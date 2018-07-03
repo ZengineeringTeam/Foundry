@@ -11,7 +11,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fml.common.Optional;
@@ -24,6 +26,8 @@ public class TileEntityMoldStation extends TileEntityFoundry implements IExoflam
 	public static final int SLOT_CLAY = 1;
 	public static final int SLOT_OUTPUT = 2;
 	public static final int SLOT_FUEL = 3;
+	public static final int MIN_DEPTH = 0;
+	public static final int MAX_DEPTH = 4;
 
 	private int burn_time;
 
@@ -94,18 +98,21 @@ public class TileEntityMoldStation extends TileEntityFoundry implements IExoflam
 		return has_block && current_recipe != null && canRecipeOutput();
 	}
 
-	public void carve(int x1, int y1, int x2, int y2) {
-		if (world.isRemote && has_block) {
+	public void carve(NonNullList<Boolean> pattern, int depth) {
+		if (world.isRemote && has_block && pattern.size() == grid.length) {
 			NBTTagCompound tag = new NBTTagCompound();
-			for (int j = y1; j <= y2; j++) {
-				for (int i = x1; i <= x2; i++) {
-					int slot = j * 6 + i;
-					if (grid[slot] < 4) {
-						grid[slot]++;
-						tag.setInteger("RecipeGrid_" + slot, grid[slot]);
-					}
-				}
-			}
+			for (int i = 0; i < grid.length; i++)
+            {
+                if (pattern.get(i) == Boolean.TRUE)
+                {
+                    int depthNew = MathHelper.clamp(depth + grid[i], MIN_DEPTH, MAX_DEPTH);
+                    if (depthNew != grid[i])
+                    {
+                        grid[i] = depthNew;
+                        tag.setInteger("RecipeGrid_" + i, grid[i]);
+                    }
+                }
+            }
 			sendToServer(tag);
 		}
 	}
@@ -236,20 +243,8 @@ public class TileEntityMoldStation extends TileEntityFoundry implements IExoflam
 		return world.getTileEntity(getPos()) != this ? false : par1EntityPlayer.getDistanceSq(getPos()) <= 64.0D;
 	}
 
-	public void mend(int x1, int y1, int x2, int y2) {
-		if (world.isRemote && has_block) {
-			NBTTagCompound tag = new NBTTagCompound();
-			for (int j = y1; j <= y2; j++) {
-				for (int i = x1; i <= x2; i++) {
-					int slot = j * 6 + i;
-					if (grid[slot] > 0) {
-						grid[slot]--;
-						tag.setInteger("RecipeGrid_" + slot, grid[slot]);
-					}
-				}
-			}
-			sendToServer(tag);
-		}
+	public void mend(NonNullList<Boolean> pattern, int depth) {
+		carve(pattern, -depth);
 	}
 
 	@Override
