@@ -7,14 +7,10 @@
   "credits" : "",
   "authors": [
     "EXTER",
-	"Shadows_of_Fire"
+	"Shadows_of_Fire",
+	"ZengineeringTeam"
   ],
   "description": "Liquid Metals",
-  "url" : "https://github.com/Shadows-of-Fire/Foundry",
-  "updateUrl" : "",
-  "logoFile" : "",
-  "parent" : "",
-  "screenshots": [
-  ]
+  "url" : "https://github.com/ZengineeringTeam/Foundry"
 }
 ]

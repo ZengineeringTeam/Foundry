@@ -23,7 +23,6 @@ import exter.foundry.material.MaterialRegistry;
 import exter.foundry.material.OreDictMaterial;
 import exter.foundry.material.OreDictType;
 import exter.foundry.recipes.manager.AlloyMixerRecipeManager;
-import exter.foundry.recipes.manager.AtomizerRecipeManager;
 import exter.foundry.recipes.manager.BurnerHeaterFuelManager;
 import exter.foundry.recipes.manager.CastingRecipeManager;
 import exter.foundry.recipes.manager.CastingTableRecipeManager;
@@ -125,15 +124,6 @@ public class InitRecipes
                     {
                         CastingTableRecipeManager.INSTANCE.addRecipe(new OreMatcher("ingot" + name), fluidstack,
                                 ICastingTableRecipe.TableType.INGOT);
-                    }
-                }
-                ores = OreDictionary.doesOreNameExist("dust" + name) ? OreDictionary.getOres("dust" + name, false)
-                        : new ArrayList<>();
-                if (ores != null && ores.size() > 0)
-                {
-                    if (AtomizerRecipeManager.INSTANCE.findRecipe(fluidstack) == null)
-                    {
-                        AtomizerRecipeManager.INSTANCE.addRecipe(new OreMatcher("dust" + name), fluidstack);
                     }
                 }
 
@@ -447,14 +437,6 @@ public class InitRecipes
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountBlock() * 3 / 4);
             CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stairs), fluid_stack, mold_stairs, null);
             MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stairs), fluid_stack);
-        }
-
-        // Dust
-        ItemStack dust = FoundryMiscUtils.getModItemFromOreDictionary(FoundryConfig.prefModID, "dust" + name);
-        if (!dust.isEmpty())
-        {
-            AtomizerRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(dust),
-                    new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_INGOT));
         }
 
         // Gear

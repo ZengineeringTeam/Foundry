@@ -25,10 +25,8 @@ import exter.foundry.item.FoundryItems;
 import exter.foundry.material.MaterialRegistry;
 import exter.foundry.network.MessageTileEntitySync;
 import exter.foundry.proxy.CommonFoundryProxy;
-import exter.foundry.recipes.manager.AlloyFurnaceRecipeManager;
 import exter.foundry.recipes.manager.AlloyMixerRecipeManager;
 import exter.foundry.recipes.manager.AlloyingCrucibleRecipeManager;
-import exter.foundry.recipes.manager.AtomizerRecipeManager;
 import exter.foundry.recipes.manager.BurnerHeaterFuelManager;
 import exter.foundry.recipes.manager.CastingRecipeManager;
 import exter.foundry.recipes.manager.CastingTableRecipeManager;
@@ -50,7 +48,6 @@ import exter.foundry.tileentity.TileEntityMeltingCrucibleStandard;
 import exter.foundry.tileentity.TileEntityMetalCaster;
 import exter.foundry.tileentity.TileEntityMetalInfuser;
 import exter.foundry.tileentity.TileEntityMoldStation;
-import exter.foundry.tileentity.TileEntityRefractoryHopper;
 import exter.foundry.tileentity.TileEntityRefractorySpout;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -117,7 +114,6 @@ public class Foundry
         GameRegistry.registerTileEntity(TileEntityMetalInfuser.class, MODID + ":metal_infuser");
         GameRegistry.registerTileEntity(TileEntityMoldStation.class, MODID + ":mold_station");
         GameRegistry.registerTileEntity(TileEntityMaterialRouter.class, MODID + ":material_router");
-        GameRegistry.registerTileEntity(TileEntityRefractoryHopper.class, MODID + ":refractory_hopper");
         GameRegistry.registerTileEntity(TileEntityInductionHeater.class, MODID + ":induction_heater");
         GameRegistry.registerTileEntity(TileEntityBurnerHeater.class, MODID + ":burner_heater");
         GameRegistry.registerTileEntity(TileEntityCastingTableIngot.class, MODID + ":cast_table_ingot");
@@ -164,8 +160,6 @@ public class Foundry
         FoundryAPI.CASTING_TABLE_MANAGER = CastingTableRecipeManager.INSTANCE;
         FoundryAPI.ALLOY_MIXER_MANAGER = AlloyMixerRecipeManager.INSTANCE;
         FoundryAPI.INFUSER_MANAGER = InfuserRecipeManager.INSTANCE;
-        FoundryAPI.ALLOY_FURNACE_MANAGER = AlloyFurnaceRecipeManager.INSTANCE;
-        FoundryAPI.ATOMIZER_MANAGER = AtomizerRecipeManager.INSTANCE;
         FoundryAPI.MOLD_MANAGER = MoldRecipeManager.INSTANCE;
         FoundryAPI.ALLOYING_CRUCIBLE_MANAGER = AlloyingCrucibleRecipeManager.INSTANCE;
 

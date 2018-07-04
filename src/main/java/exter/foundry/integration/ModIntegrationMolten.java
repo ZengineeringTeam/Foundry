@@ -8,7 +8,6 @@ import java.util.Map;
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.recipe.IAlloyMixerRecipe;
 import exter.foundry.api.recipe.IAlloyingCrucibleRecipe;
-import exter.foundry.api.recipe.IAtomizerRecipe;
 import exter.foundry.api.recipe.ICastingRecipe;
 import exter.foundry.api.recipe.ICastingTableRecipe;
 import exter.foundry.config.FoundryConfig;
@@ -17,7 +16,6 @@ import exter.foundry.fluid.FoundryFluids;
 import exter.foundry.fluid.LiquidMetalRegistry;
 import exter.foundry.recipes.manager.AlloyMixerRecipeManager;
 import exter.foundry.recipes.manager.AlloyingCrucibleRecipeManager;
-import exter.foundry.recipes.manager.AtomizerRecipeManager;
 import exter.foundry.recipes.manager.CastingRecipeManager;
 import exter.foundry.recipes.manager.CastingTableRecipeManager;
 import exter.foundry.util.FoundryMiscUtils;
@@ -170,16 +168,6 @@ public class ModIntegrationMolten implements IModIntegration
             if (input != null)
             {
                 CastingTableRecipeManager.INSTANCE.addRecipe(casting.getOutputMatcher(), input, casting.getTableType());
-            }
-        }
-
-        //Add support for "molten" fluids to the Atomizer.
-        for (IAtomizerRecipe atomize : new ArrayList<>(AtomizerRecipeManager.INSTANCE.getRecipes()))
-        {
-            FluidStack input = toMolten(atomize.getInput());
-            if (input != null)
-            {
-                AtomizerRecipeManager.INSTANCE.addRecipe(atomize.getOutputMatcher(), input);
             }
         }
 

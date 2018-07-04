@@ -1,9 +1,0 @@
-{
-    "variants": {
-        "facing=down": { "model": "foundry:refractoryhopperdown" },
-        "facing=north": { "model": "foundry:refractoryhopperside" },
-        "facing=south": { "model": "foundry:refractoryhopperside", "y": 180 },
-        "facing=west": { "model": "foundry:refractoryhopperside", "y": 270 },
-        "facing=east": { "model": "foundry:refractoryhopperside", "y": 90 }
-    }
-}

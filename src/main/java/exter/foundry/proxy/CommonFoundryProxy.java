@@ -8,7 +8,6 @@ import exter.foundry.container.ContainerMeltingCrucible;
 import exter.foundry.container.ContainerMetalCaster;
 import exter.foundry.container.ContainerMetalInfuser;
 import exter.foundry.container.ContainerMoldStation;
-import exter.foundry.container.ContainerRefractoryHopper;
 import exter.foundry.gui.GuiAlloyMixer;
 import exter.foundry.gui.GuiAlloyingCrucible;
 import exter.foundry.gui.GuiBurnerHeater;
@@ -17,7 +16,6 @@ import exter.foundry.gui.GuiMeltingCrucible;
 import exter.foundry.gui.GuiMetalCaster;
 import exter.foundry.gui.GuiMetalInfuser;
 import exter.foundry.gui.GuiMoldStation;
-import exter.foundry.gui.GuiRefractoryHopper;
 import exter.foundry.tileentity.TileEntityAlloyMixer;
 import exter.foundry.tileentity.TileEntityAlloyingCrucible;
 import exter.foundry.tileentity.TileEntityBurnerHeater;
@@ -26,7 +24,6 @@ import exter.foundry.tileentity.TileEntityMeltingCrucibleBasic;
 import exter.foundry.tileentity.TileEntityMetalCaster;
 import exter.foundry.tileentity.TileEntityMetalInfuser;
 import exter.foundry.tileentity.TileEntityMoldStation;
-import exter.foundry.tileentity.TileEntityRefractoryHopper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
@@ -40,10 +37,9 @@ public class CommonFoundryProxy implements IGuiHandler
     static public final int GUI_ALLOYMIXER = 2;
     static public final int GUI_INFUSER = 3;
     static public final int GUI_MATERIALROUTER = 4;
-    static public final int GUI_REFRACTORYHOPPER = 5;
-    static public final int GUI_MOLDSTATION = 6;
-    static public final int GUI_BURNERHEATER = 7;
-    static public final int GUI_ALLOYINGCRUCIBLE = 8;
+    static public final int GUI_MOLDSTATION = 5;
+    static public final int GUI_BURNERHEATER = 6;
+    static public final int GUI_ALLOYINGCRUCIBLE = 7;
 
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
@@ -75,11 +71,6 @@ public class CommonFoundryProxy implements IGuiHandler
         {
             TileEntityMaterialRouter te = (TileEntityMaterialRouter) world.getTileEntity(pos);
             return new GuiMaterialRouter(te, player);
-        }
-        case GUI_REFRACTORYHOPPER:
-        {
-            TileEntityRefractoryHopper te = (TileEntityRefractoryHopper) world.getTileEntity(pos);
-            return new GuiRefractoryHopper(te, player);
         }
         case GUI_MOLDSTATION:
         {
@@ -116,8 +107,6 @@ public class CommonFoundryProxy implements IGuiHandler
             return new ContainerMetalInfuser((TileEntityMetalInfuser) world.getTileEntity(pos), player);
         case GUI_MATERIALROUTER:
             return new ContainerMaterialRouter((TileEntityMaterialRouter) world.getTileEntity(pos), player);
-        case GUI_REFRACTORYHOPPER:
-            return new ContainerRefractoryHopper((TileEntityRefractoryHopper) world.getTileEntity(pos), player);
         case GUI_MOLDSTATION:
             return new ContainerMoldStation((TileEntityMoldStation) world.getTileEntity(pos), player);
         case GUI_BURNERHEATER:

@@ -259,7 +259,6 @@ tile.foundry.castingTable.ingot.name=锭铸造台
 tile.foundry.castingTable.plate.name=板铸造台
 tile.foundry.castingTable.rod.name=杆铸造台
 tile.foundry.castingTable.block.name=方块铸造台
-tile.foundry.refractoryHopper.name=耐火漏斗
 tile.foundry.moldStation.name=铸型合成站
 tile.foundry.burnerHeater.name=燃烧加热器
 tile.foundry.bronzeCauldron.name=黄铜炼药锅

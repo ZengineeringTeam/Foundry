@@ -1,19 +1,14 @@
 package exter.foundry.init;
 
 import exter.foundry.api.recipe.matcher.IItemMatcher;
-import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.api.recipe.matcher.OreMatcher;
-import exter.foundry.block.FoundryBlocks;
 import exter.foundry.config.FoundryConfig;
 import exter.foundry.fluid.FoundryFluids;
 import exter.foundry.fluid.LiquidMetalRegistry;
-import exter.foundry.recipes.manager.AlloyFurnaceRecipeManager;
 import exter.foundry.recipes.manager.AlloyMixerRecipeManager;
 import exter.foundry.recipes.manager.AlloyingCrucibleRecipeManager;
 import exter.foundry.recipes.manager.InfuserRecipeManager;
 import exter.foundry.util.FoundryMiscUtils;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -55,16 +50,10 @@ public class InitAlloyRecipes
             b[0] = new OreMatcher("ingot" + input_b, amount_b);
         if (OreDictionary.doesOreNameExist("dust" + input_b))
             b[1] = new OreMatcher("dust" + input_b, amount_b);
-
-        AlloyFurnaceRecipeManager.INSTANCE.addRecipe(alloy_ingot, a, b);
     }
 
     static public void init()
     {
-
-        AlloyFurnaceRecipeManager.INSTANCE.addRecipe(new ItemStack(FoundryBlocks.block_refractory_glass),
-                new ItemStackMatcher(Blocks.SAND), new ItemStackMatcher(Items.CLAY_BALL));
-
         addSimpleAlloy("Bronze", "Copper", 3, "Tin", 1);
 
         addSimpleAlloy("Brass", "Copper", 3,

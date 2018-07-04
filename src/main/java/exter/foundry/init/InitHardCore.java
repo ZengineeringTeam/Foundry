@@ -1,15 +1,11 @@
 package exter.foundry.init;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import exter.foundry.api.recipe.IAlloyFurnaceRecipe;
 import exter.foundry.config.FoundryConfig;
-import exter.foundry.recipes.manager.AlloyFurnaceRecipeManager;
 import exter.foundry.recipes.manager.MeltingRecipeManager;
 import exter.foundry.util.FoundryMiscUtils;
 import net.minecraft.entity.player.EntityPlayer;
@@ -65,27 +61,6 @@ public class InitHardCore
                         break;
                     }
                 }
-            }
-
-            // Remove alloy furnace recipes as well.
-            List<IAlloyFurnaceRecipe> remove = new ArrayList<>();
-            for (IAlloyFurnaceRecipe recipe : AlloyFurnaceRecipeManager.INSTANCE.getRecipes())
-            {
-                ItemStack output = recipe.getOutput();
-                Set<String> ore_names = FoundryMiscUtils.getAllItemOreDictionaryNames(output);
-                for (String name : ore_names)
-                {
-                    if (name.startsWith("ingot") && !FoundryConfig.hardcore_furnace_keep_ingots.contains(name)
-                            && MeltingRecipeManager.INSTANCE.findRecipe(output) != null)
-                    {
-                        remove.add(recipe);
-                        break;
-                    }
-                }
-            }
-            for (IAlloyFurnaceRecipe recipe : remove)
-            {
-                AlloyFurnaceRecipeManager.INSTANCE.removeRecipe(recipe);
             }
         }
     }

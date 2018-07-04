@@ -16,7 +16,6 @@ public class FoundryBlocks
     static public BlockMoldStation block_mold_station;
     static public BlockBurnerHeater block_burner_heater;
 
-    static public BlockRefractoryHopper block_refractory_hopper;
     static public BlockRefractorySpout block_refractory_spout;
 
     static public BlockCauldronBronze block_cauldron_bronze;
@@ -35,7 +34,6 @@ public class FoundryBlocks
         block_casting_table = new BlockCastingTable();
 
         block_mold_station = new BlockMoldStation();
-        block_refractory_hopper = new BlockRefractoryHopper();
         block_burner_heater = new BlockBurnerHeater();
         block_refractory_spout = new BlockRefractorySpout();
         block_cauldron_bronze = new BlockCauldronBronze();
@@ -45,7 +43,6 @@ public class FoundryBlocks
         registerMulti(block_casting_table);
         register(block_refractory_glass);
         register(block_mold_station);
-        register(block_refractory_hopper);
         register(block_burner_heater);
         register(block_refractory_spout);
         register(block_cauldron_bronze);
