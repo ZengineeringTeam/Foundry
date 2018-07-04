@@ -5,7 +5,6 @@ import exter.foundry.container.ContainerAlloyingCrucible;
 import exter.foundry.container.ContainerBurnerHeater;
 import exter.foundry.container.ContainerMaterialRouter;
 import exter.foundry.container.ContainerMeltingCrucible;
-import exter.foundry.container.ContainerMetalAtomizer;
 import exter.foundry.container.ContainerMetalCaster;
 import exter.foundry.container.ContainerMetalInfuser;
 import exter.foundry.container.ContainerMoldStation;
@@ -15,7 +14,6 @@ import exter.foundry.gui.GuiAlloyingCrucible;
 import exter.foundry.gui.GuiBurnerHeater;
 import exter.foundry.gui.GuiMaterialRouter;
 import exter.foundry.gui.GuiMeltingCrucible;
-import exter.foundry.gui.GuiMetalAtomizer;
 import exter.foundry.gui.GuiMetalCaster;
 import exter.foundry.gui.GuiMetalInfuser;
 import exter.foundry.gui.GuiMoldStation;
@@ -25,11 +23,11 @@ import exter.foundry.tileentity.TileEntityAlloyingCrucible;
 import exter.foundry.tileentity.TileEntityBurnerHeater;
 import exter.foundry.tileentity.TileEntityMaterialRouter;
 import exter.foundry.tileentity.TileEntityMeltingCrucibleBasic;
-import exter.foundry.tileentity.TileEntityMetalAtomizer;
 import exter.foundry.tileentity.TileEntityMetalCaster;
 import exter.foundry.tileentity.TileEntityMetalInfuser;
 import exter.foundry.tileentity.TileEntityMoldStation;
 import exter.foundry.tileentity.TileEntityRefractoryHopper;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -41,15 +39,11 @@ public class CommonFoundryProxy implements IGuiHandler
     static public final int GUI_CASTER = 1;
     static public final int GUI_ALLOYMIXER = 2;
     static public final int GUI_INFUSER = 3;
-    static public final int GUI_MATERIALROUTER = 5;
-    static public final int GUI_REFRACTORYHOPPER = 6;
-    static public final int GUI_REVOLVER = 7;
-    static public final int GUI_SHOTGUN = 8;
-    static public final int GUI_ATOMIZER = 9;
-    static public final int GUI_MOLDSTATION = 10;
-    static public final int GUI_BURNERHEATER = 11;
-    static public final int GUI_REFRACTORYTANK = 12;
-    static public final int GUI_ALLOYINGCRUCIBLE = 14;
+    static public final int GUI_MATERIALROUTER = 4;
+    static public final int GUI_REFRACTORYHOPPER = 5;
+    static public final int GUI_MOLDSTATION = 6;
+    static public final int GUI_BURNERHEATER = 7;
+    static public final int GUI_ALLOYINGCRUCIBLE = 8;
 
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
@@ -86,11 +80,6 @@ public class CommonFoundryProxy implements IGuiHandler
         {
             TileEntityRefractoryHopper te = (TileEntityRefractoryHopper) world.getTileEntity(pos);
             return new GuiRefractoryHopper(te, player);
-        }
-        case GUI_ATOMIZER:
-        {
-            TileEntityMetalAtomizer te = (TileEntityMetalAtomizer) world.getTileEntity(pos);
-            return new GuiMetalAtomizer(te, player);
         }
         case GUI_MOLDSTATION:
         {
@@ -129,8 +118,6 @@ public class CommonFoundryProxy implements IGuiHandler
             return new ContainerMaterialRouter((TileEntityMaterialRouter) world.getTileEntity(pos), player);
         case GUI_REFRACTORYHOPPER:
             return new ContainerRefractoryHopper((TileEntityRefractoryHopper) world.getTileEntity(pos), player);
-        case GUI_ATOMIZER:
-            return new ContainerMetalAtomizer((TileEntityMetalAtomizer) world.getTileEntity(pos), player);
         case GUI_MOLDSTATION:
             return new ContainerMoldStation((TileEntityMoldStation) world.getTileEntity(pos), player);
         case GUI_BURNERHEATER:
@@ -156,9 +143,8 @@ public class CommonFoundryProxy implements IGuiHandler
 
     }
 
-    @SuppressWarnings("deprecation")
     public String translate(String string, Object... args)
     {
-        return net.minecraft.util.text.translation.I18n.translateToLocalFormatted(string, args);
+        return I18n.format(string, args);
     }
 }

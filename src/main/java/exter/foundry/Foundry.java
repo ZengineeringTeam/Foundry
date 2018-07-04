@@ -47,7 +47,6 @@ import exter.foundry.tileentity.TileEntityMaterialRouter;
 import exter.foundry.tileentity.TileEntityMeltingCrucibleAdvanced;
 import exter.foundry.tileentity.TileEntityMeltingCrucibleBasic;
 import exter.foundry.tileentity.TileEntityMeltingCrucibleStandard;
-import exter.foundry.tileentity.TileEntityMetalAtomizer;
 import exter.foundry.tileentity.TileEntityMetalCaster;
 import exter.foundry.tileentity.TileEntityMetalInfuser;
 import exter.foundry.tileentity.TileEntityMoldStation;
@@ -119,7 +118,6 @@ public class Foundry
         GameRegistry.registerTileEntity(TileEntityMoldStation.class, MODID + ":mold_station");
         GameRegistry.registerTileEntity(TileEntityMaterialRouter.class, MODID + ":material_router");
         GameRegistry.registerTileEntity(TileEntityRefractoryHopper.class, MODID + ":refractory_hopper");
-        GameRegistry.registerTileEntity(TileEntityMetalAtomizer.class, MODID + ":atomizer");
         GameRegistry.registerTileEntity(TileEntityInductionHeater.class, MODID + ":induction_heater");
         GameRegistry.registerTileEntity(TileEntityBurnerHeater.class, MODID + ":burner_heater");
         GameRegistry.registerTileEntity(TileEntityCastingTableIngot.class, MODID + ":cast_table_ingot");

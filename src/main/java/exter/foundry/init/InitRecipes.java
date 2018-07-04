@@ -310,10 +310,6 @@ public class InitRecipes
         Foundry.HELPER.addForgeShaped(new ItemStack(FoundryBlocks.block_refractory_hopper), "R R", "RBR", " R ", 'R',
                 refbrick_stack, 'B', bucket_stack);
 
-        Foundry.HELPER.addForgeShaped(FoundryBlocks.block_machine.asItemStack(EnumMachine.ATOMIZER), "GHG", "RCR",
-                " B ", 'H', new ItemStack(FoundryBlocks.block_refractory_hopper), 'B', Items.BUCKET, 'R',
-                Items.REDSTONE, 'C', casing_stack, 'G', "gearBronze");
-
         Foundry.HELPER.addForgeShaped(FoundryBlocks.block_machine.asItemStack(EnumMachine.ALLOYING_CRUCIBLE), "HRH",
                 "BCB", "BBB", 'H', new ItemStack(FoundryBlocks.block_refractory_spout), 'B', refbrick_stack, 'R',
                 cauldron_stack, 'C', casing_stack);

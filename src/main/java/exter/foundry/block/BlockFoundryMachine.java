@@ -14,7 +14,6 @@ import exter.foundry.tileentity.TileEntityMaterialRouter;
 import exter.foundry.tileentity.TileEntityMeltingCrucibleAdvanced;
 import exter.foundry.tileentity.TileEntityMeltingCrucibleBasic;
 import exter.foundry.tileentity.TileEntityMeltingCrucibleStandard;
-import exter.foundry.tileentity.TileEntityMetalAtomizer;
 import exter.foundry.tileentity.TileEntityMetalCaster;
 import exter.foundry.tileentity.TileEntityMetalInfuser;
 import exter.foundry.util.FoundryMiscUtils;
@@ -49,11 +48,10 @@ public class BlockFoundryMachine extends Block implements ITileEntityProvider, I
         ALLOYMIXER(2, "alloymixer", "machineAlloyMixer"),
         INFUSER(3, "infuser", "machineInfuser"),
         MATERIALROUTER(4, "router", "machineMaterialRouter"),
-        ATOMIZER(5, "atomizer", "machineAtomizer"),
-        INDUCTIONHEATER(6, "heater_induction", "machineInductionHeater"),
-        CRUCIBLE_ADVANCED(7, "crucible_advanced", "machineCrucibleAdvanced"),
-        CRUCIBLE_STANDARD(8, "crucible_standard", "machineCrucibleStandard"),
-        ALLOYING_CRUCIBLE(9, "alloying_crucible", "machineAlloyingCrucible");
+        INDUCTIONHEATER(5, "heater_induction", "machineInductionHeater"),
+        CRUCIBLE_ADVANCED(6, "crucible_advanced", "machineCrucibleAdvanced"),
+        CRUCIBLE_STANDARD(7, "crucible_standard", "machineCrucibleStandard"),
+        ALLOYING_CRUCIBLE(8, "alloying_crucible", "machineAlloyingCrucible");
 
         static public EnumMachine fromID(int num)
         {
@@ -189,8 +187,6 @@ public class BlockFoundryMachine extends Block implements ITileEntityProvider, I
             return new TileEntityMetalInfuser();
         case MATERIALROUTER:
             return new TileEntityMaterialRouter();
-        case ATOMIZER:
-            return new TileEntityMetalAtomizer();
         case INDUCTIONHEATER:
             return new TileEntityInductionHeater();
         case CRUCIBLE_ADVANCED:
@@ -284,10 +280,6 @@ public class BlockFoundryMachine extends Block implements ITileEntityProvider, I
                 break;
             case MATERIALROUTER:
                 player.openGui(Foundry.INSTANCE, CommonFoundryProxy.GUI_MATERIALROUTER, world, pos.getX(), pos.getY(),
-                        pos.getZ());
-                break;
-            case ATOMIZER:
-                player.openGui(Foundry.INSTANCE, CommonFoundryProxy.GUI_ATOMIZER, world, pos.getX(), pos.getY(),
                         pos.getZ());
                 break;
             case ALLOYING_CRUCIBLE:
