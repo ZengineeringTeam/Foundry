@@ -186,7 +186,6 @@ public class InitRecipes {
 		ItemStack refbrick_stack = FoundryItems.component(ItemComponent.SubItem.REFRACTORYBRICK);
 		ItemStack refglass_stack = new ItemStack(FoundryBlocks.block_refractory_glass);
 		ItemStack heatingcoil_stack = FoundryItems.component(ItemComponent.SubItem.HEATINGCOIL);
-		ItemStack emptycontainer2_stack = FoundryItems.item_container.empty(2);
 		ItemStack comparator_stack = new ItemStack(Items.COMPARATOR);
 		ItemStack repeater_stack = new ItemStack(Items.REPEATER);
 		ItemStack bucket_stack = new ItemStack(Items.BUCKET);
@@ -211,8 +210,6 @@ public class InitRecipes {
 		GameRegistry.addSmelting(FoundryItems.component(ItemComponent.SubItem.REFRACTORYCLAY), refbrick_stack, 0.0f);
 
 		GameRegistry.addSmelting(FoundryItems.component(ItemComponent.SubItem.INFERNOCLAY), infbrick_stack, 0.0f);
-
-		Foundry.HELPER.addForgeShaped(emptycontainer2_stack, " T ", "BGB", " T ", 'T', "plateTin", 'B', refbrick_stack, 'G', refglass_stack);
 
 		Foundry.HELPER.addForgeShaped(FoundryItems.component(ItemComponent.SubItem.HEATINGCOIL, 2), "CCC", "CRC", "CCC", 'C', "rodCupronickel", 'R', redstone_stack);
 

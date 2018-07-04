@@ -19,7 +19,6 @@ import exter.foundry.item.ItemMold;
 import exter.foundry.material.MaterialRegistry;
 import exter.foundry.material.OreDictMaterial;
 import exter.foundry.material.OreDictType;
-import exter.foundry.model.RFCModel;
 import exter.foundry.tileentity.TileEntityCastingTableBlock;
 import exter.foundry.tileentity.TileEntityCastingTableIngot;
 import exter.foundry.tileentity.TileEntityCastingTablePlate;
@@ -47,7 +46,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
@@ -125,8 +123,6 @@ public class ClientFoundryProxy extends CommonFoundryProxy {
 			registerItemModel(FoundryItems.item_mold, m.name, m.id);
 		}
 
-		registerItemModel(FoundryItems.item_container, "container", 0);
-
 		for (Block b : FoundryRegistry.BLOCKS) {
 			if (b instanceof BlockLiquidMetal) {
 				ModelLoader.setCustomStateMapper(b, new FluidStateMapper((BlockLiquidMetal) b));
@@ -187,7 +183,6 @@ public class ClientFoundryProxy extends CommonFoundryProxy {
 
 	@Override
 	public void preInit() {
-		ModelLoaderRegistry.registerLoader(RFCModel.Loader.instance);
 		MaterialRegistry.INSTANCE.initIcons();
 		for (Map.Entry<String, FluidLiquidMetal> e : LiquidMetalRegistry.INSTANCE.getFluids().entrySet()) {
 			Fluid fluid = e.getValue();

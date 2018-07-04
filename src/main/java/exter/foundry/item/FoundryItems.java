@@ -8,8 +8,6 @@ public class FoundryItems {
 	static public ItemComponent item_component;
 	static public ItemMold item_mold;
 
-	static public ItemRefractoryFluidContainer item_container;
-
 	static public ItemStack component(ItemComponent.SubItem sub) {
 		return component(sub, 1);
 	}
@@ -29,10 +27,8 @@ public class FoundryItems {
 	static public void registerItems(Configuration config) {
 		item_component = new ItemComponent();
 		item_mold = new ItemMold();
-		item_container = new ItemRefractoryFluidContainer();
 
 		FoundryRegistry.ITEMS.add(item_component);
 		FoundryRegistry.ITEMS.add(item_mold);
-		FoundryRegistry.ITEMS.add(item_container);
 	}
 }
