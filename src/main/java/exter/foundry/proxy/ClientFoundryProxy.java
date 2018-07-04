@@ -10,7 +10,6 @@ import exter.foundry.block.BlockFoundryMachine;
 import exter.foundry.block.BlockLiquidMetal;
 import exter.foundry.block.FoundryBlocks;
 import exter.foundry.config.FoundryConfig;
-import exter.foundry.entity.EntitySkeletonGun;
 import exter.foundry.fluid.FluidLiquidMetal;
 import exter.foundry.fluid.LiquidMetalRegistry;
 import exter.foundry.integration.ModIntegrationManager;
@@ -42,7 +41,6 @@ import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
-import net.minecraft.client.renderer.entity.RenderSkeleton;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -54,7 +52,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -128,19 +125,6 @@ public class ClientFoundryProxy extends CommonFoundryProxy {
 			registerItemModel(FoundryItems.item_mold, m.name, m.id);
 		}
 
-		registerItemModel(FoundryItems.item_revolver, "revolver", 0);
-		registerItemModel(FoundryItems.item_shotgun, "shotgun", 0);
-		registerItemModel(FoundryItems.item_round, "roundNormal", 0);
-		registerItemModel(FoundryItems.item_round_hollow, "roundHollow", 0);
-		registerItemModel(FoundryItems.item_round_jacketed, "roundJacketed", 0);
-		registerItemModel(FoundryItems.item_round_fire, "roundFire", 0);
-		registerItemModel(FoundryItems.item_round_poison, "roundPoison", 0);
-		registerItemModel(FoundryItems.item_round_ap, "roundAP", 0);
-		registerItemModel(FoundryItems.item_round_lumium, "roundLumium", 0);
-		registerItemModel(FoundryItems.item_round_snow, "roundSnow", 0);
-		registerItemModel(FoundryItems.item_shell, "shellNormal", 0);
-		registerItemModel(FoundryItems.item_shell_ap, "shellAP", 0);
-		registerItemModel(FoundryItems.item_shell_lumium, "shellLumium", 0);
 		registerItemModel(FoundryItems.item_container, "container", 0);
 
 		for (Block b : FoundryRegistry.BLOCKS) {
@@ -214,7 +198,6 @@ public class ClientFoundryProxy extends CommonFoundryProxy {
 			ModelLoader.setCustomMeshDefinition(item, new LiquidMetalItemMeshDefinition(name));
 			ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
 		}
-		RenderingRegistry.registerEntityRenderingHandler(EntitySkeletonGun.class, manager -> new RenderSkeleton(manager));
 		ModIntegrationManager.clientPreInit();
 		MinecraftForge.EVENT_BUS.register(this);
 	}

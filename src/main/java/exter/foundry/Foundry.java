@@ -10,10 +10,8 @@ import cofh.cofhworld.init.WorldProps;
 import cofh.cofhworld.util.Utils;
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.block.FoundryBlocks;
-import exter.foundry.capability.CapabilityFirearmRound;
 import exter.foundry.capability.CapabilityHeatProvider;
 import exter.foundry.config.FoundryConfig;
-import exter.foundry.entity.EntitySkeletonGun;
 import exter.foundry.fluid.FoundryFluids;
 import exter.foundry.fluid.LiquidMetalRegistry;
 import exter.foundry.init.InitRecipes;
@@ -37,7 +35,6 @@ import exter.foundry.recipes.manager.CastingTableRecipeManager;
 import exter.foundry.recipes.manager.InfuserRecipeManager;
 import exter.foundry.recipes.manager.MeltingRecipeManager;
 import exter.foundry.recipes.manager.MoldRecipeManager;
-import exter.foundry.sound.FoundrySounds;
 import exter.foundry.tileentity.TileEntityAlloyFurnace;
 import exter.foundry.tileentity.TileEntityAlloyMixer;
 import exter.foundry.tileentity.TileEntityAlloyingCrucible;
@@ -61,11 +58,6 @@ import exter.foundry.tileentity.TileEntityRefractorySpout;
 import exter.foundry.tileentity.TileEntityRefractoryTankAdvanced;
 import exter.foundry.tileentity.TileEntityRefractoryTankBasic;
 import exter.foundry.tileentity.TileEntityRefractoryTankStandard;
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.storage.loot.LootTableList;
-import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -79,7 +71,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import shadows.placebo.registry.RegistryInformation;
@@ -138,12 +129,6 @@ public class Foundry {
 		GameRegistry.registerTileEntity(TileEntityAlloyingCrucible.class, MODID + ":alloy_crucible");
 		if (FoundryConfig.block_cokeoven) GameRegistry.registerTileEntity(TileEntityCokeOven.class, MODID + ":coke_oven");
 
-		EntityRegistry.registerModEntity(new ResourceLocation("foundry", "gun_skeleton"), EntitySkeletonGun.class, "foundry.gunSkeleton", 0, this, 80, 1, true);
-		EntityRegistry.registerEgg(new ResourceLocation("foundry", "gun_skeleton"), 0xd3d3d3, 0x808080);
-		LootTableList.register(new ResourceLocation("foundry", "gun_skeleton"));
-
-		EntityRegistry.addSpawn(EntitySkeletonGun.class, 8, 1, 2, EnumCreatureType.MONSTER, BiomeDictionary.getBiomes(BiomeDictionary.Type.PLAINS).toArray(new Biome[0]));
-
 		proxy.init();
 	}
 
@@ -183,8 +168,6 @@ public class Foundry {
 		FoundryAPI.BURNER_HEATER_FUEL = BurnerHeaterFuelManager.INSTANCE;
 
 		CapabilityHeatProvider.init();
-		CapabilityFirearmRound.init();
-		FoundrySounds.init();
 
 		FoundryConfig.load(config);
 		FoundryItems.registerItems(config);

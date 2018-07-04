@@ -27,16 +27,6 @@ public class ItemMold extends Item {
 		CHESTPLATE(13, "moldChestplate"),
 		LEGGINGS(14, "moldLeggings"),
 		BOOTS(15, "moldBoots"),
-		BULLET(16, "moldBullet"),
-		BULLET_HOLLOW(17, "moldBulletHollow"),
-		ROUND_CASING(18, "moldRoundCasing"),
-		GUN_BARREL(19, "moldGunBarrel"),
-		REVOLVER_DRUM(20, "moldRevolverDrum"),
-		REVOLVER_FRAME(21, "moldRevolverFrame"),
-		PELLET(22, "moldPellet"),
-		SHELL_CASING(23, "moldShellCasing"),
-		SHOTGUN_PUMP(24, "moldShotgunPump"),
-		SHOTGUN_FRAME(25, "moldShotgunFrame"),
 		NUGGET(26, "moldNugget");
 
 		static private final Map<Integer, SubItem> value_map = new HashMap<>();

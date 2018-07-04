@@ -20,7 +20,6 @@ import exter.foundry.fluid.FoundryFluids;
 import exter.foundry.fluid.LiquidMetalRegistry;
 import exter.foundry.item.FoundryItems;
 import exter.foundry.item.ItemComponent;
-import exter.foundry.item.ItemComponent.SubItem;
 import exter.foundry.item.ItemMold;
 import exter.foundry.material.MaterialRegistry;
 import exter.foundry.material.OreDictMaterial;
@@ -135,9 +134,6 @@ public class InitRecipes {
 	}
 
 	static public void preInit() {
-
-		Foundry.HELPER.addShapeless(FoundryItems.component(SubItem.DUST_SMALL_BLAZE, 4), Items.BLAZE_POWDER);
-		Foundry.HELPER.addShapeless(FoundryItems.component(SubItem.DUST_SMALL_GUNPOWDER, 4), Items.GUNPOWDER);
 
 		if (FoundryConfig.recipe_glass) {
 			final String[] oredict_names = { "dyeBlack", "dyeRed", "dyeGreen", "dyeBrown", "dyeBlue", "dyePurple", "dyeCyan", "dyeLightGray", "dyeGray", "dyePink", "dyeLime", "dyeYellow", "dyeLightBlue", "dyeMagenta", "dyeOrange", "dyeWhite" };
@@ -276,7 +272,6 @@ public class InitRecipes {
 			Foundry.HELPER.addForgeShaped(new ItemStack(FoundryBlocks.block_coke_oven), "BFB", "BCB", "BIB", 'B', refbrick_stack, 'F', furnace_stack, 'I', "plateCopper", 'C', casing_stack);
 		}
 
-		InitFirearmRecipes.init();
 	}
 
 	static public void registerMachineRecipes() {

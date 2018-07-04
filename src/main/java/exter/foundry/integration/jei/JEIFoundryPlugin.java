@@ -69,7 +69,7 @@ public class JEIFoundryPlugin implements IModPlugin {
 		registry.handleRecipes(IInfuserRecipe.class, InfuserJEI.Wrapper::new, FoundryJEIConstants.INF_UID);
 		registry.addRecipes(InfuserRecipeManager.INSTANCE.getRecipes(), FoundryJEIConstants.INF_UID);
 
-//		transfer_registry.addRecipeTransferHandler(ContainerMoldStation.class, FoundryJEIConstants.MOLD_UID, ContainerMoldStation.SLOTS_TE, ContainerMoldStation.SLOTS_TE_SIZE, ContainerMoldStation.SLOTS_INVENTORY, 36);
+		transfer_registry.addRecipeTransferHandler(ContainerMoldStation.class, FoundryJEIConstants.MOLD_UID, ContainerMoldStation.SLOTS_TE, ContainerMoldStation.SLOTS_TE_SIZE, ContainerMoldStation.SLOTS_INVENTORY, 36);
 		registry.addRecipeCatalyst(new ItemStack(FoundryBlocks.block_mold_station), FoundryJEIConstants.MOLD_UID);
 		registry.handleRecipes(IMoldRecipe.class, MoldStationJEI.Wrapper::new, FoundryJEIConstants.MOLD_UID);
 		registry.addRecipes(MoldRecipeManager.INSTANCE.getRecipes(), FoundryJEIConstants.MOLD_UID);

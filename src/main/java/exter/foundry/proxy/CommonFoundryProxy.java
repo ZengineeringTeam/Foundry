@@ -13,8 +13,6 @@ import exter.foundry.container.ContainerMetalInfuser;
 import exter.foundry.container.ContainerMoldStation;
 import exter.foundry.container.ContainerRefractoryHopper;
 import exter.foundry.container.ContainerRefractoryTank;
-import exter.foundry.container.ContainerRevolver;
-import exter.foundry.container.ContainerShotgun;
 import exter.foundry.gui.GuiAlloyFurnace;
 import exter.foundry.gui.GuiAlloyMixer;
 import exter.foundry.gui.GuiAlloyingCrucible;
@@ -28,8 +26,6 @@ import exter.foundry.gui.GuiMetalInfuser;
 import exter.foundry.gui.GuiMoldStation;
 import exter.foundry.gui.GuiRefractoryHopper;
 import exter.foundry.gui.GuiRefractoryTank;
-import exter.foundry.gui.GuiRevolver;
-import exter.foundry.gui.GuiShotgun;
 import exter.foundry.tileentity.TileEntityAlloyFurnace;
 import exter.foundry.tileentity.TileEntityAlloyMixer;
 import exter.foundry.tileentity.TileEntityAlloyingCrucible;
@@ -44,7 +40,6 @@ import exter.foundry.tileentity.TileEntityMoldStation;
 import exter.foundry.tileentity.TileEntityRefractoryHopper;
 import exter.foundry.tileentity.TileEntityRefractoryTankBasic;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
@@ -98,12 +93,6 @@ public class CommonFoundryProxy implements IGuiHandler {
 			TileEntityRefractoryHopper te = (TileEntityRefractoryHopper) world.getTileEntity(pos);
 			return new GuiRefractoryHopper(te, player);
 		}
-		case GUI_REVOLVER: {
-			return new GuiRevolver(player.getHeldItem(EnumHand.MAIN_HAND), player.inventory);
-		}
-		case GUI_SHOTGUN: {
-			return new GuiShotgun(player.getHeldItem(EnumHand.MAIN_HAND), player.inventory);
-		}
 		case GUI_ATOMIZER: {
 			TileEntityMetalAtomizer te = (TileEntityMetalAtomizer) world.getTileEntity(pos);
 			return new GuiMetalAtomizer(te, player);
@@ -150,10 +139,6 @@ public class CommonFoundryProxy implements IGuiHandler {
 			return new ContainerMaterialRouter((TileEntityMaterialRouter) world.getTileEntity(pos), player);
 		case GUI_REFRACTORYHOPPER:
 			return new ContainerRefractoryHopper((TileEntityRefractoryHopper) world.getTileEntity(pos), player);
-		case GUI_REVOLVER:
-			return new ContainerRevolver(player.getHeldItem(EnumHand.MAIN_HAND), player.inventory);
-		case GUI_SHOTGUN:
-			return new ContainerShotgun(player.getHeldItem(EnumHand.MAIN_HAND), player.inventory);
 		case GUI_ATOMIZER:
 			return new ContainerMetalAtomizer((TileEntityMetalAtomizer) world.getTileEntity(pos), player);
 		case GUI_MOLDSTATION:
