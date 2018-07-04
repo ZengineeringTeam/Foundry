@@ -72,8 +72,8 @@ public class FoundryFluids
          */
 
         int temp = 1550;
-        liquid_glass = LiquidMetalRegistry.INSTANCE.registerSpecialLiquidMetal("glass", temp, 12,
-                new ItemStack(Blocks.GLASS));
+        liquid_glass = LiquidMetalRegistry.INSTANCE.registerSpecialLiquidMetal("glass", temp, 12, "liquidglass",
+                0x40FFFFFF, new ItemStack(Blocks.GLASS));
         for (EnumDyeColor dye : EnumDyeColor.values())
         {
             String name = dye.getName();
