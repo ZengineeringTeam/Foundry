@@ -18,129 +18,161 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.foundry.CastingTable")
-public class MTCastingTableHandler {
-	public static class CastingTableAction extends AddRemoveAction {
+public class MTCastingTableHandler
+{
+    public static class CastingTableAction extends AddRemoveAction
+    {
 
-		ICastingTableRecipe recipe;
+        ICastingTableRecipe recipe;
 
-		public CastingTableAction(ICastingTableRecipe recipe) {
-			this.recipe = recipe;
-		}
+        public CastingTableAction(ICastingTableRecipe recipe)
+        {
+            this.recipe = recipe;
+        }
 
-		@Override
-		protected void add() {
-			CastingTableRecipeManager.INSTANCE.addRecipe(recipe.getTableType(), recipe.getInput().getFluid().getName(), recipe);
-		}
+        @Override
+        protected void add()
+        {
+            CastingTableRecipeManager.INSTANCE.addRecipe(recipe.getTableType(), recipe.getInput().getFluid().getName(),
+                    recipe);
+        }
 
-		@Override
-		public String getDescription() {
-			return String.format("( %s, %s ) -> %s", MTHelper.getFluidDescription(recipe.getInput()), recipe.getTableType().toString(), MTHelper.getItemDescription(recipe.getOutput()));
-		}
+        @Override
+        public String getDescription()
+        {
+            return String.format("( %s, %s ) -> %s", MTHelper.getFluidDescription(recipe.getInput()),
+                    recipe.getTableType().toString(), MTHelper.getItemDescription(recipe.getOutput()));
+        }
 
-		@Override
-		public String getRecipeType() {
-			return "casting table";
-		}
+        @Override
+        public String getRecipeType()
+        {
+            return "casting table";
+        }
 
-		@Override
-		protected void remove() {
-			CastingTableRecipeManager.INSTANCE.removeRecipe(recipe.getTableType(), recipe.getInput().getFluid().getName());
-		}
-	}
+        @Override
+        protected void remove()
+        {
+            CastingTableRecipeManager.INSTANCE.removeRecipe(recipe.getTableType(),
+                    recipe.getInput().getFluid().getName());
+        }
+    }
 
-	@ZenMethod
-	static public void addBlockRecipe(IItemStack output, ILiquidStack input) {
-		addRecipe(output, input, ICastingTableRecipe.TableType.BLOCK);
-	}
+    @ZenMethod
+    static public void addBlockRecipe(IItemStack output, ILiquidStack input)
+    {
+        addRecipe(output, input, ICastingTableRecipe.TableType.BLOCK);
+    }
 
-	@ZenMethod
-	static public void addIngotRecipe(IItemStack output, ILiquidStack input) {
-		addRecipe(output, input, ICastingTableRecipe.TableType.INGOT);
-	}
+    @ZenMethod
+    static public void addIngotRecipe(IItemStack output, ILiquidStack input)
+    {
+        addRecipe(output, input, ICastingTableRecipe.TableType.INGOT);
+    }
 
-	@ZenMethod
-	static public void addPlateRecipe(IItemStack output, ILiquidStack input) {
-		addRecipe(output, input, ICastingTableRecipe.TableType.PLATE);
-	}
+    @ZenMethod
+    static public void addPlateRecipe(IItemStack output, ILiquidStack input)
+    {
+        addRecipe(output, input, ICastingTableRecipe.TableType.PLATE);
+    }
 
-	static private void addRecipe(IItemStack output, ILiquidStack input, ICastingTableRecipe.TableType table) {
-		ModIntegrationMinetweaker.queueAdd(() -> {
-			ItemStackMatcher out = new ItemStackMatcher(CraftTweakerMC.getItemStack(output));
-			FluidStack in = CraftTweakerMC.getLiquidStack(input);
-			CastingTableRecipe recipe;
-			try {
-				recipe = new CastingTableRecipe(out, in, table);
-			} catch (IllegalArgumentException e) {
-				MTHelper.printCrt("Invalid casting recipe: " + e.getMessage());
-				return;
-			}
-			CraftTweakerAPI.apply(new CastingTableAction(recipe).action_add);
-		});
-	}
+    static private void addRecipe(IItemStack output, ILiquidStack input, ICastingTableRecipe.TableType table)
+    {
+        ModIntegrationMinetweaker.queueAdd(() -> {
+            ItemStackMatcher out = new ItemStackMatcher(CraftTweakerMC.getItemStack(output));
+            FluidStack in = CraftTweakerMC.getLiquidStack(input);
+            CastingTableRecipe recipe;
+            try
+            {
+                recipe = new CastingTableRecipe(out, in, table);
+            }
+            catch (IllegalArgumentException e)
+            {
+                MTHelper.printCrt("Invalid casting recipe: " + e.getMessage());
+                return;
+            }
+            CraftTweakerAPI.apply(new CastingTableAction(recipe).action_add);
+        });
+    }
 
-	@ZenMethod
-	static public void addRodRecipe(IItemStack output, ILiquidStack input) {
-		addRecipe(output, input, ICastingTableRecipe.TableType.ROD);
-	}
+    @ZenMethod
+    static public void addRodRecipe(IItemStack output, ILiquidStack input)
+    {
+        addRecipe(output, input, ICastingTableRecipe.TableType.ROD);
+    }
 
-	@ZenMethod
-	static public void removeBlockRecipe(ILiquidStack input) {
-		removeRecipe(input, ICastingTableRecipe.TableType.BLOCK);
-	}
+    @ZenMethod
+    static public void removeBlockRecipe(ILiquidStack input)
+    {
+        removeRecipe(input, ICastingTableRecipe.TableType.BLOCK);
+    }
 
-	@ZenMethod
-	static public void removeIngotRecipe(ILiquidStack input) {
-		removeRecipe(input, ICastingTableRecipe.TableType.INGOT);
-	}
+    @ZenMethod
+    static public void removeIngotRecipe(ILiquidStack input)
+    {
+        removeRecipe(input, ICastingTableRecipe.TableType.INGOT);
+    }
 
-	@ZenMethod
-	static public void removePlateRecipe(ILiquidStack input) {
-		removeRecipe(input, ICastingTableRecipe.TableType.PLATE);
-	}
+    @ZenMethod
+    static public void removePlateRecipe(ILiquidStack input)
+    {
+        removeRecipe(input, ICastingTableRecipe.TableType.PLATE);
+    }
 
-	static public void removeRecipe(ILiquidStack input, ICastingTableRecipe.TableType table) {
-		ModIntegrationMinetweaker.queueRemove(() -> {
-			ICastingTableRecipe recipe = CastingTableRecipeManager.INSTANCE.findRecipe(CraftTweakerMC.getLiquidStack(input), table);
-			if (recipe == null) {
-				CraftTweakerAPI.logWarning("Casting table recipe not found.");
-				return;
-			}
-			CraftTweakerAPI.apply(new CastingTableAction(recipe).action_remove);
-		});
-	}
+    static public void removeRecipe(ILiquidStack input, ICastingTableRecipe.TableType table)
+    {
+        ModIntegrationMinetweaker.queueRemove(() -> {
+            ICastingTableRecipe recipe = CastingTableRecipeManager.INSTANCE
+                    .findRecipe(CraftTweakerMC.getLiquidStack(input), table);
+            if (recipe == null)
+            {
+                CraftTweakerAPI.logWarning("Casting table recipe not found.");
+                return;
+            }
+            CraftTweakerAPI.apply(new CastingTableAction(recipe).action_remove);
+        });
+    }
 
-	@ZenMethod
-	static public void removeRodRecipe(ILiquidStack input) {
-		removeRecipe(input, ICastingTableRecipe.TableType.ROD);
-	}
+    @ZenMethod
+    static public void removeRodRecipe(ILiquidStack input)
+    {
+        removeRecipe(input, ICastingTableRecipe.TableType.ROD);
+    }
 
-	@ZenMethod
-	public static void clearRods() {
-		ModIntegrationMinetweaker.queueClear(CastingTableRecipeManager.INSTANCE.getRecipes(TableType.ROD));
-	}
+    @ZenMethod
+    public static void clearRods()
+    {
+        ModIntegrationMinetweaker.queueClear(CastingTableRecipeManager.INSTANCE.getRecipes(TableType.ROD));
+    }
 
-	@ZenMethod
-	public static void clearPlates() {
-		ModIntegrationMinetweaker.queueClear(CastingTableRecipeManager.INSTANCE.getRecipes(TableType.PLATE));
-	}
+    @ZenMethod
+    public static void clearPlates()
+    {
+        ModIntegrationMinetweaker.queueClear(CastingTableRecipeManager.INSTANCE.getRecipes(TableType.PLATE));
+    }
 
-	@ZenMethod
-	public static void clearIngots() {
-		ModIntegrationMinetweaker.queueClear(CastingTableRecipeManager.INSTANCE.getRecipes(TableType.INGOT));
-	}
+    @ZenMethod
+    public static void clearIngots()
+    {
+        ModIntegrationMinetweaker.queueClear(CastingTableRecipeManager.INSTANCE.getRecipes(TableType.INGOT));
+    }
 
-	@ZenMethod
-	public static void clearBlocks() {
-		ModIntegrationMinetweaker.queueClear(CastingTableRecipeManager.INSTANCE.getRecipes(TableType.BLOCK));
-	}
+    @ZenMethod
+    public static void clearBlocks()
+    {
+        ModIntegrationMinetweaker.queueClear(CastingTableRecipeManager.INSTANCE.getRecipes(TableType.BLOCK));
+    }
 
-	@ZenMethod
-	public static void clearAll() {
-		ModIntegrationMinetweaker.queueClear(() -> {
-			Map<TableType, Map<String, ICastingTableRecipe>> recipes = CastingTableRecipeManager.INSTANCE.getRecipesMap();
-			for (TableType type : TableType.values()) {
-				recipes.put(type, new HashMap<>());
-			}
-		});
-	}
+    @ZenMethod
+    public static void clearAll()
+    {
+        ModIntegrationMinetweaker.queueClear(() -> {
+            Map<TableType, Map<String, ICastingTableRecipe>> recipes = CastingTableRecipeManager.INSTANCE
+                    .getRecipesMap();
+            for (TableType type : TableType.values())
+            {
+                recipes.put(type, new HashMap<>());
+            }
+        });
+    }
 }

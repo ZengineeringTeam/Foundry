@@ -5,17 +5,20 @@ import exter.foundry.item.ItemMold;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
-public class FoundryTabMolds extends CreativeTabs {
+public class FoundryTabMolds extends CreativeTabs
+{
 
-	public static final FoundryTabMolds INSTANCE = new FoundryTabMolds();
+    public static final FoundryTabMolds INSTANCE = new FoundryTabMolds();
 
-	private FoundryTabMolds() {
-		super("foundryMolds");
-	}
+    private FoundryTabMolds()
+    {
+        super("foundryMolds");
+    }
 
-	@Override
-	public ItemStack getTabIconItem() {
-		return FoundryItems.mold(ItemMold.SubItem.INGOT);
-	}
+    @Override
+    public ItemStack getTabIconItem()
+    {
+        return FoundryItems.mold(ItemMold.SubItem.INGOT);
+    }
 
 }

@@ -2,40 +2,47 @@ package exter.foundry.integration.minetweaker;
 
 import crafttweaker.IAction;
 
-abstract public class AddRemoveAction {
+abstract public class AddRemoveAction
+{
 
-	private final class Add implements IAction {
-		@Override
-		public void apply() {
-			add();
-		}
+    private final class Add implements IAction
+    {
+        @Override
+        public void apply()
+        {
+            add();
+        }
 
-		@Override
-		public String describe() {
-			return String.format("Adding %s recipe: %s", getRecipeType(), getDescription());
-		}
-	}
+        @Override
+        public String describe()
+        {
+            return String.format("Adding %s recipe: %s", getRecipeType(), getDescription());
+        }
+    }
 
-	private final class Remove implements IAction {
-		@Override
-		public void apply() {
-			remove();
-		}
+    private final class Remove implements IAction
+    {
+        @Override
+        public void apply()
+        {
+            remove();
+        }
 
-		@Override
-		public String describe() {
-			return String.format("Removing %s recipe: %s", getRecipeType(), getDescription());
-		}
-	}
+        @Override
+        public String describe()
+        {
+            return String.format("Removing %s recipe: %s", getRecipeType(), getDescription());
+        }
+    }
 
-	public final IAction action_add = new Add();
-	public final IAction action_remove = new Remove();
+    public final IAction action_add = new Add();
+    public final IAction action_remove = new Remove();
 
-	abstract protected void add();
+    abstract protected void add();
 
-	abstract public String getDescription();
+    abstract public String getDescription();
 
-	abstract public String getRecipeType();
+    abstract public String getRecipeType();
 
-	abstract protected void remove();
+    abstract protected void remove();
 }

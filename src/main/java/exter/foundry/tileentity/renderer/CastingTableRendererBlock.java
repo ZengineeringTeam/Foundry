@@ -11,26 +11,36 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class CastingTableRendererBlock extends CastingTableRenderer {
+public class CastingTableRendererBlock extends CastingTableRenderer
+{
 
-	public CastingTableRendererBlock() {
-		super(2, 14, 2, 14, 2, 14, "foundry:blocks/castingtable_top_block");
-	}
+    public CastingTableRendererBlock()
+    {
+        super(2, 14, 2, 14, 2, 14, "foundry:blocks/castingtable_top_block");
+    }
 
-	@Override
-	protected int getItemColor(ItemStack stack) {
-		return 0xFFFFFFFF;
-	}
+    @Override
+    protected int getItemColor(ItemStack stack)
+    {
+        return 0xFFFFFFFF;
+    }
 
-	@Override
-	protected TextureAtlasSprite getItemTexture(ItemStack stack) {
-		List<BakedQuad> quads = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(stack, getWorld(), Minecraft.getMinecraft().player).getQuads(null, EnumFacing.UP, 0);
-		if (quads != null && quads.size() > 0) { return quads.get(0).getSprite(); }
-		return super.getItemTexture(stack);
-	}
+    @Override
+    protected TextureAtlasSprite getItemTexture(ItemStack stack)
+    {
+        List<BakedQuad> quads = Minecraft.getMinecraft().getRenderItem()
+                .getItemModelWithOverrides(stack, getWorld(), Minecraft.getMinecraft().player)
+                .getQuads(null, EnumFacing.UP, 0);
+        if (quads != null && quads.size() > 0)
+        {
+            return quads.get(0).getSprite();
+        }
+        return super.getItemTexture(stack);
+    }
 
-	@Override
-	protected boolean uvLockItem() {
-		return false;
-	}
+    @Override
+    protected boolean uvLockItem()
+    {
+        return false;
+    }
 }

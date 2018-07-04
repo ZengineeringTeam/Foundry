@@ -11,44 +11,55 @@ import exter.foundry.util.FoundryMiscUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-public class BurnerHeaterFuelManager implements IBurnerHeaterFuelManager {
-	public static final BurnerHeaterFuelManager INSTANCE = new BurnerHeaterFuelManager();
+public class BurnerHeaterFuelManager implements IBurnerHeaterFuelManager
+{
+    public static final BurnerHeaterFuelManager INSTANCE = new BurnerHeaterFuelManager();
 
-	private final NonNullList<IBurnerHeaterFuel> fuels;
+    private final NonNullList<IBurnerHeaterFuel> fuels;
 
-	private BurnerHeaterFuelManager() {
-		fuels = NonNullList.create();
-	}
+    private BurnerHeaterFuelManager()
+    {
+        fuels = NonNullList.create();
+    }
 
-	@Override
-	public void addFuel(IBurnerHeaterFuel fuel) {
-		if (!fuels.contains(fuel)) fuels.add(fuel);
-	}
+    @Override
+    public void addFuel(IBurnerHeaterFuel fuel)
+    {
+        if (!fuels.contains(fuel))
+            fuels.add(fuel);
+    }
 
-	@Override
-	public void addFuel(IItemMatcher fuel, int burn_time, int heat) {
-		if (!FoundryMiscUtils.isInvalid(fuel)) addFuel(new BurnerHeaterFuel(fuel, burn_time, heat));
-	}
+    @Override
+    public void addFuel(IItemMatcher fuel, int burn_time, int heat)
+    {
+        if (!FoundryMiscUtils.isInvalid(fuel))
+            addFuel(new BurnerHeaterFuel(fuel, burn_time, heat));
+    }
 
-	@Override
-	public IBurnerHeaterFuel getFuel(ItemStack item) {
-		for (IBurnerHeaterFuel f : fuels)
-			if (f.getFuel().apply(item)) return f;
-		return null;
-	}
+    @Override
+    public IBurnerHeaterFuel getFuel(ItemStack item)
+    {
+        for (IBurnerHeaterFuel f : fuels)
+            if (f.getFuel().apply(item))
+                return f;
+        return null;
+    }
 
-	@Override
-	public List<IBurnerHeaterFuel> getFuels() {
-		return fuels;
-	}
+    @Override
+    public List<IBurnerHeaterFuel> getFuels()
+    {
+        return fuels;
+    }
 
-	@Override
-	public int getHeatNeeded(int temperature, int temp_loss_rate) {
-		return TileEntityFoundryHeatable.getMaxHeatRecieve(temperature, temp_loss_rate);
-	}
+    @Override
+    public int getHeatNeeded(int temperature, int temp_loss_rate)
+    {
+        return TileEntityFoundryHeatable.getMaxHeatRecieve(temperature, temp_loss_rate);
+    }
 
-	@Override
-	public void removeFuel(IBurnerHeaterFuel fuel) {
-		fuels.remove(fuel);
-	}
+    @Override
+    public void removeFuel(IBurnerHeaterFuel fuel)
+    {
+        fuels.remove(fuel);
+    }
 }

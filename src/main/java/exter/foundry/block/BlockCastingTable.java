@@ -37,224 +37,274 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockCastingTable extends Block implements ITileEntityProvider, IBlockVariants, ISpoutPourDepth {
-	static public enum EnumTable implements IStringSerializable {
-		INGOT(0, "ingot", "castingTableIngot", 9, TableType.INGOT),
-		PLATE(1, "plate", "castingTablePlate", 11, TableType.PLATE),
-		ROD(2, "rod", "castingTableRod", 10, TableType.ROD),
-		BLOCK(3, "block", "castingTableBlock", 2, TableType.BLOCK);
+public class BlockCastingTable extends Block implements ITileEntityProvider, IBlockVariants, ISpoutPourDepth
+{
+    static public enum EnumTable implements IStringSerializable
+    {
+        INGOT(0, "ingot", "castingTableIngot", 9, TableType.INGOT),
+        PLATE(1, "plate", "castingTablePlate", 11, TableType.PLATE),
+        ROD(2, "rod", "castingTableRod", 10, TableType.ROD),
+        BLOCK(3, "block", "castingTableBlock", 2, TableType.BLOCK);
 
-		static public EnumTable fromID(int num) {
-			for (EnumTable m : values()) {
-				if (m.id == num) { return m; }
-			}
-			return null;
-		}
+        static public EnumTable fromID(int num)
+        {
+            for (EnumTable m : values())
+            {
+                if (m.id == num)
+                {
+                    return m;
+                }
+            }
+            return null;
+        }
 
-		public final int id;
-		public final String name;
-		public final String model;
-		public final int depth;
+        public final int id;
+        public final String name;
+        public final String model;
+        public final int depth;
 
-		public final TableType type;
+        public final TableType type;
 
-		private EnumTable(int id, String name, String model, int depth, TableType type) {
-			this.id = id;
-			this.name = name;
-			this.model = model;
-			this.depth = depth;
-			this.type = type;
-		}
+        private EnumTable(int id, String name, String model, int depth, TableType type)
+        {
+            this.id = id;
+            this.name = name;
+            this.model = model;
+            this.depth = depth;
+            this.type = type;
+        }
 
-		@Override
-		public String getName() {
-			return name;
-		}
+        @Override
+        public String getName()
+        {
+            return name;
+        }
 
-		@Override
-		public String toString() {
-			return getName();
-		}
-	}
+        @Override
+        public String toString()
+        {
+            return getName();
+        }
+    }
 
-	protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.75D, 1.0D);
-	protected static final AxisAlignedBB AABB_BLOCK = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D);
+    protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.75D, 1.0D);
+    protected static final AxisAlignedBB AABB_BLOCK = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D);
 
-	public static final PropertyEnum<EnumTable> TABLE = PropertyEnum.create("type", EnumTable.class);
+    public static final PropertyEnum<EnumTable> TABLE = PropertyEnum.create("type", EnumTable.class);
 
-	private final Random rand = new Random();
+    private final Random rand = new Random();
 
-	public BlockCastingTable() {
-		super(Material.IRON);
-		setHardness(1.0F);
-		setResistance(8.0F);
-		setSoundType(SoundType.STONE);
-		setUnlocalizedName("foundry.castingTable");
-		setCreativeTab(FoundryTabMachines.INSTANCE);
-		setRegistryName("castingTable");
-	}
+    public BlockCastingTable()
+    {
+        super(Material.IRON);
+        setHardness(1.0F);
+        setResistance(8.0F);
+        setSoundType(SoundType.STONE);
+        setUnlocalizedName("foundry.castingTable");
+        setCreativeTab(FoundryTabMachines.INSTANCE);
+        setRegistryName("castingTable");
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced) {
-		FoundryMiscUtils.localizeTooltip("tooltip.foundry.castingTable." + getStateFromMeta(stack.getMetadata()).getValue(TABLE).name, tooltip);
-	}
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced)
+    {
+        FoundryMiscUtils.localizeTooltip(
+                "tooltip.foundry.castingTable." + getStateFromMeta(stack.getMetadata()).getValue(TABLE).name, tooltip);
+    }
 
-	public ItemStack asItemStack(EnumTable machine) {
-		return new ItemStack(this, 1, getMetaFromState(getDefaultState().withProperty(TABLE, machine)));
-	}
+    public ItemStack asItemStack(EnumTable machine)
+    {
+        return new ItemStack(this, 1, getMetaFromState(getDefaultState().withProperty(TABLE, machine)));
+    }
 
-	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state) {
-		TileEntity te = world.getTileEntity(pos);
+    @Override
+    public void breakBlock(World world, BlockPos pos, IBlockState state)
+    {
+        TileEntity te = world.getTileEntity(pos);
 
-		if (te != null && te instanceof TileEntityCastingTableBase && !world.isRemote) {
-			TileEntityCastingTableBase tef = (TileEntityCastingTableBase) te;
-			if (tef.getProgress() == 0) {
-				ItemStack is = tef.getStackInSlot(0);
+        if (te != null && te instanceof TileEntityCastingTableBase && !world.isRemote)
+        {
+            TileEntityCastingTableBase tef = (TileEntityCastingTableBase) te;
+            if (tef.getProgress() == 0)
+            {
+                ItemStack is = tef.getStackInSlot(0);
 
-				if (!is.isEmpty()) {
-					double drop_x = rand.nextFloat() * 0.3 + 0.35;
-					double drop_y = rand.nextFloat() * 0.3 + 0.35;
-					double drop_z = rand.nextFloat() * 0.3 + 0.35;
-					EntityItem entityitem = new EntityItem(world, pos.getX() + drop_x, pos.getY() + drop_y, pos.getZ() + drop_z, is);
-					entityitem.setPickupDelay(10);
+                if (!is.isEmpty())
+                {
+                    double drop_x = rand.nextFloat() * 0.3 + 0.35;
+                    double drop_y = rand.nextFloat() * 0.3 + 0.35;
+                    double drop_z = rand.nextFloat() * 0.3 + 0.35;
+                    EntityItem entityitem = new EntityItem(world, pos.getX() + drop_x, pos.getY() + drop_y,
+                            pos.getZ() + drop_z, is);
+                    entityitem.setPickupDelay(10);
 
-					world.spawnEntity(entityitem);
-				}
-			}
-		}
-		world.removeTileEntity(pos);
-		super.breakBlock(world, pos, state);
-	}
+                    world.spawnEntity(entityitem);
+                }
+            }
+        }
+        world.removeTileEntity(pos);
+        super.breakBlock(world, pos, state);
+    }
 
-	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, TABLE);
-	}
+    @Override
+    protected BlockStateContainer createBlockState()
+    {
+        return new BlockStateContainer(this, TABLE);
+    }
 
-	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
-		return createTileEntity(world, getStateFromMeta(meta));
-	}
+    @Override
+    public TileEntity createNewTileEntity(World world, int meta)
+    {
+        return createTileEntity(world, getStateFromMeta(meta));
+    }
 
-	@Override
-	public TileEntity createTileEntity(World world, IBlockState state) {
-		switch (state.getValue(TABLE)) {
-		case INGOT:
-			return new TileEntityCastingTableIngot();
-		case PLATE:
-			return new TileEntityCastingTablePlate();
-		case ROD:
-			return new TileEntityCastingTableRod();
-		case BLOCK:
-			return new TileEntityCastingTableBlock();
-		}
-		return null;
-	}
+    @Override
+    public TileEntity createTileEntity(World world, IBlockState state)
+    {
+        switch (state.getValue(TABLE))
+        {
+        case INGOT:
+            return new TileEntityCastingTableIngot();
+        case PLATE:
+            return new TileEntityCastingTablePlate();
+        case ROD:
+            return new TileEntityCastingTableRod();
+        case BLOCK:
+            return new TileEntityCastingTableBlock();
+        }
+        return null;
+    }
 
-	@Override
-	public int damageDropped(IBlockState state) {
-		return getMetaFromState(state);
-	}
+    @Override
+    public int damageDropped(IBlockState state)
+    {
+        return getMetaFromState(state);
+    }
 
-	@Override
-	public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
-		return face == EnumFacing.DOWN;
-	}
+    @Override
+    public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face)
+    {
+        return face == EnumFacing.DOWN;
+    }
 
-	private void dropCastingTableOutput(EntityPlayer player, World world, BlockPos pos, IBlockState state) {
-		TileEntity te = world.getTileEntity(pos);
+    private void dropCastingTableOutput(EntityPlayer player, World world, BlockPos pos, IBlockState state)
+    {
+        TileEntity te = world.getTileEntity(pos);
 
-		if (te != null && te instanceof TileEntityCastingTableBase && !world.isRemote) {
-			TileEntityCastingTableBase te_ct = (TileEntityCastingTableBase) te;
-			if (te_ct.getProgress() == 0) {
-				ItemStack is = te_ct.getStackInSlot(0);
+        if (te != null && te instanceof TileEntityCastingTableBase && !world.isRemote)
+        {
+            TileEntityCastingTableBase te_ct = (TileEntityCastingTableBase) te;
+            if (te_ct.getProgress() == 0)
+            {
+                ItemStack is = te_ct.getStackInSlot(0);
 
-				if (!is.isEmpty()) {
-					EntityItem entityitem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 0.9375, pos.getZ() + 0.5, is);
-					entityitem.setPickupDelay(1);
+                if (!is.isEmpty())
+                {
+                    EntityItem entityitem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 0.9375,
+                            pos.getZ() + 0.5, is);
+                    entityitem.setPickupDelay(1);
 
-					world.spawnEntity(entityitem);
-					te_ct.setInventorySlotContents(0, ItemStack.EMPTY);
-				}
-			}
-		}
-	}
+                    world.spawnEntity(entityitem);
+                    te_ct.setInventorySlotContents(0, ItemStack.EMPTY);
+                }
+            }
+        }
+    }
 
-	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		if (state.getValue(TABLE) == EnumTable.BLOCK) {
-			return AABB_BLOCK;
-		} else {
-			return AABB;
-		}
-	}
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+    {
+        if (state.getValue(TABLE) == EnumTable.BLOCK)
+        {
+            return AABB_BLOCK;
+        }
+        else
+        {
+            return AABB;
+        }
+    }
 
-	@Override
-	public int getMetaFromState(IBlockState state) {
-		return state.getValue(TABLE).id;
-	}
+    @Override
+    public int getMetaFromState(IBlockState state)
+    {
+        return state.getValue(TABLE).id;
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public int getSpoutPourDepth(World world, BlockPos pos, IBlockState state) {
-		return state.getValue(TABLE).depth;
-	}
+    @SideOnly(Side.CLIENT)
+    @Override
+    public int getSpoutPourDepth(World world, BlockPos pos, IBlockState state)
+    {
+        return state.getValue(TABLE).depth;
+    }
 
-	@Override
-	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(TABLE, EnumTable.fromID(meta));
-	}
+    @Override
+    public IBlockState getStateFromMeta(int meta)
+    {
+        return getDefaultState().withProperty(TABLE, EnumTable.fromID(meta));
+    }
 
-	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
-		for (EnumTable m : EnumTable.values()) {
-			list.add(new ItemStack(this, 1, m.id));
-		}
-	}
+    @Override
+    public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
+    {
+        for (EnumTable m : EnumTable.values())
+        {
+            list.add(new ItemStack(this, 1, m.id));
+        }
+    }
 
-	@Override
-	public String getUnlocalizedName(int meta) {
-		return getUnlocalizedName() + "." + getStateFromMeta(meta).getValue(TABLE).name;
-	}
+    @Override
+    public String getUnlocalizedName(int meta)
+    {
+        return getUnlocalizedName() + "." + getStateFromMeta(meta).getValue(TABLE).name;
+    }
 
-	@Override
-	public boolean hasTileEntity(IBlockState state) {
-		return true;
-	}
+    @Override
+    public boolean hasTileEntity(IBlockState state)
+    {
+        return true;
+    }
 
-	@Override
-	public boolean isFullCube(IBlockState state) {
-		return false;
-	}
+    @Override
+    public boolean isFullCube(IBlockState state)
+    {
+        return false;
+    }
 
-	@Override
-	public boolean isOpaqueCube(IBlockState state) {
-		return false;
-	}
+    @Override
+    public boolean isOpaqueCube(IBlockState state)
+    {
+        return false;
+    }
 
-	@Override
-	public boolean isTopSolid(IBlockState state) {
-		return false;
-	}
+    @Override
+    public boolean isTopSolid(IBlockState state)
+    {
+        return false;
+    }
 
-	@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos) {
-		TileEntityFoundry te = (TileEntityFoundry) world.getTileEntity(pos);
+    @Override
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos)
+    {
+        TileEntityFoundry te = (TileEntityFoundry) world.getTileEntity(pos);
 
-		if (te != null) {
-			te.updateRedstone();
-		}
-	}
+        if (te != null)
+        {
+            te.updateRedstone();
+        }
+    }
 
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hit_x, float hit_y, float hit_z) {
-		if (world.isRemote) {
-			return true;
-		} else {
-			dropCastingTableOutput(player, world, pos, state);
-			return false;
-		}
-	}
+    @Override
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hit_x, float hit_y, float hit_z)
+    {
+        if (world.isRemote)
+        {
+            return true;
+        }
+        else
+        {
+            dropCastingTableOutput(player, world, pos, state);
+            return false;
+        }
+    }
 }

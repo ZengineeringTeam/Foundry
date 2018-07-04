@@ -19,115 +19,131 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 /**
  * API for recipes of Foundry machines.
  */
-public class FoundryAPI {
+public class FoundryAPI
+{
 
-	/**
-	 * The base value foundry uses for all liquid operations.  Set by foundry configs, defaulting to 108.
-	 */
-	public static int FLUID_AMOUNT_INGOT = 108;
-	
-	/**
-	 * The fluid value for an ore, or 0, if the config is not overriding it.
-	 */
-	public static int FLUID_AMOUNT_ORE = 0;
+    /**
+     * The base value foundry uses for all liquid operations.  Set by foundry configs, defaulting to 108.
+     */
+    public static int FLUID_AMOUNT_INGOT = 108;
 
-	public static int getAmountBlock() {
-		return FLUID_AMOUNT_INGOT * 9;
-	}
+    /**
+     * The fluid value for an ore, or 0, if the config is not overriding it.
+     */
+    public static int FLUID_AMOUNT_ORE = 0;
 
-	public static int getAmountPlate() {
-		return FLUID_AMOUNT_INGOT;
-	}
+    public static int getAmountBlock()
+    {
+        return FLUID_AMOUNT_INGOT * 9;
+    }
 
-	public static int getAmountRod() {
-		return FLUID_AMOUNT_INGOT / 2;
-	}
+    public static int getAmountPlate()
+    {
+        return FLUID_AMOUNT_INGOT;
+    }
 
-	public static int getAmountNugget() {
-		return FLUID_AMOUNT_INGOT / 9;
-	}
+    public static int getAmountRod()
+    {
+        return FLUID_AMOUNT_INGOT / 2;
+    }
 
-	public static int getAmountOre() {
-		return FLUID_AMOUNT_ORE == 0 ? FLUID_AMOUNT_INGOT * 2 : FLUID_AMOUNT_ORE;
-	}
+    public static int getAmountNugget()
+    {
+        return FLUID_AMOUNT_INGOT / 9;
+    }
 
-	public static int getAmountGear() {
-		return FLUID_AMOUNT_INGOT * 4;
-	}
+    public static int getAmountOre()
+    {
+        return FLUID_AMOUNT_ORE == 0 ? FLUID_AMOUNT_INGOT * 2 : FLUID_AMOUNT_ORE;
+    }
 
-	public static int getAmountHelm() {
-		return FLUID_AMOUNT_INGOT * 5;
-	}
+    public static int getAmountGear()
+    {
+        return FLUID_AMOUNT_INGOT * 4;
+    }
 
-	public static int getAmountChest() {
-		return FLUID_AMOUNT_INGOT * 8;
-	}
+    public static int getAmountHelm()
+    {
+        return FLUID_AMOUNT_INGOT * 5;
+    }
 
-	public static int getAmountLegs() {
-		return FLUID_AMOUNT_INGOT * 7;
-	}
+    public static int getAmountChest()
+    {
+        return FLUID_AMOUNT_INGOT * 8;
+    }
 
-	public static int getAmountBoots() {
-		return FLUID_AMOUNT_INGOT * 4;
-	}
+    public static int getAmountLegs()
+    {
+        return FLUID_AMOUNT_INGOT * 7;
+    }
 
-	public static int getAmountPickaxe() {
-		return FLUID_AMOUNT_INGOT * 3;
-	}
+    public static int getAmountBoots()
+    {
+        return FLUID_AMOUNT_INGOT * 4;
+    }
 
-	public static int getAmountShovel() {
-		return FLUID_AMOUNT_INGOT * 1;
-	}
+    public static int getAmountPickaxe()
+    {
+        return FLUID_AMOUNT_INGOT * 3;
+    }
 
-	public static int getAmountAxe() {
-		return FLUID_AMOUNT_INGOT * 3;
-	}
+    public static int getAmountShovel()
+    {
+        return FLUID_AMOUNT_INGOT * 1;
+    }
 
-	public static int getAmountHoe() {
-		return FLUID_AMOUNT_INGOT * 2;
-	}
+    public static int getAmountAxe()
+    {
+        return FLUID_AMOUNT_INGOT * 3;
+    }
 
-	public static int getAmountSword() {
-		return FLUID_AMOUNT_INGOT * 2;
-	}
+    public static int getAmountHoe()
+    {
+        return FLUID_AMOUNT_INGOT * 2;
+    }
 
-	/**
-	 * Tank capacity for machines.
-	 */
-	public static final int CRUCIBLE_TANK_CAPACITY = 6000;
-	public static final int CASTER_TANK_CAPACITY = 6000;
-	public static final int INFUSER_TANK_CAPACITY = 5000;
-	public static final int ALLOYMIXER_TANK_CAPACITY = 2000;
-	public static final int ALLOYING_CRUCIBLE_TANK_CAPACITY = 3000;
-	public static final int ATOMIZER_TANK_CAPACITY = 6000;
-	public static final int ATOMIZER_WATER_TANK_CAPACITY = 6000;
+    public static int getAmountSword()
+    {
+        return FLUID_AMOUNT_INGOT * 2;
+    }
 
-	//Heat loss rates for crucibles.
-	public static final int CRUCIBLE_BASIC_TEMP_LOSS_RATE = 750;
-	public static final int CRUCIBLE_STANDARD_TEMP_LOSS_RATE = 750;
-	public static final int CRUCIBLE_ADVANCED_TEMP_LOSS_RATE = 900;
+    /**
+     * Tank capacity for machines.
+     */
+    public static final int CRUCIBLE_TANK_CAPACITY = 6000;
+    public static final int CASTER_TANK_CAPACITY = 6000;
+    public static final int INFUSER_TANK_CAPACITY = 5000;
+    public static final int ALLOYMIXER_TANK_CAPACITY = 2000;
+    public static final int ALLOYING_CRUCIBLE_TANK_CAPACITY = 3000;
+    public static final int ATOMIZER_TANK_CAPACITY = 6000;
+    public static final int ATOMIZER_WATER_TANK_CAPACITY = 6000;
 
-	//Max temperatures for crucibles (in 1/100 deg Ks).
-	public static final int CRUCIBLE_BASIC_MAX_TEMP = 200000;
-	public static final int CRUCIBLE_STANDARD_MAX_TEMP = 250000;
-	public static final int CRUCIBLE_ADVANCED_MAX_TEMP = 400000;
+    //Heat loss rates for crucibles.
+    public static final int CRUCIBLE_BASIC_TEMP_LOSS_RATE = 750;
+    public static final int CRUCIBLE_STANDARD_TEMP_LOSS_RATE = 750;
+    public static final int CRUCIBLE_ADVANCED_TEMP_LOSS_RATE = 900;
 
-	//These fields are set by Foundry during it's preInit phase.
-	public static IMeltingRecipeManager MELTING_MANAGER;
-	public static ICastingRecipeManager CASTING_MANAGER;
-	public static ICastingTableRecipeManager CASTING_TABLE_MANAGER;
-	public static IAlloyMixerRecipeManager ALLOY_MIXER_MANAGER;
-	public static IAlloyingCrucibleRecipeManager ALLOYING_CRUCIBLE_MANAGER;
-	public static IInfuserRecipeManager INFUSER_MANAGER;
-	public static IAlloyFurnaceRecipeManager ALLOY_FURNACE_MANAGER;
-	public static IAtomizerRecipeManager ATOMIZER_MANAGER;
-	public static IMoldRecipeManager MOLD_MANAGER;
-	public static IBurnerHeaterFuelManager BURNER_HEATER_FUEL;
+    //Max temperatures for crucibles (in 1/100 deg Ks).
+    public static final int CRUCIBLE_BASIC_MAX_TEMP = 200000;
+    public static final int CRUCIBLE_STANDARD_MAX_TEMP = 250000;
+    public static final int CRUCIBLE_ADVANCED_MAX_TEMP = 400000;
 
-	public static IMaterialRegistry MATERIALS;
-	public static IFluidRegistry FLUIDS;
+    //These fields are set by Foundry during it's preInit phase.
+    public static IMeltingRecipeManager MELTING_MANAGER;
+    public static ICastingRecipeManager CASTING_MANAGER;
+    public static ICastingTableRecipeManager CASTING_TABLE_MANAGER;
+    public static IAlloyMixerRecipeManager ALLOY_MIXER_MANAGER;
+    public static IAlloyingCrucibleRecipeManager ALLOYING_CRUCIBLE_MANAGER;
+    public static IInfuserRecipeManager INFUSER_MANAGER;
+    public static IAlloyFurnaceRecipeManager ALLOY_FURNACE_MANAGER;
+    public static IAtomizerRecipeManager ATOMIZER_MANAGER;
+    public static IMoldRecipeManager MOLD_MANAGER;
+    public static IBurnerHeaterFuelManager BURNER_HEATER_FUEL;
 
-	@CapabilityInject(IHeatProvider.class)
-	public static Capability<IHeatProvider> HEAT_PROVIDER_CAP;
+    public static IMaterialRegistry MATERIALS;
+    public static IFluidRegistry FLUIDS;
+
+    @CapabilityInject(IHeatProvider.class)
+    public static Capability<IHeatProvider> HEAT_PROVIDER_CAP;
 
 }

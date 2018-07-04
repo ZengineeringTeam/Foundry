@@ -21,83 +21,96 @@ import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ModIntegrationMinetweaker implements IModIntegration {
+public class ModIntegrationMinetweaker implements IModIntegration
+{
 
-	private static List<Runnable> addQueue = new ArrayList<>();
-	private static List<Runnable> removeQueue = new ArrayList<>();
-	private static List<Runnable> clearQueue = new ArrayList<>();
+    private static List<Runnable> addQueue = new ArrayList<>();
+    private static List<Runnable> removeQueue = new ArrayList<>();
+    private static List<Runnable> clearQueue = new ArrayList<>();
 
-	@Override
-	public String getName() {
-		return CraftTweaker.NAME;
-	}
+    @Override
+    public String getName()
+    {
+        return CraftTweaker.NAME;
+    }
 
-	@Override
-	public void onAfterPostInit() {
-		for (Runnable r : clearQueue)
-			r.run();
-		for (Runnable r : removeQueue)
-			r.run();
-		for (Runnable r : addQueue)
-			r.run();
-		addQueue = removeQueue = clearQueue = null;
-	}
+    @Override
+    public void onAfterPostInit()
+    {
+        for (Runnable r : clearQueue)
+            r.run();
+        for (Runnable r : removeQueue)
+            r.run();
+        for (Runnable r : addQueue)
+            r.run();
+        addQueue = removeQueue = clearQueue = null;
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void onClientInit() {
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void onClientInit()
+    {
 
-	}
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void onClientPostInit() {
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void onClientPostInit()
+    {
 
-	}
+    }
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void onClientPreInit() {
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void onClientPreInit()
+    {
 
-	}
+    }
 
-	@Override
-	public void onInit() {
-	}
+    @Override
+    public void onInit()
+    {
+    }
 
-	@Override
-	public void onPostInit() {
+    @Override
+    public void onPostInit()
+    {
 
-	}
+    }
 
-	@Override
-	public void onPreInit(Configuration config) {
-		CraftTweakerAPI.registerBracketHandler(new OreStackBracketHandler());
-		CraftTweakerAPI.registerClass(MTMeltingHandler.class);
-		CraftTweakerAPI.registerClass(MTCastingHandler.class);
-		CraftTweakerAPI.registerClass(MTCastingTableHandler.class);
-		CraftTweakerAPI.registerClass(MTAlloyMixerHandler.class);
-		CraftTweakerAPI.registerClass(MTAlloyFurnaceHandler.class);
-		CraftTweakerAPI.registerClass(MTAlloyingCrucibleHandler.class);
-		CraftTweakerAPI.registerClass(MTAtomizerHandler.class);
-		CraftTweakerAPI.registerClass(MTInfuserHandler.class);
-		CraftTweakerAPI.registerClass(MTMoldStationHandler.class);
-		CraftTweakerAPI.registerClass(MTBurnerFuelHandler.class);
-	}
+    @Override
+    public void onPreInit(Configuration config)
+    {
+        CraftTweakerAPI.registerBracketHandler(new OreStackBracketHandler());
+        CraftTweakerAPI.registerClass(MTMeltingHandler.class);
+        CraftTweakerAPI.registerClass(MTCastingHandler.class);
+        CraftTweakerAPI.registerClass(MTCastingTableHandler.class);
+        CraftTweakerAPI.registerClass(MTAlloyMixerHandler.class);
+        CraftTweakerAPI.registerClass(MTAlloyFurnaceHandler.class);
+        CraftTweakerAPI.registerClass(MTAlloyingCrucibleHandler.class);
+        CraftTweakerAPI.registerClass(MTAtomizerHandler.class);
+        CraftTweakerAPI.registerClass(MTInfuserHandler.class);
+        CraftTweakerAPI.registerClass(MTMoldStationHandler.class);
+        CraftTweakerAPI.registerClass(MTBurnerFuelHandler.class);
+    }
 
-	public static void queueAdd(Runnable action) {
-		addQueue.add(action);
-	}
+    public static void queueAdd(Runnable action)
+    {
+        addQueue.add(action);
+    }
 
-	public static void queueRemove(Runnable action) {
-		removeQueue.add(action);
-	}
+    public static void queueRemove(Runnable action)
+    {
+        removeQueue.add(action);
+    }
 
-	public static void queueClear(Collection<?> recipes) {
-		clearQueue.add(() -> recipes.clear());
-	}
+    public static void queueClear(Collection<?> recipes)
+    {
+        clearQueue.add(() -> recipes.clear());
+    }
 
-	public static void queueClear(Runnable run) {
-		clearQueue.add(run);
-	}
+    public static void queueClear(Runnable run)
+    {
+        clearQueue.add(run);
+    }
 }

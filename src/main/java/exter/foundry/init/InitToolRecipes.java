@@ -14,68 +14,96 @@ import exter.foundry.util.FoundryMiscUtils;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-public class InitToolRecipes {
-	static public void init() {
-		OreMatcher extra_sticks1 = new OreMatcher("stickWood", 1);
-		OreMatcher extra_sticks2 = new OreMatcher("stickWood", 2);
+public class InitToolRecipes
+{
+    static public void init()
+    {
+        OreMatcher extra_sticks1 = new OreMatcher("stickWood", 1);
+        OreMatcher extra_sticks2 = new OreMatcher("stickWood", 2);
 
-		ItemStack mold_chestplate = FoundryItems.mold(ItemMold.SubItem.CHESTPLATE);
-		ItemStack mold_pickaxe = FoundryItems.mold(ItemMold.SubItem.PICKAXE);
-		ItemStack mold_axe = FoundryItems.mold(ItemMold.SubItem.AXE);
-		ItemStack mold_shovel = FoundryItems.mold(ItemMold.SubItem.SHOVEL);
-		ItemStack mold_hoe = FoundryItems.mold(ItemMold.SubItem.HOE);
-		ItemStack mold_sword = FoundryItems.mold(ItemMold.SubItem.SWORD);
-		ItemStack mold_leggings = FoundryItems.mold(ItemMold.SubItem.LEGGINGS);
-		ItemStack mold_helmet = FoundryItems.mold(ItemMold.SubItem.HELMET);
-		ItemStack mold_boots = FoundryItems.mold(ItemMold.SubItem.BOOTS);
+        ItemStack mold_chestplate = FoundryItems.mold(ItemMold.SubItem.CHESTPLATE);
+        ItemStack mold_pickaxe = FoundryItems.mold(ItemMold.SubItem.PICKAXE);
+        ItemStack mold_axe = FoundryItems.mold(ItemMold.SubItem.AXE);
+        ItemStack mold_shovel = FoundryItems.mold(ItemMold.SubItem.SHOVEL);
+        ItemStack mold_hoe = FoundryItems.mold(ItemMold.SubItem.HOE);
+        ItemStack mold_sword = FoundryItems.mold(ItemMold.SubItem.SWORD);
+        ItemStack mold_leggings = FoundryItems.mold(ItemMold.SubItem.LEGGINGS);
+        ItemStack mold_helmet = FoundryItems.mold(ItemMold.SubItem.HELMET);
+        ItemStack mold_boots = FoundryItems.mold(ItemMold.SubItem.BOOTS);
 
-		MoldRecipeManager.INSTANCE.addRecipe(mold_helmet, 4, 3, new int[] { 3, 3, 3, 3, 3, 1, 1, 3, 3, 1, 1, 3 });
+        MoldRecipeManager.INSTANCE.addRecipe(mold_helmet, 4, 3, new int[] { 3, 3, 3, 3, 3, 1, 1, 3, 3, 1, 1, 3 });
 
-		MoldRecipeManager.INSTANCE.addRecipe(mold_chestplate, 6, 6, new int[] { 3, 1, 0, 0, 1, 3, 3, 1, 0, 0, 1, 3, 3, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 3 });
+        MoldRecipeManager.INSTANCE.addRecipe(mold_chestplate, 6, 6, new int[] { 3, 1, 0, 0, 1, 3, 3, 1, 0, 0, 1, 3, 3,
+                1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 3 });
 
-		MoldRecipeManager.INSTANCE.addRecipe(mold_leggings, 6, 6, new int[] { 3, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 3, 3, 1, 0, 0, 1, 3, 3, 1, 0, 0, 1, 3, 3, 1, 0, 0, 1, 3, 3, 1, 0, 0, 1, 3 });
+        MoldRecipeManager.INSTANCE.addRecipe(mold_leggings, 6, 6, new int[] { 3, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 3, 3, 1,
+                0, 0, 1, 3, 3, 1, 0, 0, 1, 3, 3, 1, 0, 0, 1, 3, 3, 1, 0, 0, 1, 3 });
 
-		MoldRecipeManager.INSTANCE.addRecipe(mold_boots, 6, 6, new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 0, 0, 3, 2, 3, 3, 0, 0, 3, 3, 3, 3, 0, 0, 3, 3 });
+        MoldRecipeManager.INSTANCE.addRecipe(mold_boots, 6, 6, new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 2, 3, 0, 0, 3, 2, 3, 3, 0, 0, 3, 3, 3, 3, 0, 0, 3, 3 });
 
-		MoldRecipeManager.INSTANCE.addRecipe(mold_pickaxe, 5, 5, new int[] { 0, 2, 2, 2, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0 });
+        MoldRecipeManager.INSTANCE.addRecipe(mold_pickaxe, 5, 5,
+                new int[] { 0, 2, 2, 2, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0 });
 
-		MoldRecipeManager.INSTANCE.addRecipe(mold_axe, 3, 5, new int[] { 1, 2, 2, 1, 2, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1 });
+        MoldRecipeManager.INSTANCE.addRecipe(mold_axe, 3, 5, new int[] { 1, 2, 2, 1, 2, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1 });
 
-		MoldRecipeManager.INSTANCE.addRecipe(mold_shovel, 3, 6, new int[] { 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0 });
+        MoldRecipeManager.INSTANCE.addRecipe(mold_shovel, 3, 6,
+                new int[] { 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0 });
 
-		MoldRecipeManager.INSTANCE.addRecipe(mold_hoe, 3, 5, new int[] { 0, 2, 2, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, });
+        MoldRecipeManager.INSTANCE.addRecipe(mold_hoe, 3, 5,
+                new int[] { 0, 2, 2, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, });
 
-		MoldRecipeManager.INSTANCE.addRecipe(mold_sword, 3, 6, new int[] { 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 2, 1, 0, 1, 0, });
+        MoldRecipeManager.INSTANCE.addRecipe(mold_sword, 3, 6,
+                new int[] { 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 2, 1, 0, 1, 0, });
 
-		FoundryMiscUtils.registerCasting(new ItemStack(Items.IRON_PICKAXE), FoundryFluids.liquid_iron, 3, ItemMold.SubItem.PICKAXE, extra_sticks2);
-		FoundryMiscUtils.registerCasting(new ItemStack(Items.GOLDEN_PICKAXE), FoundryFluids.liquid_gold, 3, ItemMold.SubItem.PICKAXE, extra_sticks2);
+        FoundryMiscUtils.registerCasting(new ItemStack(Items.IRON_PICKAXE), FoundryFluids.liquid_iron, 3,
+                ItemMold.SubItem.PICKAXE, extra_sticks2);
+        FoundryMiscUtils.registerCasting(new ItemStack(Items.GOLDEN_PICKAXE), FoundryFluids.liquid_gold, 3,
+                ItemMold.SubItem.PICKAXE, extra_sticks2);
 
-		FoundryMiscUtils.registerCasting(new ItemStack(Items.IRON_AXE), FoundryFluids.liquid_iron, 3, ItemMold.SubItem.AXE, extra_sticks2);
-		FoundryMiscUtils.registerCasting(new ItemStack(Items.GOLDEN_AXE), FoundryFluids.liquid_gold, 3, ItemMold.SubItem.AXE, extra_sticks2);
+        FoundryMiscUtils.registerCasting(new ItemStack(Items.IRON_AXE), FoundryFluids.liquid_iron, 3,
+                ItemMold.SubItem.AXE, extra_sticks2);
+        FoundryMiscUtils.registerCasting(new ItemStack(Items.GOLDEN_AXE), FoundryFluids.liquid_gold, 3,
+                ItemMold.SubItem.AXE, extra_sticks2);
 
-		FoundryMiscUtils.registerCasting(new ItemStack(Items.IRON_SHOVEL), FoundryFluids.liquid_iron, 1, ItemMold.SubItem.SHOVEL, extra_sticks2);
-		FoundryMiscUtils.registerCasting(new ItemStack(Items.GOLDEN_SHOVEL), FoundryFluids.liquid_gold, 1, ItemMold.SubItem.SHOVEL, extra_sticks2);
+        FoundryMiscUtils.registerCasting(new ItemStack(Items.IRON_SHOVEL), FoundryFluids.liquid_iron, 1,
+                ItemMold.SubItem.SHOVEL, extra_sticks2);
+        FoundryMiscUtils.registerCasting(new ItemStack(Items.GOLDEN_SHOVEL), FoundryFluids.liquid_gold, 1,
+                ItemMold.SubItem.SHOVEL, extra_sticks2);
 
-		FoundryMiscUtils.registerCasting(new ItemStack(Items.IRON_HOE), FoundryFluids.liquid_iron, 2, ItemMold.SubItem.HOE, extra_sticks2);
-		FoundryMiscUtils.registerCasting(new ItemStack(Items.GOLDEN_HOE), FoundryFluids.liquid_gold, 2, ItemMold.SubItem.HOE, extra_sticks2);
+        FoundryMiscUtils.registerCasting(new ItemStack(Items.IRON_HOE), FoundryFluids.liquid_iron, 2,
+                ItemMold.SubItem.HOE, extra_sticks2);
+        FoundryMiscUtils.registerCasting(new ItemStack(Items.GOLDEN_HOE), FoundryFluids.liquid_gold, 2,
+                ItemMold.SubItem.HOE, extra_sticks2);
 
-		FoundryMiscUtils.registerCasting(new ItemStack(Items.IRON_SWORD), FoundryFluids.liquid_iron, 2, ItemMold.SubItem.SWORD, extra_sticks1);
-		FoundryMiscUtils.registerCasting(new ItemStack(Items.GOLDEN_SWORD), FoundryFluids.liquid_gold, 2, ItemMold.SubItem.SWORD, extra_sticks1);
+        FoundryMiscUtils.registerCasting(new ItemStack(Items.IRON_SWORD), FoundryFluids.liquid_iron, 2,
+                ItemMold.SubItem.SWORD, extra_sticks1);
+        FoundryMiscUtils.registerCasting(new ItemStack(Items.GOLDEN_SWORD), FoundryFluids.liquid_gold, 2,
+                ItemMold.SubItem.SWORD, extra_sticks1);
 
-		FoundryMiscUtils.registerCasting(new ItemStack(Items.IRON_HELMET), FoundryFluids.liquid_iron, 5, ItemMold.SubItem.HELMET);
-		FoundryMiscUtils.registerCasting(new ItemStack(Items.GOLDEN_HELMET), FoundryFluids.liquid_gold, 5, ItemMold.SubItem.HELMET);
+        FoundryMiscUtils.registerCasting(new ItemStack(Items.IRON_HELMET), FoundryFluids.liquid_iron, 5,
+                ItemMold.SubItem.HELMET);
+        FoundryMiscUtils.registerCasting(new ItemStack(Items.GOLDEN_HELMET), FoundryFluids.liquid_gold, 5,
+                ItemMold.SubItem.HELMET);
 
-		FoundryMiscUtils.registerCasting(new ItemStack(Items.IRON_CHESTPLATE), FoundryFluids.liquid_iron, 8, ItemMold.SubItem.CHESTPLATE);
-		FoundryMiscUtils.registerCasting(new ItemStack(Items.GOLDEN_CHESTPLATE), FoundryFluids.liquid_gold, 8, ItemMold.SubItem.CHESTPLATE);
+        FoundryMiscUtils.registerCasting(new ItemStack(Items.IRON_CHESTPLATE), FoundryFluids.liquid_iron, 8,
+                ItemMold.SubItem.CHESTPLATE);
+        FoundryMiscUtils.registerCasting(new ItemStack(Items.GOLDEN_CHESTPLATE), FoundryFluids.liquid_gold, 8,
+                ItemMold.SubItem.CHESTPLATE);
 
-		FoundryMiscUtils.registerCasting(new ItemStack(Items.IRON_LEGGINGS), FoundryFluids.liquid_iron, 7, ItemMold.SubItem.LEGGINGS);
-		FoundryMiscUtils.registerCasting(new ItemStack(Items.GOLDEN_LEGGINGS), FoundryFluids.liquid_gold, 7, ItemMold.SubItem.LEGGINGS);
+        FoundryMiscUtils.registerCasting(new ItemStack(Items.IRON_LEGGINGS), FoundryFluids.liquid_iron, 7,
+                ItemMold.SubItem.LEGGINGS);
+        FoundryMiscUtils.registerCasting(new ItemStack(Items.GOLDEN_LEGGINGS), FoundryFluids.liquid_gold, 7,
+                ItemMold.SubItem.LEGGINGS);
 
-		FoundryMiscUtils.registerCasting(new ItemStack(Items.IRON_BOOTS), FoundryFluids.liquid_iron, 4, ItemMold.SubItem.BOOTS);
-		FoundryMiscUtils.registerCasting(new ItemStack(Items.GOLDEN_BOOTS), FoundryFluids.liquid_gold, 4, ItemMold.SubItem.BOOTS);
+        FoundryMiscUtils.registerCasting(new ItemStack(Items.IRON_BOOTS), FoundryFluids.liquid_iron, 4,
+                ItemMold.SubItem.BOOTS);
+        FoundryMiscUtils.registerCasting(new ItemStack(Items.GOLDEN_BOOTS), FoundryFluids.liquid_gold, 4,
+                ItemMold.SubItem.BOOTS);
 
-		for (Entry<String, FluidLiquidMetal> metal : LiquidMetalRegistry.INSTANCE.getFluids().entrySet()) {
-			FoundryUtils.tryAddToolArmorRecipes(metal.getKey(), metal.getValue());
-		}
-	}
+        for (Entry<String, FluidLiquidMetal> metal : LiquidMetalRegistry.INSTANCE.getFluids().entrySet())
+        {
+            FoundryUtils.tryAddToolArmorRecipes(metal.getKey(), metal.getValue());
+        }
+    }
 }

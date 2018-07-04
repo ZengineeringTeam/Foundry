@@ -9,14 +9,17 @@ import net.minecraftforge.event.world.WorldEvent;
  *
  * See ic2/api/energy/usage.txt for an overall description of the energy net api.
  */
-public class EnergyTileEvent extends WorldEvent {
-	public final IEnergyTile tile;
+public class EnergyTileEvent extends WorldEvent
+{
+    public final IEnergyTile tile;
 
-	public EnergyTileEvent(IEnergyTile tile) {
-		super(EnergyNet.instance.getWorld(tile));
+    public EnergyTileEvent(IEnergyTile tile)
+    {
+        super(EnergyNet.instance.getWorld(tile));
 
-		if (getWorld() == null) throw new NullPointerException("world is null");
+        if (getWorld() == null)
+            throw new NullPointerException("world is null");
 
-		this.tile = tile;
-	}
+        this.tile = tile;
+    }
 }

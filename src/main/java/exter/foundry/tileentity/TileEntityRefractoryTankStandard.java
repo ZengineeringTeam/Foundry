@@ -1,8 +1,10 @@
 package exter.foundry.tileentity;
 
-public class TileEntityRefractoryTankStandard extends TileEntityRefractoryTankBasic {
-	@Override
-	protected int getTankCapacity() {
-		return 24000;
-	}
+public class TileEntityRefractoryTankStandard extends TileEntityRefractoryTankBasic
+{
+    @Override
+    protected int getTankCapacity()
+    {
+        return 24000;
+    }
 }
