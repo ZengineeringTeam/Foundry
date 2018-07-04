@@ -181,4 +181,15 @@ public class BlockLiquidMetal extends BlockFluidClassic {
 		}
 		return false;
 	}
+	
+	@Override
+	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
+	{
+	    IBlockState neighbor = world.getBlockState(pos.offset(side));
+        if (neighbor.getMaterial() == state.getMaterial())
+        {
+            return true;
+        }
+	    return super.shouldSideBeRendered(state, world, pos, side);
+	}
 }
