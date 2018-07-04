@@ -186,6 +186,10 @@ public class BlockLiquidMetal extends BlockFluidClassic {
 	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
 	{
 	    IBlockState neighbor = world.getBlockState(pos.offset(side));
+	    if (neighbor.getBlock() == this)
+        {
+            return false;
+        }
         if (neighbor.getMaterial() == state.getMaterial())
         {
             return true;

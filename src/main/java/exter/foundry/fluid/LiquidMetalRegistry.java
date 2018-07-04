@@ -48,7 +48,7 @@ public class LiquidMetalRegistry implements IFluidRegistry {
 	 * @param metal_name Name of the metal e.g: "Copper" for "oreCopper" in the Ore Dictionary.
 	 */
 	public FluidLiquidMetal registerLiquidMetal(String metal_name, int temperature, int luminosity) {
-		return registerLiquidMetal(metal_name, temperature, luminosity, "liquid" + metal_name, 0xFFFFFF);
+		return registerLiquidMetal(metal_name, temperature, luminosity, "liquid" + metal_name, 0xFFFFFFFF);
 	}
 
 	/**

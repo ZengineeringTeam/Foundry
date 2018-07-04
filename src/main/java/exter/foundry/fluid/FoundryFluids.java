@@ -77,7 +77,7 @@ public class FoundryFluids {
 			int c1 = 63 + (color & 0xFF) * 3 / 4;
 			int c2 = 63 + (color >> 8 & 0xFF) * 3 / 4;
 			int c3 = 63 + (color >> 16 & 0xFF) * 3 / 4;
-			int fluid_color = c1 | c2 << 8 | c3 << 16;
+			int fluid_color = c1 | c2 << 8 | c3 << 16 | 100 << 24;
 
 			int meta = dye.getMetadata();
 			ItemStack stained_glass = new ItemStack(Blocks.STAINED_GLASS, 1, meta);
