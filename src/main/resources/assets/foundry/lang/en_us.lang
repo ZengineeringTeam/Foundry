@@ -224,7 +224,6 @@ itemGroup.foundry=Foundry
 tile.foundry.componentBlockCasingStandard.name=Refractory Casing (Standard)
 tile.foundry.componentBlockCasingAdvanced.name=Refractory Casing (Advanced)
 tile.foundry.componentBlockCasingBasic.name=Refractory Casing (Basic)
-tile.foundry.refractoryGlass.name=Refractory Glass
 
 tile.foundry.machine.crucible_basic.name=Melting Crucible (Basic)
 tile.foundry.machine.crucible_standard.name=Melting Crucible (Standard)

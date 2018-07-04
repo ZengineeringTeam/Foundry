@@ -9,7 +9,6 @@ import net.minecraftforge.common.config.Configuration;
 public class FoundryBlocks
 {
     static public BlockComponent block_component;
-    static public BlockRefractoryGlass block_refractory_glass;
     static public BlockFoundryMachine block_machine;
     static public BlockCastingTable block_casting_table;
 
@@ -27,7 +26,6 @@ public class FoundryBlocks
     static public void registerBlocks(Configuration config)
     {
         block_component = new BlockComponent();
-        block_refractory_glass = new BlockRefractoryGlass();
         block_machine = new BlockFoundryMachine();
         block_casting_table = new BlockCastingTable();
 
@@ -38,7 +36,6 @@ public class FoundryBlocks
         registerMulti(block_component);
         registerMulti(block_machine);
         registerMulti(block_casting_table);
-        register(block_refractory_glass);
         register(block_mold_station);
         register(block_burner_heater);
         register(block_cauldron_bronze);

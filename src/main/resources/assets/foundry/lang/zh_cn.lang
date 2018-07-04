@@ -244,7 +244,6 @@ itemGroup.foundry=金属工坊
 tile.foundry.componentBlockCasingStandard.name=耐火框架 (标准)
 tile.foundry.componentBlockCasingAdvanced.name=耐火框架 (高级)
 tile.foundry.componentBlockCasingBasic.name=耐火框架 (基础)
-tile.foundry.refractoryGlass.name=耐火玻璃
 
 tile.foundry.machine.crucible_basic.name=基本熔炼坩埚
 tile.foundry.machine.crucible_standard.name=标准熔炼坩埚
@@ -278,7 +277,7 @@ tooltip.foundry.castingTable.rod=将液态金属铸造成杆.//凝固后右击�
 tooltip.foundry.moldStation=用于合成铸型.//需要耐火粘土方块和燃料制造铸型.
 tooltip.foundry.burnerHeater=使用固态燃料为熔炼坩埚供热.
 
-item.foundry.small_clay.name=小瓷土球
+item.foundry.small_clay.name=小块瓷土
 
 item.foundry.moldIngot.name=锭铸型
 item.foundry.moldPlate.name=板铸型

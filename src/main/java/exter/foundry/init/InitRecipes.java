@@ -217,7 +217,6 @@ public class InitRecipes
         ItemStack bronze_cauldron_stack = new ItemStack(FoundryBlocks.block_cauldron_bronze);
         ItemStack cauldron_stack = new ItemStack(Items.CAULDRON);
         ItemStack chest_stack = new ItemStack(Blocks.CHEST);
-        ItemStack refglass_stack = new ItemStack(FoundryBlocks.block_refractory_glass);
         ItemStack comparator_stack = new ItemStack(Items.COMPARATOR);
         ItemStack repeater_stack = new ItemStack(Items.REPEATER);
         ItemStack bucket_stack = new ItemStack(Items.BUCKET);
