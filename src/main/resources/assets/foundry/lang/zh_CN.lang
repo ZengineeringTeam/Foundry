@@ -275,8 +275,6 @@ tooltip.foundry.machine.heater_induction=利用能源为熔炼坩埚供热.// �
 tooltip.foundry.castingTable.ingot=将液态金属铸造成锭.//凝固后右击取出.
 tooltip.foundry.castingTable.plate=将液态金属铸造成板.//凝固后右击取出.
 tooltip.foundry.castingTable.rod=将液态金属铸造成杆.//凝固后右击取出.
-tooltip.foundry.refractoryHopper=从上方的方块向指向一侧的方块传输液体.//不可传输玻璃.
-tooltip.foundry.refractorySpout=从安放一侧向下方的方块传输液体.//不可传输玻璃.
 tooltip.foundry.moldStation=用于合成铸型.//需要耐火粘土方块和燃料制造铸型.
 tooltip.foundry.burnerHeater=使用固态燃料为熔炼坩埚供热.
 

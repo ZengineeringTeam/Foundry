@@ -11,7 +11,6 @@ import exter.foundry.tileentity.TileEntityCastingTableIngot;
 import exter.foundry.tileentity.TileEntityCastingTablePlate;
 import exter.foundry.tileentity.TileEntityCastingTableRod;
 import exter.foundry.tileentity.TileEntityFoundry;
-import exter.foundry.tileentity.renderer.ISpoutPourDepth;
 import exter.foundry.util.FoundryMiscUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -37,7 +36,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockCastingTable extends Block implements ITileEntityProvider, IBlockVariants, ISpoutPourDepth
+public class BlockCastingTable extends Block implements ITileEntityProvider, IBlockVariants
 {
     static public enum EnumTable implements IStringSerializable
     {
@@ -229,13 +228,6 @@ public class BlockCastingTable extends Block implements ITileEntityProvider, IBl
     public int getMetaFromState(IBlockState state)
     {
         return state.getValue(TABLE).id;
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public int getSpoutPourDepth(World world, BlockPos pos, IBlockState state)
-    {
-        return state.getValue(TABLE).depth;
     }
 
     @Override

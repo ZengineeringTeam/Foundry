@@ -48,7 +48,6 @@ import exter.foundry.tileentity.TileEntityMeltingCrucibleStandard;
 import exter.foundry.tileentity.TileEntityMetalCaster;
 import exter.foundry.tileentity.TileEntityMetalInfuser;
 import exter.foundry.tileentity.TileEntityMoldStation;
-import exter.foundry.tileentity.TileEntityRefractorySpout;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -120,7 +119,6 @@ public class Foundry
         GameRegistry.registerTileEntity(TileEntityCastingTablePlate.class, MODID + ":cast_table_plate");
         GameRegistry.registerTileEntity(TileEntityCastingTableRod.class, MODID + ":cast_table_rod");
         GameRegistry.registerTileEntity(TileEntityCastingTableBlock.class, MODID + ":cast_table_block");
-        GameRegistry.registerTileEntity(TileEntityRefractorySpout.class, MODID + ":refractory_spout");
         GameRegistry.registerTileEntity(TileEntityMeltingCrucibleAdvanced.class, MODID + ":melt_crucible_advanced");
         GameRegistry.registerTileEntity(TileEntityAlloyingCrucible.class, MODID + ":alloy_crucible");
 
