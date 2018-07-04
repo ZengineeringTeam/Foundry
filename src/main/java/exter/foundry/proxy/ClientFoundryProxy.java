@@ -24,14 +24,10 @@ import exter.foundry.tileentity.TileEntityCastingTablePlate;
 import exter.foundry.tileentity.TileEntityCastingTableRod;
 import exter.foundry.tileentity.TileEntityRefractoryHopper;
 import exter.foundry.tileentity.TileEntityRefractorySpout;
-import exter.foundry.tileentity.TileEntityRefractoryTankAdvanced;
-import exter.foundry.tileentity.TileEntityRefractoryTankBasic;
-import exter.foundry.tileentity.TileEntityRefractoryTankStandard;
 import exter.foundry.tileentity.renderer.CastingTableRenderer;
 import exter.foundry.tileentity.renderer.CastingTableRendererBlock;
 import exter.foundry.tileentity.renderer.HopperRenderer;
 import exter.foundry.tileentity.renderer.SpoutRenderer;
-import exter.foundry.tileentity.renderer.TankRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
@@ -112,9 +108,6 @@ public class ClientFoundryProxy extends CommonFoundryProxy
         registerItemModel(FoundryBlocks.block_refractory_hopper, "refractoryHopper");
         registerItemModel(FoundryBlocks.block_burner_heater, "burnerHeater");
         registerItemModel(FoundryBlocks.block_refractory_spout, "refractorySpout");
-        registerItemModel(FoundryBlocks.block_refractory_tank_basic, "refractoryTank");
-        registerItemModel(FoundryBlocks.block_refractory_tank_standard, "refractoryTankStandard");
-        registerItemModel(FoundryBlocks.block_refractory_tank_advanced, "infernoTank");
         registerItemModel(FoundryBlocks.block_cauldron_bronze, "bronzeCauldron");
 
         for (BlockComponent.EnumVariant v : BlockComponent.EnumVariant.values())
@@ -157,9 +150,6 @@ public class ClientFoundryProxy extends CommonFoundryProxy
                 new CastingTableRendererBlock());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRefractorySpout.class, new SpoutRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRefractoryHopper.class, new HopperRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRefractoryTankBasic.class, new TankRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRefractoryTankStandard.class, new TankRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRefractoryTankAdvanced.class, new TankRenderer());
 
         ModIntegrationManager.clientInit();
     }

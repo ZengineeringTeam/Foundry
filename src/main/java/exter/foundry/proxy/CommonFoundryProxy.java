@@ -10,7 +10,6 @@ import exter.foundry.container.ContainerMetalCaster;
 import exter.foundry.container.ContainerMetalInfuser;
 import exter.foundry.container.ContainerMoldStation;
 import exter.foundry.container.ContainerRefractoryHopper;
-import exter.foundry.container.ContainerRefractoryTank;
 import exter.foundry.gui.GuiAlloyMixer;
 import exter.foundry.gui.GuiAlloyingCrucible;
 import exter.foundry.gui.GuiBurnerHeater;
@@ -21,7 +20,6 @@ import exter.foundry.gui.GuiMetalCaster;
 import exter.foundry.gui.GuiMetalInfuser;
 import exter.foundry.gui.GuiMoldStation;
 import exter.foundry.gui.GuiRefractoryHopper;
-import exter.foundry.gui.GuiRefractoryTank;
 import exter.foundry.tileentity.TileEntityAlloyMixer;
 import exter.foundry.tileentity.TileEntityAlloyingCrucible;
 import exter.foundry.tileentity.TileEntityBurnerHeater;
@@ -32,7 +30,6 @@ import exter.foundry.tileentity.TileEntityMetalCaster;
 import exter.foundry.tileentity.TileEntityMetalInfuser;
 import exter.foundry.tileentity.TileEntityMoldStation;
 import exter.foundry.tileentity.TileEntityRefractoryHopper;
-import exter.foundry.tileentity.TileEntityRefractoryTankBasic;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -105,11 +102,6 @@ public class CommonFoundryProxy implements IGuiHandler
             TileEntityBurnerHeater te = (TileEntityBurnerHeater) world.getTileEntity(pos);
             return new GuiBurnerHeater(te, player);
         }
-        case GUI_REFRACTORYTANK:
-        {
-            TileEntityRefractoryTankBasic te = (TileEntityRefractoryTankBasic) world.getTileEntity(pos);
-            return new GuiRefractoryTank(te, player);
-        }
         case GUI_ALLOYINGCRUCIBLE:
         {
             TileEntityAlloyingCrucible te = (TileEntityAlloyingCrucible) world.getTileEntity(pos);
@@ -143,8 +135,6 @@ public class CommonFoundryProxy implements IGuiHandler
             return new ContainerMoldStation((TileEntityMoldStation) world.getTileEntity(pos), player);
         case GUI_BURNERHEATER:
             return new ContainerBurnerHeater((TileEntityBurnerHeater) world.getTileEntity(pos), player);
-        case GUI_REFRACTORYTANK:
-            return new ContainerRefractoryTank((TileEntityRefractoryTankBasic) world.getTileEntity(pos), player);
         case GUI_ALLOYINGCRUCIBLE:
             return new ContainerAlloyingCrucible((TileEntityAlloyingCrucible) world.getTileEntity(pos), player);
         }

@@ -1,5 +1,0 @@
-{
-	"revolver_fire": { "category": "player", "sounds":["foundry:revolver_fire"], "subtitle": "subtitle.foundry.revolverFire" },
-	"shotgun_fire":  { "category": "player", "sounds":["foundry:shotgun_fire"], "subtitle": "subtitle.foundry.shotgunFire" },
-	"shotgun_cock":  { "category": "player", "sounds":["foundry:shotgun_cock"], "subtitle": "subtitle.foundry.shotgunCock" }
-}

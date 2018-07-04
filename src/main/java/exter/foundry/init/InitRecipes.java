@@ -274,15 +274,6 @@ public class InitRecipes
         Foundry.HELPER.addForgeShaped(casing_inferno_stack, "IBI", "B B", "IBI", 'I', "plateSteel", 'B',
                 infbrick_stack);
 
-        Foundry.HELPER.addForgeShaped(new ItemStack(FoundryBlocks.block_refractory_tank_basic), "BPB", "G G", "BPB",
-                'G', refglass_stack, 'P', "plateBronze", 'B', refbrick_stack);
-
-        Foundry.HELPER.addForgeShaped(new ItemStack(FoundryBlocks.block_refractory_tank_standard), "BPB", "G G", "BPB",
-                'G', refglass_stack, 'P', "plateIron", 'B', refbrick_stack);
-
-        Foundry.HELPER.addForgeShaped(new ItemStack(FoundryBlocks.block_refractory_tank_advanced), "BPB", "G G", "BPB",
-                'G', refglass_stack, 'P', "plateSteel", 'B', infbrick_stack);
-
         Foundry.HELPER.addForgeShaped(new ItemStack(FoundryBlocks.block_burner_heater), "I", "C", "F", 'F',
                 furnace_stack, 'I', "ingotCopper", 'C', casing_basic_stack);
 

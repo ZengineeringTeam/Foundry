@@ -18,9 +18,6 @@ public class FoundryBlocks
 
     static public BlockRefractoryHopper block_refractory_hopper;
     static public BlockRefractorySpout block_refractory_spout;
-    static public BlockRefractoryTankBasic block_refractory_tank_basic;
-    static public BlockRefractoryTankStandard block_refractory_tank_standard;
-    static public BlockRefractoryTankAdvanced block_refractory_tank_advanced;
 
     static public BlockCauldronBronze block_cauldron_bronze;
 
@@ -41,9 +38,6 @@ public class FoundryBlocks
         block_refractory_hopper = new BlockRefractoryHopper();
         block_burner_heater = new BlockBurnerHeater();
         block_refractory_spout = new BlockRefractorySpout();
-        block_refractory_tank_basic = new BlockRefractoryTankBasic();
-        block_refractory_tank_standard = new BlockRefractoryTankStandard();
-        block_refractory_tank_advanced = new BlockRefractoryTankAdvanced();
         block_cauldron_bronze = new BlockCauldronBronze();
 
         registerMulti(block_component);
@@ -54,9 +48,6 @@ public class FoundryBlocks
         register(block_refractory_hopper);
         register(block_burner_heater);
         register(block_refractory_spout);
-        register(block_refractory_tank_basic);
-        register(block_refractory_tank_standard);
-        register(block_refractory_tank_advanced);
         register(block_cauldron_bronze);
     }
 
