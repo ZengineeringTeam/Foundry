@@ -239,14 +239,9 @@ foundry.router.type.NativeCluster=纯净的矿簇
 foundry.router.type.PoorOre=贫矿
 foundry.router.type.Shard=碎片
 
-itemGroup.foundryMaterials=金属工坊-材料
-itemGroup.foundryFluids=金属工坊-液体
-itemGroup.foundryMachines=金属工坊-机器
-itemGroup.foundryMolds=金属工坊-铸型
-itemGroup.foundryFirearms=金属工坊-枪械
+itemGroup.foundry=金属工坊
 
 tile.foundry.componentBlockCasingStandard.name=耐火框架 (标准)
-tile.foundry.componentBlockRefractoryClay.name=耐火粘土方块
 tile.foundry.componentBlockCasingAdvanced.name=耐火框架 (高级)
 tile.foundry.componentBlockCasingBasic.name=耐火框架 (基础)
 tile.foundry.refractoryGlass.name=耐火玻璃
@@ -258,22 +253,15 @@ tile.foundry.machine.caster.name=金属铸造机
 tile.foundry.machine.alloymixer.name=合金混合机
 tile.foundry.machine.infuser.name=金属注入机
 tile.foundry.machine.router.name=材料路由器
-tile.foundry.machine.atomizer.name=金属原子化仪
 tile.foundry.machine.heater_induction.name=感应加热器
 tile.foundry.machine.alloying_crucible.name=合金坩埚
 tile.foundry.castingTable.ingot.name=锭铸造台
 tile.foundry.castingTable.plate.name=板铸造台
 tile.foundry.castingTable.rod.name=杆铸造台
 tile.foundry.castingTable.block.name=方块铸造台
-tile.foundry.alloyFurnace.name=合金炉
 tile.foundry.refractoryHopper.name=耐火漏斗
-tile.foundry.refractoryTankBasic.name=耐火储罐 (基础)
-tile.foundry.refractoryTankStandard.name=耐火储罐 (标准)
-tile.foundry.refractoryTankAdvanced.name=耐火储罐 (高级)
-tile.foundry.infernoTank.name=炼狱储罐
 tile.foundry.moldStation.name=铸型合成站
 tile.foundry.burnerHeater.name=燃烧加热器
-tile.foundry.cokeOven.name=焦炉
 tile.foundry.bronzeCauldron.name=黄铜炼药锅
 
 tooltip.foundry.machine.crucible_basic=熔化矿石和金属.//必须放在加热器方块上.//最高温度2000 °K.
@@ -284,43 +272,16 @@ tooltip.foundry.machine.alloymixer=混合至多4种液态金属制取合金.//�
 tooltip.foundry.machine.alloying_crucible=混合2种液态金属制取合金.
 tooltip.foundry.machine.infuser=向物品中注入液态金属.//需要RF 或Tesla 运转.
 tooltip.foundry.machine.router=按材料和类型排列物品.
-tooltip.foundry.machine.atomizer=用液态金属制粉.// 需要RF 或Tesla 运转.
 tooltip.foundry.machine.heater_induction=利用能源为熔炼坩埚供热.// 需要RF 或Tesla 运转.
 tooltip.foundry.castingTable.ingot=将液态金属铸造成锭.//凝固后右击取出.
 tooltip.foundry.castingTable.plate=将液态金属铸造成板.//凝固后右击取出.
 tooltip.foundry.castingTable.rod=将液态金属铸造成杆.//凝固后右击取出.
-tooltip.foundry.alloyFurnace=将物品熔炼成合金.
 tooltip.foundry.refractoryHopper=从上方的方块向指向一侧的方块传输液体.//不可传输玻璃.
 tooltip.foundry.refractorySpout=从安放一侧向下方的方块传输液体.//不可传输玻璃.
-tooltip.foundry.refractoryTankBasic=储存至多16桶液体.
-tooltip.foundry.refractoryTankStandard=储存至多24桶液体.
-tooltip.foundry.refractoryTankAdvanced=储存至多32桶液体.
 tooltip.foundry.moldStation=用于合成铸型.//需要耐火粘土方块和燃料制造铸型.
 tooltip.foundry.burnerHeater=使用固态燃料为熔炼坩埚供热.
-tooltip.foundry.cokeOven=将煤炭炼制成焦炭.//必须放在加热器方块上.
 
-item.foundry.componentHeatingCoil.name=加热线圈
-item.foundry.componentRefractoryClay.name=耐火粘土
-item.foundry.componentRefractoryBrick.name=耐火砖
-item.foundry.componentGunBarrel.name=枪管
-item.foundry.componentRevolverDrum.name=左筒
-item.foundry.componentRevolverFrame.name=左轮枪框架
-item.foundry.componentRoundCasing.name=手枪弹壳
-item.foundry.componentBullet.name=子弹
-item.foundry.componentBuletHollow.name=中空弹
-item.foundry.componentBulletJacketed.name=包壳弹
-item.foundry.componentPellet.name=弹丸
-item.foundry.componentShellCasing.name=散弹壳
-item.foundry.componentShotgunPump.name=散弹枪气泵
-item.foundry.componentShotgunFrame.name=散弹枪框架
-item.foundry.componentBulletSteel.name=钢子弹
-item.foundry.componentPelletSteel.name=钢弹丸
-item.foundry.componentSmallRefractoryClay.name=小块耐火粘土
-item.foundry.componentInfernoClay.name=地狱粘土
-item.foundry.componentInfernoBrick.name=地狱红砖
-item.foundry.componentBulletLumium.name=流明子弹
-item.foundry.componentPelletLumium.name=流明弹丸
-item.foundry.componentCoalCoke.name=焦炭
+item.foundry.small_clay.name=小瓷土球
 
 item.foundry.moldIngot.name=锭铸型
 item.foundry.moldPlate.name=板铸型
@@ -338,55 +299,11 @@ item.foundry.moldHelmet.name=头盔铸型
 item.foundry.moldChestplate.name=胸甲铸型
 item.foundry.moldLeggings.name=护腿铸型
 item.foundry.moldBoots.name=靴子铸型
-item.foundry.moldBullet.name=子弹铸型
-item.foundry.moldBulletHollow.name=中空弹铸型
-item.foundry.moldRoundCasing.name=手枪弹壳铸型
-item.foundry.moldGunBarrel.name=枪管铸型
-item.foundry.moldRevolverDrum.name=左筒铸型
-item.foundry.moldRevolverFrame.name=左轮枪框架铸型
-item.foundry.moldPellet.name=弹丸铸型
-item.foundry.moldShellCasing.name=散弹壳铸型
-item.foundry.moldShotgunPump.name=散弹枪气泵铸型
-item.foundry.moldShotgunFrame.name=散弹枪框架铸型
 
-item.foundry.fluidContainer.name=耐火液体储罐
-
-item.revolver.name=左轮手枪
-item.shotgun.name=散弹枪
-item.roundNormal.name=标准手枪弹
-item.roundJacketed.name=包壳手枪弹
-item.roundHollow.name=中空手枪弹
-item.roundFire.name=燃烧手枪弹
-item.roundPoison.name=毒性手枪弹
-item.roundAP.name=穿甲手枪弹
-item.shellNormal.name=常规散弹
-item.shellAP.name=穿甲散弹
-item.roundLumium.name=流明手枪弹
-item.shellLumium.name=流明散弹
-item.roundSnow.name=雪之手枪弹
-
-
-tc.research_category.FOUNDRY=金属工坊
-
-tc.research.shardmold.text1=使用感应坩埚炉, 碎片能化成液体并用金属铸造机和碎片铸型进行铸造, 此模组也允许使用液态金属制作杖端. 合成后, 铸型需在熔炉中硬化. 每个碎片融化成 108mB 注魔液体.
-tc.research.shardmold.text2=合金混合机允许混合注魔液体:<BR/><BR/>火之注魔液体 + 秩序注魔液体 -> 能量注魔液体.<BR/>风之注魔液体 + 熵之注魔液体 -> 虚空注魔液体.<BR/>地之注魔液体 + 水之注魔液体 -> 生命注魔液体.<BR/><BR/>最终这三种液体可以混合为元始液体并铸造成平衡碎片.<BR/><BR/>能量, 虚空, 生命三种注魔液体可以铸造成对应的碎片. 然而目前这些碎片没有已知用途.
-tc.research_name.FOUNDRY_shardmold=碎片铸造.
-tc.research_text.FOUNDRY_shardmold=[Foundry] 熔化,混合,铸造碎片.
-
-tc.research.capmold.text=杖端铸型允许你使用液态金属制造杖端. 合成后, 铸型需在熔炉中硬化. 
-tc.research_name.FOUNDRY_capmold=杖端铸造.
-tc.research_text.FOUNDRY_capmold=[Foundry] 用液态金属制作杖端.
-
-entity.foundry.gunSkeleton.name=骷髅枪手
-
-death.attack.foundry.bullet=%1$s被 %2$s 射杀
-
-gui.jei.alloyfurnace=合金炉
 gui.jei.melting=熔炼坩埚
 gui.jei.casting=金属铸造机
 gui.jei.alloymixer=合金混合机
 gui.jei.infuser=金属注入机
-gui.jei.atomizer=金属原子化仪
 gui.jei.mold=铸模合成站
 gui.jei.casting_table.ingot=锭铸造台
 gui.jei.casting_table.plate=板铸造台

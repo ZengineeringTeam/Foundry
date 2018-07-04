@@ -2,7 +2,7 @@ package exter.foundry.block;
 
 import java.util.Random;
 
-import exter.foundry.creativetab.FoundryTabMachines;
+import exter.foundry.creativetab.FoundryTab;
 import exter.foundry.tileentity.TileEntityFoundry;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -115,7 +115,7 @@ public abstract class BlockFoundrySidedMachine extends BlockContainer
     public BlockFoundrySidedMachine(Material material)
     {
         super(material);
-        setCreativeTab(FoundryTabMachines.INSTANCE);
+        setCreativeTab(FoundryTab.INSTANCE);
     }
 
     @Override

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import exter.foundry.api.recipe.ICastingTableRecipe.TableType;
-import exter.foundry.creativetab.FoundryTabMachines;
+import exter.foundry.creativetab.FoundryTab;
 import exter.foundry.tileentity.TileEntityCastingTableBase;
 import exter.foundry.tileentity.TileEntityCastingTableBlock;
 import exter.foundry.tileentity.TileEntityCastingTableIngot;
@@ -101,7 +101,7 @@ public class BlockCastingTable extends Block implements ITileEntityProvider, IBl
         setResistance(8.0F);
         setSoundType(SoundType.STONE);
         setUnlocalizedName("foundry.castingTable");
-        setCreativeTab(FoundryTabMachines.INSTANCE);
+        setCreativeTab(FoundryTab.INSTANCE);
         setRegistryName("castingTable");
     }
 

@@ -74,7 +74,7 @@ import shadows.placebo.util.RecipeHelper;
         modid = Foundry.MODID,
         name = Foundry.MODNAME,
         version = Foundry.MODVERSION,
-        dependencies = "required-after:placebo@[1.2.0,);required-after:thermalfoundation;after:jei;after:tconstruct;after:mekanism"
+        dependencies = "required-after:placebo@[1.2.0,);required-after:ceramics;required-after:thermalfoundation;after:jei;after:tconstruct;after:mekanism"
 )
 public class Foundry
 {

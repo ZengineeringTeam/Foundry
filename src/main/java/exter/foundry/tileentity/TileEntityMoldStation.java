@@ -3,7 +3,6 @@ package exter.foundry.tileentity;
 import exter.foundry.api.recipe.IMoldRecipe;
 import exter.foundry.block.BlockMoldStation;
 import exter.foundry.item.FoundryItems;
-import exter.foundry.item.ItemComponent;
 import exter.foundry.recipes.manager.MoldRecipeManager;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -173,7 +172,8 @@ public class TileEntityMoldStation extends TileEntityFoundry implements IExoflam
             }
             if (getStackInSlot(SLOT_CLAY).isEmpty())
             {
-                setStackInSlot(SLOT_CLAY, FoundryItems.component(ItemComponent.SubItem.REFRACTORYCLAY_SMALL, clay));
+                // TODO
+                setStackInSlot(SLOT_CLAY, new ItemStack(FoundryItems.item_small_clay, clay));
             }
             else
             {

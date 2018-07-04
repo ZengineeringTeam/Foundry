@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import exter.foundry.Foundry;
-import exter.foundry.creativetab.FoundryTabMachines;
+import exter.foundry.creativetab.FoundryTab;
 import exter.foundry.proxy.CommonFoundryProxy;
 import exter.foundry.tileentity.TileEntityFoundry;
 import exter.foundry.tileentity.TileEntityRefractoryHopper;
@@ -98,7 +98,7 @@ public class BlockRefractoryHopper extends BlockContainer implements ISpoutPourD
     public BlockRefractoryHopper()
     {
         super(Material.IRON);
-        setCreativeTab(FoundryTabMachines.INSTANCE);
+        setCreativeTab(FoundryTab.INSTANCE);
         setHardness(1.0F);
         setResistance(8.0F);
         setUnlocalizedName("foundry.refractoryHopper");

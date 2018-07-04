@@ -5,14 +5,14 @@ import exter.foundry.block.FoundryBlocks;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
-public class FoundryTabMachines extends CreativeTabs
+public class FoundryTab extends CreativeTabs
 {
 
-    public static final FoundryTabMachines INSTANCE = new FoundryTabMachines();
+    public static final FoundryTab INSTANCE = new FoundryTab();
 
-    private FoundryTabMachines()
+    private FoundryTab()
     {
-        super("foundryMachines");
+        super("foundry");
     }
 
     @Override

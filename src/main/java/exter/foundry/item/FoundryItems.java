@@ -1,23 +1,16 @@
 package exter.foundry.item;
 
+import exter.foundry.Foundry;
 import exter.foundry.FoundryRegistry;
+import exter.foundry.creativetab.FoundryTab;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 
 public class FoundryItems
 {
-    static public ItemComponent item_component;
+    static public Item item_small_clay;
     static public ItemMold item_mold;
-
-    static public ItemStack component(ItemComponent.SubItem sub)
-    {
-        return component(sub, 1);
-    }
-
-    static public ItemStack component(ItemComponent.SubItem sub, int amount)
-    {
-        return new ItemStack(item_component, amount, sub.id);
-    }
 
     static public ItemStack mold(ItemMold.SubItem sub)
     {
@@ -31,10 +24,11 @@ public class FoundryItems
 
     static public void registerItems(Configuration config)
     {
-        item_component = new ItemComponent();
+        item_small_clay = new Item().setRegistryName(Foundry.MODID, "small_clay")
+                .setUnlocalizedName(Foundry.MODID + ".small_clay").setCreativeTab(FoundryTab.INSTANCE);
         item_mold = new ItemMold();
 
-        FoundryRegistry.ITEMS.add(item_component);
+        FoundryRegistry.ITEMS.add(item_small_clay);
         FoundryRegistry.ITEMS.add(item_mold);
     }
 }

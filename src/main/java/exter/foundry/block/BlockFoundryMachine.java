@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import exter.foundry.Foundry;
-import exter.foundry.creativetab.FoundryTabMachines;
+import exter.foundry.creativetab.FoundryTab;
 import exter.foundry.proxy.CommonFoundryProxy;
 import exter.foundry.tileentity.TileEntityAlloyMixer;
 import exter.foundry.tileentity.TileEntityAlloyingCrucible;
@@ -112,7 +112,7 @@ public class BlockFoundryMachine extends Block implements ITileEntityProvider, I
         setResistance(8.0F);
         setSoundType(SoundType.STONE);
         setUnlocalizedName("foundry.machine");
-        setCreativeTab(FoundryTabMachines.INSTANCE);
+        setCreativeTab(FoundryTab.INSTANCE);
         setRegistryName("machine");
     }
 

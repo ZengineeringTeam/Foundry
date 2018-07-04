@@ -2,7 +2,7 @@ package exter.foundry.block;
 
 import java.util.Random;
 
-import exter.foundry.creativetab.FoundryTabMaterials;
+import exter.foundry.creativetab.FoundryTab;
 import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -17,7 +17,7 @@ public class BlockRefractoryGlass extends BlockBreakable
     public BlockRefractoryGlass()
     {
         super(Material.GLASS, false);
-        setCreativeTab(FoundryTabMaterials.INSTANCE);
+        setCreativeTab(FoundryTab.INSTANCE);
         setHardness(0.4F);
         setSoundType(SoundType.GLASS);
         setUnlocalizedName("foundry.refractoryGlass");

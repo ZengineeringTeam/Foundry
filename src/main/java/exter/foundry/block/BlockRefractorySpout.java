@@ -2,7 +2,7 @@ package exter.foundry.block;
 
 import java.util.List;
 
-import exter.foundry.creativetab.FoundryTabMachines;
+import exter.foundry.creativetab.FoundryTab;
 import exter.foundry.tileentity.TileEntityRefractorySpout;
 import exter.foundry.util.FoundryMiscUtils;
 import net.minecraft.block.Block;
@@ -49,7 +49,7 @@ public class BlockRefractorySpout extends BlockFoundrySidedMachine
     public BlockRefractorySpout()
     {
         super(Material.ROCK);
-        setCreativeTab(FoundryTabMachines.INSTANCE);
+        setCreativeTab(FoundryTab.INSTANCE);
         setHardness(1.0F);
         setResistance(8.0F);
         setUnlocalizedName("foundry.refractorySpout");

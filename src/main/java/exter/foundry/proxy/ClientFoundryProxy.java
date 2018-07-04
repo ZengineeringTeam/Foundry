@@ -13,7 +13,6 @@ import exter.foundry.fluid.FluidLiquidMetal;
 import exter.foundry.fluid.LiquidMetalRegistry;
 import exter.foundry.integration.ModIntegrationManager;
 import exter.foundry.item.FoundryItems;
-import exter.foundry.item.ItemComponent;
 import exter.foundry.item.ItemMold;
 import exter.foundry.material.MaterialRegistry;
 import exter.foundry.material.OreDictMaterial;
@@ -115,10 +114,7 @@ public class ClientFoundryProxy extends CommonFoundryProxy
             registerItemModel(FoundryBlocks.block_component, v.model, v.ordinal());
         }
 
-        for (ItemComponent.SubItem c : ItemComponent.SubItem.values())
-        {
-            registerItemModel(FoundryItems.item_component, c.name, c.id);
-        }
+        registerItemModel(FoundryItems.item_small_clay, "small_clay");
 
         for (ItemMold.SubItem m : ItemMold.SubItem.values())
         {

@@ -2,7 +2,7 @@ package exter.foundry.block;
 
 import java.util.Random;
 
-import exter.foundry.creativetab.FoundryTabMaterials;
+import exter.foundry.creativetab.FoundryTab;
 import exter.foundry.util.FoundryMiscUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -38,7 +38,7 @@ public class BlockLiquidMetal extends BlockFluidClassic
         setLightLevel(1.0f);
         solid = solid_block;
         setUnlocalizedName(name);
-        setCreativeTab(FoundryTabMaterials.INSTANCE);
+        setCreativeTab(FoundryTab.INSTANCE);
         setRegistryName(name);
     }
 

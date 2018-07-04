@@ -1,6 +1,6 @@
 package exter.foundry.block;
 
-import exter.foundry.creativetab.FoundryTabMaterials;
+import exter.foundry.creativetab.FoundryTab;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -21,7 +21,6 @@ public class BlockComponent extends Block implements IBlockVariants
     static public enum EnumVariant implements IStringSerializable
     {
         CASING_STANDARD("casing_standard", "componentBlockCasingStandard"),
-        REFRACTORY_CLAY("block_refractoryclay", "componentBlockRefractoryClay"),
         CASING_ADVANCED("casing_advanced", "componentBlockCasingAdvanced"),
         CASING_BASIC("casing_basic", "componentBlockCasingBasic");
 
@@ -57,7 +56,7 @@ public class BlockComponent extends Block implements IBlockVariants
         setResistance(8.0F);
         setSoundType(SoundType.STONE);
         setUnlocalizedName("foundry.componentBlock");
-        setCreativeTab(FoundryTabMaterials.INSTANCE);
+        setCreativeTab(FoundryTab.INSTANCE);
         setRegistryName("componentBlock");
     }
 
@@ -69,8 +68,6 @@ public class BlockComponent extends Block implements IBlockVariants
     @Override
     public SoundType getSoundType(IBlockState state, World world, BlockPos pos, Entity entity)
     {
-        if (state.getValue(VARIANT) == EnumVariant.REFRACTORY_CLAY)
-            return SoundType.GROUND;
         return super.getSoundType(state, world, pos, entity);
     }
 

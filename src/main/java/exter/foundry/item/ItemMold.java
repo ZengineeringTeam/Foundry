@@ -3,7 +3,7 @@ package exter.foundry.item;
 import java.util.HashMap;
 import java.util.Map;
 
-import exter.foundry.creativetab.FoundryTabMolds;
+import exter.foundry.creativetab.FoundryTab;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -60,7 +60,7 @@ public class ItemMold extends Item
     {
         super();
         maxStackSize = 1;
-        setCreativeTab(FoundryTabMolds.INSTANCE);
+        setCreativeTab(FoundryTab.INSTANCE);
         setHasSubtypes(true);
         setUnlocalizedName("mold");
         setRegistryName("mold");
