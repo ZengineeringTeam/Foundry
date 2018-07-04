@@ -455,3 +455,7 @@ item.foundryContainer.name=Réservoir à liquide réfractaire
 tc.research.capmold.text=Ce moule permet de créer des capuchons de baguette avec du métal liquide. Après sa fabrication, ce moule doit être durci dans un four avant son utilisation. 
 tc.research_name.FOUNDRY_capmold=Moule à capuchons de baguette.
 tc.research_text.FOUNDRY_capmold=Faite des capuchons de baguette à partir du métal liquide.
+
+gui.foundry.mold=Mold Station
+gui.foundry.mold.depth=Depth: %d
+gui.foundry.mold.fire=Fire mold

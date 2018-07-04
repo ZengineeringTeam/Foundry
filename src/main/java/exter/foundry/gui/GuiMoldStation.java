@@ -11,6 +11,7 @@ import exter.foundry.container.ContainerMoldStation;
 import exter.foundry.gui.button.GuiButtonFoundry;
 import exter.foundry.tileentity.TileEntityMoldStation;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -60,6 +61,10 @@ public class GuiMoldStation extends GuiFoundry {
 	private GuiButtonFoundry button_fire;
 	private final NonNullList<Boolean> pattern;
 	private int processingState;
+	
+	private final String STRING_MOLD_STATION;
+	private final String STRING_INVENTORY;
+	private final String STRING_FIRE;
 
 	public GuiMoldStation(TileEntityMoldStation af, EntityPlayer player) {
 		super(new ContainerMoldStation(af, player));
@@ -68,6 +73,9 @@ public class GuiMoldStation extends GuiFoundry {
 		te_ms = af;
 		pattern = NonNullList.withSize(36, Boolean.FALSE);
 		processingState = -1; // No state.
+		STRING_MOLD_STATION = I18n.format("gui.foundry.mold");
+		STRING_INVENTORY = I18n.format("container.inventory");
+		STRING_FIRE = I18n.format("gui.foundry.mold.fire");
 	}
 
 	@Override
@@ -120,8 +128,8 @@ public class GuiMoldStation extends GuiFoundry {
 	protected void drawGuiContainerForegroundLayer(int mouse_x, int mouse_y) {
 		super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
 
-		fontRenderer.drawString("Mold Station", 5, 6, 0x404040);
-		fontRenderer.drawString("Inventory", 8, ySize - 96 + 2, 0x404040);
+		fontRenderer.drawString(STRING_MOLD_STATION, 8, 6, 0x404040);
+		fontRenderer.drawString(STRING_INVENTORY, 8, ySize - 96 + 2, 0x404040);
 	}
 
 	@Override
@@ -140,13 +148,13 @@ public class GuiMoldStation extends GuiFoundry {
 			    depth += (processingState == 0 ? 1 : -1) * (isShiftKeyDown() ? 4 : 1);
             }
 			depth = MathHelper.clamp(depth, TileEntityMoldStation.MIN_DEPTH, TileEntityMoldStation.MAX_DEPTH);
-			currenttip.add("Depth: " + depth);
+			currenttip.add(I18n.format("gui.foundry.mold.depth", depth));
 			drawHoveringText(currenttip, mousex, mousey, fontRenderer);
 		}
 
 		if (isPointInRegion(117, 15, button_fire.width, button_fire.height, mousex, mousey)) {
 			List<String> currenttip = new ArrayList<>(1);
-			currenttip.add("Fire mold");
+			currenttip.add(STRING_FIRE);
 			drawHoveringText(currenttip, mousex, mousey, fontRenderer);
 		}
 	}
