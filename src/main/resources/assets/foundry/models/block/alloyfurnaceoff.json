@@ -1,9 +1,0 @@
-{
-    "parent": "foundry:block/orientable",
-    "textures": {
-        "top": "foundry:blocks/alloyfurnace_top_bottom",
-        "bottom": "foundry:blocks/alloyfurnace_top_bottom",
-        "front": "foundry:blocks/alloyfurnace_front_off",
-        "side": "foundry:blocks/alloyfurnace_side"
-    }
-}

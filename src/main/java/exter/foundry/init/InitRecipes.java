@@ -316,9 +316,6 @@ public class InitRecipes
         Foundry.HELPER.addForgeShaped(FoundryBlocks.block_machine.asItemStack(EnumMachine.INFUSER), " R ", "GCG", "HRH",
                 'R', redstone_stack, 'C', casing_stack, 'G', "gearInvar", 'H', heatingcoil_stack);
 
-        Foundry.HELPER.addForgeShaped(new ItemStack(FoundryBlocks.block_alloy_furnace), "BBB", "BFB", "BBB", 'B',
-                refbrick_stack, 'F', furnace_stack);
-
         Foundry.HELPER.addForgeShaped(new ItemStack(FoundryBlocks.block_refractory_hopper), "R R", "RBR", " R ", 'R',
                 refbrick_stack, 'B', bucket_stack);
 

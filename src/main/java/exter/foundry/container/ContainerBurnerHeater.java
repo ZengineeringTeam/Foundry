@@ -1,7 +1,6 @@
 package exter.foundry.container;
 
 import exter.foundry.recipes.manager.BurnerHeaterFuelManager;
-import exter.foundry.tileentity.TileEntityAlloyFurnace;
 import exter.foundry.tileentity.TileEntityBurnerHeater;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -89,14 +88,6 @@ public class ContainerBurnerHeater extends Container
 
             if (slot_index >= SLOTS_INVENTORY && slot_index <= SLOTS_HOTBAR + 9)
             {
-                if (TileEntityFurnace.isItemFuel(stack))
-                {
-                    int s = SLOTS_TE + TileEntityAlloyFurnace.SLOT_FUEL;
-                    if (!mergeItemStack(stack, s, s + 1, false))
-                    {
-                        return ItemStack.EMPTY;
-                    }
-                }
                 if (!mergeItemStack(stack, SLOTS_TE, SLOTS_TE + SLOTS_TE_SIZE, false))
                 {
                     return ItemStack.EMPTY;

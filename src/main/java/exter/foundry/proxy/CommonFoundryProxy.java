@@ -1,6 +1,5 @@
 package exter.foundry.proxy;
 
-import exter.foundry.container.ContainerAlloyFurnace;
 import exter.foundry.container.ContainerAlloyMixer;
 import exter.foundry.container.ContainerAlloyingCrucible;
 import exter.foundry.container.ContainerBurnerHeater;
@@ -12,7 +11,6 @@ import exter.foundry.container.ContainerMetalInfuser;
 import exter.foundry.container.ContainerMoldStation;
 import exter.foundry.container.ContainerRefractoryHopper;
 import exter.foundry.container.ContainerRefractoryTank;
-import exter.foundry.gui.GuiAlloyFurnace;
 import exter.foundry.gui.GuiAlloyMixer;
 import exter.foundry.gui.GuiAlloyingCrucible;
 import exter.foundry.gui.GuiBurnerHeater;
@@ -24,7 +22,6 @@ import exter.foundry.gui.GuiMetalInfuser;
 import exter.foundry.gui.GuiMoldStation;
 import exter.foundry.gui.GuiRefractoryHopper;
 import exter.foundry.gui.GuiRefractoryTank;
-import exter.foundry.tileentity.TileEntityAlloyFurnace;
 import exter.foundry.tileentity.TileEntityAlloyMixer;
 import exter.foundry.tileentity.TileEntityAlloyingCrucible;
 import exter.foundry.tileentity.TileEntityBurnerHeater;
@@ -47,7 +44,6 @@ public class CommonFoundryProxy implements IGuiHandler
     static public final int GUI_CASTER = 1;
     static public final int GUI_ALLOYMIXER = 2;
     static public final int GUI_INFUSER = 3;
-    static public final int GUI_ALLOYFURNACE = 4;
     static public final int GUI_MATERIALROUTER = 5;
     static public final int GUI_REFRACTORYHOPPER = 6;
     static public final int GUI_REVOLVER = 7;
@@ -83,11 +79,6 @@ public class CommonFoundryProxy implements IGuiHandler
         {
             TileEntityMetalInfuser te = (TileEntityMetalInfuser) world.getTileEntity(pos);
             return new GuiMetalInfuser(te, player);
-        }
-        case GUI_ALLOYFURNACE:
-        {
-            TileEntityAlloyFurnace te = (TileEntityAlloyFurnace) world.getTileEntity(pos);
-            return new GuiAlloyFurnace(te, player);
         }
         case GUI_MATERIALROUTER:
         {
@@ -142,8 +133,6 @@ public class CommonFoundryProxy implements IGuiHandler
             return new ContainerAlloyMixer((TileEntityAlloyMixer) world.getTileEntity(pos), player);
         case GUI_INFUSER:
             return new ContainerMetalInfuser((TileEntityMetalInfuser) world.getTileEntity(pos), player);
-        case GUI_ALLOYFURNACE:
-            return new ContainerAlloyFurnace((TileEntityAlloyFurnace) world.getTileEntity(pos), player);
         case GUI_MATERIALROUTER:
             return new ContainerMaterialRouter((TileEntityMaterialRouter) world.getTileEntity(pos), player);
         case GUI_REFRACTORYHOPPER:

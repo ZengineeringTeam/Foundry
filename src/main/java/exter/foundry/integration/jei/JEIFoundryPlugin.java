@@ -1,6 +1,5 @@
 package exter.foundry.integration.jei;
 
-import exter.foundry.api.recipe.IAlloyFurnaceRecipe;
 import exter.foundry.api.recipe.IAlloyMixerRecipe;
 import exter.foundry.api.recipe.IAlloyingCrucibleRecipe;
 import exter.foundry.api.recipe.IAtomizerRecipe;
@@ -12,12 +11,10 @@ import exter.foundry.api.recipe.IMoldRecipe;
 import exter.foundry.block.BlockCastingTable;
 import exter.foundry.block.BlockFoundryMachine;
 import exter.foundry.block.FoundryBlocks;
-import exter.foundry.container.ContainerAlloyFurnace;
 import exter.foundry.container.ContainerMeltingCrucible;
 import exter.foundry.container.ContainerMetalCaster;
 import exter.foundry.container.ContainerMetalInfuser;
 import exter.foundry.container.ContainerMoldStation;
-import exter.foundry.recipes.manager.AlloyFurnaceRecipeManager;
 import exter.foundry.recipes.manager.AlloyMixerRecipeManager;
 import exter.foundry.recipes.manager.AlloyingCrucibleRecipeManager;
 import exter.foundry.recipes.manager.AtomizerRecipeManager;
@@ -48,13 +45,6 @@ public class JEIFoundryPlugin implements IModPlugin
     {
 
         IRecipeTransferRegistry transfer_registry = registry.getRecipeTransferRegistry();
-
-        transfer_registry.addRecipeTransferHandler(ContainerAlloyFurnace.class, FoundryJEIConstants.AF_UID,
-                ContainerAlloyFurnace.SLOTS_TE, ContainerAlloyFurnace.SLOTS_TE_SIZE,
-                ContainerAlloyFurnace.SLOTS_INVENTORY, 36);
-        registry.addRecipeCatalyst(new ItemStack(FoundryBlocks.block_alloy_furnace), FoundryJEIConstants.AF_UID);
-        registry.handleRecipes(IAlloyFurnaceRecipe.class, AlloyFurnaceJEI.Wrapper::new, FoundryJEIConstants.AF_UID);
-        registry.addRecipes(AlloyFurnaceRecipeManager.INSTANCE.getRecipes(), FoundryJEIConstants.AF_UID);
 
         transfer_registry.addRecipeTransferHandler(ContainerMeltingCrucible.class, FoundryJEIConstants.MELT_UID,
                 ContainerMeltingCrucible.SLOTS_TE, ContainerMeltingCrucible.SLOTS_TE_SIZE,

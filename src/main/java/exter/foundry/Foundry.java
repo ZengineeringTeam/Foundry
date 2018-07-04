@@ -35,7 +35,6 @@ import exter.foundry.recipes.manager.CastingTableRecipeManager;
 import exter.foundry.recipes.manager.InfuserRecipeManager;
 import exter.foundry.recipes.manager.MeltingRecipeManager;
 import exter.foundry.recipes.manager.MoldRecipeManager;
-import exter.foundry.tileentity.TileEntityAlloyFurnace;
 import exter.foundry.tileentity.TileEntityAlloyMixer;
 import exter.foundry.tileentity.TileEntityAlloyingCrucible;
 import exter.foundry.tileentity.TileEntityBurnerHeater;
@@ -120,7 +119,6 @@ public class Foundry
         GameRegistry.registerTileEntity(TileEntityMetalCaster.class, MODID + ":metal_caster");
         GameRegistry.registerTileEntity(TileEntityAlloyMixer.class, MODID + ":alloy_mixer");
         GameRegistry.registerTileEntity(TileEntityMetalInfuser.class, MODID + ":metal_infuser");
-        GameRegistry.registerTileEntity(TileEntityAlloyFurnace.class, MODID + ":alloy_furnace");
         GameRegistry.registerTileEntity(TileEntityMoldStation.class, MODID + ":mold_station");
         GameRegistry.registerTileEntity(TileEntityMaterialRouter.class, MODID + ":material_router");
         GameRegistry.registerTileEntity(TileEntityRefractoryHopper.class, MODID + ":refractory_hopper");

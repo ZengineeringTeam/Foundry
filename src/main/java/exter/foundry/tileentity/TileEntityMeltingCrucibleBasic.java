@@ -185,6 +185,7 @@ public class TileEntityMeltingCrucibleBasic extends TileEntityFoundryHeatable
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack)
     {
+        // TODO
         return i == INVENTORY_INPUT;
     }
 
