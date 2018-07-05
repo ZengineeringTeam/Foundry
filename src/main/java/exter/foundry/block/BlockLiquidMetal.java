@@ -59,7 +59,7 @@ public class BlockLiquidMetal extends BlockFluidClassic
             IBlockState solid = null;
             if (solid_state == null)
             {
-                List<ItemStack> list = FoundryMiscUtils.getOresSafe("sandstone");
+                List<ItemStack> list = FoundryMiscUtils.getOresSafe("stoneVariant");
                 if (!list.isEmpty())
                 {
                     ItemStack item = list.get(Block.RANDOM.nextInt(list.size()));

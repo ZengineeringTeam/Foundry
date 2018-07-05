@@ -117,10 +117,11 @@ public class JEIFoundryPlugin implements IModPlugin
         table_block = new CastingTableJEI(BlockCastingTable.EnumTable.BLOCK);
 
         IJeiHelpers helpers = registry.getJeiHelpers();
-        registry.addRecipeCategories(new MeltingJEI.Category(helpers), new CastingJEI.Category(helpers),
-                new AlloyMixerJEI.Category(helpers), new AlloyingCrucibleJEI.Category(helpers),
-                new InfuserJEI.Category(helpers), table_ingot.new Category(helpers), table_plate.new Category(helpers),
-                table_rod.new Category(helpers), table_block.new Category(helpers));
+        registry.addRecipeCategories(new MoldStationJEI.Category(helpers), new MeltingJEI.Category(helpers),
+                new CastingJEI.Category(helpers), new AlloyMixerJEI.Category(helpers),
+                new AlloyingCrucibleJEI.Category(helpers), new InfuserJEI.Category(helpers),
+                table_ingot.new Category(helpers), table_plate.new Category(helpers), table_rod.new Category(helpers),
+                table_block.new Category(helpers));
     }
 
     private void setupTable(IModRegistry registry, CastingTableJEI table)
