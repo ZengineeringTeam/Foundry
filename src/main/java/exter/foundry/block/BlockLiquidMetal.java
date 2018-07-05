@@ -8,6 +8,7 @@ import exter.foundry.util.FoundryMiscUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -110,7 +111,15 @@ public class BlockLiquidMetal extends BlockFluidClassic
     @Override
     public String getUnlocalizedName()
     {
+        System.out.println(stack.getUnlocalizedName());
         return stack.getUnlocalizedName();
+    }
+
+    @Override
+    public String getLocalizedName()
+    {
+        System.out.println(I18n.format(getUnlocalizedName()));
+        return I18n.format(getUnlocalizedName());
     }
 
     @Override

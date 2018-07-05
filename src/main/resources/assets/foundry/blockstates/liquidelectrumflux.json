@@ -5,7 +5,7 @@
     "normal":
     {
       "model": "forge:fluid",
-      "custom": { "fluid": "liquidelectrumflux" }
+      "custom": { "fluid": "electrumflux" }
     }
   }
 }

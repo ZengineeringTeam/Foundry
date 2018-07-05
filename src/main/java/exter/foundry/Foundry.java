@@ -20,7 +20,6 @@ import exter.foundry.integration.ModIntegrationEnderIO;
 import exter.foundry.integration.ModIntegrationManager;
 import exter.foundry.integration.ModIntegrationMinetweaker;
 import exter.foundry.integration.ModIntegrationMolten;
-import exter.foundry.integration.ModIntegrationTiCon;
 import exter.foundry.item.FoundryItems;
 import exter.foundry.material.MaterialRegistry;
 import exter.foundry.network.MessageTileEntitySync;
@@ -142,8 +141,6 @@ public class Foundry
         config.load();
 
         ModIntegrationManager.registerIntegration(config, new ModIntegrationMolten());
-        if (Loader.isModLoaded("tconstruct"))
-            ModIntegrationManager.registerIntegration(config, new ModIntegrationTiCon());
         if (Loader.isModLoaded("enderio"))
             ModIntegrationManager.registerIntegration(config, new ModIntegrationEnderIO());
         if (Loader.isModLoaded("botania"))

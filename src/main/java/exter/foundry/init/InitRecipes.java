@@ -248,9 +248,9 @@ public class InitRecipes
                 FoundryUtils.registerBasicMeltingRecipes(name, fluid);
             }
         }
-        //FoundryUtils.registerBasicMeltingRecipes("Chromium", LiquidMetalRegistry.instance.getFluid("Chrome"));
-        FoundryUtils.registerBasicMeltingRecipes("Aluminum", LiquidMetalRegistry.INSTANCE.getFluid("Aluminium"));
-        FoundryUtils.registerBasicMeltingRecipes("Constantan", LiquidMetalRegistry.INSTANCE.getFluid("Constantan"));
+        //FoundryUtils.registerBasicMeltingRecipes("Chromium", LiquidMetalRegistry.instance.getFluid("chrome"));
+        FoundryUtils.registerBasicMeltingRecipes("Aluminum", LiquidMetalRegistry.INSTANCE.getFluid("aluminium"));
+        FoundryUtils.registerBasicMeltingRecipes("Constantan", LiquidMetalRegistry.INSTANCE.getFluid("constantan"));
 
         MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("dustRedstone"),
                 new FluidStack(TFFluids.fluidRedstone, 100));
@@ -305,8 +305,8 @@ public class InitRecipes
             addDefaultCasting(LiquidMetalRegistry.INSTANCE.getFluid(name), name);
         }
 
-        addDefaultCasting(LiquidMetalRegistry.INSTANCE.getFluid("Aluminium"), "Aluminum");
-        addDefaultCasting(LiquidMetalRegistry.INSTANCE.getFluid("Constantan"), "Constantan");
+        addDefaultCasting(LiquidMetalRegistry.INSTANCE.getFluid("aluminium"), "Aluminum");
+        addDefaultCasting(LiquidMetalRegistry.INSTANCE.getFluid("constantan"), "Constantan");
 
         AlloyMixerRecipeManager.INSTANCE.addRecipe(
                 new FluidStack(FoundryFluids.liquid_lumium, FoundryAPI.FLUID_AMOUNT_INGOT),

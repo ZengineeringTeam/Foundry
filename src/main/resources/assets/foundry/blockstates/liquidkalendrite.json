@@ -5,7 +5,7 @@
     "normal":
     {
       "model": "forge:fluid",
-      "custom": { "fluid": "liquidkalendrite" }
+      "custom": { "fluid": "kalendrite" }
     }
   }
 }

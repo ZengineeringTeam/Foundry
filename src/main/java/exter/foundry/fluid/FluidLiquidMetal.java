@@ -1,6 +1,6 @@
 package exter.foundry.fluid;
 
-import exter.foundry.Foundry;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -26,12 +26,6 @@ public class FluidLiquidMetal extends Fluid
     public int getColor()
     {
         return color;
-    }
-
-    @Override
-    public String getLocalizedName(FluidStack stack)
-    {
-        return Foundry.proxy.translate(this.getUnlocalizedName(stack) + ".name");
     }
 
     @Override

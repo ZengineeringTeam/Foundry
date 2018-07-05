@@ -5,6 +5,7 @@ import exter.foundry.item.ItemBlockMulti;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fluids.BlockFluidBase;
 
 public class FoundryBlocks
 {
@@ -20,7 +21,10 @@ public class FoundryBlocks
     static public void register(Block block)
     {
         FoundryRegistry.BLOCKS.add(block);
-        FoundryRegistry.ITEMS.add(new ItemBlock(block).setRegistryName(block.getRegistryName()));
+        if (!(block instanceof BlockFluidBase))
+        {
+            FoundryRegistry.ITEMS.add(new ItemBlock(block).setRegistryName(block.getRegistryName()));
+        }
     }
 
     static public void registerBlocks(Configuration config)

@@ -54,7 +54,7 @@ public class LiquidMetalRegistry implements IFluidRegistry
      */
     public FluidLiquidMetal registerLiquidMetal(String metal_name, int temperature, int luminosity)
     {
-        return registerLiquidMetal(metal_name, temperature, luminosity, "liquid" + metal_name, 0xFFFFFFFF);
+        return registerLiquidMetal(metal_name, temperature, luminosity, metal_name, 0xFFFFFFFF);
     }
 
     /**
@@ -63,9 +63,9 @@ public class LiquidMetalRegistry implements IFluidRegistry
      */
     public FluidLiquidMetal registerLiquidMetal(String metal_name, int temperature, int luminosity, String texture, int color)
     {
-        FluidLiquidMetal fluid = new FluidLiquidMetal("liquid" + metal_name,
-                new ResourceLocation("foundry", "blocks/" + texture + "_still"),
-                new ResourceLocation("foundry", "blocks/" + texture + "_flow"), color, false, temperature, luminosity);
+        FluidLiquidMetal fluid = new FluidLiquidMetal(metal_name,
+                new ResourceLocation("foundry", "blocks/liquid" + texture + "_still"),
+                new ResourceLocation("foundry", "blocks/liquid" + texture + "_flow"), color, false, temperature, luminosity);
         FluidRegistry.registerFluid(fluid);
         FluidRegistry.addBucketForFluid(fluid);
 
@@ -87,14 +87,14 @@ public class LiquidMetalRegistry implements IFluidRegistry
 
     public FluidLiquidMetal registerSpecialLiquidMetal(String metal_name, int temperature, int luminosity, IBlockState solid)
     {
-        return registerSpecialLiquidMetal(metal_name, temperature, luminosity, "liquid" + metal_name, 0xFFFFFF, solid);
+        return registerSpecialLiquidMetal(metal_name, temperature, luminosity, metal_name, 0xFFFFFF, solid);
     }
 
     public FluidLiquidMetal registerSpecialLiquidMetal(String metal_name, int temperature, int luminosity, String texture, int color, IBlockState solid)
     {
-        FluidLiquidMetal fluid = new FluidLiquidMetal("liquid" + metal_name,
-                new ResourceLocation("foundry", "blocks/" + texture + "_still"),
-                new ResourceLocation("foundry", "blocks/" + texture + "_flow"), color, true, temperature, luminosity);
+        FluidLiquidMetal fluid = new FluidLiquidMetal(metal_name,
+                new ResourceLocation("foundry", "blocks/liquid" + texture + "_still"),
+                new ResourceLocation("foundry", "blocks/liquid" + texture + "_flow"), color, true, temperature, luminosity);
         FluidRegistry.registerFluid(fluid);
         FluidRegistry.addBucketForFluid(fluid);
 

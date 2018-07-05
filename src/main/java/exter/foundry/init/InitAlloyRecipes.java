@@ -54,16 +54,16 @@ public class InitAlloyRecipes
 
     static public void init()
     {
-        addSimpleAlloy("Bronze", "Copper", 3, "Tin", 1);
+        addSimpleAlloy("bronze", "copper", 3, "tin", 1);
 
-        addSimpleAlloy("Brass", "Copper", 3,
-                !OreDictionary.getOres("ingotZinc", false).isEmpty() ? "Zinc" : "Aluminium", 1);
+        addSimpleAlloy("brass", "copper", 3,
+                !OreDictionary.getOres("ingotZinc", false).isEmpty() ? "zinc" : "aluminium", 1);
 
-        addSimpleAlloy("Invar", "Iron", 2, "Nickel", 1);
+        addSimpleAlloy("invar", "iron", 2, "nickel", 1);
 
-        addSimpleAlloy("Electrum", "Gold", 1, "Silver", 1);
+        addSimpleAlloy("electrum", "gold", 1, "silver", 1);
 
-        addSimpleAlloy("Constantan", "Copper", 1, "Nickel", 1);
+        addSimpleAlloy("constantan", "copper", 1, "nickel", 1);
 
         Fluid liquid_redstone = FluidRegistry.getFluid("liquidredstone");
         Fluid liquid_glowstone = FluidRegistry.getFluid("liquidglowstone");
