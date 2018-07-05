@@ -12,15 +12,17 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.12.2-3.1.4.1"
+version = "${version_major}.${version_minor}.${version_patch}"
 group = "exter.foundry"
-archivesBaseName = "Foundry"
+archivesBaseName = "ZenFoundry"
 
 minecraft {
     version = "1.12.2-14.23.1.2599"
     runDir = "run"
     mappings = "snapshot_20180119"
 	makeObfSourceJar = false
+	
+	replace "@VERSION_INJECT@", project.version
 }
 
 repositories {

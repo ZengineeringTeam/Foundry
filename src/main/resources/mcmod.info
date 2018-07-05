@@ -1,7 +1,7 @@
 [
 {
   "modid" : "foundry",
-  "name" : "Foundry",
+  "name" : "Zen: Foundry",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "credits" : "",

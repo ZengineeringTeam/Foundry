@@ -74,8 +74,8 @@ import shadows.placebo.util.RecipeHelper;
 public class Foundry
 {
     public static final String MODID = "foundry";
-    public static final String MODNAME = "Foundry";
-    public static final String MODVERSION = "3.1.4.1";
+    public static final String MODNAME = "Zen: Foundry";
+    public static final String MODVERSION = "@VERSION_INJECT@";
 
     @SidedProxy(
             clientSide = "exter.foundry.proxy.ClientFoundryProxy",
