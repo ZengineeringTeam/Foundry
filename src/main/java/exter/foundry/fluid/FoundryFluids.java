@@ -1,10 +1,11 @@
 package exter.foundry.fluid;
 
 import exter.foundry.config.FoundryConfig;
+import net.minecraft.block.BlockColored;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemDye;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 
 public class FoundryFluids
@@ -73,7 +74,8 @@ public class FoundryFluids
 
         int temp = 1550;
         liquid_glass = LiquidMetalRegistry.INSTANCE.registerSpecialLiquidMetal("glass", temp, 12, "liquidglass",
-                0x40FFFFFF, new ItemStack(Blocks.GLASS));
+                0x40FFFFFF, Blocks.GLASS.getDefaultState());
+        IBlockState stained_glass = Blocks.STAINED_GLASS.getDefaultState();
         for (EnumDyeColor dye : EnumDyeColor.values())
         {
             String name = dye.getName();
@@ -85,10 +87,9 @@ public class FoundryFluids
             int fluid_color = c1 | c2 << 8 | c3 << 16 | 100 << 24;
 
             int meta = dye.getMetadata();
-            ItemStack stained_glass = new ItemStack(Blocks.STAINED_GLASS, 1, meta);
 
             liquid_glass_colored[meta] = LiquidMetalRegistry.INSTANCE.registerSpecialLiquidMetal("glass" + name, temp,
-                    12, "liquidglass", fluid_color, stained_glass);
+                    12, "liquidglass", fluid_color, stained_glass.withProperty(BlockColored.COLOR, dye));
         }
     }
 }

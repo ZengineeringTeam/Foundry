@@ -1,5 +1,6 @@
 package exter.foundry.block;
 
+import java.util.List;
 import java.util.Random;
 
 import exter.foundry.creativetab.FoundryTab;
@@ -15,6 +16,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
@@ -27,16 +29,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockLiquidMetal extends BlockFluidClassic
 {
-    private Object solid;
+    private IBlockState solid_state;
 
-    private IBlockState solid_state = null;
-
-    public BlockLiquidMetal(Fluid fluid, String name, Object solid_block)
+    public BlockLiquidMetal(Fluid fluid, String name, IBlockState solid_state)
     {
         super(fluid, Material.LAVA);
         setLightOpacity(0);
         setLightLevel(1.0f);
-        solid = solid_block;
+        this.solid_state = solid_state;
         setUnlocalizedName(name);
         setCreativeTab(FoundryTab.INSTANCE);
         setRegistryName(name);
@@ -56,62 +56,31 @@ public class BlockLiquidMetal extends BlockFluidClassic
     {
         if (isSourceBlock(world, pos))
         {
-            if (solid_state == null && solid != null)
-            {
-                ItemStack item = ItemStack.EMPTY;
-                if (solid instanceof ItemStack)
-                {
-                    item = (ItemStack) solid;
-                }
-                else if (solid instanceof String)
-                {
-                    for (ItemStack i : FoundryMiscUtils.getOresSafe((String) solid))
-                    {
-                        if (i.getItem() instanceof ItemBlock)
-                        {
-                            item = i;
-                            break;
-                        }
-                    }
-                }
-                else
-                {
-                    solid = null;
-                }
-
-                if (item.isEmpty())
-                {
-                    solid = null;
-                }
-                solid_state = getBlockStateFromItemStack(item);
-            }
+            IBlockState solid = null;
             if (solid_state == null)
             {
-                return;
+                List<ItemStack> list = FoundryMiscUtils.getOresSafe("sandstone");
+                if (!list.isEmpty())
+                {
+                    ItemStack item = list.get(Block.RANDOM.nextInt(list.size()));
+                    if (item.getItem() instanceof ItemBlock)
+                    {
+                        solid = ((ItemBlock) item.getItem()).getBlock().getStateForPlacement(world, pos,
+                                EnumFacing.NORTH, 0, 0, 0, item.getMetadata(), null, EnumHand.MAIN_HAND);
+                    }
+                }
             }
-            if (tryToHarden(world, pos, pos.add(-1, 0, 0)))
+            else
+            {
+                solid = solid_state;
+            }
+            if (solid == null)
             {
                 return;
             }
-            if (tryToHarden(world, pos, pos.add(1, 0, 0)))
+            for (EnumFacing facing : EnumFacing.VALUES)
             {
-                return;
-            }
-            if (tryToHarden(world, pos, pos.add(0, -1, 0)))
-            {
-                return;
-            }
-            if (tryToHarden(world, pos, pos.add(0, 1, 0)))
-            {
-                return;
-            }
-            if (tryToHarden(world, pos, pos.add(0, 0, -1)))
-            {
-                return;
-            }
-            if (tryToHarden(world, pos, pos.add(0, 0, 1)))
-            {
-                return;
+                tryToHarden(world, pos, pos.offset(facing), solid);
             }
         }
     }
@@ -124,23 +93,6 @@ public class BlockLiquidMetal extends BlockFluidClassic
             return false;
         }
         return super.displaceIfPossible(world, pos);
-    }
-
-    private IBlockState getBlockStateFromItemStack(ItemStack stack)
-    {
-        if (stack.getItem() instanceof ItemBlock)
-        {
-            Block block = ((ItemBlock) stack.getItem()).getBlock();
-            int meta = stack.getMetadata();
-            for (IBlockState state : block.getBlockState().getValidStates())
-            {
-                if (state != null && block.damageDropped(state) == meta)
-                {
-                    return state;
-                }
-            }
-        }
-        return null;
     }
 
     @Override
@@ -237,16 +189,15 @@ public class BlockLiquidMetal extends BlockFluidClassic
         }
     }
 
-    private boolean tryToHarden(World world, BlockPos pos, BlockPos npos)
+    private boolean tryToHarden(World world, BlockPos pos, BlockPos npos, IBlockState state)
     {
         //Check if block is in contact with water.
         if (world.getBlockState(npos).getMaterial() == Material.WATER)
         {
-            int i;
-            world.setBlockState(pos, solid_state);
+            world.setBlockState(pos, state);
             world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.BLOCK_LAVA_EXTINGUISH,
                     SoundCategory.BLOCKS, 0.5f, 2.6f + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8f, false);
-            for (i = 0; i < 8; i++)
+            for (int i = 0; i < 8; i++)
             {
                 world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + Math.random(), pos.getY() + 1.2D,
                         pos.getZ() + Math.random(), 0.0D, 0.0D, 0.0D);

@@ -8,9 +8,9 @@ import java.util.Set;
 import exter.foundry.api.registry.IFluidRegistry;
 import exter.foundry.block.BlockLiquidMetal;
 import exter.foundry.block.FoundryBlocks;
-import exter.foundry.config.FoundryConfig;
-import exter.foundry.util.FoundryMiscUtils;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -70,13 +70,13 @@ public class LiquidMetalRegistry implements IFluidRegistry
         FluidRegistry.addBucketForFluid(fluid);
 
         String block_name = "block" + metal_name;
-        Object solid = FoundryMiscUtils.getModItemFromOreDictionary(FoundryConfig.prefModID, block_name);
-        if (solid == null)
-        {
-            solid = block_name;
-        }
+        //        Object solid = FoundryMiscUtils.getModItemFromOreDictionary(FoundryConfig.prefModID, block_name);
+        //        if (solid == null)
+        //        {
+        //            solid = block_name;
+        //        }
 
-        Block liquid_block = new BlockLiquidMetal(fluid, "liquid" + metal_name, solid);
+        Block liquid_block = new BlockLiquidMetal(fluid, "liquid" + metal_name, null);
         FoundryBlocks.register(liquid_block);
 
         fluid.setBlock(liquid_block);
@@ -85,12 +85,12 @@ public class LiquidMetalRegistry implements IFluidRegistry
         return fluid;
     }
 
-    public FluidLiquidMetal registerSpecialLiquidMetal(String metal_name, int temperature, int luminosity, ItemStack solid)
+    public FluidLiquidMetal registerSpecialLiquidMetal(String metal_name, int temperature, int luminosity, IBlockState solid)
     {
         return registerSpecialLiquidMetal(metal_name, temperature, luminosity, "liquid" + metal_name, 0xFFFFFF, solid);
     }
 
-    public FluidLiquidMetal registerSpecialLiquidMetal(String metal_name, int temperature, int luminosity, String texture, int color, ItemStack solid)
+    public FluidLiquidMetal registerSpecialLiquidMetal(String metal_name, int temperature, int luminosity, String texture, int color, IBlockState solid)
     {
         FluidLiquidMetal fluid = new FluidLiquidMetal("liquid" + metal_name,
                 new ResourceLocation("foundry", "blocks/" + texture + "_still"),
