@@ -22,7 +22,7 @@ public class FoundryFluids
     static public Fluid liquid_brass;
     static public Fluid liquid_silver;
     static public Fluid liquid_steel;
-    static public Fluid liquid_cupronickel;
+    static public Fluid liquid_constantan;
     static public Fluid liquid_lead;
     static public Fluid liquid_platinum;
     static public Fluid liquid_aluminium;
@@ -49,7 +49,7 @@ public class FoundryFluids
         liquid_brass = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("Brass", 1200, 15);
         liquid_silver = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("Silver", 1250, 15);
         liquid_steel = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("Steel", 1800, 15);
-        liquid_cupronickel = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("Cupronickel", 1750, 15);
+        liquid_constantan = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("Constantan", 1750, 15);
         liquid_lead = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("Lead", 650, 0);
         liquid_platinum = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("Platinum", 2100, 15);
         liquid_aluminium = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("Aluminium", 900, 0);

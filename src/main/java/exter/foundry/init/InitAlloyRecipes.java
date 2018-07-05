@@ -63,7 +63,7 @@ public class InitAlloyRecipes
 
         addSimpleAlloy("Electrum", "Gold", 1, "Silver", 1);
 
-        addSimpleAlloy("Cupronickel", "Copper", 1, "Nickel", 1);
+        addSimpleAlloy("Constantan", "Copper", 1, "Nickel", 1);
 
         Fluid liquid_redstone = FluidRegistry.getFluid("liquidredstone");
         Fluid liquid_glowstone = FluidRegistry.getFluid("liquidglowstone");

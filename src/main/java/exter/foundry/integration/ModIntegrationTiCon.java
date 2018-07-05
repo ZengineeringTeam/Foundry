@@ -131,7 +131,7 @@ public class ModIntegrationTiCon implements IModIntegration
                 }
             }
         }
-        liquid_map.put("constantan", "Cupronickel");
+        liquid_map.put("constantan", "Constantan");
 
         reverse_liquid_map = new HashMap<>();
         for (Map.Entry<String, String> e : liquid_map.entrySet())

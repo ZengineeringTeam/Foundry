@@ -148,7 +148,7 @@ public class ModIntegrationMolten implements IModIntegration
                 }
             }
         }
-        liquid_map.put(FoundryFluids.liquid_cupronickel.getName(), "constantan");
+        liquid_map.put(FoundryFluids.liquid_constantan.getName(), "constantan");
 
         //Add support for "molten" fluids to the Metal Caster.
         for (ICastingRecipe casting : new ArrayList<>(CastingRecipeManager.INSTANCE.getRecipes()))
