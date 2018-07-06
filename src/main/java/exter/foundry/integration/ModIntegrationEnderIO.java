@@ -159,21 +159,24 @@ public class ModIntegrationEnderIO implements IModIntegration
     @Override
     public void onPreInit(Configuration config)
     {
-        liquid_redstone_alloy = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("RedstoneAlloy", 1000, 14);
-        liquid_energetic_alloy = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("EnergeticAlloy", 2500, 15);
-        liquid_vibrant_alloy = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("VibrantAlloy", 2500, 15);
-        liquid_dark_steel = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("DarkSteel", 1850, 12);
-        liquid_electrical_steel = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("ElectricalSteel", 1850, 15);
-        liquid_phased_iron = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("PulsatingIron", 1850, 15);
-        liquid_soularium = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("Soularium", 1350, 12);
+        liquid_redstone_alloy = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("redstone_alloy", 1000, 14,
+                0xFFFFFFFF);
+        liquid_energetic_alloy = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("energetic_alloy", 2500, 15,
+                0xFFFFFFFF);
+        liquid_vibrant_alloy = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("vibrant_alloy", 2500, 15, 0xFFFFFF);
+        liquid_dark_steel = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("dark_steel", 1850, 12, 0xFFFFFF);
+        liquid_electrical_steel = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("electrical_steel", 1850, 15,
+                0xFFFFFFFF);
+        liquid_phased_iron = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("pulsating_iron", 1850, 15, 0xFFFFFF);
+        liquid_soularium = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("soularium", 1350, 12, 0xFFFFFF);
 
-        FoundryUtils.registerBasicMeltingRecipes("RedstoneAlloy", liquid_redstone_alloy);
-        FoundryUtils.registerBasicMeltingRecipes("EnergeticAlloy", liquid_energetic_alloy);
-        FoundryUtils.registerBasicMeltingRecipes("VibrantAlloy", liquid_vibrant_alloy);
-        FoundryUtils.registerBasicMeltingRecipes("PhasedGold", liquid_vibrant_alloy);
-        FoundryUtils.registerBasicMeltingRecipes("DarkSteel", liquid_dark_steel);
-        FoundryUtils.registerBasicMeltingRecipes("PulsatingIron", liquid_phased_iron);
-        FoundryUtils.registerBasicMeltingRecipes("ElectricalSteel", liquid_electrical_steel);
-        FoundryUtils.registerBasicMeltingRecipes("Soularium", liquid_soularium);
+        FoundryUtils.registerBasicMeltingRecipes("redstone_alloy", liquid_redstone_alloy);
+        FoundryUtils.registerBasicMeltingRecipes("energetic_alloy", liquid_energetic_alloy);
+        FoundryUtils.registerBasicMeltingRecipes("vibrant_alloy", liquid_vibrant_alloy);
+        FoundryUtils.registerBasicMeltingRecipes("phased_gold", liquid_vibrant_alloy);
+        FoundryUtils.registerBasicMeltingRecipes("dark_steel", liquid_dark_steel);
+        FoundryUtils.registerBasicMeltingRecipes("pulsating_iron", liquid_phased_iron);
+        FoundryUtils.registerBasicMeltingRecipes("electrical_steel", liquid_electrical_steel);
+        FoundryUtils.registerBasicMeltingRecipes("soularium", liquid_soularium);
     }
 }

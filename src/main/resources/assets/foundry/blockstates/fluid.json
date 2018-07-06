@@ -1,0 +1,194 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "forge:fluid"
+  },
+  "variants": {
+    "iron": {
+      "custom": {
+        "model": "forge:fluid",
+        "fluid": "iron"
+      }
+    },
+    "refined_iron": {
+      "custom": {
+        "fluid": "refined_iron"
+      }
+    },
+    "gold": {
+      "custom": {
+        "fluid": "gold"
+      }
+    },
+    "copper": {
+      "custom": {
+        "fluid": "copper"
+      }
+    },
+    "tin": {
+      "custom": {
+        "fluid": "tin"
+      }
+    },
+    "bronze": {
+      "custom": {
+        "fluid": "bronze"
+      }
+    },
+    "electrum": {
+      "custom": {
+        "fluid": "electrum"
+      }
+    },
+    "invar": {
+      "custom": {
+        "fluid": "invar"
+      }
+    },
+    "nickel": {
+      "custom": {
+        "fluid": "nickel"
+      }
+    },
+    "zinc": {
+      "custom": {
+        "fluid": "zinc"
+      }
+    },
+    "brass": {
+      "custom": {
+        "fluid": "brass"
+      }
+    },
+    "silver": {
+      "custom": {
+        "fluid": "silver"
+      }
+    },
+    "steel": {
+      "custom": {
+        "fluid": "steel"
+      }
+    },
+    "constantan": {
+      "custom": {
+        "fluid": "constantan"
+      }
+    },
+    "uranium": {
+      "custom": {
+        "fluid": "uranium"
+      }
+    },
+    "lead": {
+      "custom": {
+        "fluid": "lead"
+      }
+    },
+    "platinum": {
+      "custom": {
+        "fluid": "platinum"
+      }
+    },
+    "aluminium": {
+      "custom": {
+        "fluid": "aluminium"
+      }
+    },
+    "chrome": {
+      "custom": {
+        "fluid": "chrome"
+      }
+    },
+    "cobalt": {
+      "custom": {
+        "fluid": "cobalt"
+      }
+    },
+    "titanium": {
+      "custom": {
+        "fluid": "titanium"
+      }
+    },
+    "iridium": {
+      "custom": {
+        "fluid": "iridium"
+      }
+    },
+    "signalum": {
+      "custom": {
+        "fluid": "signalum"
+      }
+    },
+    "lumium": {
+      "custom": {
+        "fluid": "lumium"
+      }
+    },
+    "enderium": {
+      "custom": {
+        "fluid": "enderium"
+      }
+    },
+    "osmium": {
+      "custom": {
+        "fluid": "osmium"
+      }
+    },
+    "alumina": {
+      "custom": {
+        "fluid": "alumina"
+      }
+    },
+    "manasteel": {
+      "custom": {
+        "fluid": "manasteel"
+      }
+    },
+    "terrasteel": {
+      "custom": {
+        "fluid": "terrasteel"
+      }
+    },
+    "elvenelementium": {
+      "custom": {
+        "fluid": "elvenelementium"
+      }
+    },
+    "redstone_alloy": {
+      "custom": {
+        "fluid": "redstone_alloy"
+      }
+    },
+    "energetic_alloy": {
+      "custom": {
+        "fluid": "energetic_alloy"
+      }
+    },
+    "vibrant_alloy": {
+      "custom": {
+        "fluid": "vibrant_alloy"
+      }
+    },
+    "dark_steel": {
+      "custom": {
+        "fluid": "dark_steel"
+      }
+    },
+    "electrical_steel": {
+      "custom": {
+        "fluid": "electrical_steel"
+      }
+    },
+    "pulsating_iron": {
+      "custom": {
+        "fluid": "pulsating_iron"
+      }
+    },
+    "soularium": {
+      "custom": {
+        "fluid": "soularium"
+      }
+    }
+  }
+}

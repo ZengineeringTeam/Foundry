@@ -184,12 +184,12 @@ public class ModIntegrationBotania implements IModIntegration
     @Override
     public void onPreInit(Configuration config)
     {
-        liquid_manasteel = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("Manasteel", 1950, 15);
-        liquid_terrasteel = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("Terrasteel", 2100, 15);
-        liquid_elementium = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("ElvenElementium", 2400, 15);
+        liquid_manasteel = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("manasteel", 1950, 15, 0xFFFFFF);
+        liquid_terrasteel = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("terrasteel", 2100, 15, 0xFFFFFF);
+        liquid_elementium = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("elvenelementium", 2400, 15, 0xFFFFFF);
 
-        FoundryUtils.registerBasicMeltingRecipes("Manasteel", liquid_manasteel);
-        FoundryUtils.registerBasicMeltingRecipes("Terrasteel", liquid_terrasteel);
-        FoundryUtils.registerBasicMeltingRecipes("ElvenElementium", liquid_elementium);
+        FoundryUtils.registerBasicMeltingRecipes("manasteel", liquid_manasteel);
+        FoundryUtils.registerBasicMeltingRecipes("terrasteel", liquid_terrasteel);
+        FoundryUtils.registerBasicMeltingRecipes("elvenelementium", liquid_elementium);
     }
 }

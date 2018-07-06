@@ -10,8 +10,6 @@ import exter.foundry.block.BlockLiquidMetal;
 import exter.foundry.block.FoundryBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -52,31 +50,27 @@ public class LiquidMetalRegistry implements IFluidRegistry
      * Helper method to register a metal's fluid, and block.
      * @param metal_name Name of the metal e.g: "Copper" for "oreCopper" in the Ore Dictionary.
      */
-    public FluidLiquidMetal registerLiquidMetal(String metal_name, int temperature, int luminosity)
+    public FluidLiquidMetal registerLiquidMetal(String metal_name, int temperature, int luminosity, int color)
     {
-        return registerLiquidMetal(metal_name, temperature, luminosity, metal_name, 0xFFFFFFFF);
+        return registerLiquidMetal(metal_name, temperature, luminosity, metal_name, color | 0xFF000000);
     }
 
-    /**
-     * Helper method to register a metal's fluid, and block.
-     * @param metal_name Name of the metal e.g: "Copper" for "oreCopper" in the Ore Dictionary.
-     */
     public FluidLiquidMetal registerLiquidMetal(String metal_name, int temperature, int luminosity, String texture, int color)
     {
         FluidLiquidMetal fluid = new FluidLiquidMetal(metal_name,
-                new ResourceLocation("foundry", "blocks/liquid" + texture + "_still"),
-                new ResourceLocation("foundry", "blocks/liquid" + texture + "_flow"), color, false, temperature, luminosity);
+                new ResourceLocation("foundry", "blocks/molten_metal_still"),
+                new ResourceLocation("foundry", "blocks/molten_metal_flow"), color, false, temperature, luminosity);
         FluidRegistry.registerFluid(fluid);
         FluidRegistry.addBucketForFluid(fluid);
 
-        String block_name = "block" + metal_name;
+        //        String block_name = "block" + metal_name;
         //        Object solid = FoundryMiscUtils.getModItemFromOreDictionary(FoundryConfig.prefModID, block_name);
         //        if (solid == null)
         //        {
         //            solid = block_name;
         //        }
 
-        Block liquid_block = new BlockLiquidMetal(fluid, "liquid" + metal_name, null);
+        Block liquid_block = new BlockLiquidMetal(fluid, metal_name, null);
         FoundryBlocks.register(liquid_block);
 
         fluid.setBlock(liquid_block);
@@ -94,11 +88,12 @@ public class LiquidMetalRegistry implements IFluidRegistry
     {
         FluidLiquidMetal fluid = new FluidLiquidMetal(metal_name,
                 new ResourceLocation("foundry", "blocks/liquid" + texture + "_still"),
-                new ResourceLocation("foundry", "blocks/liquid" + texture + "_flow"), color, true, temperature, luminosity);
+                new ResourceLocation("foundry", "blocks/liquid" + texture + "_flow"), color, true, temperature,
+                luminosity);
         FluidRegistry.registerFluid(fluid);
         FluidRegistry.addBucketForFluid(fluid);
 
-        Block liquid_block = new BlockLiquidMetal(fluid, "liquid" + metal_name, solid);
+        Block liquid_block = new BlockLiquidMetal(fluid, metal_name, solid);
         FoundryBlocks.register(liquid_block);
 
         fluid.setBlock(liquid_block);
