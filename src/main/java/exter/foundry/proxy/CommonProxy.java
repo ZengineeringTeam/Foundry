@@ -30,7 +30,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
-public class CommonFoundryProxy implements IGuiHandler
+public class CommonProxy implements IGuiHandler
 {
     static public final int GUI_CRUCIBLE = 0;
     static public final int GUI_CASTER = 1;

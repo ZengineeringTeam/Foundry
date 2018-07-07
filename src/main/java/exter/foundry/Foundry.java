@@ -1,29 +1,20 @@
 package exter.foundry;
 
-import java.io.File;
-import java.io.IOException;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import cofh.cofhworld.init.WorldProps;
-import cofh.cofhworld.util.Utils;
 import exter.foundry.api.FoundryAPI;
-import exter.foundry.block.FoundryBlocks;
 import exter.foundry.capability.CapabilityHeatProvider;
 import exter.foundry.config.FoundryConfig;
-import exter.foundry.fluid.FoundryFluids;
-import exter.foundry.fluid.LiquidMetalRegistry;
+import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.init.InitRecipes;
 import exter.foundry.integration.ModIntegrationBotania;
 import exter.foundry.integration.ModIntegrationEnderIO;
 import exter.foundry.integration.ModIntegrationManager;
 import exter.foundry.integration.ModIntegrationMinetweaker;
-import exter.foundry.integration.ModIntegrationMolten;
-import exter.foundry.item.FoundryItems;
 import exter.foundry.material.MaterialRegistry;
 import exter.foundry.network.MessageTileEntitySync;
-import exter.foundry.proxy.CommonFoundryProxy;
+import exter.foundry.proxy.CommonProxy;
 import exter.foundry.recipes.manager.AlloyMixerRecipeManager;
 import exter.foundry.recipes.manager.AlloyingCrucibleRecipeManager;
 import exter.foundry.recipes.manager.BurnerHeaterFuelManager;
@@ -47,8 +38,6 @@ import exter.foundry.tileentity.TileEntityMeltingCrucibleStandard;
 import exter.foundry.tileentity.TileEntityMetalCaster;
 import exter.foundry.tileentity.TileEntityMetalInfuser;
 import exter.foundry.tileentity.TileEntityMoldStation;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -68,20 +57,19 @@ import shadows.placebo.util.RecipeHelper;
 @Mod(
         modid = Foundry.MODID,
         name = Foundry.MODNAME,
-        version = Foundry.MODVERSION,
+        version = "@VERSION_INJECT@",
         dependencies = "required-after:placebo@[1.2.0,);required-after:ceramics;required-after:thermalfoundation;after:jei;after:tconstruct;after:mekanism"
 )
 public class Foundry
 {
     public static final String MODID = "foundry";
     public static final String MODNAME = "Zen: Foundry";
-    public static final String MODVERSION = "@VERSION_INJECT@";
 
     @SidedProxy(
-            clientSide = "exter.foundry.proxy.ClientFoundryProxy",
-            serverSide = "exter.foundry.proxy.CommonFoundryProxy"
+            clientSide = "exter.foundry.proxy.ClientProxy",
+            serverSide = "exter.foundry.proxy.CommonProxy"
     )
-    public static CommonFoundryProxy proxy;
+    public static CommonProxy proxy;
 
     @Instance
     public static Foundry INSTANCE = null;
@@ -131,24 +119,25 @@ public class Foundry
         InitRecipes.postInit();
         proxy.postInit();
         ModIntegrationManager.finalStep();
+        if (FoundryConfig.config.hasChanged())
+        {
+            FoundryConfig.config.save();
+        }
     }
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        MinecraftForge.EVENT_BUS.register(new FoundryRegistry());
-        Configuration config = new Configuration(event.getSuggestedConfigurationFile());
-        config.load();
+        FoundryConfig.load(event.getSuggestedConfigurationFile());
 
-        ModIntegrationManager.registerIntegration(config, new ModIntegrationMolten());
         if (Loader.isModLoaded("enderio"))
-            ModIntegrationManager.registerIntegration(config, new ModIntegrationEnderIO());
+            ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationEnderIO());
         if (Loader.isModLoaded("botania"))
-            ModIntegrationManager.registerIntegration(config, new ModIntegrationBotania());
+            ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationBotania());
         if (Loader.isModLoaded("crafttweaker"))
-            ModIntegrationManager.registerIntegration(config, new ModIntegrationMinetweaker());
+            ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationMinetweaker());
 
-        FoundryAPI.FLUIDS = LiquidMetalRegistry.INSTANCE;
+        FoundryAPI.FLUIDS = FoundryFluidRegistry.INSTANCE;
 
         FoundryAPI.MELTING_MANAGER = MeltingRecipeManager.INSTANCE;
         FoundryAPI.CASTING_MANAGER = CastingRecipeManager.INSTANCE;
@@ -163,32 +152,12 @@ public class Foundry
 
         CapabilityHeatProvider.init();
 
-        FoundryConfig.load(config);
-        FoundryItems.registerItems(config);
-        FoundryBlocks.registerBlocks(config);
-
-        FoundryFluids.init();
-
-        ModIntegrationManager.preInit(config);
-
-        config.save();
+        ModIntegrationManager.preInit(FoundryConfig.config);
 
         NETWORK.registerMessage(MessageTileEntitySync.Handler.class, MessageTileEntitySync.class, 0, Side.SERVER);
         NETWORK.registerMessage(MessageTileEntitySync.Handler.class, MessageTileEntitySync.class, 0, Side.CLIENT);
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
         proxy.preInit();
-
-        try
-        {
-            File f = new File(WorldProps.worldGenDir, "04_foundry_aluminium.json");
-            if (f.createNewFile())
-                Utils.copyFileUsingStream("assets/foundry/world/04_foundry_aluminium.json", f);
-        }
-        catch (IOException e)
-        {
-            LOGGER.error("Failed to copy foundry aluminium generation file!");
-            e.printStackTrace();
-        }
     }
 }

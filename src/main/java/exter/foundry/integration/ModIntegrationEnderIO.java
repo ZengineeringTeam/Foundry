@@ -6,23 +6,27 @@ import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.api.recipe.matcher.OreMatcher;
 import exter.foundry.config.FoundryConfig;
 import exter.foundry.fluid.FoundryFluids;
-import exter.foundry.fluid.LiquidMetalRegistry;
+import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.item.ItemMold;
 import exter.foundry.recipes.manager.AlloyMixerRecipeManager;
 import exter.foundry.recipes.manager.InfuserRecipeManager;
 import exter.foundry.util.FoundryMiscUtils;
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.registries.IForgeRegistry;
 
 public class ModIntegrationEnderIO implements IModIntegration
 {
@@ -156,19 +160,23 @@ public class ModIntegrationEnderIO implements IModIntegration
                 50000);
     }
 
-    @Override
-    public void onPreInit(Configuration config)
+    @SubscribeEvent
+    public void registerFluids(Register<Block> e)
     {
-        liquid_redstone_alloy = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("redstone_alloy", 1000, 14,
+        IForgeRegistry<Block> registry = e.getRegistry();
+        liquid_redstone_alloy = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "redstone_alloy", 1000, 14,
                 0xFFFFFFFF);
-        liquid_energetic_alloy = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("energetic_alloy", 2500, 15,
+        liquid_energetic_alloy = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "energetic_alloy", 2500, 15,
                 0xFFFFFFFF);
-        liquid_vibrant_alloy = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("vibrant_alloy", 2500, 15, 0xFFFFFF);
-        liquid_dark_steel = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("dark_steel", 1850, 12, 0xFFFFFF);
-        liquid_electrical_steel = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("electrical_steel", 1850, 15,
-                0xFFFFFFFF);
-        liquid_phased_iron = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("pulsating_iron", 1850, 15, 0xFFFFFF);
-        liquid_soularium = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("soularium", 1350, 12, 0xFFFFFF);
+        liquid_vibrant_alloy = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "vibrant_alloy", 2500, 15,
+                0xFFFFFF);
+        liquid_dark_steel = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "dark_steel", 1850, 12,
+                0xFFFFFF);
+        liquid_electrical_steel = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "electrical_steel", 1850,
+                15, 0xFFFFFFFF);
+        liquid_phased_iron = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "pulsating_iron", 1850, 15,
+                0xFFFFFF);
+        liquid_soularium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "soularium", 1350, 12, 0xFFFFFF);
 
         FoundryUtils.registerBasicMeltingRecipes("redstone_alloy", liquid_redstone_alloy);
         FoundryUtils.registerBasicMeltingRecipes("energetic_alloy", liquid_energetic_alloy);
@@ -178,5 +186,10 @@ public class ModIntegrationEnderIO implements IModIntegration
         FoundryUtils.registerBasicMeltingRecipes("pulsating_iron", liquid_phased_iron);
         FoundryUtils.registerBasicMeltingRecipes("electrical_steel", liquid_electrical_steel);
         FoundryUtils.registerBasicMeltingRecipes("soularium", liquid_soularium);
+    }
+
+    @Override
+    public void onPreInit(Configuration config)
+    {
     }
 }

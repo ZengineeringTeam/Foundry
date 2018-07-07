@@ -1,5 +1,6 @@
 package exter.foundry.block;
 
+import exter.foundry.Foundry;
 import exter.foundry.creativetab.FoundryTab;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -20,18 +21,13 @@ public class BlockComponent extends Block implements IBlockVariants
 
     static public enum EnumVariant implements IStringSerializable
     {
-        CASING_STANDARD("casing_standard", "componentBlockCasingStandard"),
-        CASING_ADVANCED("casing_advanced", "componentBlockCasingAdvanced"),
-        CASING_BASIC("casing_basic", "componentBlockCasingBasic");
+        CASING_STANDARD("casing_standard"), CASING_ADVANCED("casing_advanced"), CASING_BASIC("casing_basic");
 
         public final String name;
 
-        public final String model;
-
-        private EnumVariant(String name, String model)
+        private EnumVariant(String name)
         {
             this.name = name;
-            this.model = model;
         }
 
         @Override
@@ -107,6 +103,6 @@ public class BlockComponent extends Block implements IBlockVariants
     @Override
     public String getUnlocalizedName(int meta)
     {
-        return "tile.foundry." + getStateFromMeta(meta).getValue(VARIANT).model;
+        return "tile." + Foundry.MODID + "." + getStateFromMeta(meta).getValue(VARIANT).name;
     }
 }

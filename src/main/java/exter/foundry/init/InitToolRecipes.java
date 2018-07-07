@@ -6,7 +6,7 @@ import exter.foundry.api.FoundryUtils;
 import exter.foundry.api.recipe.matcher.OreMatcher;
 import exter.foundry.fluid.FluidLiquidMetal;
 import exter.foundry.fluid.FoundryFluids;
-import exter.foundry.fluid.LiquidMetalRegistry;
+import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.item.FoundryItems;
 import exter.foundry.item.ItemMold;
 import exter.foundry.recipes.manager.MoldRecipeManager;
@@ -101,7 +101,7 @@ public class InitToolRecipes
         FoundryMiscUtils.registerCasting(new ItemStack(Items.GOLDEN_BOOTS), FoundryFluids.liquid_gold, 4,
                 ItemMold.SubItem.BOOTS);
 
-        for (Entry<String, FluidLiquidMetal> metal : LiquidMetalRegistry.INSTANCE.getFluids().entrySet())
+        for (Entry<String, FluidLiquidMetal> metal : FoundryFluidRegistry.INSTANCE.getMap().entrySet())
         {
             FoundryUtils.tryAddToolArmorRecipes(metal.getKey(), metal.getValue());
         }

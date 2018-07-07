@@ -1,15 +1,22 @@
 package exter.foundry.config;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
 import cofh.thermalfoundation.ThermalFoundation;
+import exter.foundry.Foundry;
 import exter.foundry.api.FoundryAPI;
-import exter.foundry.block.BlockFoundryMachine;
+import exter.foundry.block.BlockMachine;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+@EventBusSubscriber
 public class FoundryConfig
 {
+    public static Configuration config;
 
     public static boolean debug = false;
 
@@ -28,9 +35,10 @@ public class FoundryConfig
 
     public static String prefModID = ThermalFoundation.MOD_ID;
 
-    static public void load(Configuration config)
+    static public void load(File file)
     {
-
+        config = new Configuration(file);
+        config.load();
         debug = config.getBoolean("debug", "debug", false, "Enable debug logging.");
         recipe_equipment = config.getBoolean("equipment", "recipes", recipe_equipment,
                 "Enable/disable casting recipes for equipment");
@@ -66,7 +74,7 @@ public class FoundryConfig
         metalCasterPower = config.getBoolean("Metal Caster Power", "general", true,
                 "If the Metal Caster requires power to operate.");
         if (!metalCasterPower)
-            BlockFoundryMachine.EnumMachine.CASTER.setTooltip("caster2");
+            BlockMachine.EnumMachine.CASTER.setTooltip("caster2");
 
         crtError = config.getBoolean("CrT Errors", "general", true,
                 "If foundry's CraftTweaker integration logs errors instead of info");
@@ -75,5 +83,14 @@ public class FoundryConfig
                 Integer.MAX_VALUE, "The value, in mB, of an ingot.");
         FoundryAPI.FLUID_AMOUNT_ORE = config.getInt("Fluid Ore Value", "general", FoundryAPI.FLUID_AMOUNT_ORE, 1,
                 Integer.MAX_VALUE, "The value, in mB, of an ore.  Set to 0 to use default values.");
+    }
+
+    @SubscribeEvent
+    public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
+    {
+        if (event.getModID().equals(Foundry.MODID))
+        {
+            config.save();
+        }
     }
 }

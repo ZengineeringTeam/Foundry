@@ -1,193 +1,328 @@
 {
   "forge_marker": 1,
-  "defaults": {
-    "model": "forge:fluid"
-  },
   "variants": {
     "iron": {
+      "model": "forge:fluid",
       "custom": {
-        "model": "forge:fluid",
         "fluid": "iron"
       }
     },
     "refined_iron": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "refined_iron"
       }
     },
     "gold": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "gold"
       }
     },
     "copper": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "copper"
       }
     },
     "tin": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "tin"
       }
     },
     "bronze": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "bronze"
       }
     },
     "electrum": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "electrum"
       }
     },
     "invar": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "invar"
       }
     },
     "nickel": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "nickel"
       }
     },
     "zinc": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "zinc"
       }
     },
     "brass": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "brass"
       }
     },
     "silver": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "silver"
       }
     },
     "steel": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "steel"
       }
     },
     "constantan": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "constantan"
       }
     },
     "uranium": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "uranium"
       }
     },
     "lead": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "lead"
       }
     },
     "platinum": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "platinum"
       }
     },
     "aluminium": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "aluminium"
       }
     },
     "chrome": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "chrome"
       }
     },
     "cobalt": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "cobalt"
       }
     },
     "titanium": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "titanium"
       }
     },
     "iridium": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "iridium"
       }
     },
     "signalum": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "signalum"
       }
     },
     "lumium": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "lumium"
       }
     },
     "enderium": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "enderium"
       }
     },
     "osmium": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "osmium"
       }
     },
     "alumina": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "alumina"
       }
     },
     "manasteel": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "manasteel"
       }
     },
     "terrasteel": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "terrasteel"
       }
     },
     "elvenelementium": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "elvenelementium"
       }
     },
     "redstone_alloy": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "redstone_alloy"
       }
     },
     "energetic_alloy": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "energetic_alloy"
       }
     },
     "vibrant_alloy": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "vibrant_alloy"
       }
     },
     "dark_steel": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "dark_steel"
       }
     },
     "electrical_steel": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "electrical_steel"
       }
     },
     "pulsating_iron": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "pulsating_iron"
       }
     },
     "soularium": {
+      "model": "forge:fluid",
       "custom": {
         "fluid": "soularium"
+      }
+    },
+    "glass": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "glass"
+      }
+    },
+    "glass_white": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "glass_white"
+      }
+    },
+    "glass_orange": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "glass_orange"
+      }
+    },
+    "glass_magenta": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "glass_magenta"
+      }
+    },
+    "glass_light_blue": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "glass_light_blue"
+      }
+    },
+    "glass_yellow": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "glass_yellow"
+      }
+    },
+    "glass_lime": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "glass_lime"
+      }
+    },
+    "glass_pink": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "glass_pink"
+      }
+    },
+    "glass_gray": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "glass_gray"
+      }
+    },
+    "glass_silver": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "glass_silver"
+      }
+    },
+    "glass_cyan": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "glass_cyan"
+      }
+    },
+    "glass_purple": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "glass_purple"
+      }
+    },
+    "glass_blue": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "glass_blue"
+      }
+    },
+    "glass_brown": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "glass_brown"
+      }
+    },
+    "glass_green": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "glass_green"
+      }
+    },
+    "glass_red": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "glass_red"
+      }
+    },
+    "glass_black": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "glass_black"
       }
     }
   }

@@ -3,6 +3,7 @@ package exter.foundry.block;
 import java.util.List;
 import java.util.Random;
 
+import exter.foundry.Foundry;
 import exter.foundry.api.recipe.ICastingTableRecipe.TableType;
 import exter.foundry.creativetab.FoundryTab;
 import exter.foundry.tileentity.TileEntityCastingTableBase;
@@ -40,10 +41,10 @@ public class BlockCastingTable extends Block implements ITileEntityProvider, IBl
 {
     static public enum EnumTable implements IStringSerializable
     {
-        INGOT(0, "ingot", "castingTableIngot", 9, TableType.INGOT),
-        PLATE(1, "plate", "castingTablePlate", 11, TableType.PLATE),
-        ROD(2, "rod", "castingTableRod", 10, TableType.ROD),
-        BLOCK(3, "block", "castingTableBlock", 2, TableType.BLOCK);
+        INGOT(0, "ingot", 9, TableType.INGOT),
+        PLATE(1, "plate", 11, TableType.PLATE),
+        ROD(2, "rod", 10, TableType.ROD),
+        BLOCK(3, "block", 2, TableType.BLOCK);
 
         static public EnumTable fromID(int num)
         {
@@ -59,16 +60,14 @@ public class BlockCastingTable extends Block implements ITileEntityProvider, IBl
 
         public final int id;
         public final String name;
-        public final String model;
         public final int depth;
 
         public final TableType type;
 
-        private EnumTable(int id, String name, String model, int depth, TableType type)
+        private EnumTable(int id, String name, int depth, TableType type)
         {
             this.id = id;
             this.name = name;
-            this.model = model;
             this.depth = depth;
             this.type = type;
         }
@@ -99,17 +98,16 @@ public class BlockCastingTable extends Block implements ITileEntityProvider, IBl
         setHardness(1.0F);
         setResistance(8.0F);
         setSoundType(SoundType.STONE);
-        setUnlocalizedName("foundry.castingTable");
+        setUnlocalizedName(Foundry.MODID + ".casting_table");
         setCreativeTab(FoundryTab.INSTANCE);
-        setRegistryName("castingTable");
+        setRegistryName(Foundry.MODID, "casting_table");
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced)
     {
-        FoundryMiscUtils.localizeTooltip(
-                "tooltip.foundry.castingTable." + getStateFromMeta(stack.getMetadata()).getValue(TABLE).name, tooltip);
+        FoundryMiscUtils.localizeTooltip(getUnlocalizedName(stack.getMetadata()) + ".tooltip", tooltip);
     }
 
     public ItemStack asItemStack(EnumTable machine)

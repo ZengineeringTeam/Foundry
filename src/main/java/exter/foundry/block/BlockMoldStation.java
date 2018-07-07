@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import exter.foundry.Foundry;
-import exter.foundry.proxy.CommonFoundryProxy;
+import exter.foundry.proxy.CommonProxy;
 import exter.foundry.tileentity.TileEntityMoldStation;
 import exter.foundry.util.FoundryMiscUtils;
 import net.minecraft.block.SoundType;
@@ -27,18 +27,18 @@ public class BlockMoldStation extends BlockFoundrySidedMachine
     public BlockMoldStation()
     {
         super(Material.ROCK);
-        setUnlocalizedName("foundry.moldStation");
+        setUnlocalizedName(Foundry.MODID + ".mold_station");
         setHardness(1.0F);
         setResistance(8.0F);
         setSoundType(SoundType.STONE);
-        setRegistryName("moldStation");
+        setRegistryName(Foundry.MODID, "mold_station");
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced)
     {
-        FoundryMiscUtils.localizeTooltip("tooltip.foundry.moldStation", tooltip);
+        FoundryMiscUtils.localizeTooltip(getUnlocalizedName() + ".tooltip", tooltip);
     }
 
     @Override
@@ -56,8 +56,7 @@ public class BlockMoldStation extends BlockFoundrySidedMachine
         }
         else
         {
-            player.openGui(Foundry.INSTANCE, CommonFoundryProxy.GUI_MOLDSTATION, world, pos.getX(), pos.getY(),
-                    pos.getZ());
+            player.openGui(Foundry.INSTANCE, CommonProxy.GUI_MOLDSTATION, world, pos.getX(), pos.getY(), pos.getZ());
             return true;
         }
     }

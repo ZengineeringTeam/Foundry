@@ -4,6 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import exter.foundry.Foundry;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -18,8 +19,8 @@ public class BlockCauldronBronze extends BlockCauldron
 {
     public BlockCauldronBronze()
     {
-        setRegistryName("bronzeCauldron");
-        setUnlocalizedName("foundry.bronzeCauldron");
+        setRegistryName(Foundry.MODID, "bronze_cauldron");
+        setUnlocalizedName(Foundry.MODID + ".bronze_cauldron");
         setHardness(1.8F);
         setCreativeTab(CreativeTabs.BREWING);
     }

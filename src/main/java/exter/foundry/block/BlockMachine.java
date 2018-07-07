@@ -5,7 +5,7 @@ import java.util.Random;
 
 import exter.foundry.Foundry;
 import exter.foundry.creativetab.FoundryTab;
-import exter.foundry.proxy.CommonFoundryProxy;
+import exter.foundry.proxy.CommonProxy;
 import exter.foundry.tileentity.TileEntityAlloyMixer;
 import exter.foundry.tileentity.TileEntityAlloyingCrucible;
 import exter.foundry.tileentity.TileEntityFoundry;
@@ -39,19 +39,19 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockFoundryMachine extends Block implements ITileEntityProvider, IBlockVariants
+public class BlockMachine extends Block implements ITileEntityProvider, IBlockVariants
 {
     static public enum EnumMachine implements IStringSerializable
     {
-        CRUCIBLE_BASIC(0, "crucible_basic", "machineCrucibleBasic"),
-        CASTER(1, "caster", "machineCaster"),
-        ALLOYMIXER(2, "alloymixer", "machineAlloyMixer"),
-        INFUSER(3, "infuser", "machineInfuser"),
-        MATERIALROUTER(4, "router", "machineMaterialRouter"),
-        INDUCTIONHEATER(5, "heater_induction", "machineInductionHeater"),
-        CRUCIBLE_ADVANCED(6, "crucible_advanced", "machineCrucibleAdvanced"),
-        CRUCIBLE_STANDARD(7, "crucible_standard", "machineCrucibleStandard"),
-        ALLOYING_CRUCIBLE(8, "alloying_crucible", "machineAlloyingCrucible");
+        CRUCIBLE_BASIC(0, "crucible_basic"),
+        CASTER(1, "caster"),
+        ALLOYMIXER(2, "alloy_mixer"),
+        INFUSER(3, "infuser"),
+        MATERIALROUTER(4, "router"),
+        INDUCTIONHEATER(5, "heater_induction"),
+        CRUCIBLE_ADVANCED(6, "crucible_advanced"),
+        CRUCIBLE_STANDARD(7, "crucible_standard"),
+        ALLOYING_CRUCIBLE(8, "alloying_crucible");
 
         static public EnumMachine fromID(int num)
         {
@@ -67,14 +67,12 @@ public class BlockFoundryMachine extends Block implements ITileEntityProvider, I
 
         public final int id;
         public final String name;
-        public final String model;
         private String tooltip;
 
-        private EnumMachine(int id, String name, String model)
+        private EnumMachine(int id, String name)
         {
             this.id = id;
             this.name = name;
-            this.model = model;
             this.tooltip = name;
         }
 
@@ -105,7 +103,7 @@ public class BlockFoundryMachine extends Block implements ITileEntityProvider, I
 
     private final Random rand = new Random();
 
-    public BlockFoundryMachine()
+    public BlockMachine()
     {
         super(Material.IRON);
         setHardness(1.0F);
@@ -114,15 +112,6 @@ public class BlockFoundryMachine extends Block implements ITileEntityProvider, I
         setUnlocalizedName("foundry.machine");
         setCreativeTab(FoundryTab.INSTANCE);
         setRegistryName("machine");
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced)
-    {
-        FoundryMiscUtils.localizeTooltip(
-                "tooltip.foundry.machine." + getStateFromMeta(stack.getMetadata()).getValue(MACHINE).getTooltipKey(),
-                tooltip);
     }
 
     public ItemStack asItemStack(EnumMachine machine)
@@ -229,7 +218,14 @@ public class BlockFoundryMachine extends Block implements ITileEntityProvider, I
     @Override
     public String getUnlocalizedName(int meta)
     {
-        return getUnlocalizedName() + "." + getStateFromMeta(meta).getValue(MACHINE).name;
+        return "tile." + Foundry.MODID + "." + getStateFromMeta(meta).getValue(MACHINE).name;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced)
+    {
+        FoundryMiscUtils.localizeTooltip(getUnlocalizedName(stack.getMetadata()) + ".tooltip", tooltip);
     }
 
     @Override
@@ -263,27 +259,23 @@ public class BlockFoundryMachine extends Block implements ITileEntityProvider, I
             case CRUCIBLE_BASIC:
             case CRUCIBLE_STANDARD:
             case CRUCIBLE_ADVANCED:
-                player.openGui(Foundry.INSTANCE, CommonFoundryProxy.GUI_CRUCIBLE, world, pos.getX(), pos.getY(),
-                        pos.getZ());
+                player.openGui(Foundry.INSTANCE, CommonProxy.GUI_CRUCIBLE, world, pos.getX(), pos.getY(), pos.getZ());
                 break;
             case CASTER:
-                player.openGui(Foundry.INSTANCE, CommonFoundryProxy.GUI_CASTER, world, pos.getX(), pos.getY(),
-                        pos.getZ());
+                player.openGui(Foundry.INSTANCE, CommonProxy.GUI_CASTER, world, pos.getX(), pos.getY(), pos.getZ());
                 break;
             case ALLOYMIXER:
-                player.openGui(Foundry.INSTANCE, CommonFoundryProxy.GUI_ALLOYMIXER, world, pos.getX(), pos.getY(),
-                        pos.getZ());
+                player.openGui(Foundry.INSTANCE, CommonProxy.GUI_ALLOYMIXER, world, pos.getX(), pos.getY(), pos.getZ());
                 break;
             case INFUSER:
-                player.openGui(Foundry.INSTANCE, CommonFoundryProxy.GUI_INFUSER, world, pos.getX(), pos.getY(),
-                        pos.getZ());
+                player.openGui(Foundry.INSTANCE, CommonProxy.GUI_INFUSER, world, pos.getX(), pos.getY(), pos.getZ());
                 break;
             case MATERIALROUTER:
-                player.openGui(Foundry.INSTANCE, CommonFoundryProxy.GUI_MATERIALROUTER, world, pos.getX(), pos.getY(),
+                player.openGui(Foundry.INSTANCE, CommonProxy.GUI_MATERIALROUTER, world, pos.getX(), pos.getY(),
                         pos.getZ());
                 break;
             case ALLOYING_CRUCIBLE:
-                player.openGui(Foundry.INSTANCE, CommonFoundryProxy.GUI_ALLOYINGCRUCIBLE, world, pos.getX(), pos.getY(),
+                player.openGui(Foundry.INSTANCE, CommonProxy.GUI_ALLOYINGCRUCIBLE, world, pos.getX(), pos.getY(),
                         pos.getZ());
                 break;
             default:

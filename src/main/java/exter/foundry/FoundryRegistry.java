@@ -15,23 +15,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ItemStackHolder;
 @EventBusSubscriber
 public class FoundryRegistry
 {
-
-    public static final List<Block> BLOCKS = Foundry.INFO.getBlockList();
-    public static final List<Item> ITEMS = Foundry.INFO.getItemList();
     public static final List<IRecipe> RECIPES = Foundry.INFO.getRecipeList();
-
-    @SubscribeEvent
-    public void registerBlocks(Register<Block> e)
-    {
-        e.getRegistry().registerAll(BLOCKS.toArray(new Block[BLOCKS.size()]));
-    }
-
-    @SubscribeEvent
-    public void registerItems(Register<Item> e)
-    {
-        e.getRegistry().registerAll(ITEMS.toArray(new Item[ITEMS.size()]));
-    }
-
     @SubscribeEvent
     public void registerRecipes(Register<IRecipe> e)
     {

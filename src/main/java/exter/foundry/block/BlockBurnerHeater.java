@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import exter.foundry.Foundry;
-import exter.foundry.proxy.CommonFoundryProxy;
+import exter.foundry.proxy.CommonProxy;
 import exter.foundry.tileentity.TileEntityBurnerHeater;
 import exter.foundry.util.FoundryMiscUtils;
 import net.minecraft.block.SoundType;
@@ -27,18 +27,18 @@ public class BlockBurnerHeater extends BlockFoundrySidedMachine
     public BlockBurnerHeater()
     {
         super(Material.ROCK);
-        setUnlocalizedName("foundry.burnerHeater");
+        setUnlocalizedName(Foundry.MODID + ".burner_heater");
         setHardness(1.0F);
         setResistance(8.0F);
         setSoundType(SoundType.STONE);
-        setRegistryName("burnerHeater");
+        setRegistryName(Foundry.MODID, "burner_heater");
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced)
     {
-        FoundryMiscUtils.localizeTooltip("tooltip.foundry.burnerHeater", tooltip);
+        FoundryMiscUtils.localizeTooltip(getUnlocalizedName() + ".tooltip", tooltip);
     }
 
     @Override
@@ -56,8 +56,7 @@ public class BlockBurnerHeater extends BlockFoundrySidedMachine
         }
         else
         {
-            player.openGui(Foundry.INSTANCE, CommonFoundryProxy.GUI_BURNERHEATER, world, pos.getX(), pos.getY(),
-                    pos.getZ());
+            player.openGui(Foundry.INSTANCE, CommonProxy.GUI_BURNERHEATER, world, pos.getX(), pos.getY(), pos.getZ());
             return true;
         }
     }

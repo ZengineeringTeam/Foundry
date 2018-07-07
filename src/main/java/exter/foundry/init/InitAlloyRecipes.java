@@ -4,7 +4,7 @@ import exter.foundry.api.recipe.matcher.IItemMatcher;
 import exter.foundry.api.recipe.matcher.OreMatcher;
 import exter.foundry.config.FoundryConfig;
 import exter.foundry.fluid.FoundryFluids;
-import exter.foundry.fluid.LiquidMetalRegistry;
+import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.recipes.manager.AlloyMixerRecipeManager;
 import exter.foundry.recipes.manager.AlloyingCrucibleRecipeManager;
 import exter.foundry.recipes.manager.InfuserRecipeManager;
@@ -27,9 +27,9 @@ public class InitAlloyRecipes
             checkAndAddRecipe(alloy_ingot, input_a, amount_a, input_b, amount_b);
         }
 
-        Fluid fluid_out = LiquidMetalRegistry.INSTANCE.getFluid(output);
-        Fluid fluid_in_a = LiquidMetalRegistry.INSTANCE.getFluid(input_a);
-        Fluid fluid_in_b = LiquidMetalRegistry.INSTANCE.getFluid(input_b);
+        Fluid fluid_out = FoundryFluidRegistry.INSTANCE.getFluid(output);
+        Fluid fluid_in_a = FoundryFluidRegistry.INSTANCE.getFluid(input_a);
+        Fluid fluid_in_b = FoundryFluidRegistry.INSTANCE.getFluid(input_b);
 
         AlloyingCrucibleRecipeManager.INSTANCE.addRecipe(new FluidStack(fluid_out, (amount_a + amount_b) * 3),
                 new FluidStack(fluid_in_a, amount_a * 3), new FluidStack(fluid_in_b, amount_b * 3));

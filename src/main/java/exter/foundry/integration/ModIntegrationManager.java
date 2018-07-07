@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import exter.foundry.Foundry;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -81,6 +82,7 @@ public final class ModIntegrationManager
         if (config.getBoolean("enable", "integration." + name, true, "Enable/disable mod integration."))
         {
             integrations.add(imod);
+            MinecraftForge.EVENT_BUS.register(imod);
         }
     }
 

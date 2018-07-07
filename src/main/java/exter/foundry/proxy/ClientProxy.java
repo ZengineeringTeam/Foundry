@@ -1,16 +1,12 @@
 package exter.foundry.proxy;
 
 import java.util.List;
-import java.util.Map;
 
-import exter.foundry.FoundryRegistry;
+import exter.foundry.Foundry;
 import exter.foundry.block.BlockCastingTable;
 import exter.foundry.block.BlockComponent;
-import exter.foundry.block.BlockFoundryMachine;
-import exter.foundry.block.BlockLiquidMetal;
+import exter.foundry.block.BlockMachine;
 import exter.foundry.block.FoundryBlocks;
-import exter.foundry.fluid.FluidLiquidMetal;
-import exter.foundry.fluid.LiquidMetalRegistry;
 import exter.foundry.integration.ModIntegrationManager;
 import exter.foundry.item.FoundryItems;
 import exter.foundry.item.ItemMold;
@@ -24,107 +20,20 @@ import exter.foundry.tileentity.TileEntityCastingTableRod;
 import exter.foundry.tileentity.renderer.CastingTableRenderer;
 import exter.foundry.tileentity.renderer.CastingTableRendererBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.StateMap;
-import net.minecraft.client.renderer.block.statemap.StateMapperBase;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.BlockFluidBase;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class ClientFoundryProxy extends CommonFoundryProxy
+public class ClientProxy extends CommonProxy
 {
-    public static class FluidStateMapper extends StateMapperBase implements ItemMeshDefinition
-    {
-
-        public final BlockLiquidMetal fluid;
-        public final ModelResourceLocation location;
-
-        public FluidStateMapper(BlockLiquidMetal fluid)
-        {
-            this.fluid = fluid;
-            this.location = new ModelResourceLocation(fluid.getRegistryName(), "normal");
-        }
-
-        @Override
-        public ModelResourceLocation getModelLocation(ItemStack stack)
-        {
-            return this.location;
-        }
-
-        @Override
-        protected ModelResourceLocation getModelResourceLocation(IBlockState state)
-        {
-            return this.location;
-        }
-    }
-
-    static private class LiquidMetalItemMeshDefinition implements ItemMeshDefinition
-    {
-        private final ModelResourceLocation model;
-
-        LiquidMetalItemMeshDefinition(String name)
-        {
-            model = new ModelResourceLocation("foundry:liquid" + name);
-        }
-
-        @Override
-        public ModelResourceLocation getModelLocation(ItemStack stack)
-        {
-            return model;
-        }
-    }
-
-    @SubscribeEvent
-    public void doModels(ModelRegistryEvent e)
-    {
-        for (BlockFoundryMachine.EnumMachine m : BlockFoundryMachine.EnumMachine.values())
-        {
-            registerItemModel(FoundryBlocks.block_machine, m.model, m.id);
-        }
-        for (BlockCastingTable.EnumTable m : BlockCastingTable.EnumTable.values())
-        {
-            registerItemModel(FoundryBlocks.block_casting_table, m.model, m.id);
-        }
-
-        registerItemModel(FoundryBlocks.block_mold_station, "moldStation");
-        registerItemModel(FoundryBlocks.block_burner_heater, "burnerHeater");
-        registerItemModel(FoundryBlocks.block_cauldron_bronze, "bronzeCauldron");
-
-        for (BlockComponent.EnumVariant v : BlockComponent.EnumVariant.values())
-        {
-            registerItemModel(FoundryBlocks.block_component, v.model, v.ordinal());
-        }
-
-        registerItemModel(FoundryItems.item_small_clay, "small_clay");
-
-        for (ItemMold.SubItem m : ItemMold.SubItem.values())
-        {
-            registerItemModel(FoundryItems.item_mold, m.name, m.id);
-        }
-
-        for (Block b : FoundryRegistry.BLOCKS)
-        {
-            if (b instanceof BlockLiquidMetal)
-            {
-                ModelLoader.setCustomStateMapper(b, new FluidStateMapper((BlockLiquidMetal) b));
-                ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(b), 0,
-                        new ModelResourceLocation(b.getRegistryName(), "normal"));
-            }
-        }
-    }
-
     @Override
     public void init()
     {
@@ -192,18 +101,7 @@ public class ClientFoundryProxy extends CommonFoundryProxy
     public void preInit()
     {
         MaterialRegistry.INSTANCE.initIcons();
-        for (Map.Entry<String, FluidLiquidMetal> e : LiquidMetalRegistry.INSTANCE.getFluids().entrySet())
-        {
-            Fluid fluid = e.getValue();
-            Block block = fluid.getBlock();
-            Item item = Item.getItemFromBlock(block);
-            String name = e.getKey();
-            ModelBakery.registerItemVariants(item);
-            ModelLoader.setCustomMeshDefinition(item, new LiquidMetalItemMeshDefinition(name));
-            ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BlockFluidBase.LEVEL).build());
-        }
         ModIntegrationManager.clientPreInit();
-        MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void registerItemModel(Block block, String name)
@@ -218,19 +116,14 @@ public class ClientFoundryProxy extends CommonFoundryProxy
 
     private void registerItemModel(Item item, String name)
     {
-        ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation("foundry:" + name, "inventory"));
+        ModelLoader.setCustomModelResourceLocation(item, 0,
+                new ModelResourceLocation(Foundry.MODID + ":" + name, "inventory"));
     }
 
     private void registerItemModel(Item item, String name, int meta)
     {
-        name = "foundry:" + name;
+        name = Foundry.MODID + ":" + name;
         ModelBakery.registerItemVariants(item, new ResourceLocation(name));
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(name, "inventory"));
-    }
-
-    @Override
-    public String translate(String string, Object... args)
-    {
-        return I18n.format(string, args);
     }
 }

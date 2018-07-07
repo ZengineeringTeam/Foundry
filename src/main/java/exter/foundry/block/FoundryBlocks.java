@@ -1,16 +1,19 @@
 package exter.foundry.block;
 
-import exter.foundry.FoundryRegistry;
 import exter.foundry.item.ItemBlockMulti;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fluids.BlockFluidBase;
+import net.minecraftforge.event.RegistryEvent.Register;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.registries.IForgeRegistry;
 
+@EventBusSubscriber
 public class FoundryBlocks
 {
     static public BlockComponent block_component;
-    static public BlockFoundryMachine block_machine;
+    static public BlockMachine block_machine;
     static public BlockCastingTable block_casting_table;
 
     static public BlockMoldStation block_mold_station;
@@ -18,36 +21,36 @@ public class FoundryBlocks
 
     static public BlockCauldronBronze block_cauldron_bronze;
 
-    static public void register(Block block)
-    {
-        FoundryRegistry.BLOCKS.add(block);
-        if (!(block instanceof BlockFluidBase))
-        {
-            FoundryRegistry.ITEMS.add(new ItemBlock(block).setRegistryName(block.getRegistryName()));
-        }
-    }
-
-    static public void registerBlocks(Configuration config)
+    @SubscribeEvent
+    public static void registerBlocks(Register<Block> event)
     {
         block_component = new BlockComponent();
-        block_machine = new BlockFoundryMachine();
+        block_machine = new BlockMachine();
         block_casting_table = new BlockCastingTable();
 
         block_mold_station = new BlockMoldStation();
         block_burner_heater = new BlockBurnerHeater();
         block_cauldron_bronze = new BlockCauldronBronze();
 
-        registerMulti(block_component);
-        registerMulti(block_machine);
-        registerMulti(block_casting_table);
-        register(block_mold_station);
-        register(block_burner_heater);
-        register(block_cauldron_bronze);
+        event.getRegistry().registerAll(block_component, block_machine, block_casting_table, block_mold_station,
+                block_burner_heater, block_cauldron_bronze);
     }
 
-    static private <T extends Block & IBlockVariants> void registerMulti(T block)
+    @SubscribeEvent
+    public static void registerItems(Register<Item> event)
     {
-        FoundryRegistry.BLOCKS.add(block);
-        FoundryRegistry.ITEMS.add(new ItemBlockMulti(block).setRegistryName(block.getRegistryName()));
+        IForgeRegistry<Item> registry = event.getRegistry();
+        registerItem(registry, block_component);
+        registerItem(registry, block_machine);
+        registerItem(registry, block_casting_table);
+        registerItem(registry, block_mold_station);
+        registerItem(registry, block_burner_heater);
+        registerItem(registry, block_cauldron_bronze);
+    }
+
+    private static void registerItem(IForgeRegistry<Item> registry, Block block)
+    {
+        registry.register((block instanceof IBlockVariants ? new ItemBlockMulti(block) : new ItemBlock(block))
+                .setRegistryName(block.getRegistryName()));
     }
 }

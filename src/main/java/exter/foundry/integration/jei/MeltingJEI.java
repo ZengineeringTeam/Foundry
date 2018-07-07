@@ -48,15 +48,15 @@ public class MeltingJEI
         public Category(IJeiHelpers helpers)
         {
             IGuiHelper guiHelper = helpers.getGuiHelper();
-            backgroundLocation = new ResourceLocation("foundry", "textures/gui/crucible.png");
+            backgroundLocation = new ResourceLocation(Foundry.MODID, "textures/gui/crucible.png");
 
             IDrawableStatic arrowDrawable = guiHelper.createDrawable(backgroundLocation, 176, 78, 24, 17);
             arrow = guiHelper.createAnimatedDrawable(arrowDrawable, 200, IDrawableAnimated.StartDirection.LEFT, false);
 
-            ResourceLocation location = new ResourceLocation("foundry", "textures/gui/crucible.png");
+            ResourceLocation location = new ResourceLocation(Foundry.MODID, "textures/gui/crucible.png");
             background = guiHelper.createDrawable(location, 30, 16, 94, 54);
             tank_overlay = guiHelper.createDrawable(location, 176, 0, 16, 47);
-            localizedName = I18n.format("gui.jei.melting");
+            localizedName = I18n.format("gui.jei.melting"); // TODO
 
         }
 
@@ -128,7 +128,7 @@ public class MeltingJEI
         public Wrapper(IMeltingRecipe recipe)
         {
             this.recipe = recipe;
-            ResourceLocation background_location = new ResourceLocation("foundry", "textures/gui/crucible.png");
+            ResourceLocation background_location = new ResourceLocation(Foundry.MODID, "textures/gui/crucible.png");
             temp = new DrawableResource(background_location, 176, 53,
                     (recipe.getMeltingPoint() * 100 - TileEntityFoundryHeatable.TEMP_MIN) * 54
                             / (500000 - TileEntityFoundryHeatable.TEMP_MIN),

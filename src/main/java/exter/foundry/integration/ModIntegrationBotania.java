@@ -5,21 +5,25 @@ import exter.foundry.api.FoundryUtils;
 import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.config.FoundryConfig;
 import exter.foundry.fluid.FluidLiquidMetal;
-import exter.foundry.fluid.LiquidMetalRegistry;
+import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.item.FoundryItems;
 import exter.foundry.item.ItemMold;
 import exter.foundry.recipes.manager.CastingRecipeManager;
 import exter.foundry.recipes.manager.MeltingRecipeManager;
 import exter.foundry.util.FoundryMiscUtils;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.registries.IForgeRegistry;
 
 public class ModIntegrationBotania implements IModIntegration
 {
@@ -184,9 +188,17 @@ public class ModIntegrationBotania implements IModIntegration
     @Override
     public void onPreInit(Configuration config)
     {
-        liquid_manasteel = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("manasteel", 1950, 15, 0xFFFFFF);
-        liquid_terrasteel = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("terrasteel", 2100, 15, 0xFFFFFF);
-        liquid_elementium = LiquidMetalRegistry.INSTANCE.registerLiquidMetal("elvenelementium", 2400, 15, 0xFFFFFF);
+    }
+
+    @SubscribeEvent
+    public void registerFluids(Register<Block> e)
+    {
+        IForgeRegistry<Block> registry = e.getRegistry();
+        liquid_manasteel = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "manasteel", 1950, 15, 0xFFFFFF);
+        liquid_terrasteel = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "terrasteel", 2100, 15,
+                0xFFFFFF);
+        liquid_elementium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "elvenelementium", 2400, 15,
+                0xFFFFFF);
 
         FoundryUtils.registerBasicMeltingRecipes("manasteel", liquid_manasteel);
         FoundryUtils.registerBasicMeltingRecipes("terrasteel", liquid_terrasteel);

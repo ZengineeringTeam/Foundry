@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 public class ItemBlockMulti extends ItemBlock
 {
 
-    public <T extends Block & IBlockVariants> ItemBlockMulti(T block)
+    public ItemBlockMulti(Block block)
     {
         super(block);
         setHasSubtypes(true);

@@ -3,7 +3,7 @@
   {
     "machine=crucible_basic": { "model": "foundry:machinecruciblebasic" },
     "machine=caster": { "model": "foundry:machinecaster" },
-    "machine=alloymixer": { "model": "foundry:machinealloymixer" },
+    "machine=alloy_mixer": { "model": "foundry:machinealloymixer" },
     "machine=infuser": { "model": "foundry:machineinfuser" },
     "machine=router": { "model": "foundry:machinematerialrouter" },
     "machine=heater_induction": { "model": "foundry:machineinductionheater" },

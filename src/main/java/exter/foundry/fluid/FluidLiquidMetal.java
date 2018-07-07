@@ -1,9 +1,8 @@
 package exter.foundry.fluid;
 
-import net.minecraft.client.resources.I18n;
+import exter.foundry.Foundry;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
 
 public class FluidLiquidMetal extends Fluid
 {
@@ -12,9 +11,12 @@ public class FluidLiquidMetal extends Fluid
 
     public final boolean special;
 
-    public FluidLiquidMetal(String fluidName, ResourceLocation still, ResourceLocation flowing, int color, boolean special, int temperature, int luminosity)
+    public static final ResourceLocation STILL = new ResourceLocation(Foundry.MODID, "blocks/molten_metal_still");
+    public static final ResourceLocation FLOW = new ResourceLocation(Foundry.MODID, "blocks/molten_metal_flow");
+
+    public FluidLiquidMetal(String fluidName, int color, boolean special, int temperature, int luminosity)
     {
-        super(fluidName, still, flowing);
+        super(fluidName, STILL, FLOW);
         this.color = color;
         this.special = special;
         setTemperature(temperature);

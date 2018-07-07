@@ -7,29 +7,30 @@ import exter.foundry.creativetab.FoundryTab;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 
 public class ItemMold extends Item
 {
-    static public enum SubItem
+    static public enum SubItem implements IStringSerializable
     {
-        INGOT(0, "moldIngot"),
-        PLATE(1, "moldPlate"),
-        GEAR(2, "moldGear"),
-        ROD(3, "moldRod"),
-        BLOCK(4, "moldBlock"),
-        SLAB(5, "moldSlab"),
-        STAIRS(6, "moldStairs"),
-        PICKAXE(7, "moldPickaxe"),
-        AXE(8, "moldAxe"),
-        SWORD(9, "moldSword"),
-        SHOVEL(10, "moldShovel"),
-        HOE(11, "moldHoe"),
-        HELMET(12, "moldHelmet"),
-        CHESTPLATE(13, "moldChestplate"),
-        LEGGINGS(14, "moldLeggings"),
-        BOOTS(15, "moldBoots"),
-        NUGGET(26, "moldNugget");
+        INGOT(0, "ingot"),
+        PLATE(1, "plate"),
+        GEAR(2, "gear"),
+        ROD(3, "rod"),
+        BLOCK(4, "block"),
+        SLAB(5, "slab"),
+        STAIRS(6, "stairs"),
+        PICKAXE(7, "pickaxe"),
+        AXE(8, "axe"),
+        SWORD(9, "sword"),
+        SHOVEL(10, "shovel"),
+        HOE(11, "hoe"),
+        HELMET(12, "helmet"),
+        CHESTPLATE(13, "chestplate"),
+        LEGGINGS(14, "leggings"),
+        BOOTS(15, "boots"),
+        NUGGET(16, "nugget");
 
         static private final Map<Integer, SubItem> value_map = new HashMap<>();
         static
@@ -53,6 +54,12 @@ public class ItemMold extends Item
         {
             this.id = id;
             this.name = name;
+        }
+
+        @Override
+        public String getName()
+        {
+            return name;
         }
     }
 
@@ -80,6 +87,6 @@ public class ItemMold extends Item
     @Override
     public String getUnlocalizedName(ItemStack itemstack)
     {
-        return "item.foundry." + SubItem.fromId(itemstack.getItemDamage()).name;
+        return "item.foundry.mold." + SubItem.fromId(itemstack.getItemDamage()).name;
     }
 }
