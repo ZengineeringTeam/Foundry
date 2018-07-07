@@ -48,15 +48,15 @@ public class CastingJEI
         public Category(IJeiHelpers helpers)
         {
             IGuiHelper guiHelper = helpers.getGuiHelper();
-            backgroundLocation = new ResourceLocation("foundry", "textures/gui/caster.png");
+            backgroundLocation = new ResourceLocation(Foundry.MODID, "textures/gui/caster.png");
 
             IDrawableStatic arrowDrawable = guiHelper.createDrawable(backgroundLocation, 176, 53, 24, 17);
             arrow = guiHelper.createAnimatedDrawable(arrowDrawable, 200, IDrawableAnimated.StartDirection.LEFT, false);
 
-            ResourceLocation location = new ResourceLocation("foundry", "textures/gui/caster.png");
+            ResourceLocation location = new ResourceLocation(Foundry.MODID, "textures/gui/caster.png");
             background = guiHelper.createDrawable(location, 38, 16, 68, 54);
             tank_overlay = guiHelper.createDrawable(location, 176, 0, 16, 47);
-            localizedName = I18n.format("gui.jei.casting");
+            localizedName = I18n.format("gui.jei." + getUid());
 
         }
 

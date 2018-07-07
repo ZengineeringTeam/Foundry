@@ -38,12 +38,12 @@ public class AlloyMixerJEI
         public Category(IJeiHelpers helpers)
         {
             IGuiHelper guiHelper = helpers.getGuiHelper();
-            backgroundLocation = new ResourceLocation("foundry", "textures/gui/alloymixer.png");
+            backgroundLocation = new ResourceLocation(Foundry.MODID, "textures/gui/alloymixer.png");
 
-            ResourceLocation location = new ResourceLocation("foundry", "textures/gui/alloymixer.png");
+            ResourceLocation location = new ResourceLocation(Foundry.MODID, "textures/gui/alloymixer.png");
             background = guiHelper.createDrawable(location, 18, 44, 132, 37);
             tank_overlay = guiHelper.createDrawable(location, 176, 0, 16, 35);
-            localizedName = Translator.translateToLocal("gui.jei.alloymixer");
+            localizedName = Translator.translateToLocal("gui.jei." + getUid());
         }
 
         @Override

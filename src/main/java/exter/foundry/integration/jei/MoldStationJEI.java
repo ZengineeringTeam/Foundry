@@ -43,16 +43,16 @@ public class MoldStationJEI
         public Category(IJeiHelpers helpers)
         {
             IGuiHelper guiHelper = helpers.getGuiHelper();
-            background_location = new ResourceLocation("foundry", "textures/gui/moldstation.png");
+            background_location = new ResourceLocation(Foundry.MODID, "textures/gui/moldstation.png");
 
             grid_drawable = guiHelper.createDrawable(background_location, 176, 31, 76, 76);
 
             IDrawableStatic arrowDrawable = guiHelper.createDrawable(background_location, 176, 14, 24, 17);
             arrow = guiHelper.createAnimatedDrawable(arrowDrawable, 200, IDrawableAnimated.StartDirection.LEFT, false);
 
-            ResourceLocation location = new ResourceLocation("foundry", "textures/gui/moldstation.png");
+            ResourceLocation location = new ResourceLocation(Foundry.MODID, "textures/gui/moldstation.png");
             background = guiHelper.createDrawable(location, 36, 14, 133, 81);
-            localizedName = Translator.translateToLocal("gui.jei.mold");
+            localizedName = Translator.translateToLocal("gui.jei." + getUid());
         }
 
         @Override
@@ -120,7 +120,7 @@ public class MoldStationJEI
         public Wrapper(IMoldRecipe recipe)
         {
             carve_drawables = new IDrawable[4];
-            ResourceLocation location = new ResourceLocation("foundry", "textures/gui/moldstation.png");
+            ResourceLocation location = new ResourceLocation(Foundry.MODID, "textures/gui/moldstation.png");
             for (int i = 0; i < 4; i++)
                 carve_drawables[i] = new DrawableResource(location, 176, 107 + i * 11, 11, 11, 0, 0, 0, 0, 256, 256);
 

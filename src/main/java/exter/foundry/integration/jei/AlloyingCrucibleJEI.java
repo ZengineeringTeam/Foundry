@@ -40,12 +40,12 @@ public class AlloyingCrucibleJEI
         public Category(IJeiHelpers helpers)
         {
             IGuiHelper guiHelper = helpers.getGuiHelper();
-            backgroundLocation = new ResourceLocation("foundry", "textures/gui/alloyingcrucible.png");
+            backgroundLocation = new ResourceLocation(Foundry.MODID, "textures/gui/alloyingcrucible.png");
 
-            ResourceLocation location = new ResourceLocation("foundry", "textures/gui/alloyingcrucible.png");
+            ResourceLocation location = new ResourceLocation(Foundry.MODID, "textures/gui/alloyingcrucible.png");
             background = guiHelper.createDrawable(location, 33, 43, 110, 39);
             tank_overlay = guiHelper.createDrawable(location, 176, 0, 16, 35);
-            localizedName = Translator.translateToLocal("gui.jei.alloyingcrucible");
+            localizedName = Translator.translateToLocal("gui.jei." + getUid());
         }
 
         @Override

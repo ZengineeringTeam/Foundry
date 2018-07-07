@@ -43,11 +43,11 @@ public class CastingTableJEI
         {
             this.helpers = helpers;
             IGuiHelper guiHelper = helpers.getGuiHelper();
-            backgroundLocation = new ResourceLocation("foundry", "textures/gui/casting_table_jei.png");
+            backgroundLocation = new ResourceLocation(Foundry.MODID, "textures/gui/casting_table_jei.png");
 
-            ResourceLocation location = new ResourceLocation("foundry", "textures/gui/casting_table_jei.png");
+            ResourceLocation location = new ResourceLocation(Foundry.MODID, "textures/gui/casting_table_jei.png");
             background = guiHelper.createDrawable(location, 0, 0, 74, 59);
-            localizedName = I18n.format("gui.jei.casting_table." + name);
+            localizedName = I18n.format("gui.jei." + getUid());
         }
 
         @Override
@@ -174,7 +174,7 @@ public class CastingTableJEI
         type = table;
         table_item = FoundryBlocks.block_casting_table.asItemStack(table);
         name = table.name;
-        UID = "foundry.casting_table." + name;
+        UID = Foundry.MODID + ".casting_table." + name;
     }
 
     public BlockCastingTable.EnumTable getType()

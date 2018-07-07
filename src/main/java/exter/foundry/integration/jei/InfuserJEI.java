@@ -47,15 +47,15 @@ public class InfuserJEI
         public Category(IJeiHelpers helpers)
         {
             IGuiHelper guiHelper = helpers.getGuiHelper();
-            background_location = new ResourceLocation("foundry", "textures/gui/infuser.png");
+            background_location = new ResourceLocation(Foundry.MODID, "textures/gui/infuser.png");
 
             IDrawableStatic arrowDrawable = guiHelper.createDrawable(background_location, 176, 53, 24, 17);
             arrow = guiHelper.createAnimatedDrawable(arrowDrawable, 200, IDrawableAnimated.StartDirection.LEFT, false);
 
-            ResourceLocation location = new ResourceLocation("foundry", "textures/gui/infuser.png");
+            ResourceLocation location = new ResourceLocation(Foundry.MODID, "textures/gui/infuser.png");
             background = guiHelper.createDrawable(location, 15, 41, 137, 51);
             tank_overlay = guiHelper.createDrawable(location, 176, 0, 16, 47);
-            localizedName = I18n.format("gui.jei.infuser");
+            localizedName = I18n.format("gui.jei." + getUid());
 
         }
 

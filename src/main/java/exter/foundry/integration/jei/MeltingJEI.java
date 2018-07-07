@@ -56,7 +56,7 @@ public class MeltingJEI
             ResourceLocation location = new ResourceLocation(Foundry.MODID, "textures/gui/crucible.png");
             background = guiHelper.createDrawable(location, 30, 16, 94, 54);
             tank_overlay = guiHelper.createDrawable(location, 176, 0, 16, 47);
-            localizedName = I18n.format("gui.jei.melting"); // TODO
+            localizedName = I18n.format("gui.jei." + getUid());
 
         }
 
