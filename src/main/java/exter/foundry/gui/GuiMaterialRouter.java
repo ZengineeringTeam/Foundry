@@ -125,7 +125,7 @@ public class GuiMaterialRouter extends GuiFoundry
 
     public GuiMaterialRouter(TileEntityMaterialRouter router, EntityPlayer player)
     {
-        super(new ContainerMaterialRouter(router, player));
+        super(new ContainerMaterialRouter(router, player), player.inventory);
         allowUserInput = false;
         xSize = 200;
         ySize = 229;

@@ -54,7 +54,7 @@ public class GuiMetalCaster extends GuiFoundry
 
     public GuiMetalCaster(TileEntityMetalCaster cs, EntityPlayer player)
     {
-        super(new ContainerMetalCaster(cs, player));
+        super(new ContainerMetalCaster(cs, player), player.inventory);
         allowUserInput = false;
         ySize = 166;
         te_caster = cs;

@@ -51,24 +51,19 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
-import shadows.placebo.registry.RegistryInformation;
-import shadows.placebo.util.RecipeHelper;
 
 @Mod(
         modid = Foundry.MODID,
         name = Foundry.MODNAME,
         version = "@VERSION_INJECT@",
-        dependencies = "required-after:placebo@[1.2.0,);required-after:ceramics;required-after:thermalfoundation;after:jei;after:tconstruct;after:mekanism"
+        dependencies = "required-after:ceramics;required-after:thermalfoundation;after:jei;after:tconstruct;after:mekanism"
 )
 public class Foundry
 {
     public static final String MODID = "foundry";
     public static final String MODNAME = "Zen: Foundry";
 
-    @SidedProxy(
-            clientSide = "exter.foundry.proxy.ClientProxy",
-            serverSide = "exter.foundry.proxy.CommonProxy"
-    )
+    @SidedProxy(clientSide = "exter.foundry.proxy.ClientProxy", serverSide = "exter.foundry.proxy.CommonProxy")
     public static CommonProxy proxy;
 
     @Instance
@@ -77,10 +72,6 @@ public class Foundry
     public static final Logger LOGGER = LogManager.getLogger(MODID);
 
     public static final SimpleNetworkWrapper NETWORK = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
-
-    public static final RegistryInformation INFO = new RegistryInformation(MODID, null);
-
-    public static final RecipeHelper HELPER = new RecipeHelper(MODID, MODNAME, INFO.getRecipeList());
 
     static
     {

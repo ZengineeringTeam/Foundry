@@ -27,7 +27,7 @@ public class GuiBurnerHeater extends GuiFoundry
 
     public GuiBurnerHeater(TileEntityBurnerHeater bh, EntityPlayer player)
     {
-        super(new ContainerBurnerHeater(bh, player));
+        super(new ContainerBurnerHeater(bh, player), player.inventory);
         allowUserInput = false;
         ySize = 166;
         te_bh = bh;

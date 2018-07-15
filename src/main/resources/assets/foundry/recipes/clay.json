@@ -1,0 +1,16 @@
+{
+  "type": "forge:ore_shaped",
+  "result": {
+    "item": "ceramics:unfired_clay",
+    "data": 4
+  },
+  "pattern": [
+    "**",
+    "**"
+  ],
+  "key": {
+    "*": {
+      "item": "foundry:small_clay"
+    }
+  }
+}

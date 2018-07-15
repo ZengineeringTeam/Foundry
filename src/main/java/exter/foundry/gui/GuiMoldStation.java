@@ -69,7 +69,7 @@ public class GuiMoldStation extends GuiFoundry
 
     public GuiMoldStation(TileEntityMoldStation af, EntityPlayer player)
     {
-        super(new ContainerMoldStation(af, player));
+        super(new ContainerMoldStation(af, player), player.inventory);
         allowUserInput = false;
         ySize = 190;
         te_ms = af;

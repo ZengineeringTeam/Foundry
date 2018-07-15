@@ -3,13 +3,7 @@ package exter.foundry.proxy;
 import java.util.List;
 
 import exter.foundry.Foundry;
-import exter.foundry.block.BlockCastingTable;
-import exter.foundry.block.BlockComponent;
-import exter.foundry.block.BlockMachine;
-import exter.foundry.block.FoundryBlocks;
 import exter.foundry.integration.ModIntegrationManager;
-import exter.foundry.item.FoundryItems;
-import exter.foundry.item.ItemMold;
 import exter.foundry.material.MaterialRegistry;
 import exter.foundry.material.OreDictMaterial;
 import exter.foundry.material.OreDictType;
@@ -25,11 +19,8 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class ClientProxy extends CommonProxy

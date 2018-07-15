@@ -60,7 +60,7 @@ public class GuiMeltingCrucible extends GuiFoundry
 
     public GuiMeltingCrucible(TileEntityMeltingCrucibleBasic ms, EntityPlayer player)
     {
-        super(new ContainerMeltingCrucible(ms, player));
+        super(new ContainerMeltingCrucible(ms, player), player.inventory);
         allowUserInput = false;
         ySize = 166;
         te_crucible = ms;

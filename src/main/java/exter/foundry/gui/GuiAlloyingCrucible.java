@@ -32,7 +32,7 @@ public class GuiAlloyingCrucible extends GuiFoundry
 
     public GuiAlloyingCrucible(TileEntityAlloyingCrucible am, EntityPlayer player)
     {
-        super(new ContainerAlloyingCrucible(am, player));
+        super(new ContainerAlloyingCrucible(am, player), player.inventory);
         allowUserInput = false;
         ySize = 209;
         te_alloymixer = am;

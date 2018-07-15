@@ -38,7 +38,7 @@ public class GuiAlloyMixer extends GuiFoundry
 
     public GuiAlloyMixer(TileEntityAlloyMixer am, EntityPlayer player)
     {
-        super(new ContainerAlloyMixer(am, player));
+        super(new ContainerAlloyMixer(am, player), player.inventory);
         allowUserInput = false;
         ySize = 209;
         te_alloymixer = am;

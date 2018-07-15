@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cofh.thermalfoundation.init.TFFluids;
-import exter.foundry.Foundry;
-import exter.foundry.FoundryRegistry;
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.FoundryUtils;
 import exter.foundry.api.recipe.ICastingTableRecipe;
@@ -15,8 +13,8 @@ import exter.foundry.block.BlockComponent;
 import exter.foundry.block.FoundryBlocks;
 import exter.foundry.config.FoundryConfig;
 import exter.foundry.fluid.FluidLiquidMetal;
-import exter.foundry.fluid.FoundryFluids;
 import exter.foundry.fluid.FoundryFluidRegistry;
+import exter.foundry.fluid.FoundryFluids;
 import exter.foundry.item.FoundryItems;
 import exter.foundry.item.ItemMold;
 import exter.foundry.material.MaterialRegistry;
@@ -225,15 +223,6 @@ public class InitRecipes
         ItemStack mold_plate = FoundryItems.mold(ItemMold.SubItem.PLATE);
         ItemStack mold_block = FoundryItems.mold(ItemMold.SubItem.BLOCK);
         ItemStack mold_rod = FoundryItems.mold(ItemMold.SubItem.ROD);
-
-        Foundry.HELPER.addForgeShaped(FoundryRegistry.CLAY, "CC", "CC", 'C',
-                new ItemStack(FoundryItems.item_small_clay));
-
-        Foundry.HELPER.addForgeShaped(new ItemStack(FoundryBlocks.block_burner_heater), "I", "C", "F", 'F',
-                furnace_stack, 'I', "ingotCopper", 'C', casing_basic_stack);
-
-        Foundry.HELPER.addForgeShaped(new ItemStack(FoundryBlocks.block_cauldron_bronze), "I I", "I I", "III", 'I',
-                "ingotBronze");
 
     }
 

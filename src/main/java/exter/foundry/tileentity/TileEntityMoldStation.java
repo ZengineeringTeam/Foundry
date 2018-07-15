@@ -216,8 +216,7 @@ public class TileEntityMoldStation extends TileEntityFoundry implements IExoflam
         {
             amount += g;
         }
-        amount /= 10;
-        return amount;
+        return amount / 10;
     }
 
     public int getGridSlot(int slot)
@@ -297,12 +296,6 @@ public class TileEntityMoldStation extends TileEntityFoundry implements IExoflam
     protected void onInitialize()
     {
         current_recipe = null;
-    }
-
-    @Override
-    public void openInventory(EntityPlayer player)
-    {
-
     }
 
     @Override

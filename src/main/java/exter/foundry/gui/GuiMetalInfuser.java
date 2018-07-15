@@ -40,7 +40,7 @@ public class GuiMetalInfuser extends GuiFoundry
 
     public GuiMetalInfuser(TileEntityMetalInfuser inf, EntityPlayer player)
     {
-        super(new ContainerMetalInfuser(inf, player));
+        super(new ContainerMetalInfuser(inf, player), player.inventory);
         allowUserInput = false;
         ySize = 209;
         te_infuser = inf;

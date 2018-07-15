@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -27,10 +28,12 @@ public abstract class GuiFoundry extends GuiContainer
 
     public static final String DEG_K = "K";
     private static final ResourceLocation BLOCK_TEXTURE = TextureMap.LOCATION_BLOCKS_TEXTURE;
+    protected final InventoryPlayer playerInventory;
 
-    public GuiFoundry(Container container)
+    public GuiFoundry(Container container, InventoryPlayer playerInventory)
     {
         super(container);
+        this.playerInventory = playerInventory;
     }
 
     protected void addTankTooltip(List<String> tooltip, int x, int y, FluidTank tank)
