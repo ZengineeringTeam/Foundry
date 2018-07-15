@@ -26,7 +26,6 @@ import net.minecraftforge.fluids.FluidTank;
 public abstract class GuiFoundry extends GuiContainer
 {
 
-    public static final String DEG_K = "K";
     private static final ResourceLocation BLOCK_TEXTURE = TextureMap.LOCATION_BLOCKS_TEXTURE;
     protected final InventoryPlayer playerInventory;
 
@@ -200,7 +199,7 @@ public abstract class GuiFoundry extends GuiContainer
 
     protected String getRedstoenModeText(TileEntityFoundry.RedstoneMode mode)
     {
-        switch (mode)
+        switch (mode) // TODO
         {
         case RSMODE_IGNORE:
             return "Mode: Ignore Restone";
@@ -213,6 +212,11 @@ public abstract class GuiFoundry extends GuiContainer
         default:
             return null;
         }
+    }
+
+    protected String getInventoryName()
+    {
+        return playerInventory.getDisplayName().getUnformattedText();
     }
 
     protected void setGLColor(int color)

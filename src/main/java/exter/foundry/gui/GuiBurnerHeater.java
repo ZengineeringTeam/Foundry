@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import exter.foundry.container.ContainerBurnerHeater;
 import exter.foundry.tileentity.TileEntityBurnerHeater;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -25,12 +26,15 @@ public class GuiBurnerHeater extends GuiFoundry
 
     private final TileEntityBurnerHeater te_bh;
 
+    private final String STRING_MACHINE;
+
     public GuiBurnerHeater(TileEntityBurnerHeater bh, EntityPlayer player)
     {
         super(new ContainerBurnerHeater(bh, player), player.inventory);
         allowUserInput = false;
         ySize = 166;
         te_bh = bh;
+        STRING_MACHINE = I18n.format("tile.foundry.burner_heater.name");
     }
 
     @Override
@@ -59,8 +63,8 @@ public class GuiBurnerHeater extends GuiFoundry
     {
         super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
 
-        fontRenderer.drawString("Burner Heater", 5, 6, 0x404040);
-        fontRenderer.drawString("Inventory", 8, ySize - 96 + 2, 0x404040);
+        fontRenderer.drawString(STRING_MACHINE, 8, 6, 0x404040);
+        fontRenderer.drawString(getInventoryName(), 8, ySize - 96 + 2, 0x404040);
 
     }
 

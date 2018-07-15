@@ -8,7 +8,6 @@ import javax.annotation.Nonnull;
 import exter.foundry.Foundry;
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.recipe.IMeltingRecipe;
-import exter.foundry.gui.GuiFoundry;
 import exter.foundry.gui.GuiMeltingCrucible;
 import exter.foundry.tileentity.TileEntityFoundryHeatable;
 import mezz.jei.api.IGuiHelper;
@@ -133,7 +132,6 @@ public class MeltingJEI
                     (recipe.getMeltingPoint() * 100 - TileEntityFoundryHeatable.TEMP_MIN) * 54
                             / (500000 - TileEntityFoundryHeatable.TEMP_MIN),
                     12, 0, 0, 0, 0, 256, 256);
-
         }
 
         @Override
@@ -144,7 +142,8 @@ public class MeltingJEI
                 temp.draw(minecraft, 11, 41);
             }
 
-            minecraft.fontRenderer.drawString(recipe.getMeltingPoint() + " " + GuiFoundry.DEG_K, 14, 28, 0);
+            minecraft.fontRenderer.drawString(I18n.format("gui.jei.foundry.melting.point", recipe.getMeltingPoint()),
+                    14, 28, 0);
         }
 
         @Override

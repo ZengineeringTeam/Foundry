@@ -10,6 +10,7 @@ import exter.foundry.gui.button.GuiButtonFoundry;
 import exter.foundry.tileentity.TileEntityFoundry.RedstoneMode;
 import exter.foundry.tileentity.TileEntityMetalCaster;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -52,12 +53,15 @@ public class GuiMetalCaster extends GuiFoundry
     private final TileEntityMetalCaster te_caster;
     private GuiButtonFoundry button_mode;
 
+    private final String STRING_MACHINE;
+
     public GuiMetalCaster(TileEntityMetalCaster cs, EntityPlayer player)
     {
         super(new ContainerMetalCaster(cs, player), player.inventory);
         allowUserInput = false;
         ySize = 166;
         te_caster = cs;
+        STRING_MACHINE = I18n.format("tile.foundry.caster.name");
     }
 
     @Override
@@ -116,8 +120,8 @@ public class GuiMetalCaster extends GuiFoundry
     {
         super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
 
-        fontRenderer.drawString("Metal Caster", 5, 6, 0x404040);
-        fontRenderer.drawString("Inventory", 8, ySize - 96 + 2, 0x404040);
+        fontRenderer.drawString(STRING_MACHINE, 8, 6, 0x404040);
+        fontRenderer.drawString(getInventoryName(), 8, ySize - 96 + 2, 0x404040);
     }
 
     @Override
@@ -137,7 +141,7 @@ public class GuiMetalCaster extends GuiFoundry
             List<String> currenttip = new ArrayList<>();
             long power = te_caster.getStoredFoundryEnergy();
             long max_power = te_caster.getFoundryEnergyCapacity();
-            currenttip.add("Energy: " + String.valueOf(power) + "/" + String.valueOf(max_power));
+            currenttip.add(I18n.format("gui.foundry.caster.energy", power, max_power));
             drawHoveringText(currenttip, mousex, mousey, fontRenderer);
         }
 

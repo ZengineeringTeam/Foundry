@@ -10,6 +10,7 @@ import exter.foundry.gui.button.GuiButtonFoundry;
 import exter.foundry.tileentity.TileEntityAlloyMixer;
 import exter.foundry.tileentity.TileEntityFoundry.RedstoneMode;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -36,12 +37,15 @@ public class GuiAlloyMixer extends GuiFoundry
     private final TileEntityAlloyMixer te_alloymixer;
     private GuiButtonFoundry button_mode;
 
+    private final String STRING_MACHINE;
+
     public GuiAlloyMixer(TileEntityAlloyMixer am, EntityPlayer player)
     {
         super(new ContainerAlloyMixer(am, player), player.inventory);
         allowUserInput = false;
         ySize = 209;
         te_alloymixer = am;
+        STRING_MACHINE = I18n.format("tile.foundry.alloying_crucible.name");
     }
 
     @Override
@@ -89,8 +93,8 @@ public class GuiAlloyMixer extends GuiFoundry
     {
         super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
 
-        fontRenderer.drawString("Alloy Mixer", 5, 6, 0x404040);
-        fontRenderer.drawString("Inventory", 8, ySize - 96 + 2, 0x404040);
+        fontRenderer.drawString(STRING_MACHINE, 8, 6, 0x404040);
+        fontRenderer.drawString(getInventoryName(), 8, ySize - 96 + 2, 0x404040);
 
     }
 

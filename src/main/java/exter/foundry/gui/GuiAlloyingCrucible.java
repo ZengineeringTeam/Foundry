@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL11;
 
 import exter.foundry.container.ContainerAlloyingCrucible;
 import exter.foundry.tileentity.TileEntityAlloyingCrucible;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -28,6 +29,8 @@ public class GuiAlloyingCrucible extends GuiFoundry
     private static final int TANK_OVERLAY_X = 176;
     private static final int TANK_OVERLAY_Y = 0;
 
+    private final String STRING_MACHINE;
+
     private final TileEntityAlloyingCrucible te_alloymixer;
 
     public GuiAlloyingCrucible(TileEntityAlloyingCrucible am, EntityPlayer player)
@@ -36,6 +39,7 @@ public class GuiAlloyingCrucible extends GuiFoundry
         allowUserInput = false;
         ySize = 209;
         te_alloymixer = am;
+        STRING_MACHINE = I18n.format("tile.foundry.alloying_crucible.name");
     }
 
     @Override
@@ -60,8 +64,8 @@ public class GuiAlloyingCrucible extends GuiFoundry
     {
         super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
 
-        fontRenderer.drawString("Alloying Crucible", 5, 6, 0x404040);
-        fontRenderer.drawString("Inventory", 8, ySize - 96 + 2, 0x404040);
+        fontRenderer.drawString(STRING_MACHINE, 8, 6, 0x404040);
+        fontRenderer.drawString(getInventoryName(), 8, ySize - 96 + 2, 0x404040);
 
     }
 

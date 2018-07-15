@@ -11,6 +11,7 @@ import exter.foundry.tileentity.TileEntityFoundry.RedstoneMode;
 import exter.foundry.tileentity.TileEntityFoundryHeatable;
 import exter.foundry.tileentity.TileEntityMeltingCrucibleBasic;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -58,12 +59,15 @@ public class GuiMeltingCrucible extends GuiFoundry
     private final TileEntityMeltingCrucibleBasic te_crucible;
     private GuiButtonFoundry button_mode;
 
+    private final String STRING_MACHINE;
+
     public GuiMeltingCrucible(TileEntityMeltingCrucibleBasic ms, EntityPlayer player)
     {
         super(new ContainerMeltingCrucible(ms, player), player.inventory);
         allowUserInput = false;
         ySize = 166;
         te_crucible = ms;
+        STRING_MACHINE = I18n.format("gui.foundry.crucible");
     }
 
     @Override
@@ -131,8 +135,8 @@ public class GuiMeltingCrucible extends GuiFoundry
     {
         super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
 
-        fontRenderer.drawString("Melting Crucible", 5, 6, 0x404040);
-        fontRenderer.drawString("Inventory", 8, ySize - 96 + 2, 0x404040);
+        fontRenderer.drawString(STRING_MACHINE, 8, 6, 0x404040);
+        fontRenderer.drawString(getInventoryName(), 8, ySize - 96 + 2, 0x404040);
 
     }
 
@@ -155,10 +159,10 @@ public class GuiMeltingCrucible extends GuiFoundry
             List<String> currenttip = new ArrayList<>();
             int heat = te_crucible.getTemperature() / 100;
             int melt_point = te_crucible.getMeltingPoint() / 100;
-            currenttip.add("Temperature: " + String.valueOf(heat) + " " + GuiFoundry.DEG_K);
+            currenttip.add(I18n.format("gui.foundry.crucible.temperature", heat));
             if (melt_point > 0)
             {
-                currenttip.add("Melt: " + String.valueOf(melt_point) + " " + GuiFoundry.DEG_K);
+                currenttip.add(I18n.format("gui.foundry.crucible.melt", melt_point));
             }
             drawHoveringText(currenttip, mousex, mousey, fontRenderer);
         }

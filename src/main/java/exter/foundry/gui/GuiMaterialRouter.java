@@ -12,6 +12,7 @@ import exter.foundry.gui.button.GuiButtonFoundry;
 import exter.foundry.material.MaterialRegistry;
 import exter.foundry.tileentity.TileEntityMaterialRouter;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -123,6 +124,9 @@ public class GuiMaterialRouter extends GuiFoundry
 
     private boolean do_scroll_sync;
 
+    private final String STRING_MACHINE;
+    private final String STRING_REMOVE;
+
     public GuiMaterialRouter(TileEntityMaterialRouter router, EntityPlayer player)
     {
         super(new ContainerMaterialRouter(router, player), player.inventory);
@@ -130,6 +134,8 @@ public class GuiMaterialRouter extends GuiFoundry
         xSize = 200;
         ySize = 229;
         te_router = router;
+        STRING_MACHINE = I18n.format("tile.foundry.router.name");
+        STRING_REMOVE = I18n.format("gui.foundry.router.remove");
 
         material_slots = new ArrayList<>();
         material_slots.add(new FilterSlotMaterial(0, "_Any"));
@@ -295,9 +301,10 @@ public class GuiMaterialRouter extends GuiFoundry
     protected void drawGuiContainerForegroundLayer(int mouse_x, int mouse_y)
     {
         super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
-        fontRenderer.drawString("Material Router", 6, 6, 0x404040);
-        fontRenderer.drawString("Inventory", 32, ySize - 96 + 2, 0x404040);
+        fontRenderer.drawString(STRING_MACHINE, 8, 6, 0x404040);
+        fontRenderer.drawString(getInventoryName(), 8, ySize - 96 + 2, 0x404040);
 
+        // TODO
         fontRenderer.drawString("Materials(" + (te_router.gui_material_scroll / 8 + 1) + "/"
                 + (int) Math.ceil((double) material_slots.size() / 8) + "):", 111, 14, 0x404040);
         fontRenderer.drawString("Types(" + (te_router.gui_type_scroll / 8 + 1) + "/"
@@ -379,7 +386,7 @@ public class GuiMaterialRouter extends GuiFoundry
             if (isPointInRegion(81, y + 4, 8, 8, mousex, mousey))
             {
                 List<String> tooltip = new ArrayList<>();
-                tooltip.add("Remove");
+                tooltip.add(STRING_REMOVE);
                 drawHoveringText(tooltip, mousex, mousey, fontRenderer);
             }
         }

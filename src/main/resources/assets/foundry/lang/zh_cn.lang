@@ -180,13 +180,13 @@ foundry.router.type.PoorOre=贫矿
 
 itemGroup.foundry=金属工坊
 
-tile.foundry.casing_standard.name=耐火框架（标准）
-tile.foundry.casing_advanced.name=耐火框架（高级）
-tile.foundry.casing_basic.name=耐火框架（基础）
+tile.foundry.casing_standard.name=标准耐火框架
+tile.foundry.casing_advanced.name=高级耐火框架
+tile.foundry.casing_basic.name=基础耐火框架
 
-tile.foundry.crucible_basic.name=熔炼坩埚（基础）
-tile.foundry.crucible_standard.name=熔炼坩埚（标准）
-tile.foundry.crucible_advanced.name=熔炼坩埚（高级）
+tile.foundry.crucible_basic.name=基础熔炼坩埚
+tile.foundry.crucible_standard.name=标准熔炼坩埚
+tile.foundry.crucible_advanced.name=高级熔炼坩埚
 tile.foundry.caster.name=金属铸造机
 tile.foundry.alloy_mixer.name=合金混合机
 tile.foundry.infuser.name=金属注入机
@@ -239,6 +239,7 @@ item.foundry.mold.boots.name=靴子铸型
 item.foundry.mold.nugget.name=粒铸型
 
 gui.jei.foundry.melting=熔炼坩埚
+gui.jei.foundry.melting.point=%d K
 gui.jei.foundry.casting=金属铸造机
 gui.jei.foundry.alloy_mixer=合金混合机
 gui.jei.foundry.alloying_crucible=合金坩埚
@@ -249,6 +250,10 @@ gui.jei.foundry.casting_table.plate=板铸造台
 gui.jei.foundry.casting_table.rod=杆铸造台
 gui.jei.foundry.casting_table.block=方块铸造台
 
-gui.foundry.mold=铸型加工站
 gui.foundry.mold.depth=深度：%d
 gui.foundry.mold.fire=烧制铸型
+gui.foundry.router.remove=移除
+gui.foundry.crucible=熔炼坩埚
+gui.foundry.crucible.temperature=温度：%d K
+gui.foundry.crucible.melt=熔点：%d K
+gui.foundry.caster.energy=能量：%d / %d

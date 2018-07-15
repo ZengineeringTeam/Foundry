@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL11;
 
 import exter.foundry.container.ContainerMetalInfuser;
 import exter.foundry.tileentity.TileEntityMetalInfuser;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -37,6 +38,7 @@ public class GuiMetalInfuser extends GuiFoundry
     private static final int PROGRESS_OVERLAY_Y = 53;
 
     private final TileEntityMetalInfuser te_infuser;
+    private final String STRING_MACHINE;
 
     public GuiMetalInfuser(TileEntityMetalInfuser inf, EntityPlayer player)
     {
@@ -44,6 +46,7 @@ public class GuiMetalInfuser extends GuiFoundry
         allowUserInput = false;
         ySize = 209;
         te_infuser = inf;
+        STRING_MACHINE = I18n.format("tile.foundry.infuser.name");
     }
 
     @Override
@@ -74,8 +77,8 @@ public class GuiMetalInfuser extends GuiFoundry
     {
         super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
 
-        fontRenderer.drawString("Metal Infuser", 5, 6, 0x404040);
-        fontRenderer.drawString("Inventory", 8, ySize - 96 + 2, 0x404040);
+        fontRenderer.drawString(STRING_MACHINE, 8, 6, 0x404040);
+        fontRenderer.drawString(getInventoryName(), 8, ySize - 96 + 2, 0x404040);
     }
 
     @Override

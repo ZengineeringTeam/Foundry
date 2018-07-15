@@ -63,8 +63,7 @@ public class GuiMoldStation extends GuiFoundry
     private final NonNullList<Boolean> pattern;
     private int processingState;
 
-    private final String STRING_MOLD_STATION;
-    private final String STRING_INVENTORY;
+    private final String STRING_MACHINE;
     private final String STRING_FIRE;
 
     public GuiMoldStation(TileEntityMoldStation af, EntityPlayer player)
@@ -75,8 +74,7 @@ public class GuiMoldStation extends GuiFoundry
         te_ms = af;
         pattern = NonNullList.withSize(36, Boolean.FALSE);
         processingState = -1; // No state.
-        STRING_MOLD_STATION = I18n.format("gui.foundry.mold");
-        STRING_INVENTORY = I18n.format("container.inventory");
+        STRING_MACHINE = I18n.format("tile.foundry.mold_station.name");
         STRING_FIRE = I18n.format("gui.foundry.mold.fire");
     }
 
@@ -144,8 +142,8 @@ public class GuiMoldStation extends GuiFoundry
     {
         super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
 
-        fontRenderer.drawString(STRING_MOLD_STATION, 8, 6, 0x404040);
-        fontRenderer.drawString(STRING_INVENTORY, 8, ySize - 96 + 2, 0x404040);
+        fontRenderer.drawString(STRING_MACHINE, 8, 6, 0x404040);
+        fontRenderer.drawString(getInventoryName(), 8, ySize - 96 + 2, 0x404040);
     }
 
     @Override
