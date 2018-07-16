@@ -5,6 +5,7 @@ import java.util.Map;
 
 import exter.foundry.creativetab.FoundryTab;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
@@ -30,7 +31,11 @@ public class ItemMold extends Item
         CHESTPLATE(13, "chestplate"),
         LEGGINGS(14, "leggings"),
         BOOTS(15, "boots"),
-        NUGGET(16, "nugget");
+        NUGGET(16, "nugget"),
+        HAMMER(17, "hammer"),
+        SICKLE(18, "sickle"),
+        SHEARS(19, "shears"),
+        SHIELD(-1, "shield");
 
         static private final Map<Integer, SubItem> value_map = new HashMap<>();
         static
@@ -61,6 +66,20 @@ public class ItemMold extends Item
         {
             return name;
         }
+
+        public ItemStack getItem()
+        {
+            return getItem(1);
+        }
+
+        public ItemStack getItem(int amount)
+        {
+            if (id == -1)
+            {
+                return new ItemStack(Items.SHIELD, amount);
+            }
+            return new ItemStack(FoundryItems.item_mold, amount);
+        }
     }
 
     public ItemMold()
@@ -79,8 +98,11 @@ public class ItemMold extends Item
         if (isInCreativeTab(tabs))
             for (SubItem m : SubItem.values())
             {
-                ItemStack itemstack = new ItemStack(this, 1, m.id);
-                list.add(itemstack);
+                if (m.id >= 0)
+                {
+                    ItemStack itemstack = new ItemStack(this, 1, m.id);
+                    list.add(itemstack);
+                }
             }
     }
 

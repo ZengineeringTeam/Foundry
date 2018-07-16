@@ -107,6 +107,26 @@ public class FoundryAPI
         return FLUID_AMOUNT_INGOT * 2;
     }
 
+    public static int getAmountHammer()
+    {
+        return FLUID_AMOUNT_INGOT * 5;
+    }
+
+    public static int getAmountSickle()
+    {
+        return FLUID_AMOUNT_INGOT * 3;
+    }
+
+    public static int getAmountShield()
+    {
+        return FLUID_AMOUNT_INGOT * 6;
+    }
+
+    public static int getAmountShears()
+    {
+        return FLUID_AMOUNT_INGOT * 2;
+    }
+
     /**
      * Tank capacity for machines.
      */

@@ -6,7 +6,6 @@ import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.config.FoundryConfig;
 import exter.foundry.fluid.FluidLiquidMetal;
 import exter.foundry.fluid.FoundryFluidRegistry;
-import exter.foundry.item.FoundryItems;
 import exter.foundry.item.ItemMold;
 import exter.foundry.recipes.manager.CastingRecipeManager;
 import exter.foundry.recipes.manager.MeltingRecipeManager;
@@ -99,7 +98,7 @@ public class ModIntegrationBotania implements IModIntegration
         ItemStack manasteel_block = getItemStack("storage", 0);
         ItemStack terrasteel_block = getItemStack("storage", 1);
         ItemStack elementium_block = getItemStack("storage", 2);
-        ItemStack mold_block = FoundryItems.mold(ItemMold.SubItem.BLOCK);
+        ItemStack mold_block = ItemMold.SubItem.BLOCK.getItem();
 
         MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(manasteel_block),
                 new FluidStack(liquid_manasteel, FoundryAPI.getAmountBlock()));
@@ -154,13 +153,10 @@ public class ModIntegrationBotania implements IModIntegration
             ItemStackMatcher extra_dreamsticks1 = new ItemStackMatcher(dreamsticks1);
             ItemStackMatcher extra_dreamsticks2 = new ItemStackMatcher(dreamsticks2);
 
-            MiscUtil.registerCasting(manasteel_pickaxe, liquid_manasteel, 3, ItemMold.SubItem.PICKAXE,
-                    extra_sticks2);
+            MiscUtil.registerCasting(manasteel_pickaxe, liquid_manasteel, 3, ItemMold.SubItem.PICKAXE, extra_sticks2);
             MiscUtil.registerCasting(manasteel_axe, liquid_manasteel, 3, ItemMold.SubItem.AXE, extra_sticks2);
-            MiscUtil.registerCasting(manasteel_shovel, liquid_manasteel, 1, ItemMold.SubItem.SHOVEL,
-                    extra_sticks2);
-            MiscUtil.registerCasting(manasteel_sword, liquid_manasteel, 2, ItemMold.SubItem.SWORD,
-                    extra_sticks1);
+            MiscUtil.registerCasting(manasteel_shovel, liquid_manasteel, 1, ItemMold.SubItem.SHOVEL, extra_sticks2);
+            MiscUtil.registerCasting(manasteel_sword, liquid_manasteel, 2, ItemMold.SubItem.SWORD, extra_sticks1);
             MiscUtil.registerCasting(manasteel_chestplate, liquid_manasteel, 8, ItemMold.SubItem.CHESTPLATE);
             MiscUtil.registerCasting(manasteel_leggings, liquid_manasteel, 7, ItemMold.SubItem.LEGGINGS);
             MiscUtil.registerCasting(manasteel_helmet, liquid_manasteel, 5, ItemMold.SubItem.HELMET);
@@ -172,8 +168,7 @@ public class ModIntegrationBotania implements IModIntegration
 
             MiscUtil.registerCasting(elementium_pickaxe, liquid_elementium, 3, ItemMold.SubItem.PICKAXE,
                     extra_dreamsticks2);
-            MiscUtil.registerCasting(elementium_axe, liquid_elementium, 3, ItemMold.SubItem.AXE,
-                    extra_dreamsticks2);
+            MiscUtil.registerCasting(elementium_axe, liquid_elementium, 3, ItemMold.SubItem.AXE, extra_dreamsticks2);
             MiscUtil.registerCasting(elementium_shovel, liquid_elementium, 1, ItemMold.SubItem.SHOVEL,
                     extra_dreamsticks2);
             MiscUtil.registerCasting(elementium_sword, liquid_elementium, 2, ItemMold.SubItem.SWORD,

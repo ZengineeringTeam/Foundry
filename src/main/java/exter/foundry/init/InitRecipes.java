@@ -13,7 +13,6 @@ import exter.foundry.config.FoundryConfig;
 import exter.foundry.fluid.FluidLiquidMetal;
 import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.fluid.FoundryFluids;
-import exter.foundry.item.FoundryItems;
 import exter.foundry.item.ItemMold;
 import exter.foundry.material.MaterialRegistry;
 import exter.foundry.material.OreDictMaterial;
@@ -97,8 +96,8 @@ public class InitRecipes
         }
         */
 
-        ItemStack ingot_mold = FoundryItems.mold(ItemMold.SubItem.INGOT);
-        ItemStack block_mold = FoundryItems.mold(ItemMold.SubItem.BLOCK);
+        ItemStack ingot_mold = ItemMold.SubItem.INGOT.getItem();
+        ItemStack block_mold = ItemMold.SubItem.BLOCK.getItem();
         for (String name : FoundryFluidRegistry.INSTANCE.getFluidNames())
         {
             FluidLiquidMetal fluid = FoundryFluidRegistry.INSTANCE.getFluid(name);
@@ -167,7 +166,7 @@ public class InitRecipes
             MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS_PANE),
                     new FluidStack(liquid_glass, 375), temp, melt);
             CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS),
-                    new FluidStack(liquid_glass, 1000), FoundryItems.mold(ItemMold.SubItem.BLOCK), null, 400);
+                    new FluidStack(liquid_glass, 1000), ItemMold.SubItem.BLOCK.getItem(), null, 400);
             CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS),
                     new FluidStack(liquid_glass, 1000), ICastingTableRecipe.TableType.BLOCK);
             for (EnumDyeColor dye : EnumDyeColor.values())
@@ -184,8 +183,7 @@ public class InitRecipes
                         new ItemStackMatcher(new ItemStack(Blocks.STAINED_GLASS_PANE, 1, meta)),
                         new FluidStack(liquid_glass_colored, 375), temp, melt);
                 CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stained_glass),
-                        new FluidStack(liquid_glass_colored, 1000), FoundryItems.mold(ItemMold.SubItem.BLOCK), null,
-                        400);
+                        new FluidStack(liquid_glass_colored, 1000), ItemMold.SubItem.BLOCK.getItem(), null, 400);
                 CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stained_glass),
                         new FluidStack(liquid_glass_colored, 1000), ICastingTableRecipe.TableType.BLOCK);
 
@@ -226,35 +224,34 @@ public class InitRecipes
         MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Items.ENDER_PEARL),
                 new FluidStack(TFFluids.fluidEnder, 250), TFFluids.fluidEnder.getTemperature(), 75);
 
-        MoldRecipeManager.INSTANCE.addRecipe(FoundryItems.mold(ItemMold.SubItem.INGOT), 2, 4,
+        MoldRecipeManager.INSTANCE.addRecipe(ItemMold.SubItem.INGOT.getItem(), 2, 4,
                 new int[] { 2, 2, 2, 2, 2, 2, 2, 2 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(FoundryItems.mold(ItemMold.SubItem.PLATE), 4, 4,
+        MoldRecipeManager.INSTANCE.addRecipe(ItemMold.SubItem.PLATE.getItem(), 4, 4,
                 new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(FoundryItems.mold(ItemMold.SubItem.ROD), 1, 6,
-                new int[] { 1, 1, 1, 1, 1, 1 });
+        MoldRecipeManager.INSTANCE.addRecipe(ItemMold.SubItem.ROD.getItem(), 1, 6, new int[] { 1, 1, 1, 1, 1, 1 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(FoundryItems.mold(ItemMold.SubItem.GEAR), 5, 5,
+        MoldRecipeManager.INSTANCE.addRecipe(ItemMold.SubItem.GEAR.getItem(), 5, 5,
                 new int[] { 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(FoundryItems.mold(ItemMold.SubItem.BLOCK), 6, 6, new int[] { 4, 4, 4, 4, 4,
-                4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 });
+        MoldRecipeManager.INSTANCE.addRecipe(ItemMold.SubItem.BLOCK.getItem(), 6, 6, new int[] { 4, 4, 4, 4, 4, 4, 4, 4,
+                4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(FoundryItems.mold(ItemMold.SubItem.SLAB), 6, 6, new int[] { 0, 0, 0, 0, 0,
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 });
+        MoldRecipeManager.INSTANCE.addRecipe(ItemMold.SubItem.SLAB.getItem(), 6, 6, new int[] { 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(FoundryItems.mold(ItemMold.SubItem.STAIRS), 6, 6, new int[] { 0, 0, 0, 4,
-                4, 4, 0, 0, 0, 4, 4, 4, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 });
+        MoldRecipeManager.INSTANCE.addRecipe(ItemMold.SubItem.STAIRS.getItem(), 6, 6, new int[] { 0, 0, 0, 4, 4, 4, 0,
+                0, 0, 4, 4, 4, 0, 0, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(FoundryItems.mold(ItemMold.SubItem.NUGGET), 3, 3,
+        MoldRecipeManager.INSTANCE.addRecipe(ItemMold.SubItem.NUGGET.getItem(), 3, 3,
                 new int[] { 1, 1, 1, 1, 1, 1, 0, 1, 0 });
 
         InitAlloyRecipes.init();
 
         for (ItemMold.SubItem sub : ItemMold.SubItem.values())
         {
-            CastingRecipeManager.INSTANCE.addMold(FoundryItems.mold(sub));
+            CastingRecipeManager.INSTANCE.addMold(sub.getItem());
         }
 
         if (FoundryConfig.recipe_equipment)
@@ -346,14 +343,14 @@ public class InitRecipes
 
     }
 
-    static ItemStack mold_ingot = FoundryItems.mold(ItemMold.SubItem.INGOT);
-    static ItemStack mold_slab = FoundryItems.mold(ItemMold.SubItem.SLAB);
-    static ItemStack mold_stairs = FoundryItems.mold(ItemMold.SubItem.STAIRS);
-    static ItemStack mold_plate = FoundryItems.mold(ItemMold.SubItem.PLATE);
-    static ItemStack mold_block = FoundryItems.mold(ItemMold.SubItem.BLOCK);
-    static ItemStack mold_gear = FoundryItems.mold(ItemMold.SubItem.GEAR);
-    static ItemStack mold_rod = FoundryItems.mold(ItemMold.SubItem.ROD);
-    static ItemStack mold_nugget = FoundryItems.mold(ItemMold.SubItem.NUGGET);
+    static ItemStack mold_ingot = ItemMold.SubItem.INGOT.getItem();
+    static ItemStack mold_slab = ItemMold.SubItem.SLAB.getItem();
+    static ItemStack mold_stairs = ItemMold.SubItem.STAIRS.getItem();
+    static ItemStack mold_plate = ItemMold.SubItem.PLATE.getItem();
+    static ItemStack mold_block = ItemMold.SubItem.BLOCK.getItem();
+    static ItemStack mold_gear = ItemMold.SubItem.GEAR.getItem();
+    static ItemStack mold_rod = ItemMold.SubItem.ROD.getItem();
+    static ItemStack mold_nugget = ItemMold.SubItem.NUGGET.getItem();
 
     public static void addDefaultCasting(FluidLiquidMetal fluid, String name)
     {

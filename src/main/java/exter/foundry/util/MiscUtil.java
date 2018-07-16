@@ -9,7 +9,6 @@ import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.FoundryUtils;
 import exter.foundry.api.recipe.matcher.IItemMatcher;
 import exter.foundry.api.recipe.matcher.ItemStackMatcher;
-import exter.foundry.item.FoundryItems;
 import exter.foundry.item.ItemMold;
 import exter.foundry.recipes.manager.CastingRecipeManager;
 import net.minecraft.block.BlockLiquid;
@@ -174,7 +173,7 @@ public class MiscUtil
     {
         if (!item.isEmpty())
         {
-            ItemStack mold = FoundryItems.mold(mold_meta);
+            ItemStack mold = mold_meta.getItem();
             ItemStack extra_item = extra != null ? extra.getItem() : ItemStack.EMPTY;
             if (CastingRecipeManager.INSTANCE.findRecipe(
                     new FluidStack(fluid.getFluid(), FoundryAPI.CASTER_TANK_CAPACITY), mold, extra_item) == null)

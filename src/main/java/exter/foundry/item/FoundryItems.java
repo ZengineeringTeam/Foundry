@@ -14,16 +14,6 @@ public class FoundryItems
     static public Item item_small_clay;
     static public ItemMold item_mold;
 
-    static public ItemStack mold(ItemMold.SubItem sub)
-    {
-        return mold(sub, 1);
-    }
-
-    static public ItemStack mold(ItemMold.SubItem sub, int amount)
-    {
-        return new ItemStack(item_mold, amount, sub.id);
-    }
-
     @SubscribeEvent
     public static void registerItems(Register<Item> event)
     {

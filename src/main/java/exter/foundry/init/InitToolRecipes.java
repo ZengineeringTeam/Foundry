@@ -2,17 +2,19 @@ package exter.foundry.init;
 
 import java.util.Map.Entry;
 
+import cofh.thermalfoundation.ThermalFoundation;
 import exter.foundry.api.FoundryUtils;
 import exter.foundry.api.recipe.matcher.OreMatcher;
 import exter.foundry.fluid.FluidLiquidMetal;
-import exter.foundry.fluid.FoundryFluids;
 import exter.foundry.fluid.FoundryFluidRegistry;
-import exter.foundry.item.FoundryItems;
+import exter.foundry.fluid.FoundryFluids;
 import exter.foundry.item.ItemMold;
 import exter.foundry.recipes.manager.MoldRecipeManager;
 import exter.foundry.util.MiscUtil;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class InitToolRecipes
 {
@@ -21,15 +23,19 @@ public class InitToolRecipes
         OreMatcher extra_sticks1 = new OreMatcher("stickWood", 1);
         OreMatcher extra_sticks2 = new OreMatcher("stickWood", 2);
 
-        ItemStack mold_chestplate = FoundryItems.mold(ItemMold.SubItem.CHESTPLATE);
-        ItemStack mold_pickaxe = FoundryItems.mold(ItemMold.SubItem.PICKAXE);
-        ItemStack mold_axe = FoundryItems.mold(ItemMold.SubItem.AXE);
-        ItemStack mold_shovel = FoundryItems.mold(ItemMold.SubItem.SHOVEL);
-        ItemStack mold_hoe = FoundryItems.mold(ItemMold.SubItem.HOE);
-        ItemStack mold_sword = FoundryItems.mold(ItemMold.SubItem.SWORD);
-        ItemStack mold_leggings = FoundryItems.mold(ItemMold.SubItem.LEGGINGS);
-        ItemStack mold_helmet = FoundryItems.mold(ItemMold.SubItem.HELMET);
-        ItemStack mold_boots = FoundryItems.mold(ItemMold.SubItem.BOOTS);
+        ItemStack mold_chestplate = ItemMold.SubItem.CHESTPLATE.getItem();
+        ItemStack mold_pickaxe = ItemMold.SubItem.PICKAXE.getItem();
+        ItemStack mold_axe = ItemMold.SubItem.AXE.getItem();
+        ItemStack mold_shovel = ItemMold.SubItem.SHOVEL.getItem();
+        ItemStack mold_hoe = ItemMold.SubItem.HOE.getItem();
+        ItemStack mold_sword = ItemMold.SubItem.SWORD.getItem();
+        ItemStack mold_leggings = ItemMold.SubItem.LEGGINGS.getItem();
+        ItemStack mold_helmet = ItemMold.SubItem.HELMET.getItem();
+        ItemStack mold_boots = ItemMold.SubItem.BOOTS.getItem();
+        ItemStack mold_hammer = ItemMold.SubItem.HAMMER.getItem();
+        ItemStack mold_sickle = ItemMold.SubItem.SICKLE.getItem();
+        ItemStack mold_shears = ItemMold.SubItem.SHEARS.getItem();
+        ItemStack mold_shield = ItemMold.SubItem.SHIELD.getItem();
 
         MoldRecipeManager.INSTANCE.addRecipe(mold_helmet, 4, 3, new int[] { 3, 3, 3, 3, 3, 1, 1, 3, 3, 1, 1, 3 });
 
@@ -56,28 +62,30 @@ public class InitToolRecipes
         MoldRecipeManager.INSTANCE.addRecipe(mold_sword, 3, 6,
                 new int[] { 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 2, 1, 0, 1, 0, });
 
+        // TODO: mold recipes
+
         MiscUtil.registerCasting(new ItemStack(Items.IRON_PICKAXE), FoundryFluids.liquid_iron, 3,
                 ItemMold.SubItem.PICKAXE, extra_sticks2);
         MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_PICKAXE), FoundryFluids.liquid_gold, 3,
                 ItemMold.SubItem.PICKAXE, extra_sticks2);
 
-        MiscUtil.registerCasting(new ItemStack(Items.IRON_AXE), FoundryFluids.liquid_iron, 3,
-                ItemMold.SubItem.AXE, extra_sticks2);
-        MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_AXE), FoundryFluids.liquid_gold, 3,
-                ItemMold.SubItem.AXE, extra_sticks2);
+        MiscUtil.registerCasting(new ItemStack(Items.IRON_AXE), FoundryFluids.liquid_iron, 3, ItemMold.SubItem.AXE,
+                extra_sticks2);
+        MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_AXE), FoundryFluids.liquid_gold, 3, ItemMold.SubItem.AXE,
+                extra_sticks2);
 
         MiscUtil.registerCasting(new ItemStack(Items.IRON_SHOVEL), FoundryFluids.liquid_iron, 1,
                 ItemMold.SubItem.SHOVEL, extra_sticks2);
         MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_SHOVEL), FoundryFluids.liquid_gold, 1,
                 ItemMold.SubItem.SHOVEL, extra_sticks2);
 
-        MiscUtil.registerCasting(new ItemStack(Items.IRON_HOE), FoundryFluids.liquid_iron, 2,
-                ItemMold.SubItem.HOE, extra_sticks2);
-        MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_HOE), FoundryFluids.liquid_gold, 2,
-                ItemMold.SubItem.HOE, extra_sticks2);
+        MiscUtil.registerCasting(new ItemStack(Items.IRON_HOE), FoundryFluids.liquid_iron, 2, ItemMold.SubItem.HOE,
+                extra_sticks2);
+        MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_HOE), FoundryFluids.liquid_gold, 2, ItemMold.SubItem.HOE,
+                extra_sticks2);
 
-        MiscUtil.registerCasting(new ItemStack(Items.IRON_SWORD), FoundryFluids.liquid_iron, 2,
-                ItemMold.SubItem.SWORD, extra_sticks1);
+        MiscUtil.registerCasting(new ItemStack(Items.IRON_SWORD), FoundryFluids.liquid_iron, 2, ItemMold.SubItem.SWORD,
+                extra_sticks1);
         MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_SWORD), FoundryFluids.liquid_gold, 2,
                 ItemMold.SubItem.SWORD, extra_sticks1);
 
@@ -96,10 +104,15 @@ public class InitToolRecipes
         MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_LEGGINGS), FoundryFluids.liquid_gold, 7,
                 ItemMold.SubItem.LEGGINGS);
 
-        MiscUtil.registerCasting(new ItemStack(Items.IRON_BOOTS), FoundryFluids.liquid_iron, 4,
-                ItemMold.SubItem.BOOTS);
+        MiscUtil.registerCasting(new ItemStack(Items.IRON_BOOTS), FoundryFluids.liquid_iron, 4, ItemMold.SubItem.BOOTS);
         MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_BOOTS), FoundryFluids.liquid_gold, 4,
                 ItemMold.SubItem.BOOTS);
+
+        // iron shield?
+        // MiscUtil.registerCasting(new ItemStack(Items.IRON_BOOTS), FoundryFluids.liquid_iron, 4, ItemMold.SubItem.BOOTS);
+        //        MiscUtil.registerCasting(
+        //                new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "???"))),
+        //                FoundryFluids.liquid_gold, 6, ItemMold.SubItem.BOOTS);
 
         for (Entry<String, FluidLiquidMetal> metal : FoundryFluidRegistry.INSTANCE.getMap().entrySet())
         {
