@@ -63,7 +63,7 @@ public class GuiBurnerHeater extends GuiFoundry
     {
         super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
 
-        fontRenderer.drawString(STRING_MACHINE, 8, 6, 0x404040);
+        fontRenderer.drawString(STRING_MACHINE, xSize / 2 - fontRenderer.getStringWidth(STRING_MACHINE) / 2, 6, 0x404040);
         fontRenderer.drawString(getInventoryName(), 8, ySize - 96 + 2, 0x404040);
 
     }
