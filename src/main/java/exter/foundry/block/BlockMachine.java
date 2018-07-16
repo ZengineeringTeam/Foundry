@@ -16,7 +16,7 @@ import exter.foundry.tileentity.TileEntityMeltingCrucibleBasic;
 import exter.foundry.tileentity.TileEntityMeltingCrucibleStandard;
 import exter.foundry.tileentity.TileEntityMetalCaster;
 import exter.foundry.tileentity.TileEntityMetalInfuser;
-import exter.foundry.util.FoundryMiscUtils;
+import exter.foundry.util.MiscUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -225,7 +225,7 @@ public class BlockMachine extends Block implements ITileEntityProvider, IBlockVa
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced)
     {
-        FoundryMiscUtils.localizeTooltip(getUnlocalizedName(stack.getMetadata()) + ".tooltip", tooltip);
+        MiscUtil.localizeTooltip(getUnlocalizedName(stack.getMetadata()) + ".tooltip", tooltip);
     }
 
     @Override

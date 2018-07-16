@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import exter.foundry.api.FoundryUtils;
-import exter.foundry.util.FoundryMiscUtils;
+import exter.foundry.util.MiscUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -45,7 +45,7 @@ public class OreMatcher implements IItemMatcher
     {
         if (OreDictionary.doesOreNameExist(match))
         {
-            List<ItemStack> list = FoundryMiscUtils.getOresSafe(match);
+            List<ItemStack> list = MiscUtil.getOresSafe(match);
             if (list.isEmpty())
                 return ItemStack.EMPTY;
             ItemStack res = list.get(0).copy();
@@ -61,7 +61,7 @@ public class OreMatcher implements IItemMatcher
         List<ItemStack> list = new ArrayList<>();
         if (OreDictionary.doesOreNameExist(match))
         {
-            for (ItemStack ore : FoundryMiscUtils.getOresSafe(match))
+            for (ItemStack ore : MiscUtil.getOresSafe(match))
             {
                 ore = ore.copy();
                 ore.setCount(amount);

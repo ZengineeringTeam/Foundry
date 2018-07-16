@@ -3,7 +3,7 @@ package exter.foundry.tileentity;
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.recipe.IAlloyingCrucibleRecipe;
 import exter.foundry.recipes.manager.AlloyingCrucibleRecipeManager;
-import exter.foundry.util.FoundryMiscUtils;
+import exter.foundry.util.MiscUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -220,7 +220,7 @@ public class TileEntityAlloyingCrucible extends TileEntityFoundry
 
         if (recipe != null && canOutput(recipe))
         {
-            if (++progress >= FoundryMiscUtils.divCeil(recipe.getOutput().amount, 2))
+            if (++progress >= MiscUtil.divCeil(recipe.getOutput().amount, 2))
             {
                 progress = 0;
                 doMix(recipe, reversed);

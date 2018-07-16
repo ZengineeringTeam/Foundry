@@ -8,7 +8,7 @@ import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.recipes.manager.AlloyMixerRecipeManager;
 import exter.foundry.recipes.manager.AlloyingCrucibleRecipeManager;
 import exter.foundry.recipes.manager.InfuserRecipeManager;
-import exter.foundry.util.FoundryMiscUtils;
+import exter.foundry.util.MiscUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -20,7 +20,7 @@ public class InitAlloyRecipes
     // Create recipes for all alloy making machines.
     static private void addSimpleAlloy(String output, String input_a, int amount_a, String input_b, int amount_b)
     {
-        ItemStack alloy_ingot = FoundryMiscUtils.getModItemFromOreDictionary(FoundryConfig.prefModID, "ingot" + output,
+        ItemStack alloy_ingot = MiscUtil.getModItemFromOreDictionary(FoundryConfig.prefModID, "ingot" + output,
                 amount_a + amount_b);
         if (!alloy_ingot.isEmpty())
         {

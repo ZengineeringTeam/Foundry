@@ -6,7 +6,7 @@ import exter.foundry.api.recipe.IInfuserRecipe;
 import exter.foundry.api.recipe.manager.IInfuserRecipeManager;
 import exter.foundry.api.recipe.matcher.IItemMatcher;
 import exter.foundry.recipes.InfuserRecipe;
-import exter.foundry.util.FoundryMiscUtils;
+import exter.foundry.util.MiscUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.FluidStack;
@@ -25,7 +25,7 @@ public class InfuserRecipeManager implements IInfuserRecipeManager
     @Override
     public void addRecipe(FluidStack result, FluidStack in_fluid, IItemMatcher item, int energy)
     {
-        if (!FoundryMiscUtils.isInvalid(item))
+        if (!MiscUtil.isInvalid(item))
             recipes.add(new InfuserRecipe(result, in_fluid, item, energy));
     }
 

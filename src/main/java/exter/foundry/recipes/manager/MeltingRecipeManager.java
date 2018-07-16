@@ -6,7 +6,7 @@ import exter.foundry.api.recipe.IMeltingRecipe;
 import exter.foundry.api.recipe.manager.IMeltingRecipeManager;
 import exter.foundry.api.recipe.matcher.IItemMatcher;
 import exter.foundry.recipes.MeltingRecipe;
-import exter.foundry.util.FoundryMiscUtils;
+import exter.foundry.util.MiscUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.FluidStack;
@@ -26,7 +26,7 @@ public class MeltingRecipeManager implements IMeltingRecipeManager
     @Override
     public void addRecipe(IItemMatcher solid, FluidStack fluid_stack)
     {
-        if (!FoundryMiscUtils.isInvalid(solid))
+        if (!MiscUtil.isInvalid(solid))
             addRecipe(solid, fluid_stack, fluid_stack.getFluid().getTemperature(), 100);
     }
 

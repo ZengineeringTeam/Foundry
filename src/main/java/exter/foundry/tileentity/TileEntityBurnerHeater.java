@@ -10,7 +10,7 @@ import exter.foundry.api.recipe.IBurnerHeaterFuel;
 import exter.foundry.block.BlockBurnerHeater;
 import exter.foundry.recipes.manager.BurnerHeaterFuelManager;
 import exter.foundry.tileentity.itemhandler.ItemHandlerFuel;
-import exter.foundry.util.FoundryMiscUtils;
+import exter.foundry.util.MiscUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -42,7 +42,7 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
                         max_heat = heat_provide;
                     }
                     int last_burn_time = burn_time;
-                    burn_time -= FoundryMiscUtils.divCeil(max_heat * 10, heat_provide);
+                    burn_time -= MiscUtil.divCeil(max_heat * 10, heat_provide);
                     if (burn_time < 0)
                     {
                         burn_time = 0;

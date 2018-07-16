@@ -10,7 +10,7 @@ import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.item.ItemMold;
 import exter.foundry.recipes.manager.AlloyMixerRecipeManager;
 import exter.foundry.recipes.manager.InfuserRecipeManager;
-import exter.foundry.util.FoundryMiscUtils;
+import exter.foundry.util.MiscUtil;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -113,17 +113,17 @@ public class ModIntegrationEnderIO implements IModIntegration
             ItemStack dark_steel_leggings = getItemStack("item_dark_steel_leggings");
             ItemStack dark_steel_boots = getItemStack("item_dark_steel_boots");
 
-            FoundryMiscUtils.registerCasting(dark_steel_chestplate, liquid_dark_steel, 8, ItemMold.SubItem.CHESTPLATE,
+            MiscUtil.registerCasting(dark_steel_chestplate, liquid_dark_steel, 8, ItemMold.SubItem.CHESTPLATE,
                     null);
-            FoundryMiscUtils.registerCasting(dark_steel_helmet, liquid_dark_steel, 5, ItemMold.SubItem.HELMET, null);
-            FoundryMiscUtils.registerCasting(dark_steel_leggings, liquid_dark_steel, 7, ItemMold.SubItem.LEGGINGS,
+            MiscUtil.registerCasting(dark_steel_helmet, liquid_dark_steel, 5, ItemMold.SubItem.HELMET, null);
+            MiscUtil.registerCasting(dark_steel_leggings, liquid_dark_steel, 7, ItemMold.SubItem.LEGGINGS,
                     null);
-            FoundryMiscUtils.registerCasting(dark_steel_boots, liquid_dark_steel, 4, ItemMold.SubItem.BOOTS, null);
+            MiscUtil.registerCasting(dark_steel_boots, liquid_dark_steel, 4, ItemMold.SubItem.BOOTS, null);
 
-            FoundryMiscUtils.registerCasting(dark_steel_pickaxe, liquid_dark_steel, 3, ItemMold.SubItem.PICKAXE,
+            MiscUtil.registerCasting(dark_steel_pickaxe, liquid_dark_steel, 3, ItemMold.SubItem.PICKAXE,
                     extra_sticks2);
-            FoundryMiscUtils.registerCasting(dark_steel_axe, liquid_dark_steel, 3, ItemMold.SubItem.AXE, extra_sticks2);
-            FoundryMiscUtils.registerCasting(dark_steel_sword, liquid_dark_steel, 2, ItemMold.SubItem.SWORD,
+            MiscUtil.registerCasting(dark_steel_axe, liquid_dark_steel, 3, ItemMold.SubItem.AXE, extra_sticks2);
+            MiscUtil.registerCasting(dark_steel_sword, liquid_dark_steel, 2, ItemMold.SubItem.SWORD,
                     extra_sticks1);
 
         }

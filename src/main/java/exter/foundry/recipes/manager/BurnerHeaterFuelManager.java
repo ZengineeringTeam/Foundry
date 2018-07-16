@@ -7,7 +7,7 @@ import exter.foundry.api.recipe.manager.IBurnerHeaterFuelManager;
 import exter.foundry.api.recipe.matcher.IItemMatcher;
 import exter.foundry.recipes.BurnerHeaterFuel;
 import exter.foundry.tileentity.TileEntityFoundryHeatable;
-import exter.foundry.util.FoundryMiscUtils;
+import exter.foundry.util.MiscUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
@@ -32,7 +32,7 @@ public class BurnerHeaterFuelManager implements IBurnerHeaterFuelManager
     @Override
     public void addFuel(IItemMatcher fuel, int burn_time, int heat)
     {
-        if (!FoundryMiscUtils.isInvalid(fuel))
+        if (!MiscUtil.isInvalid(fuel))
             addFuel(new BurnerHeaterFuel(fuel, burn_time, heat));
     }
 

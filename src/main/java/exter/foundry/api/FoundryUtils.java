@@ -5,6 +5,7 @@ import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.api.recipe.matcher.OreMatcher;
 import exter.foundry.item.FoundryItems;
 import exter.foundry.item.ItemMold.SubItem;
+import exter.foundry.util.MiscUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
@@ -43,6 +44,7 @@ public class FoundryUtils
     {
         if (FoundryAPI.MELTING_MANAGER != null)
         {
+            partial_name = MiscUtil.upperCaseFirstChar(partial_name);
             if (exists("ingot" + partial_name))
                 FoundryAPI.MELTING_MANAGER.addRecipe(new OreMatcher("ingot" + partial_name),
                         new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_INGOT));

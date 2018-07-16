@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import exter.foundry.creativetab.FoundryTab;
-import exter.foundry.util.FoundryMiscUtils;
+import exter.foundry.util.MiscUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -60,7 +60,7 @@ public class BlockLiquidMetal extends BlockFluidClassic
             IBlockState solid = null;
             if (solid_state == null)
             {
-                List<ItemStack> list = FoundryMiscUtils.getOresSafe("stoneVariant");
+                List<ItemStack> list = MiscUtil.getOresSafe("stoneVariant");
                 if (!list.isEmpty())
                 {
                     ItemStack item = list.get(Block.RANDOM.nextInt(list.size()));

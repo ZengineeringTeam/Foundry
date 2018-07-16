@@ -32,14 +32,14 @@ import net.minecraftforge.oredict.OreDictionary;
 /**
  * Miscellaneous utility methods
  */
-public class FoundryMiscUtils
+public class MiscUtil
 {
-    static public int divCeil(int a, int b)
+    public static int divCeil(int a, int b)
     {
         return a / b + (a % b == 0 ? 0 : 1);
     }
 
-    static public FluidStack drainFluidFromWorld(World world, BlockPos pos, boolean do_drain)
+    public static FluidStack drainFluidFromWorld(World world, BlockPos pos, boolean do_drain)
     {
         IBlockState state = world.getBlockState(pos);
         if (state.getBlock() instanceof IFluidBlock)
@@ -72,12 +72,12 @@ public class FoundryMiscUtils
         return null;
     }
 
-    static public Set<String> getAllItemOreDictionaryNames(ItemStack stack)
+    public static Set<String> getAllItemOreDictionaryNames(ItemStack stack)
     {
         Set<String> result = new HashSet<>();
         for (String name : OreDictionary.getOreNames())
         {
-            List<ItemStack> ores = FoundryMiscUtils.getOresSafe(name);
+            List<ItemStack> ores = MiscUtil.getOresSafe(name);
             for (ItemStack i : ores)
             {
                 if (i.isItemEqual(stack) && ItemStack.areItemStackTagsEqual(i, stack))
@@ -89,7 +89,7 @@ public class FoundryMiscUtils
         return result;
     }
 
-    static public String getItemOreDictionaryName(ItemStack stack)
+    public static String getItemOreDictionaryName(ItemStack stack)
     {
         for (String name : OreDictionary.getOreNames())
         {
@@ -105,12 +105,12 @@ public class FoundryMiscUtils
         return null;
     }
 
-    static public ItemStack getModItemFromOreDictionary(String modid, String orename)
+    public static ItemStack getModItemFromOreDictionary(String modid, String orename)
     {
         return getModItemFromOreDictionary(modid, orename, 1);
     }
 
-    static public ItemStack getModItemFromOreDictionary(String modid, String orename, int amount)
+    public static ItemStack getModItemFromOreDictionary(String modid, String orename, int amount)
     {
         return getStackFromDictWithPreference(modid, orename, amount);
     }
@@ -122,7 +122,7 @@ public class FoundryMiscUtils
 
     public static ItemStack getStackFromDictWithPreference(String domain, String ore, int amount)
     {
-        for (ItemStack is : FoundryMiscUtils.getOresSafe(ore))
+        for (ItemStack is : MiscUtil.getOresSafe(ore))
         {
             if (is.getItem().getRegistryName().getResourceDomain().equals(domain))
             {
@@ -131,7 +131,7 @@ public class FoundryMiscUtils
                 return is;
             }
         }
-        for (ItemStack is : FoundryMiscUtils.getOresSafe(ore))
+        for (ItemStack is : MiscUtil.getOresSafe(ore))
         {
             is = is.copy();
             is.setCount(amount);
@@ -152,7 +152,7 @@ public class FoundryMiscUtils
     }
 
     @SideOnly(Side.CLIENT)
-    static public void localizeTooltip(String key, List<String> tooltip)
+    public static void localizeTooltip(String key, List<String> tooltip)
     {
         for (String str : new TextComponentTranslation(key).getUnformattedText().split("//"))
         {
@@ -160,17 +160,17 @@ public class FoundryMiscUtils
         }
     }
 
-    static public void registerCasting(ItemStack item, Fluid liquid_metal, int ingots, ItemMold.SubItem mold_meta)
+    public static void registerCasting(ItemStack item, Fluid liquid_metal, int ingots, ItemMold.SubItem mold_meta)
     {
         registerCasting(item, new FluidStack(liquid_metal, FoundryAPI.FLUID_AMOUNT_INGOT * ingots), mold_meta, null);
     }
 
-    static public void registerCasting(ItemStack item, Fluid liquid_metal, int ingots, ItemMold.SubItem mold_meta, IItemMatcher extra)
+    public static void registerCasting(ItemStack item, Fluid liquid_metal, int ingots, ItemMold.SubItem mold_meta, IItemMatcher extra)
     {
         registerCasting(item, new FluidStack(liquid_metal, FoundryAPI.FLUID_AMOUNT_INGOT * ingots), mold_meta, extra);
     }
 
-    static public void registerCasting(ItemStack item, FluidStack fluid, ItemMold.SubItem mold_meta, IItemMatcher extra)
+    public static void registerCasting(ItemStack item, FluidStack fluid, ItemMold.SubItem mold_meta, IItemMatcher extra)
     {
         if (!item.isEmpty())
         {
@@ -193,10 +193,16 @@ public class FoundryMiscUtils
      * @param name Ore Dictionary name.
      * @param stack Item to register.
      */
-    static public void registerInOreDictionary(String name, ItemStack stack)
+    public static void registerInOreDictionary(String name, ItemStack stack)
     {
         if (!stack.isEmpty() && !FoundryUtils.isItemInOreDictionary(name, stack))
             OreDictionary.registerOre(name, stack);
+    }
+
+    public static String upperCaseFirstChar(String s)
+    {
+        char ch = s.charAt(0);
+        return Character.toUpperCase(s.charAt(0)) + s.substring(1);
     }
 
 }

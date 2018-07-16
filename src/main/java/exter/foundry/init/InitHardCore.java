@@ -7,7 +7,7 @@ import java.util.Set;
 
 import exter.foundry.config.FoundryConfig;
 import exter.foundry.recipes.manager.MeltingRecipeManager;
-import exter.foundry.util.FoundryMiscUtils;
+import exter.foundry.util.MiscUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryCrafting;
@@ -22,7 +22,7 @@ public class InitHardCore
 {
     static private boolean hasOreDictionaryPrefix(ItemStack item, String prefix)
     {
-        for (String name : FoundryMiscUtils.getAllItemOreDictionaryNames(item))
+        for (String name : MiscUtil.getAllItemOreDictionaryNames(item))
         {
             if (name.startsWith(prefix))
             {
@@ -51,7 +51,7 @@ public class InitHardCore
             while (iter.hasNext())
             {
                 Map.Entry<ItemStack, ItemStack> recipe = iter.next();
-                Set<String> ore_names = FoundryMiscUtils.getAllItemOreDictionaryNames(recipe.getValue());
+                Set<String> ore_names = MiscUtil.getAllItemOreDictionaryNames(recipe.getValue());
                 for (String name : ore_names)
                 {
                     if (name.startsWith("ingot") && !FoundryConfig.hardcore_furnace_keep_ingots.contains(name)

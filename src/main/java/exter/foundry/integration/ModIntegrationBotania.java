@@ -10,7 +10,7 @@ import exter.foundry.item.FoundryItems;
 import exter.foundry.item.ItemMold;
 import exter.foundry.recipes.manager.CastingRecipeManager;
 import exter.foundry.recipes.manager.MeltingRecipeManager;
-import exter.foundry.util.FoundryMiscUtils;
+import exter.foundry.util.MiscUtil;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -154,34 +154,34 @@ public class ModIntegrationBotania implements IModIntegration
             ItemStackMatcher extra_dreamsticks1 = new ItemStackMatcher(dreamsticks1);
             ItemStackMatcher extra_dreamsticks2 = new ItemStackMatcher(dreamsticks2);
 
-            FoundryMiscUtils.registerCasting(manasteel_pickaxe, liquid_manasteel, 3, ItemMold.SubItem.PICKAXE,
+            MiscUtil.registerCasting(manasteel_pickaxe, liquid_manasteel, 3, ItemMold.SubItem.PICKAXE,
                     extra_sticks2);
-            FoundryMiscUtils.registerCasting(manasteel_axe, liquid_manasteel, 3, ItemMold.SubItem.AXE, extra_sticks2);
-            FoundryMiscUtils.registerCasting(manasteel_shovel, liquid_manasteel, 1, ItemMold.SubItem.SHOVEL,
+            MiscUtil.registerCasting(manasteel_axe, liquid_manasteel, 3, ItemMold.SubItem.AXE, extra_sticks2);
+            MiscUtil.registerCasting(manasteel_shovel, liquid_manasteel, 1, ItemMold.SubItem.SHOVEL,
                     extra_sticks2);
-            FoundryMiscUtils.registerCasting(manasteel_sword, liquid_manasteel, 2, ItemMold.SubItem.SWORD,
+            MiscUtil.registerCasting(manasteel_sword, liquid_manasteel, 2, ItemMold.SubItem.SWORD,
                     extra_sticks1);
-            FoundryMiscUtils.registerCasting(manasteel_chestplate, liquid_manasteel, 8, ItemMold.SubItem.CHESTPLATE);
-            FoundryMiscUtils.registerCasting(manasteel_leggings, liquid_manasteel, 7, ItemMold.SubItem.LEGGINGS);
-            FoundryMiscUtils.registerCasting(manasteel_helmet, liquid_manasteel, 5, ItemMold.SubItem.HELMET);
-            FoundryMiscUtils.registerCasting(manasteel_boots, liquid_manasteel, 4, ItemMold.SubItem.BOOTS);
+            MiscUtil.registerCasting(manasteel_chestplate, liquid_manasteel, 8, ItemMold.SubItem.CHESTPLATE);
+            MiscUtil.registerCasting(manasteel_leggings, liquid_manasteel, 7, ItemMold.SubItem.LEGGINGS);
+            MiscUtil.registerCasting(manasteel_helmet, liquid_manasteel, 5, ItemMold.SubItem.HELMET);
+            MiscUtil.registerCasting(manasteel_boots, liquid_manasteel, 4, ItemMold.SubItem.BOOTS);
 
-            FoundryMiscUtils.registerCasting(terrasteel_sword,
+            MiscUtil.registerCasting(terrasteel_sword,
                     new FluidStack(liquid_terrasteel, FoundryAPI.FLUID_AMOUNT_INGOT * 2), ItemMold.SubItem.SWORD,
                     extra_sticks1);
 
-            FoundryMiscUtils.registerCasting(elementium_pickaxe, liquid_elementium, 3, ItemMold.SubItem.PICKAXE,
+            MiscUtil.registerCasting(elementium_pickaxe, liquid_elementium, 3, ItemMold.SubItem.PICKAXE,
                     extra_dreamsticks2);
-            FoundryMiscUtils.registerCasting(elementium_axe, liquid_elementium, 3, ItemMold.SubItem.AXE,
+            MiscUtil.registerCasting(elementium_axe, liquid_elementium, 3, ItemMold.SubItem.AXE,
                     extra_dreamsticks2);
-            FoundryMiscUtils.registerCasting(elementium_shovel, liquid_elementium, 1, ItemMold.SubItem.SHOVEL,
+            MiscUtil.registerCasting(elementium_shovel, liquid_elementium, 1, ItemMold.SubItem.SHOVEL,
                     extra_dreamsticks2);
-            FoundryMiscUtils.registerCasting(elementium_sword, liquid_elementium, 2, ItemMold.SubItem.SWORD,
+            MiscUtil.registerCasting(elementium_sword, liquid_elementium, 2, ItemMold.SubItem.SWORD,
                     extra_dreamsticks1);
-            FoundryMiscUtils.registerCasting(elementium_chestplate, liquid_elementium, 8, ItemMold.SubItem.CHESTPLATE);
-            FoundryMiscUtils.registerCasting(elementium_leggings, liquid_elementium, 7, ItemMold.SubItem.LEGGINGS);
-            FoundryMiscUtils.registerCasting(elementium_helmet, liquid_elementium, 5, ItemMold.SubItem.HELMET);
-            FoundryMiscUtils.registerCasting(elementium_boots, liquid_elementium, 4, ItemMold.SubItem.BOOTS);
+            MiscUtil.registerCasting(elementium_chestplate, liquid_elementium, 8, ItemMold.SubItem.CHESTPLATE);
+            MiscUtil.registerCasting(elementium_leggings, liquid_elementium, 7, ItemMold.SubItem.LEGGINGS);
+            MiscUtil.registerCasting(elementium_helmet, liquid_elementium, 5, ItemMold.SubItem.HELMET);
+            MiscUtil.registerCasting(elementium_boots, liquid_elementium, 4, ItemMold.SubItem.BOOTS);
         }
     }
 

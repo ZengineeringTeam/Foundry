@@ -7,7 +7,7 @@ import javax.annotation.Nonnull;
 
 import exter.foundry.Foundry;
 import exter.foundry.api.recipe.IMoldRecipe;
-import exter.foundry.util.FoundryMiscUtils;
+import exter.foundry.util.MiscUtil;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.IDrawable;
@@ -136,8 +136,8 @@ public class MoldStationJEI
                 int height = recipe.getHeight();
                 int[] grid = recipe.getRecipeGrid();
 
-                int left = 3 - FoundryMiscUtils.divCeil(width, 2);
-                int top = 3 - FoundryMiscUtils.divCeil(height, 2);
+                int left = 3 - MiscUtil.divCeil(width, 2);
+                int top = 3 - MiscUtil.divCeil(height, 2);
 
                 for (int y = 0; y < height; y++)
                 {
@@ -172,8 +172,8 @@ public class MoldStationJEI
             int height = recipe.getHeight();
             if (mx >= 7 && mx < 73 && my >= 7 && my < 73)
             {
-                int x = (mx - 7) / 11 - (3 - FoundryMiscUtils.divCeil(width, 2));
-                int y = (my - 7) / 11 - (3 - FoundryMiscUtils.divCeil(height, 2));
+                int x = (mx - 7) / 11 - (3 - MiscUtil.divCeil(width, 2));
+                int y = (my - 7) / 11 - (3 - MiscUtil.divCeil(height, 2));
 
                 int depth = 0;
                 if (x >= 0 && x < width && y >= 0 && y < height)

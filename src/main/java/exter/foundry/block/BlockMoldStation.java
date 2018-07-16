@@ -6,7 +6,7 @@ import java.util.Random;
 import exter.foundry.Foundry;
 import exter.foundry.proxy.CommonProxy;
 import exter.foundry.tileentity.TileEntityMoldStation;
-import exter.foundry.util.FoundryMiscUtils;
+import exter.foundry.util.MiscUtil;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -38,7 +38,7 @@ public class BlockMoldStation extends BlockFoundrySidedMachine
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced)
     {
-        FoundryMiscUtils.localizeTooltip(getUnlocalizedName() + ".tooltip", tooltip);
+        MiscUtil.localizeTooltip(getUnlocalizedName() + ".tooltip", tooltip);
     }
 
     @Override

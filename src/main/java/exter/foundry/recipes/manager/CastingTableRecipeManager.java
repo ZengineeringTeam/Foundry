@@ -12,7 +12,7 @@ import exter.foundry.api.recipe.ICastingTableRecipe.TableType;
 import exter.foundry.api.recipe.manager.ICastingTableRecipeManager;
 import exter.foundry.api.recipe.matcher.IItemMatcher;
 import exter.foundry.recipes.CastingTableRecipe;
-import exter.foundry.util.FoundryMiscUtils;
+import exter.foundry.util.MiscUtil;
 import net.minecraftforge.fluids.FluidStack;
 
 public class CastingTableRecipeManager implements ICastingTableRecipeManager
@@ -39,7 +39,7 @@ public class CastingTableRecipeManager implements ICastingTableRecipeManager
     @Override
     public void addRecipe(IItemMatcher result, FluidStack fluid, TableType type)
     {
-        if (FoundryMiscUtils.isInvalid(result))
+        if (MiscUtil.isInvalid(result))
             return;
         ICastingTableRecipe recipe = new CastingTableRecipe(result, fluid, type);
         recipes.get(recipe.getTableType()).put(recipe.getInput().getFluid().getName(), recipe);

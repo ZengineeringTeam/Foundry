@@ -12,7 +12,7 @@ import exter.foundry.tileentity.TileEntityCastingTableIngot;
 import exter.foundry.tileentity.TileEntityCastingTablePlate;
 import exter.foundry.tileentity.TileEntityCastingTableRod;
 import exter.foundry.tileentity.TileEntityFoundry;
-import exter.foundry.util.FoundryMiscUtils;
+import exter.foundry.util.MiscUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -107,7 +107,7 @@ public class BlockCastingTable extends Block implements ITileEntityProvider, IBl
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced)
     {
-        FoundryMiscUtils.localizeTooltip(getUnlocalizedName(stack.getMetadata()) + ".tooltip", tooltip);
+        MiscUtil.localizeTooltip(getUnlocalizedName(stack.getMetadata()) + ".tooltip", tooltip);
     }
 
     public ItemStack asItemStack(EnumTable machine)

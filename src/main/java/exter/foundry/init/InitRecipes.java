@@ -9,8 +9,6 @@ import exter.foundry.api.FoundryUtils;
 import exter.foundry.api.recipe.ICastingTableRecipe;
 import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.api.recipe.matcher.OreMatcher;
-import exter.foundry.block.BlockComponent;
-import exter.foundry.block.FoundryBlocks;
 import exter.foundry.config.FoundryConfig;
 import exter.foundry.fluid.FluidLiquidMetal;
 import exter.foundry.fluid.FoundryFluidRegistry;
@@ -27,7 +25,7 @@ import exter.foundry.recipes.manager.CastingTableRecipeManager;
 import exter.foundry.recipes.manager.InfuserRecipeManager;
 import exter.foundry.recipes.manager.MeltingRecipeManager;
 import exter.foundry.recipes.manager.MoldRecipeManager;
-import exter.foundry.util.FoundryMiscUtils;
+import exter.foundry.util.MiscUtil;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
@@ -104,6 +102,7 @@ public class InitRecipes
         for (String name : FoundryFluidRegistry.INSTANCE.getFluidNames())
         {
             FluidLiquidMetal fluid = FoundryFluidRegistry.INSTANCE.getFluid(name);
+            name = MiscUtil.upperCaseFirstChar(name);
             if (!fluid.special)
             {
                 FluidStack fluidstack = new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_INGOT);
@@ -127,7 +126,7 @@ public class InitRecipes
 
                 ores = OreDictionary.doesOreNameExist("block" + name) ? OreDictionary.getOres("block" + name, false)
                         : new ArrayList<>();
-                fluidstack = new FluidStack(FoundryFluidRegistry.INSTANCE.getFluid(name), FoundryAPI.getAmountBlock());
+                fluidstack.amount = FoundryAPI.getAmountBlock();
                 if (ores != null && ores.size() > 0)
                 {
                     if (CastingRecipeManager.INSTANCE.findRecipe(fluidstack, block_mold, null) == null)
@@ -199,31 +198,6 @@ public class InitRecipes
 
     public static void registerCrafting()
     {
-
-        ItemStack redstone_stack = new ItemStack(Items.REDSTONE);
-        ItemStack furnace_stack = new ItemStack(Blocks.FURNACE);
-        ItemStack clay_stack = new ItemStack(Items.CLAY_BALL);
-        ItemStack sand_stack = new ItemStack(Blocks.SAND, 1, -1);
-        ItemStack soulsand_stack = new ItemStack(Blocks.SOUL_SAND);
-        ItemStack clayblock_stack = new ItemStack(Blocks.CLAY, 1, -1);
-        ItemStack casing_basic_stack = FoundryBlocks.block_component
-                .asItemStack(BlockComponent.EnumVariant.CASING_BASIC);
-        ItemStack casing_stack = FoundryBlocks.block_component.asItemStack(BlockComponent.EnumVariant.CASING_STANDARD);
-        ItemStack casing_inferno_stack = FoundryBlocks.block_component
-                .asItemStack(BlockComponent.EnumVariant.CASING_ADVANCED);
-        ItemStack piston_stack = new ItemStack(Blocks.PISTON);
-        ItemStack bronze_cauldron_stack = new ItemStack(FoundryBlocks.block_cauldron_bronze);
-        ItemStack cauldron_stack = new ItemStack(Items.CAULDRON);
-        ItemStack chest_stack = new ItemStack(Blocks.CHEST);
-        ItemStack comparator_stack = new ItemStack(Items.COMPARATOR);
-        ItemStack repeater_stack = new ItemStack(Items.REPEATER);
-        ItemStack bucket_stack = new ItemStack(Items.BUCKET);
-        ItemStack magmacream_stack = new ItemStack(Items.MAGMA_CREAM);
-        ItemStack mold_ingot = FoundryItems.mold(ItemMold.SubItem.INGOT);
-        ItemStack mold_plate = FoundryItems.mold(ItemMold.SubItem.PLATE);
-        ItemStack mold_block = FoundryItems.mold(ItemMold.SubItem.BLOCK);
-        ItemStack mold_rod = FoundryItems.mold(ItemMold.SubItem.ROD);
-
     }
 
     static public void registerMachineRecipes()
@@ -383,13 +357,15 @@ public class InitRecipes
 
     public static void addDefaultCasting(FluidLiquidMetal fluid, String name)
     {
+        name = MiscUtil.upperCaseFirstChar(name);
+
         if (fluid.special)
         {
             return;
         }
 
         // Ingot
-        ItemStack ingot = FoundryMiscUtils.getModItemFromOreDictionary(FoundryConfig.prefModID, "ingot" + name);
+        ItemStack ingot = MiscUtil.getModItemFromOreDictionary(FoundryConfig.prefModID, "ingot" + name);
         if (!ingot.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_INGOT);
@@ -399,7 +375,7 @@ public class InitRecipes
         }
 
         // Block
-        ItemStack block = FoundryMiscUtils.getModItemFromOreDictionary(FoundryConfig.prefModID, "block" + name);
+        ItemStack block = MiscUtil.getModItemFromOreDictionary(FoundryConfig.prefModID, "block" + name);
         if (!block.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountBlock());
@@ -409,7 +385,7 @@ public class InitRecipes
         }
 
         // Slab
-        ItemStack slab = FoundryMiscUtils.getModItemFromOreDictionary(FoundryConfig.prefModID, "slab" + name);
+        ItemStack slab = MiscUtil.getModItemFromOreDictionary(FoundryConfig.prefModID, "slab" + name);
         if (!slab.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountBlock() / 2);
@@ -419,7 +395,7 @@ public class InitRecipes
         }
 
         // Stairs
-        ItemStack stairs = FoundryMiscUtils.getModItemFromOreDictionary(FoundryConfig.prefModID, "stairs" + name);
+        ItemStack stairs = MiscUtil.getModItemFromOreDictionary(FoundryConfig.prefModID, "stairs" + name);
         if (!stairs.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountBlock() * 3 / 4);
@@ -428,7 +404,7 @@ public class InitRecipes
         }
 
         // Gear
-        ItemStack gear = FoundryMiscUtils.getModItemFromOreDictionary(FoundryConfig.prefModID, "gear" + name);
+        ItemStack gear = MiscUtil.getModItemFromOreDictionary(FoundryConfig.prefModID, "gear" + name);
         if (!gear.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountGear());
@@ -436,7 +412,7 @@ public class InitRecipes
         }
 
         // Nugget
-        ItemStack nugget = FoundryMiscUtils.getModItemFromOreDictionary(FoundryConfig.prefModID, "nugget" + name);
+        ItemStack nugget = MiscUtil.getModItemFromOreDictionary(FoundryConfig.prefModID, "nugget" + name);
         if (!nugget.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountNugget());
@@ -444,7 +420,7 @@ public class InitRecipes
         }
 
         // Plate
-        ItemStack plate = FoundryMiscUtils.getModItemFromOreDictionary(FoundryConfig.prefModID, "plate" + name);
+        ItemStack plate = MiscUtil.getModItemFromOreDictionary(FoundryConfig.prefModID, "plate" + name);
         if (!plate.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountPlate());
@@ -455,7 +431,7 @@ public class InitRecipes
         }
 
         // Rod
-        ItemStack rod = FoundryMiscUtils.getModItemFromOreDictionary(FoundryConfig.prefModID, "rod" + name);
+        ItemStack rod = MiscUtil.getModItemFromOreDictionary(FoundryConfig.prefModID, "rod" + name);
         if (!rod.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountRod());

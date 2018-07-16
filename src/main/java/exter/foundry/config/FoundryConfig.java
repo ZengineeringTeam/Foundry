@@ -81,7 +81,7 @@ public class FoundryConfig
 
         FoundryAPI.FLUID_AMOUNT_INGOT = config.getInt("Fluid Ingot Value", "general", FoundryAPI.FLUID_AMOUNT_INGOT, 36,
                 Integer.MAX_VALUE, "The value, in mB, of an ingot.");
-        FoundryAPI.FLUID_AMOUNT_ORE = config.getInt("Fluid Ore Value", "general", FoundryAPI.FLUID_AMOUNT_ORE, 1,
+        FoundryAPI.FLUID_AMOUNT_ORE = config.getInt("Fluid Ore Value", "general", FoundryAPI.FLUID_AMOUNT_ORE, 0,
                 Integer.MAX_VALUE, "The value, in mB, of an ore.  Set to 0 to use default values.");
     }
 
