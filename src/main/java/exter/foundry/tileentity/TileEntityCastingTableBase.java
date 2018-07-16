@@ -68,6 +68,11 @@ public abstract class TileEntityCastingTableBase extends TileEntityFoundry
             {
                 return 0;
             }
+            ICastingTableRecipe testRecipe = CastingTableRecipeManager.INSTANCE.findRecipe(resource, getTableType());
+            if (testRecipe == null)
+            {
+                return 0;
+            }
             if (doFill && (tank.getFluid() == null || tank.getFluid().amount == 0))
             {
                 setRecipe(resource);
@@ -161,7 +166,6 @@ public abstract class TileEntityCastingTableBase extends TileEntityFoundry
         return 1;
     }
 
-    @Deprecated
     @Override
     public final boolean isItemValidForSlot(int slot, ItemStack itemstack)
     {
