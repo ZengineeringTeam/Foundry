@@ -396,7 +396,8 @@ public class InitRecipes
         if (!stairs.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountBlock() * 3 / 4);
-            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stairs), fluid_stack, mold_stairs, false, null);
+            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stairs), fluid_stack, mold_stairs, false,
+                    null);
             MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stairs), fluid_stack);
         }
 
@@ -413,7 +414,8 @@ public class InitRecipes
         if (!nugget.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountNugget());
-            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(nugget), fluid_stack, mold_nugget, false, null);
+            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(nugget), fluid_stack, mold_nugget, false,
+                    null);
         }
 
         // Plate

@@ -3,7 +3,6 @@ package exter.foundry.item;
 import exter.foundry.Foundry;
 import exter.foundry.creativetab.FoundryTab;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

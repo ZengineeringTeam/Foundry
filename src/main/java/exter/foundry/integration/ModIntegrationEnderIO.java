@@ -113,18 +113,14 @@ public class ModIntegrationEnderIO implements IModIntegration
             ItemStack dark_steel_leggings = getItemStack("item_dark_steel_leggings");
             ItemStack dark_steel_boots = getItemStack("item_dark_steel_boots");
 
-            MiscUtil.registerCasting(dark_steel_chestplate, liquid_dark_steel, 8, ItemMold.SubItem.CHESTPLATE,
-                    null);
+            MiscUtil.registerCasting(dark_steel_chestplate, liquid_dark_steel, 8, ItemMold.SubItem.CHESTPLATE, null);
             MiscUtil.registerCasting(dark_steel_helmet, liquid_dark_steel, 5, ItemMold.SubItem.HELMET, null);
-            MiscUtil.registerCasting(dark_steel_leggings, liquid_dark_steel, 7, ItemMold.SubItem.LEGGINGS,
-                    null);
+            MiscUtil.registerCasting(dark_steel_leggings, liquid_dark_steel, 7, ItemMold.SubItem.LEGGINGS, null);
             MiscUtil.registerCasting(dark_steel_boots, liquid_dark_steel, 4, ItemMold.SubItem.BOOTS, null);
 
-            MiscUtil.registerCasting(dark_steel_pickaxe, liquid_dark_steel, 3, ItemMold.SubItem.PICKAXE,
-                    extra_sticks2);
+            MiscUtil.registerCasting(dark_steel_pickaxe, liquid_dark_steel, 3, ItemMold.SubItem.PICKAXE, extra_sticks2);
             MiscUtil.registerCasting(dark_steel_axe, liquid_dark_steel, 3, ItemMold.SubItem.AXE, extra_sticks2);
-            MiscUtil.registerCasting(dark_steel_sword, liquid_dark_steel, 2, ItemMold.SubItem.SWORD,
-                    extra_sticks1);
+            MiscUtil.registerCasting(dark_steel_sword, liquid_dark_steel, 2, ItemMold.SubItem.SWORD, extra_sticks1);
 
         }
         ItemStack silicon = getItemStack("item_material", 5);
@@ -166,8 +162,8 @@ public class ModIntegrationEnderIO implements IModIntegration
         IForgeRegistry<Block> registry = e.getRegistry();
         liquid_redstone_alloy = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "redstone_alloy", 1000, 14,
                 0xFFFFFFFF);
-        liquid_energetic_alloy = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "energetic_alloy", 2500, 15,
-                0xFFFFFFFF);
+        liquid_energetic_alloy = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "energetic_alloy", 2500,
+                15, 0xFFFFFFFF);
         liquid_vibrant_alloy = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "vibrant_alloy", 2500, 15,
                 0xFFFFFF);
         liquid_dark_steel = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "dark_steel", 1850, 12,

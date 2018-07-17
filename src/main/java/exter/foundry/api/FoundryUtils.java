@@ -186,8 +186,8 @@ public class FoundryUtils
             FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(sword),
                     new FluidStack(fluid, FoundryAPI.getAmountSword()));
             FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(sword),
-                    new FluidStack(fluid, FoundryAPI.getAmountSword()), SubItem.SWORD.getItem(),
-                    false, new OreMatcher("stickWood"));
+                    new FluidStack(fluid, FoundryAPI.getAmountSword()), SubItem.SWORD.getItem(), false,
+                    new OreMatcher("stickWood"));
         }
 
         if (!sickle.isEmpty())
@@ -195,8 +195,8 @@ public class FoundryUtils
             FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(sickle),
                     new FluidStack(fluid, FoundryAPI.getAmountSickle()));
             FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(sickle),
-                    new FluidStack(fluid, FoundryAPI.getAmountSickle()), SubItem.SICKLE.getItem(),
-                    false, new OreMatcher("stickWood"));
+                    new FluidStack(fluid, FoundryAPI.getAmountSickle()), SubItem.SICKLE.getItem(), false,
+                    new OreMatcher("stickWood"));
         }
 
         if (!shears.isEmpty())

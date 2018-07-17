@@ -46,14 +46,11 @@ public class JEIFoundryPlugin implements IModPlugin
         transferRegistry.addRecipeTransferHandler(ContainerMeltingCrucible.class, FoundryJEIConstants.MELT_UID,
                 ContainerMeltingCrucible.SLOTS_TE, ContainerMeltingCrucible.SLOTS_TE_SIZE,
                 ContainerMeltingCrucible.SLOTS_INVENTORY, 36);
-        registry.addRecipeCatalyst(
-                FoundryBlocks.block_machine.asItemStack(BlockMachine.EnumMachine.CRUCIBLE_BASIC),
+        registry.addRecipeCatalyst(FoundryBlocks.block_machine.asItemStack(BlockMachine.EnumMachine.CRUCIBLE_BASIC),
                 FoundryJEIConstants.MELT_UID);
-        registry.addRecipeCatalyst(
-                FoundryBlocks.block_machine.asItemStack(BlockMachine.EnumMachine.CRUCIBLE_STANDARD),
+        registry.addRecipeCatalyst(FoundryBlocks.block_machine.asItemStack(BlockMachine.EnumMachine.CRUCIBLE_STANDARD),
                 FoundryJEIConstants.MELT_UID);
-        registry.addRecipeCatalyst(
-                FoundryBlocks.block_machine.asItemStack(BlockMachine.EnumMachine.CRUCIBLE_ADVANCED),
+        registry.addRecipeCatalyst(FoundryBlocks.block_machine.asItemStack(BlockMachine.EnumMachine.CRUCIBLE_ADVANCED),
                 FoundryJEIConstants.MELT_UID);
         registry.handleRecipes(IMeltingRecipe.class, MeltingJEI.Wrapper::new, FoundryJEIConstants.MELT_UID);
         registry.addRecipes(MeltingRecipeManager.INSTANCE.getRecipes(), FoundryJEIConstants.MELT_UID);
@@ -83,8 +80,7 @@ public class JEIFoundryPlugin implements IModPlugin
         registry.handleRecipes(IAlloyMixerRecipe.class, AlloyMixerJEI.Wrapper::new, FoundryJEIConstants.AM_UID);
         registry.addRecipes(AlloyMixerRecipeManager.INSTANCE.getRecipes(), FoundryJEIConstants.AM_UID);
 
-        registry.addRecipeCatalyst(
-                FoundryBlocks.block_machine.asItemStack(BlockMachine.EnumMachine.ALLOYING_CRUCIBLE),
+        registry.addRecipeCatalyst(FoundryBlocks.block_machine.asItemStack(BlockMachine.EnumMachine.ALLOYING_CRUCIBLE),
                 FoundryJEIConstants.AC_UID);
         registry.handleRecipes(IAlloyingCrucibleRecipe.class, AlloyingCrucibleJEI.Wrapper::new,
                 FoundryJEIConstants.AC_UID);

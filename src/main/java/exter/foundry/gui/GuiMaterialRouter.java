@@ -301,8 +301,9 @@ public class GuiMaterialRouter extends GuiFoundry
     protected void drawGuiContainerForegroundLayer(int mouse_x, int mouse_y)
     {
         super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
-        
-        fontRenderer.drawString(STRING_MACHINE, xSize / 2 - fontRenderer.getStringWidth(STRING_MACHINE) / 2, 6, 0x404040);
+
+        fontRenderer.drawString(STRING_MACHINE, xSize / 2 - fontRenderer.getStringWidth(STRING_MACHINE) / 2, 6,
+                0x404040);
         fontRenderer.drawString(getInventoryName(), 32, ySize - 96 + 2, 0x404040);
 
         // TODO
