@@ -2,6 +2,6 @@
   "parent": "item/generated",
   "textures":
   {
-    "layer0": "foundry:items/moldCableIC2"
+    "layer0": "foundry:items/mold_cableIC2"
   }
 }

@@ -2,6 +2,6 @@
   "parent": "item/generated",
   "textures":
   {
-    "layer0": "foundry:items/moldBoots"
+    "layer0": "foundry:items/mold_boots"
   }
 }

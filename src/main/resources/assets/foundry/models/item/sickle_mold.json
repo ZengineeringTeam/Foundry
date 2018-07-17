@@ -2,6 +2,6 @@
   "parent": "item/generated",
   "textures":
   {
-    "layer0": "foundry:items/moldSickle"
+    "layer0": "foundry:items/mold_sickle"
   }
 }
