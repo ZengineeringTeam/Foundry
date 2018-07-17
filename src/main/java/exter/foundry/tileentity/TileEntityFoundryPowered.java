@@ -11,7 +11,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional;
 
@@ -21,62 +21,39 @@ import net.minecraftforge.fml.common.Optional;
 @Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
 public abstract class TileEntityFoundryPowered extends TileEntityFoundry implements IEnergySink
 {
+    protected final EnergyStorageMachine energyStorage;
 
-    private class ForgeEnergyConsumer implements IEnergyStorage
+    private class EnergyStorageMachine extends EnergyStorage
     {
-
-        @Override
-        public boolean canExtract()
+        public EnergyStorageMachine(int capacity, int maxReceive, int maxExtract)
         {
-            return false;
+            super(capacity, maxReceive, maxExtract);
         }
 
-        @Override
-        public boolean canReceive()
+        public void setEnergy(int energy)
         {
-            return true;
+            energy = Math.max(energy, getMaxEnergyStored());
         }
 
-        @Override
-        public int extractEnergy(int maxExtract, boolean simulate)
+        public int useEnergy(int maxExtract, boolean simulate)
         {
-            return 0;
-        }
-
-        @Override
-        public int getEnergyStored()
-        {
-            return energy_stored / RATIO_FE;
-        }
-
-        @Override
-        public int getMaxEnergyStored()
-        {
-            return 0;
-        }
-
-        @Override
-        public int receiveEnergy(int maxReceive, boolean simulate)
-        {
-            return receiveFoundryEnergy(maxReceive * RATIO_FE, !simulate, false) / RATIO_FE;
+            int energyExtracted = Math.min(energy, maxExtract);
+            if (!simulate)
+                energy -= energyExtracted;
+            return energyExtracted;
         }
     }
 
     static public int RATIO_RF = 1;
-    static public int RATIO_FE = 1;
-
     static public int RATIO_EU = 4;
 
     private boolean added_enet;
     protected boolean update_energy;
     protected boolean update_energy_tick;
-    private int energy_stored;
-
-    private final ForgeEnergyConsumer fe;
 
     public TileEntityFoundryPowered()
     {
-        fe = new ForgeEnergyConsumer();
+        energyStorage = new EnergyStorageMachine(getFoundryEnergyCapacity(), 512, 0);
         update_energy = false;
         update_energy_tick = true;
         added_enet = false;
@@ -94,7 +71,7 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
     {
         if (cap == CapabilityEnergy.ENERGY)
         {
-            return CapabilityEnergy.ENERGY.cast(fe);
+            return CapabilityEnergy.ENERGY.cast(energyStorage);
         }
         else
         {
@@ -120,15 +97,7 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
 
     public int getStoredFoundryEnergy()
     {
-        int capacity = getFoundryEnergyCapacity();
-        if (energy_stored > capacity)
-        {
-            return capacity;
-        }
-        else
-        {
-            return energy_stored;
-        }
+        return energyStorage.getEnergyStored();
     }
 
     @Override
@@ -182,37 +151,18 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
         super.readFromNBT(compound);
         if (compound.hasKey("energy"))
         {
-            energy_stored = compound.getInteger("energy");
+            energyStorage.setEnergy(compound.getInteger("energy"));
         }
     }
 
     private double receiveEU(double eu, boolean do_receive)
     {
-        return (double) receiveFoundryEnergy((int) (eu * RATIO_EU), do_receive, true) / RATIO_EU;
+        return (double) receiveFoundryEnergy((int) (eu * RATIO_EU), do_receive) / RATIO_EU;
     }
 
-    private int receiveFoundryEnergy(int en, boolean do_receive, boolean allow_overflow)
+    private int receiveFoundryEnergy(int energy, boolean do_receive)
     {
-        if (!allow_overflow)
-        {
-            int needed = getFoundryEnergyCapacity() - energy_stored;
-            if (en > needed)
-            {
-                en = needed;
-            }
-        }
-        if (do_receive)
-        {
-            energy_stored += en;
-            if (en > 0)
-            {
-                if (update_energy && !world.isRemote)
-                {
-                    update_energy_tick = true;
-                }
-            }
-        }
-        return en;
+        return energyStorage.receiveEnergy(energy, !do_receive);
     }
 
     @Optional.Method(modid = "ic2")
@@ -265,7 +215,7 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
     {
         if (update_energy)
         {
-            updateValue("energy", energy_stored);
+            updateValue("energy", energyStorage.getEnergyStored());
         }
     }
 
@@ -287,16 +237,7 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
 
     public int useFoundryEnergy(int amount, boolean do_use)
     {
-        if (amount > energy_stored)
-        {
-            amount = energy_stored;
-        }
-        if (do_use)
-        {
-            energy_stored -= amount;
-            updateFoundryEnergy();
-        }
-        return amount;
+        return energyStorage.useEnergy(amount, !do_use);
     }
 
     @Override
@@ -307,7 +248,7 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
             compound = new NBTTagCompound();
         }
         super.writeToNBT(compound);
-        compound.setInteger("energy", energy_stored);
+        compound.setInteger("energy", energyStorage.getEnergyStored());
         return compound;
     }
 }

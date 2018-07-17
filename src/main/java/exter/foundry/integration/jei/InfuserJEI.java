@@ -9,7 +9,6 @@ import exter.foundry.Foundry;
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.recipe.IInfuserRecipe;
 import exter.foundry.gui.GuiMetalInfuser;
-import exter.foundry.tileentity.TileEntityFoundryPowered;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.IDrawable;
@@ -135,8 +134,7 @@ public class InfuserJEI
         @Override
         public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY)
         {
-            minecraft.fontRenderer.drawString(recipe.getEnergyNeeded() / TileEntityFoundryPowered.RATIO_FE + " FE", 0,
-                    38, 0);
+            minecraft.fontRenderer.drawString(recipe.getEnergyNeeded() + " FE", 0, 38, 0);
         }
 
         @Override

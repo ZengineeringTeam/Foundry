@@ -90,7 +90,6 @@ public class TileEntityInductionHeater extends TileEntityFoundryPowered
     @Override
     protected void updateClient()
     {
-
     }
 
     @Override

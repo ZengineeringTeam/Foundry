@@ -259,4 +259,4 @@ gui.foundry.router.remove=移除
 gui.foundry.crucible=熔炼坩埚
 gui.foundry.crucible.temperature=温度：%d K
 gui.foundry.crucible.melt=熔点：%d K
-gui.foundry.caster.energy=能量：%d / %d
+gui.foundry.caster.energy=能量：%d FE / %d FE

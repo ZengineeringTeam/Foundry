@@ -253,4 +253,4 @@ gui.foundry.router.remove=Remove
 gui.foundry.crucible=Melting Crucible
 gui.foundry.crucible.temperature=Temperature: %d K
 gui.foundry.crucible.melt=Melt: %d K
-gui.foundry.caster.energy=Energy: %d / %d
+gui.foundry.caster.energy=Energy: %d FE / %d FE
