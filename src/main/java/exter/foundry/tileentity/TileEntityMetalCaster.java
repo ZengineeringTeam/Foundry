@@ -249,6 +249,10 @@ public class TileEntityMetalCaster extends TileEntityFoundryPowered
                     {
                         inventory.get(INVENTORY_OUTPUT).grow(current_recipe.getOutput().getCount());
                     }
+                    if (current_recipe.consumesMold())
+                    {
+                        inventory.get(INVENTORY_MOLD).shrink(1);
+                    }
                     updateInventoryItem(INVENTORY_OUTPUT);
                     updateTank(0);
                     markDirty();

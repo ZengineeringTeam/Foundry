@@ -31,7 +31,7 @@ public class OreMatcher implements IItemMatcher
     @Override
     public boolean apply(ItemStack input)
     {
-        return FoundryUtils.isItemInOreDictionary(match, input) && input.getCount() >= amount;
+        return input != null && FoundryUtils.isItemInOreDictionary(match, input) && input.getCount() >= amount;
     }
 
     @Override

@@ -78,7 +78,7 @@ public class ItemMold extends Item
             {
                 return new ItemStack(Items.SHIELD, amount);
             }
-            return new ItemStack(FoundryItems.item_mold, amount);
+            return new ItemStack(FoundryItems.item_mold, amount, id);
         }
     }
 

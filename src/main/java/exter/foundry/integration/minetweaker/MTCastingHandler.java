@@ -122,14 +122,14 @@ public class MTCastingHandler
     }
 
     @ZenMethod
-    static public void addRecipe(IItemStack output, ILiquidStack input, IItemStack mold, @Optional IIngredient extra, @Optional int speed)
+    static public void addRecipe(IItemStack output, ILiquidStack input, IItemStack mold, @Optional IIngredient extra, @Optional int speed, @Optional boolean consumes_mold)
     {
         ModIntegrationMinetweaker.queueAdd(() -> {
             ICastingRecipe recipe = null;
             try
             {
                 recipe = new CastingRecipe(new ItemStackMatcher(CraftTweakerMC.getItemStack(output)),
-                        CraftTweakerMC.getLiquidStack(input), CraftTweakerMC.getItemStack(mold),
+                        CraftTweakerMC.getLiquidStack(input), CraftTweakerMC.getItemStack(mold), consumes_mold,
                         extra == null ? null : MTHelper.getIngredient(extra), speed == 0 ? 100 : speed);
             }
             catch (IllegalArgumentException e)

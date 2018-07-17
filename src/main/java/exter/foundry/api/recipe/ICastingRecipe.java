@@ -62,4 +62,6 @@ public interface ICastingRecipe
      * Return true if the recipe requires an extra item.
      */
     public boolean requiresExtra();
+
+    public boolean consumesMold();
 }

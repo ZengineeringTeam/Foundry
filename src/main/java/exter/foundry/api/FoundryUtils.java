@@ -96,13 +96,21 @@ public class FoundryUtils
                 ForgeRegistries.ITEMS.getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "armor.legs_" + name)));
         ItemStack boots = new ItemStack(
                 ForgeRegistries.ITEMS.getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "armor.boots_" + name)));
+        ItemStack hammer = new ItemStack(
+                ForgeRegistries.ITEMS.getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "tool.hammer_" + name)));
+        ItemStack shield = new ItemStack(
+                ForgeRegistries.ITEMS.getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "tool.shield_" + name)));
+        ItemStack sickle = new ItemStack(
+                ForgeRegistries.ITEMS.getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "tool.sickle_" + name)));
+        ItemStack shears = new ItemStack(
+                ForgeRegistries.ITEMS.getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "tool.shears_" + name)));
 
         if (!helm.isEmpty())
         {
             FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(helm),
                     new FluidStack(fluid, FoundryAPI.getAmountHelm()));
             FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(helm),
-                    new FluidStack(fluid, FoundryAPI.getAmountHelm()), SubItem.HELMET.getItem(), null);
+                    new FluidStack(fluid, FoundryAPI.getAmountHelm()), SubItem.HELMET.getItem(), false, null);
         }
 
         if (!chest.isEmpty())
@@ -110,7 +118,7 @@ public class FoundryUtils
             FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(chest),
                     new FluidStack(fluid, FoundryAPI.getAmountChest()));
             FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(chest),
-                    new FluidStack(fluid, FoundryAPI.getAmountChest()), SubItem.CHESTPLATE.getItem(), null);
+                    new FluidStack(fluid, FoundryAPI.getAmountChest()), SubItem.CHESTPLATE.getItem(), false, null);
         }
 
         if (!legs.isEmpty())
@@ -118,7 +126,7 @@ public class FoundryUtils
             FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(legs),
                     new FluidStack(fluid, FoundryAPI.getAmountLegs()));
             FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(legs),
-                    new FluidStack(fluid, FoundryAPI.getAmountLegs()), SubItem.LEGGINGS.getItem(), null);
+                    new FluidStack(fluid, FoundryAPI.getAmountLegs()), SubItem.LEGGINGS.getItem(), false, null);
         }
 
         if (!boots.isEmpty())
@@ -126,7 +134,7 @@ public class FoundryUtils
             FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(boots),
                     new FluidStack(fluid, FoundryAPI.getAmountHelm()));
             FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(boots),
-                    new FluidStack(fluid, FoundryAPI.getAmountHelm()), SubItem.BOOTS.getItem(), null);
+                    new FluidStack(fluid, FoundryAPI.getAmountHelm()), SubItem.BOOTS.getItem(), false, null);
         }
 
         ItemStack pickaxe = new ItemStack(
@@ -146,7 +154,7 @@ public class FoundryUtils
             FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(pickaxe),
                     new FluidStack(fluid, FoundryAPI.getAmountPickaxe()));
             FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(pickaxe),
-                    new FluidStack(fluid, FoundryAPI.getAmountPickaxe()), SubItem.PICKAXE.getItem(), stick);
+                    new FluidStack(fluid, FoundryAPI.getAmountPickaxe()), SubItem.PICKAXE.getItem(), false, stick);
         }
 
         if (!axe.isEmpty())
@@ -154,7 +162,7 @@ public class FoundryUtils
             FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(axe),
                     new FluidStack(fluid, FoundryAPI.getAmountAxe()));
             FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(axe),
-                    new FluidStack(fluid, FoundryAPI.getAmountAxe()), SubItem.AXE.getItem(), stick);
+                    new FluidStack(fluid, FoundryAPI.getAmountAxe()), SubItem.AXE.getItem(), false, stick);
         }
 
         if (!shovel.isEmpty())
@@ -162,7 +170,7 @@ public class FoundryUtils
             FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(shovel),
                     new FluidStack(fluid, FoundryAPI.getAmountShovel()));
             FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(shovel),
-                    new FluidStack(fluid, FoundryAPI.getAmountShovel()), SubItem.SHOVEL.getItem(), stick);
+                    new FluidStack(fluid, FoundryAPI.getAmountShovel()), SubItem.SHOVEL.getItem(), false, stick);
         }
 
         if (!hoe.isEmpty())
@@ -170,7 +178,7 @@ public class FoundryUtils
             FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(hoe),
                     new FluidStack(fluid, FoundryAPI.getAmountHoe()));
             FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(hoe),
-                    new FluidStack(fluid, FoundryAPI.getAmountHoe()), SubItem.HOE.getItem(), stick);
+                    new FluidStack(fluid, FoundryAPI.getAmountHoe()), SubItem.HOE.getItem(), false, stick);
         }
 
         if (!sword.isEmpty())
@@ -179,7 +187,40 @@ public class FoundryUtils
                     new FluidStack(fluid, FoundryAPI.getAmountSword()));
             FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(sword),
                     new FluidStack(fluid, FoundryAPI.getAmountSword()), SubItem.SWORD.getItem(),
-                    new OreMatcher("stickWood"));
+                    false, new OreMatcher("stickWood"));
+        }
+
+        if (!sickle.isEmpty())
+        {
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(sickle),
+                    new FluidStack(fluid, FoundryAPI.getAmountSickle()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(sickle),
+                    new FluidStack(fluid, FoundryAPI.getAmountSickle()), SubItem.SICKLE.getItem(),
+                    false, new OreMatcher("stickWood"));
+        }
+
+        if (!shears.isEmpty())
+        {
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(shears),
+                    new FluidStack(fluid, FoundryAPI.getAmountShears()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(shears),
+                    new FluidStack(fluid, FoundryAPI.getAmountShears()), SubItem.SHEARS.getItem(), false, null);
+        }
+
+        if (!hammer.isEmpty())
+        {
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(hammer),
+                    new FluidStack(fluid, FoundryAPI.getAmountHammer()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(hammer),
+                    new FluidStack(fluid, FoundryAPI.getAmountHammer()), SubItem.HAMMER.getItem(), false, stick);
+        }
+
+        if (!shield.isEmpty())
+        {
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(shield),
+                    new FluidStack(fluid, FoundryAPI.getAmountSword()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(shield),
+                    new FluidStack(fluid, FoundryAPI.getAmountSword()), SubItem.SHIELD.getItem(), true, null);
         }
     }
 }

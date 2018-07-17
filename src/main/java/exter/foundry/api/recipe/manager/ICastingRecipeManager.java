@@ -24,7 +24,10 @@ public interface ICastingRecipeManager
      * @param in_mold Mold required.
      * @param in_extra Extra item required (null, if no extra item is required).
      */
-    public void addRecipe(IItemMatcher result, FluidStack in_fluid, ItemStack in_mold, IItemMatcher in_extra);
+    default public void addRecipe(IItemMatcher result, FluidStack in_fluid, ItemStack in_mold, boolean comsume_mold, IItemMatcher in_extra)
+    {
+        addRecipe(result, in_fluid, in_mold, comsume_mold, in_extra, 100);
+    }
 
     /**
      * Register a Metal Caster recipe.
@@ -34,7 +37,7 @@ public interface ICastingRecipeManager
      * @param in_mold Mold required.
      * @param in_extra Extra item required (null, if no extra item is required).
      */
-    public void addRecipe(IItemMatcher result, FluidStack in_fluid, ItemStack in_mold, IItemMatcher in_extra, int speed);
+    public void addRecipe(IItemMatcher result, FluidStack in_fluid, ItemStack in_mold, boolean comsume_mold, IItemMatcher in_extra, int speed);
 
     /**
      * Find a casting recipe given a FluidStack and a mold.

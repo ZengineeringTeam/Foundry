@@ -171,6 +171,11 @@ public class MiscUtil
 
     public static void registerCasting(ItemStack item, FluidStack fluid, ItemMold.SubItem mold_meta, IItemMatcher extra)
     {
+        registerCasting(item, fluid, mold_meta, false, extra);
+    }
+
+    public static void registerCasting(ItemStack item, FluidStack fluid, ItemMold.SubItem mold_meta, boolean consume_mold, IItemMatcher extra)
+    {
         if (!item.isEmpty())
         {
             ItemStack mold = mold_meta.getItem();
@@ -178,7 +183,7 @@ public class MiscUtil
             if (CastingRecipeManager.INSTANCE.findRecipe(
                     new FluidStack(fluid.getFluid(), FoundryAPI.CASTER_TANK_CAPACITY), mold, extra_item) == null)
             {
-                CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(item), fluid, mold, extra);
+                CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(item), fluid, mold, consume_mold, extra);
             }
         }
         else

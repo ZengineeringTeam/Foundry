@@ -21,8 +21,9 @@ public class CastingRecipe implements ICastingRecipe
     private final IItemMatcher output;
 
     private final int speed;
+    private final boolean consume_mold;
 
-    public CastingRecipe(IItemMatcher result, FluidStack in_fluid, ItemStack in_mold, @Nullable IItemMatcher in_extra, int cast_speed)
+    public CastingRecipe(IItemMatcher result, FluidStack in_fluid, ItemStack in_mold, boolean in_comsume_mold, @Nullable IItemMatcher in_extra, int cast_speed)
     {
         Preconditions.checkArgument(in_fluid != null);
         Preconditions.checkArgument(!in_mold.isEmpty());
@@ -33,6 +34,7 @@ public class CastingRecipe implements ICastingRecipe
         mold = in_mold.copy();
         extra = in_extra;
         speed = cast_speed;
+        consume_mold = in_comsume_mold;
     }
 
     @Override
@@ -81,12 +83,18 @@ public class CastingRecipe implements ICastingRecipe
     public boolean matchesRecipe(ItemStack mold_stack, FluidStack fluid_stack, ItemStack in_extra)
     {
         return fluid_stack != null && fluid_stack.containsFluid(fluid) && ItemStack.areItemStacksEqual(mold, mold_stack)
-                && (extra == null || extra.apply(in_extra));
+                && (!requiresExtra() || extra.apply(in_extra));
     }
 
     @Override
     public boolean requiresExtra()
     {
         return extra != null;
+    }
+
+    @Override
+    public boolean consumesMold()
+    {
+        return consume_mold;
     }
 }

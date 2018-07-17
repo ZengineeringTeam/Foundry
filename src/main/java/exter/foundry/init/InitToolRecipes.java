@@ -2,7 +2,6 @@ package exter.foundry.init;
 
 import java.util.Map.Entry;
 
-import cofh.thermalfoundation.ThermalFoundation;
 import exter.foundry.api.FoundryUtils;
 import exter.foundry.api.recipe.matcher.OreMatcher;
 import exter.foundry.fluid.FluidLiquidMetal;
@@ -13,8 +12,6 @@ import exter.foundry.recipes.manager.MoldRecipeManager;
 import exter.foundry.util.MiscUtil;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class InitToolRecipes
 {
@@ -63,7 +60,7 @@ public class InitToolRecipes
                 new int[] { 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 2, 1, 0, 1, 0, });
 
         // TODO: mold recipes
-
+        // TODO: melting recipes
         MiscUtil.registerCasting(new ItemStack(Items.IRON_PICKAXE), FoundryFluids.liquid_iron, 3,
                 ItemMold.SubItem.PICKAXE, extra_sticks2);
         MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_PICKAXE), FoundryFluids.liquid_gold, 3,
@@ -107,6 +104,8 @@ public class InitToolRecipes
         MiscUtil.registerCasting(new ItemStack(Items.IRON_BOOTS), FoundryFluids.liquid_iron, 4, ItemMold.SubItem.BOOTS);
         MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_BOOTS), FoundryFluids.liquid_gold, 4,
                 ItemMold.SubItem.BOOTS);
+
+        MiscUtil.registerCasting(new ItemStack(Items.SHEARS), FoundryFluids.liquid_iron, 2, ItemMold.SubItem.SHEARS);
 
         // iron shield?
         // MiscUtil.registerCasting(new ItemStack(Items.IRON_BOOTS), FoundryFluids.liquid_iron, 4, ItemMold.SubItem.BOOTS);
