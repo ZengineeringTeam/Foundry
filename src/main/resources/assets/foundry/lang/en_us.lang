@@ -231,6 +231,9 @@ item.foundry.mold.chestplate.name=Chestplate Mold
 item.foundry.mold.leggings.name=Leggings Mold
 item.foundry.mold.boots.name=Boots Mold
 item.foundry.mold.nugget.name=Nugget Mold
+item.foundry.mold.sickle.name=Sickle Mold
+item.foundry.mold.shears.name=Shears Mold
+item.foundry.mold.hammer.name=Hammer Mold
 
 gui.jei.foundry.melting=Melting Crucible
 gui.jei.foundry.melting.point=%d K
