@@ -141,12 +141,6 @@ public class TileEntityAlloyMixer extends TileEntityFoundryPowered
     }
 
     @Override
-    public int getFoundryEnergyCapacity()
-    {
-        return 3000;
-    }
-
-    @Override
     public int getSizeInventory()
     {
         return 10;

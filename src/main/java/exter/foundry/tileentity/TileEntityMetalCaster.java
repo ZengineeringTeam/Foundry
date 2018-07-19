@@ -113,12 +113,6 @@ public class TileEntityMetalCaster extends TileEntityFoundryPowered
     }
 
     @Override
-    public int getFoundryEnergyCapacity()
-    {
-        return 40000;
-    }
-
-    @Override
     protected IItemHandler getItemHandler(EnumFacing side)
     {
         return item_handler;

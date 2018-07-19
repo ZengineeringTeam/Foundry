@@ -82,7 +82,6 @@ public class TileEntityMetalInfuser extends TileEntityFoundryPowered
     @Override
     public void closeInventory(EntityPlayer player)
     {
-
     }
 
     private void doInfusion()
@@ -123,12 +122,6 @@ public class TileEntityMetalInfuser extends TileEntityFoundryPowered
     protected IFluidHandler getFluidHandler(EnumFacing facing)
     {
         return fluid_handler;
-    }
-
-    @Override
-    public int getFoundryEnergyCapacity()
-    {
-        return 3000;
     }
 
     @Override

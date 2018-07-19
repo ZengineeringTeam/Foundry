@@ -86,7 +86,10 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
         return (double) (getFoundryEnergyCapacity() - getStoredFoundryEnergy()) / RATIO_EU;
     }
 
-    public abstract int getFoundryEnergyCapacity();
+    public int getFoundryEnergyCapacity()
+    {
+        return energyStorage.getMaxEnergyStored();
+    }
 
     @Optional.Method(modid = "ic2")
     @Override

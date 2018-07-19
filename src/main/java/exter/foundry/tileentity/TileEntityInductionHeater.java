@@ -44,12 +44,6 @@ public class TileEntityInductionHeater extends TileEntityFoundryPowered
         return super.getCapability(cap, facing);
     }
 
-    @Override
-    public int getFoundryEnergyCapacity()
-    {
-        return 25000;
-    }
-
     @Optional.Method(modid = "IC2")
     @Override
     public int getSinkTier()
