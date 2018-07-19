@@ -7,7 +7,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerAlloyMixer extends Container
+public class ContainerAlloyMixer extends ContainerFoundry
 {
 
     // Slot numbers
@@ -27,6 +27,7 @@ public class ContainerAlloyMixer extends Container
 
     public ContainerAlloyMixer(TileEntityAlloyMixer mixer, EntityPlayer player)
     {
+        super(mixer);
         te_alloymixer = mixer;
         te_alloymixer.openInventory(player);
         int i, j;

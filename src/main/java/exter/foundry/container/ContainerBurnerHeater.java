@@ -7,7 +7,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerBurnerHeater extends Container
+public class ContainerBurnerHeater extends ContainerFoundry
 {
 
     // Slot numbers
@@ -27,6 +27,7 @@ public class ContainerBurnerHeater extends Container
 
     public ContainerBurnerHeater(TileEntityBurnerHeater burner, EntityPlayer player)
     {
+        super(burner);
         te_burner = burner;
         te_burner.openInventory(player);
         int i, j;

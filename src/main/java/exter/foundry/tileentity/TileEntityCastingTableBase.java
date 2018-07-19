@@ -175,7 +175,6 @@ public abstract class TileEntityCastingTableBase extends TileEntityFoundry
     @Override
     protected final void onInitialize()
     {
-
     }
 
     @Override
@@ -214,7 +213,7 @@ public abstract class TileEntityCastingTableBase extends TileEntityFoundry
         {
             recipe = null;
             tank.setCapacity(getDefaultCapacity());
-            updateValue("tank_capacity", tank.getCapacity());
+            sendDataToClientSide();
             return;
         }
 
@@ -225,18 +224,17 @@ public abstract class TileEntityCastingTableBase extends TileEntityFoundry
             {
                 recipe = null;
                 tank.setCapacity(getDefaultCapacity());
-                updateValue("tank_capacity", tank.getCapacity());
+                sendDataToClientSide();
                 return;
             }
             tank.setCapacity(recipe.getInput().amount);
-            updateValue("tank_capacity", tank.getCapacity());
+            sendDataToClientSide();
         }
     }
 
     @Override
     protected void updateClient()
     {
-
     }
 
     @Override
@@ -261,7 +259,7 @@ public abstract class TileEntityCastingTableBase extends TileEntityFoundry
 
         if (last_progress != progress)
         {
-            updateValue("progress", progress);
+            sendDataToClientSide();
         }
     }
 
@@ -275,5 +273,19 @@ public abstract class TileEntityCastingTableBase extends TileEntityFoundry
         super.writeToNBT(compound);
         compound.setInteger("progress", progress);
         return compound;
+    }
+
+    @Override
+    protected void updateInventoryItem(int slot)
+    {
+        super.updateInventoryItem(slot);
+        sendDataToClientSide();
+    }
+
+    @Override
+    protected void updateTank(int slot)
+    {
+        super.updateTank(slot);
+        sendDataToClientSide();
     }
 }

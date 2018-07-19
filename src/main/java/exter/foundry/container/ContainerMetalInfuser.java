@@ -7,7 +7,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerMetalInfuser extends Container
+public class ContainerMetalInfuser extends ContainerFoundry
 {
 
     // Slot numbers
@@ -26,6 +26,7 @@ public class ContainerMetalInfuser extends Container
 
     public ContainerMetalInfuser(TileEntityMetalInfuser infuser, EntityPlayer player)
     {
+        super(infuser);
         te_infuser = infuser;
         te_infuser.openInventory(player);
         int i, j;

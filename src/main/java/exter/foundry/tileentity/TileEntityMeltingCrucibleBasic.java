@@ -231,16 +231,6 @@ public class TileEntityMeltingCrucibleBasic extends TileEntityFoundryHeatable
         }
 
         doMeltingProgress();
-
-        if (last_progress != progress)
-        {
-            updateValue("progress", progress);
-        }
-
-        if (last_melt_point != melt_point)
-        {
-            updateValue("melt_point", melt_point);
-        }
     }
 
     @Override

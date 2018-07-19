@@ -230,11 +230,6 @@ public class TileEntityAlloyingCrucible extends TileEntityFoundry
         {
             progress = 0;
         }
-
-        if (last_progress != progress)
-        {
-            updateValue("Progress", progress);
-        }
     }
 
     @Override

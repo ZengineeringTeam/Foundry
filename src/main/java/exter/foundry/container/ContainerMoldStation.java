@@ -11,7 +11,7 @@ import net.minecraft.inventory.SlotFurnaceFuel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityFurnace;
 
-public class ContainerMoldStation extends Container
+public class ContainerMoldStation extends ContainerFoundry
 {
 
     // Slot numbers
@@ -31,6 +31,7 @@ public class ContainerMoldStation extends Container
 
     public ContainerMoldStation(TileEntityMoldStation station, EntityPlayer player)
     {
+        super(station);
         te_station = station;
         te_station.openInventory(player);
         int i, j;

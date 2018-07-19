@@ -269,18 +269,18 @@ public class TileEntityMaterialRouter extends TileEntityFoundry
 
     public void syncRoutes()
     {
-        NBTTagCompound tag = new NBTTagCompound();
-        writeTileToNBT(tag);
-        writeRoutesToNBT(tag);
-        if (world.isRemote)
-        {
-            tag.setInteger("dim", world.provider.getDimension());
-            Foundry.NETWORK.sendToServer(new MessageTileEntitySync(tag));
-        }
-        else
-        {
-            sendPacketToNearbyPlayers(tag);
-        }
+//        NBTTagCompound tag = new NBTTagCompound();
+//        writeTileToNBT(tag);
+//        writeRoutesToNBT(tag);
+//        if (world.isRemote)
+//        {
+//            tag.setInteger("dim", world.provider.getDimension());
+//            Foundry.NETWORK.sendToServer(new MessageTileEntitySync(tag));
+//        }
+//        else
+//        {
+//            sendPacketToNearbyPlayers(tag);
+//        }
     }
 
     @Override

@@ -137,7 +137,7 @@ public class TileEntityMoldStation extends TileEntityFoundry implements IExoflam
             if (grid[i] > 0)
             {
                 grid[i] = 0;
-                updateValue("RecipeGrid_" + i, grid[i]);
+                //                updateValue("RecipeGrid_" + i, grid[i]);
             }
         }
         current_recipe = null;
@@ -182,7 +182,7 @@ public class TileEntityMoldStation extends TileEntityFoundry implements IExoflam
             updateInventoryItem(SLOT_OUTPUT);
             updateInventoryItem(SLOT_CLAY);
             has_block = false;
-            updateValue("HasBlock", has_block);
+            //            updateValue("HasBlock", has_block);
             clearGrid();
         }
     }
@@ -371,7 +371,7 @@ public class TileEntityMoldStation extends TileEntityFoundry implements IExoflam
             {
                 decrStackSize(SLOT_BLOCK, 1);
                 has_block = true;
-                updateValue("HasBlock", has_block);
+                //                updateValue("HasBlock", has_block);
                 clearGrid();
             }
         }
@@ -425,19 +425,19 @@ public class TileEntityMoldStation extends TileEntityFoundry implements IExoflam
                 ((BlockMoldStation) getBlockType()).setMachineState(world, getPos(), world.getBlockState(getPos()),
                         burn_time > 0);
             }
-            updateValue("BurnTime", burn_time);
+            //            updateValue("BurnTime", burn_time);
         }
 
-        if (last_item_burn_time != item_burn_time || update_burn_times)
-        {
-            updateValue("ItemBurnTime", item_burn_time);
-        }
+        //        if (last_item_burn_time != item_burn_time || update_burn_times)
+        //        {
+        //            updateValue("ItemBurnTime", item_burn_time);
+        //        }
         update_burn_times = false;
 
-        if (last_progress != progress)
-        {
-            updateValue("CookTime", progress);
-        }
+        //        if (last_progress != progress)
+        //        {
+        //            updateValue("CookTime", progress);
+        //        }
     }
 
     @Override

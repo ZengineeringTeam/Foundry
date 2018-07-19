@@ -10,7 +10,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerMetalCaster extends Container
+public class ContainerMetalCaster extends ContainerFoundry
 {
 
     // Slot numbers
@@ -34,6 +34,7 @@ public class ContainerMetalCaster extends Container
 
     public ContainerMetalCaster(TileEntityMetalCaster caster, EntityPlayer player)
     {
+        super(caster);
         te_caster = caster;
         te_caster.openInventory(player);
         int i, j;

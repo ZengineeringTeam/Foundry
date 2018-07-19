@@ -215,16 +215,6 @@ public class TileEntityMetalInfuser extends TileEntityFoundryPowered
         {
             doInfusion();
         }
-
-        if (last_extract_time != extract_energy)
-        {
-            updateValue("extract_time", extract_energy);
-        }
-
-        if (last_progress != progress)
-        {
-            updateValue("progress", progress);
-        }
     }
 
     @Override

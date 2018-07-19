@@ -7,7 +7,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerAlloyingCrucible extends Container
+public class ContainerAlloyingCrucible extends ContainerFoundry
 {
 
     // Slot numbers
@@ -27,6 +27,7 @@ public class ContainerAlloyingCrucible extends Container
 
     public ContainerAlloyingCrucible(TileEntityAlloyingCrucible ac, EntityPlayer player)
     {
+        super(ac);
         te_alloyingcrucible = ac;
         te_alloyingcrucible.openInventory(player);
         int i, j;

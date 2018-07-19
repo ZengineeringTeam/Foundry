@@ -55,7 +55,7 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
                             ((BlockBurnerHeater) getBlockType()).setMachineState(world, getPos(),
                                     world.getBlockState(getPos()), burn_time > 0);
                         }
-                        updateValue("BurnTime", burn_time);
+                        //                        updateValue("BurnTime", burn_time);
                     }
                 }
                 return max_heat;
@@ -299,13 +299,13 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
                 ((BlockBurnerHeater) getBlockType()).setMachineState(world, getPos(), world.getBlockState(getPos()),
                         burn_time > 0);
             }
-            updateValue("BurnTime", burn_time);
+            //            updateValue("BurnTime", burn_time);
         }
 
-        if (last_item_burn_time != item_burn_time || update_burn_times)
-        {
-            updateValue("ItemBurnTime", item_burn_time);
-        }
+        //        if (last_item_burn_time != item_burn_time || update_burn_times)
+        //        {
+        //            updateValue("ItemBurnTime", item_burn_time);
+        //        }
         update_burn_times = false;
     }
 

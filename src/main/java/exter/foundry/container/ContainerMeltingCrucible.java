@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
-public class ContainerMeltingCrucible extends Container
+public class ContainerMeltingCrucible extends ContainerFoundry
 {
 
     // Slot numbers
@@ -29,6 +29,7 @@ public class ContainerMeltingCrucible extends Container
 
     public ContainerMeltingCrucible(TileEntityMeltingCrucibleBasic icf, EntityPlayer player)
     {
+        super(icf);
         te_icf = icf;
         te_icf.openInventory(player);
         int i, j;

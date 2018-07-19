@@ -263,11 +263,6 @@ public class TileEntityMetalCaster extends TileEntityFoundryPowered
                 progress = -1;
             }
         }
-
-        if (last_progress != progress)
-        {
-            updateValue("progress", progress);
-        }
     }
 
     @Override

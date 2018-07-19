@@ -89,10 +89,6 @@ public abstract class TileEntityFoundryHeatable extends TileEntityFoundry
         {
             heat = TEMP_MIN;
         }
-        if (last_heat / 100 != heat / 100)
-        {
-            updateValue("heat", heat);
-        }
     }
 
     @Override

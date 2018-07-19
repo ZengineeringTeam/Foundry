@@ -7,7 +7,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerMaterialRouter extends Container
+public class ContainerMaterialRouter extends ContainerFoundry
 {
 
     // Slot numbers
@@ -27,6 +27,7 @@ public class ContainerMaterialRouter extends Container
 
     public ContainerMaterialRouter(TileEntityMaterialRouter router, EntityPlayer player)
     {
+        super(router);
         te_router = router;
         te_router.openInventory(player);
         int i, j;

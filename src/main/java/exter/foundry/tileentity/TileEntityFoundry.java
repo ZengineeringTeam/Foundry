@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.OverridingMethodsMustInvokeSuper;
+
 import com.google.common.collect.ImmutableSet;
 
 import exter.foundry.Foundry;
@@ -276,7 +278,6 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
     private RedstoneMode mode;
 
     private final List<ContainerSlot> conatiner_slots;
-    private NBTTagCompound update_packet;
     private boolean initialized;
 
     protected boolean last_redstone_signal;
@@ -331,14 +332,12 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
                 is = getStackInSlot(slot);
                 setStackInSlot(slot, ItemStack.EMPTY);
                 updateInventoryItem(slot);
-                markDirty();
                 return is;
             }
             else
             {
                 is = getStackInSlot(slot).splitStack(amount);
                 updateInventoryItem(slot);
-                markDirty();
                 return is;
             }
         }
@@ -346,6 +345,7 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
         {
             return ItemStack.EMPTY;
         }
+
     }
 
     protected final FluidStack drainTank(int slot, FluidStack resource, boolean doDrain)
@@ -479,15 +479,7 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
     @Override
     public final SPacketUpdateTileEntity getUpdatePacket()
     {
-        NBTTagCompound nbt = new NBTTagCompound();
-        writeToNBT(nbt);
-        return new SPacketUpdateTileEntity(getPos(), 0, nbt);
-    }
-
-    @Override
-    public NBTTagCompound getUpdateTag()
-    {
-        return writeToNBT(new NBTTagCompound());
+        return new SPacketUpdateTileEntity(getPos(), 0, getUpdateTag());
     }
 
     @Override
@@ -539,7 +531,6 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
     @Override
     public final void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)
     {
-        super.onDataPacket(net, pkt);
         if (world.isRemote)
         {
             readFromNBT(pkt.getNbtCompound());
@@ -551,11 +542,6 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
     @Override
     public void openInventory(EntityPlayer player)
     {
-        if (!world.isRemote && player instanceof EntityPlayerMP)
-        {
-            NBTTagCompound tag = writeToNBT(null);
-            sendPacketToPlayer(tag, (EntityPlayerMP) player);
-        }
     }
 
     @Override
@@ -688,11 +674,6 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
 
         if (!world.isRemote)
         {
-            if (update_packet == null)
-            {
-                update_packet = new NBTTagCompound();
-                super.writeToNBT(update_packet);
-            }
             for (ContainerSlot cs : conatiner_slots)
             {
                 cs.update();
@@ -702,12 +683,6 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
                 container_timer--;
             }
             updateServer();
-
-            if (update_packet != null)
-            {
-                sendPacketToNearbyPlayers(update_packet);
-            }
-            update_packet = null;
         }
         else
         {
@@ -718,32 +693,9 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
 
     protected abstract void updateClient();
 
-    protected final void updateInventoryItem(int slot)
+    @OverridingMethodsMustInvokeSuper
+    protected void updateInventoryItem(int slot)
     {
-        if (world.isRemote)
-        {
-            return;
-        }
-        if (update_packet == null)
-        {
-            update_packet = new NBTTagCompound();
-            super.writeToNBT(update_packet);
-        }
-        writeInventoryItemToNBT(update_packet, slot);
-    }
-
-    protected final void updateNBTTag(String name, NBTTagCompound compound)
-    {
-        if (world.isRemote)
-        {
-            return;
-        }
-        if (update_packet == null)
-        {
-            update_packet = new NBTTagCompound();
-            super.writeToNBT(update_packet);
-        }
-        update_packet.setTag(name, compound);
     }
 
     public void updateRedstone()
@@ -753,60 +705,9 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
 
     protected abstract void updateServer();
 
-    protected final void updateTank(int slot)
+    @OverridingMethodsMustInvokeSuper
+    protected void updateTank(int slot)
     {
-        if (world.isRemote)
-        {
-            return;
-        }
-        if (update_packet == null)
-        {
-            update_packet = new NBTTagCompound();
-            super.writeToNBT(update_packet);
-        }
-        writeTankToNBT(update_packet, slot);
-    }
-
-    protected final void updateValue(String name, boolean value)
-    {
-        if (world.isRemote)
-        {
-            return;
-        }
-        if (update_packet == null)
-        {
-            update_packet = new NBTTagCompound();
-            super.writeToNBT(update_packet);
-        }
-        update_packet.setBoolean(name, value);
-    }
-
-    protected final void updateValue(String name, int value)
-    {
-        if (world != null && world.isRemote)
-        {
-            return;
-        }
-        if (update_packet == null)
-        {
-            update_packet = new NBTTagCompound();
-            super.writeToNBT(update_packet);
-        }
-        update_packet.setInteger(name, value);
-    }
-
-    protected final void updateValue(String name, long value)
-    {
-        if (world.isRemote)
-        {
-            return;
-        }
-        if (update_packet == null)
-        {
-            update_packet = new NBTTagCompound();
-            super.writeToNBT(update_packet);
-        }
-        update_packet.setLong(name, value);
     }
 
     protected final void writeInventoryItemToNBT(NBTTagCompound compound, int slot)
@@ -857,5 +758,27 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
         compound.setInteger("rsmode", mode.id);
         compound.setInteger("container_timer", container_timer);
         return compound;
+    }
+
+    public void sendDataToClientSide(EntityPlayerMP player)
+    {
+        if (!world.isRemote)
+        {
+            sendPacketToPlayer(getUpdateTag(), player);
+        }
+    }
+
+    public void sendDataToClientSide()
+    {
+        if (!world.isRemote)
+        {
+            sendPacketToNearbyPlayers(getUpdateTag());
+        }
+    }
+
+    @Override
+    public NBTTagCompound getUpdateTag()
+    {
+        return writeToNBT(null);
     }
 }

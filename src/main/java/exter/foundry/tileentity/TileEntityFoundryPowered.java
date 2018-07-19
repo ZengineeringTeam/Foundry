@@ -32,7 +32,7 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
 
         public void setEnergy(int energy)
         {
-            energy = Math.max(energy, getMaxEnergyStored());
+            energy = Math.min(energy, getMaxEnergyStored());
         }
 
         public int useEnergy(int maxExtract, boolean simulate)
@@ -149,6 +149,7 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
     public void readFromNBT(NBTTagCompound compound)
     {
         super.readFromNBT(compound);
+        System.out.println(compound);
         if (compound.hasKey("energy"))
         {
             energyStorage.setEnergy(compound.getInteger("energy"));
@@ -211,14 +212,6 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
         super.update();
     }
 
-    private void updateFoundryEnergy()
-    {
-        if (update_energy)
-        {
-            updateValue("energy", energyStorage.getEnergyStored());
-        }
-    }
-
     @Override
     public void updateRedstone()
     {
@@ -230,7 +223,6 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
     {
         if (update_energy_tick)
         {
-            updateFoundryEnergy();
             update_energy_tick = false;
         }
     }
@@ -249,6 +241,7 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
         }
         super.writeToNBT(compound);
         compound.setInteger("energy", energyStorage.getEnergyStored());
+        System.out.println(compound);
         return compound;
     }
 }
