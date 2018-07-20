@@ -1,10 +1,11 @@
-package exter.foundry.integration.minetweaker;
+package exter.foundry.integration.crafttweaker;
 
 import crafttweaker.CraftTweakerAPI;
+import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.liquid.ILiquidStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import exter.foundry.api.recipe.IAlloyMixerRecipe;
-import exter.foundry.integration.ModIntegrationMinetweaker;
+import exter.foundry.integration.ModIntegrationCrafttweaker;
 import exter.foundry.recipes.AlloyMixerRecipe;
 import exter.foundry.recipes.manager.AlloyMixerRecipeManager;
 import net.minecraftforge.fluids.FluidStack;
@@ -12,7 +13,8 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.foundry.AlloyMixer")
-public class MTAlloyMixerHandler
+@ZenRegister
+public class CrTAlloyMixerHandler
 {
     public static class AlloyMixerAction extends AddRemoveAction
     {
@@ -43,10 +45,10 @@ public class MTAlloyMixerHandler
                     builder.append(',');
                 }
                 builder.append(' ');
-                builder.append(MTHelper.getFluidDescription(input));
+                builder.append(CrTHelper.getFluidDescription(input));
                 comma = true;
             }
-            builder.append(String.format(" ) -> %s", MTHelper.getFluidDescription(recipe.getOutput())));
+            builder.append(String.format(" ) -> %s", CrTHelper.getFluidDescription(recipe.getOutput())));
             return builder.toString();
         }
 
@@ -66,7 +68,7 @@ public class MTAlloyMixerHandler
     @ZenMethod
     static public void addRecipe(ILiquidStack output, ILiquidStack[] inputs)
     {
-        ModIntegrationMinetweaker.queueAdd(() -> {
+        ModIntegrationCrafttweaker.queueAdd(() -> {
             FluidStack out = (FluidStack) output.getInternal();
             FluidStack[] in = new FluidStack[inputs.length];
 
@@ -83,7 +85,7 @@ public class MTAlloyMixerHandler
             }
             catch (IllegalArgumentException e)
             {
-                MTHelper.printCrt("Invalid alloy mixer recipe: " + e.getMessage());
+                CrTHelper.printCrt("Invalid alloy mixer recipe: " + e.getMessage());
                 return;
             }
             CraftTweakerAPI.apply(new AlloyMixerAction(recipe).action_add);
@@ -93,7 +95,7 @@ public class MTAlloyMixerHandler
     @ZenMethod
     static public void removeRecipe(ILiquidStack[] inputs)
     {
-        ModIntegrationMinetweaker.queueRemove(() -> {
+        ModIntegrationCrafttweaker.queueRemove(() -> {
 
             FluidStack[] in = new FluidStack[inputs.length];
 
@@ -116,6 +118,6 @@ public class MTAlloyMixerHandler
     @ZenMethod
     public static void clear()
     {
-        ModIntegrationMinetweaker.queueClear(AlloyMixerRecipeManager.INSTANCE.getRecipes());
+        ModIntegrationCrafttweaker.queueClear(AlloyMixerRecipeManager.INSTANCE.getRecipes());
     }
 }

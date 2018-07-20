@@ -1,4 +1,4 @@
-package exter.foundry.integration.minetweaker;
+package exter.foundry.integration.crafttweaker;
 
 import crafttweaker.IAction;
 

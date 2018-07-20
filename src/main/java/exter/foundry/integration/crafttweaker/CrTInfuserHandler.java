@@ -1,19 +1,21 @@
-package exter.foundry.integration.minetweaker;
+package exter.foundry.integration.crafttweaker;
 
 import crafttweaker.CraftTweakerAPI;
+import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.liquid.ILiquidStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import exter.foundry.api.recipe.IInfuserRecipe;
-import exter.foundry.integration.ModIntegrationMinetweaker;
+import exter.foundry.integration.ModIntegrationCrafttweaker;
 import exter.foundry.recipes.InfuserRecipe;
 import exter.foundry.recipes.manager.InfuserRecipeManager;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.foundry.Infuser")
-public class MTInfuserHandler
+@ZenRegister
+public class CrTInfuserHandler
 {
     public static class InfuserAction extends AddRemoveAction
     {
@@ -34,8 +36,8 @@ public class MTInfuserHandler
         @Override
         public String getDescription()
         {
-            return String.format("( %s, %s ) -> %s", MTHelper.getFluidDescription(recipe.getInputFluid()),
-                    MTHelper.getItemDescription(recipe.getInput()), MTHelper.getFluidDescription(recipe.getOutput()));
+            return String.format("( %s, %s ) -> %s", CrTHelper.getFluidDescription(recipe.getInputFluid()),
+                    CrTHelper.getItemDescription(recipe.getInput()), CrTHelper.getFluidDescription(recipe.getOutput()));
         }
 
         @Override
@@ -54,16 +56,16 @@ public class MTInfuserHandler
     @ZenMethod
     static public void addRecipe(ILiquidStack output, ILiquidStack input, IIngredient substance, int energy)
     {
-        ModIntegrationMinetweaker.queueAdd(() -> {
+        ModIntegrationCrafttweaker.queueAdd(() -> {
             IInfuserRecipe recipe = null;
             try
             {
                 recipe = new InfuserRecipe(CraftTweakerMC.getLiquidStack(output), CraftTweakerMC.getLiquidStack(input),
-                        MTHelper.getIngredient(substance), energy);
+                        CrTHelper.getIngredient(substance), energy);
             }
             catch (IllegalArgumentException e)
             {
-                MTHelper.printCrt("Invalid infuser recipe: " + e.getMessage());
+                CrTHelper.printCrt("Invalid infuser recipe: " + e.getMessage());
                 return;
             }
             CraftTweakerAPI.apply(new InfuserAction(recipe).action_add);
@@ -73,7 +75,7 @@ public class MTInfuserHandler
     @ZenMethod
     static public void removeRecipe(ILiquidStack input, IItemStack substance)
     {
-        ModIntegrationMinetweaker.queueRemove(() -> {
+        ModIntegrationCrafttweaker.queueRemove(() -> {
             IInfuserRecipe recipe = InfuserRecipeManager.INSTANCE.findRecipe(CraftTweakerMC.getLiquidStack(input),
                     CraftTweakerMC.getItemStack(substance));
             if (recipe == null)
@@ -88,6 +90,6 @@ public class MTInfuserHandler
     @ZenMethod
     public static void clear()
     {
-        ModIntegrationMinetweaker.queueClear(InfuserRecipeManager.INSTANCE.getRecipes());
+        ModIntegrationCrafttweaker.queueClear(InfuserRecipeManager.INSTANCE.getRecipes());
     }
 }

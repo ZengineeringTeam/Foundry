@@ -1,4 +1,4 @@
-package exter.foundry.integration.minetweaker.orestack;
+package exter.foundry.integration.crafttweaker.orestack;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class OreStackBracketHandler implements IBracketHandler
 
     public static IIngredient getOreStack(String name)
     {
-        return new MTOreStack(new OreMatcher(name, 1));
+        return new CrTOreStack(new OreMatcher(name, 1));
     }
 
     private final IZenSymbol symbolAny;

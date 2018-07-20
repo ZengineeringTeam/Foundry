@@ -1,8 +1,9 @@
-package exter.foundry.integration.minetweaker;
+package exter.foundry.integration.crafttweaker;
 
 import javax.annotation.Nullable;
 
 import crafttweaker.CraftTweakerAPI;
+import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.liquid.ILiquidStack;
@@ -10,7 +11,7 @@ import crafttweaker.api.minecraft.CraftTweakerMC;
 import exter.foundry.api.recipe.ICastingRecipe;
 import exter.foundry.api.recipe.matcher.IItemMatcher;
 import exter.foundry.api.recipe.matcher.ItemStackMatcher;
-import exter.foundry.integration.ModIntegrationMinetweaker;
+import exter.foundry.integration.ModIntegrationCrafttweaker;
 import exter.foundry.recipes.CastingRecipe;
 import exter.foundry.recipes.manager.CastingRecipeManager;
 import net.minecraft.item.ItemStack;
@@ -20,7 +21,8 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.foundry.Casting")
-public class MTCastingHandler
+@ZenRegister
+public class CrTCastingHandler
 {
     public static class CastingAction extends AddRemoveAction
     {
@@ -51,12 +53,14 @@ public class MTCastingHandler
             IItemMatcher extra = recipe.getInputExtra();
             if (extra == null)
             {
-                return String.format("( %s, %s ) -> %s", MTHelper.getFluidDescription(recipe.getInput()),
-                        MTHelper.getItemDescription(recipe.getMold()), MTHelper.getItemDescription(recipe.getOutput()));
+                return String.format("( %s, %s ) -> %s", CrTHelper.getFluidDescription(recipe.getInput()),
+                        CrTHelper.getItemDescription(recipe.getMold()),
+                        CrTHelper.getItemDescription(recipe.getOutput()));
             }
-            return String.format("( %s, %s, %s ) -> %s", MTHelper.getFluidDescription(recipe.getInput()),
-                    MTHelper.getItemDescription(recipe.getMold()), MTHelper.getItemDescription(recipe.getInputExtra()),
-                    MTHelper.getItemDescription(recipe.getOutput()));
+            return String.format("( %s, %s, %s ) -> %s", CrTHelper.getFluidDescription(recipe.getInput()),
+                    CrTHelper.getItemDescription(recipe.getMold()),
+                    CrTHelper.getItemDescription(recipe.getInputExtra()),
+                    CrTHelper.getItemDescription(recipe.getOutput()));
         }
 
         @Override
@@ -91,7 +95,7 @@ public class MTCastingHandler
         @Override
         public String getDescription()
         {
-            return String.format("%s", MTHelper.getItemDescription(mold));
+            return String.format("%s", CrTHelper.getItemDescription(mold));
         }
 
         @Override
@@ -110,11 +114,11 @@ public class MTCastingHandler
     @ZenMethod
     static public void addMold(IItemStack mold)
     {
-        ModIntegrationMinetweaker.queueAdd(() -> {
+        ModIntegrationCrafttweaker.queueAdd(() -> {
             ItemStack molditem = CraftTweakerMC.getItemStack(mold);
             if (molditem.isEmpty())
             {
-                MTHelper.printCrt("Invalid mold item: " + mold);
+                CrTHelper.printCrt("Invalid mold item: " + mold);
                 return;
             }
             CraftTweakerAPI.apply(new MoldAction(molditem).action_add);
@@ -124,17 +128,17 @@ public class MTCastingHandler
     @ZenMethod
     static public void addRecipe(IItemStack output, ILiquidStack input, IItemStack mold, @Optional IIngredient extra, @Optional int speed, @Optional boolean consumes_mold)
     {
-        ModIntegrationMinetweaker.queueAdd(() -> {
+        ModIntegrationCrafttweaker.queueAdd(() -> {
             ICastingRecipe recipe = null;
             try
             {
                 recipe = new CastingRecipe(new ItemStackMatcher(CraftTweakerMC.getItemStack(output)),
                         CraftTweakerMC.getLiquidStack(input), CraftTweakerMC.getItemStack(mold), consumes_mold,
-                        extra == null ? null : MTHelper.getIngredient(extra), speed == 0 ? 100 : speed);
+                        extra == null ? null : CrTHelper.getIngredient(extra), speed == 0 ? 100 : speed);
             }
             catch (IllegalArgumentException e)
             {
-                MTHelper.printCrt("Invalid casting recipe: " + e.getMessage());
+                CrTHelper.printCrt("Invalid casting recipe: " + e.getMessage());
                 return;
             }
             CraftTweakerAPI.apply(new CastingAction(recipe).action_add);
@@ -144,7 +148,7 @@ public class MTCastingHandler
     @ZenMethod
     static public void removeMold(IItemStack mold)
     {
-        ModIntegrationMinetweaker.queueRemove(() -> {
+        ModIntegrationCrafttweaker.queueRemove(() -> {
 
             ItemStack molditem = CraftTweakerMC.getItemStack(mold);
             if (molditem.isEmpty())
@@ -167,7 +171,7 @@ public class MTCastingHandler
     @ZenMethod
     static public void removeRecipe(ILiquidStack input, IItemStack mold, @Optional IItemStack extra)
     {
-        ModIntegrationMinetweaker.queueRemove(() -> {
+        ModIntegrationCrafttweaker.queueRemove(() -> {
             ICastingRecipe recipe = findCastingForRemoval(CraftTweakerMC.getLiquidStack(input),
                     CraftTweakerMC.getItemStack(mold), CraftTweakerMC.getItemStack(extra));
             if (recipe == null)
@@ -182,9 +186,10 @@ public class MTCastingHandler
     public static String getDebugDescription(ILiquidStack input, IItemStack mold, @Nullable IItemStack extra)
     {
         if (extra == null)
-            return String.format("( %s, %s )", MTHelper.getFluidDescription(input), MTHelper.getItemDescription(mold));
-        return String.format("( %s, %s, %s )", MTHelper.getFluidDescription(input), MTHelper.getItemDescription(mold),
-                MTHelper.getItemDescription(extra));
+            return String.format("( %s, %s )", CrTHelper.getFluidDescription(input),
+                    CrTHelper.getItemDescription(mold));
+        return String.format("( %s, %s, %s )", CrTHelper.getFluidDescription(input), CrTHelper.getItemDescription(mold),
+                CrTHelper.getItemDescription(extra));
     }
 
     public static ICastingRecipe findCastingForRemoval(FluidStack fluid, ItemStack mold, ItemStack extra)
@@ -202,13 +207,13 @@ public class MTCastingHandler
     @ZenMethod
     public static void clearRecipes()
     {
-        ModIntegrationMinetweaker.queueClear(CastingRecipeManager.INSTANCE.getRecipes());
+        ModIntegrationCrafttweaker.queueClear(CastingRecipeManager.INSTANCE.getRecipes());
     }
 
     @ZenMethod
     public static void clearMolds()
     {
-        ModIntegrationMinetweaker.queueClear(CastingRecipeManager.INSTANCE.getMolds());
+        ModIntegrationCrafttweaker.queueClear(CastingRecipeManager.INSTANCE.getMolds());
     }
 
 }

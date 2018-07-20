@@ -1,4 +1,4 @@
-package exter.foundry.integration.minetweaker;
+package exter.foundry.integration.crafttweaker;
 
 import com.google.common.base.Preconditions;
 
@@ -12,11 +12,11 @@ import exter.foundry.api.recipe.matcher.IItemMatcher;
 import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.api.recipe.matcher.OreMatcher;
 import exter.foundry.config.FoundryConfig;
-import exter.foundry.integration.minetweaker.orestack.MTOreStack;
+import exter.foundry.integration.crafttweaker.orestack.CrTOreStack;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public class MTHelper
+public class CrTHelper
 {
 
     public static String getFluidDescription(ILiquidStack stack)
@@ -39,7 +39,7 @@ public class MTHelper
         {
             return new OreMatcher((String) ingr.getInternal());
         }
-        if (ingr instanceof MTOreStack)
+        if (ingr instanceof CrTOreStack)
         {
             return (OreMatcher) ingr.getInternal();
         }

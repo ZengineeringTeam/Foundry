@@ -1,4 +1,4 @@
-package exter.foundry.integration.minetweaker.orestack;
+package exter.foundry.integration.crafttweaker.orestack;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,11 +15,11 @@ import crafttweaker.api.player.IPlayer;
 import exter.foundry.api.recipe.matcher.OreMatcher;
 import net.minecraft.item.ItemStack;
 
-public class MTOreStack implements IIngredient
+public class CrTOreStack implements IIngredient
 {
     private final OreMatcher stack;
 
-    public MTOreStack(OreMatcher stack)
+    public CrTOreStack(OreMatcher stack)
     {
         this.stack = stack;
     }
@@ -27,7 +27,7 @@ public class MTOreStack implements IIngredient
     @Override
     public IIngredient amount(int amount)
     {
-        return new MTOreStack(new OreMatcher(stack.getOreName(), stack.getAmount() * amount));
+        return new CrTOreStack(new OreMatcher(stack.getOreName(), stack.getAmount() * amount));
     }
 
     @Override

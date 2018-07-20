@@ -6,20 +6,12 @@ import java.util.List;
 
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.mc1120.CraftTweaker;
-import exter.foundry.integration.minetweaker.MTAlloyMixerHandler;
-import exter.foundry.integration.minetweaker.MTAlloyingCrucibleHandler;
-import exter.foundry.integration.minetweaker.MTBurnerFuelHandler;
-import exter.foundry.integration.minetweaker.MTCastingHandler;
-import exter.foundry.integration.minetweaker.MTCastingTableHandler;
-import exter.foundry.integration.minetweaker.MTInfuserHandler;
-import exter.foundry.integration.minetweaker.MTMeltingHandler;
-import exter.foundry.integration.minetweaker.MTMoldStationHandler;
-import exter.foundry.integration.minetweaker.orestack.OreStackBracketHandler;
+import exter.foundry.integration.crafttweaker.orestack.OreStackBracketHandler;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ModIntegrationMinetweaker implements IModIntegration
+public class ModIntegrationCrafttweaker implements IModIntegration
 {
 
     private static List<Runnable> addQueue = new ArrayList<>();
@@ -80,14 +72,6 @@ public class ModIntegrationMinetweaker implements IModIntegration
     public void onPreInit(Configuration config)
     {
         CraftTweakerAPI.registerBracketHandler(new OreStackBracketHandler());
-        CraftTweakerAPI.registerClass(MTMeltingHandler.class);
-        CraftTweakerAPI.registerClass(MTCastingHandler.class);
-        CraftTweakerAPI.registerClass(MTCastingTableHandler.class);
-        CraftTweakerAPI.registerClass(MTAlloyMixerHandler.class);
-        CraftTweakerAPI.registerClass(MTAlloyingCrucibleHandler.class);
-        CraftTweakerAPI.registerClass(MTInfuserHandler.class);
-        CraftTweakerAPI.registerClass(MTMoldStationHandler.class);
-        CraftTweakerAPI.registerClass(MTBurnerFuelHandler.class);
     }
 
     public static void queueAdd(Runnable action)

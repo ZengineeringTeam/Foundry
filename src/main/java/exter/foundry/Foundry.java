@@ -11,7 +11,7 @@ import exter.foundry.init.InitRecipes;
 import exter.foundry.integration.ModIntegrationBotania;
 import exter.foundry.integration.ModIntegrationEnderIO;
 import exter.foundry.integration.ModIntegrationManager;
-import exter.foundry.integration.ModIntegrationMinetweaker;
+import exter.foundry.integration.ModIntegrationCrafttweaker;
 import exter.foundry.material.MaterialRegistry;
 import exter.foundry.network.MessageTileEntitySync;
 import exter.foundry.proxy.CommonProxy;
@@ -128,7 +128,7 @@ public class Foundry
         if (Loader.isModLoaded("botania"))
             ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationBotania());
         if (Loader.isModLoaded("crafttweaker"))
-            ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationMinetweaker());
+            ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationCrafttweaker());
 
         FoundryAPI.FLUIDS = FoundryFluidRegistry.INSTANCE;
 

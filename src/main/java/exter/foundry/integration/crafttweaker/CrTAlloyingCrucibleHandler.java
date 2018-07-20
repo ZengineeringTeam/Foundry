@@ -1,10 +1,11 @@
-package exter.foundry.integration.minetweaker;
+package exter.foundry.integration.crafttweaker;
 
 import crafttweaker.CraftTweakerAPI;
+import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.liquid.ILiquidStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import exter.foundry.api.recipe.IAlloyingCrucibleRecipe;
-import exter.foundry.integration.ModIntegrationMinetweaker;
+import exter.foundry.integration.ModIntegrationCrafttweaker;
 import exter.foundry.recipes.AlloyingCrucibleRecipe;
 import exter.foundry.recipes.manager.AlloyingCrucibleRecipeManager;
 import net.minecraftforge.fluids.FluidStack;
@@ -12,7 +13,8 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.foundry.AlloyingCrucible")
-public class MTAlloyingCrucibleHandler
+@ZenRegister
+public class CrTAlloyingCrucibleHandler
 {
     public static class AlloyingCrucibleAction extends AddRemoveAction
     {
@@ -33,8 +35,9 @@ public class MTAlloyingCrucibleHandler
         @Override
         public String getDescription()
         {
-            return String.format("(%s,%s) -> %s", MTHelper.getFluidDescription(recipe.getInputA()),
-                    MTHelper.getFluidDescription(recipe.getInputB()), MTHelper.getFluidDescription(recipe.getOutput()));
+            return String.format("(%s,%s) -> %s", CrTHelper.getFluidDescription(recipe.getInputA()),
+                    CrTHelper.getFluidDescription(recipe.getInputB()),
+                    CrTHelper.getFluidDescription(recipe.getOutput()));
         }
 
         @Override
@@ -53,7 +56,7 @@ public class MTAlloyingCrucibleHandler
     @ZenMethod
     static public void addRecipe(ILiquidStack output, ILiquidStack input_a, ILiquidStack input_b)
     {
-        ModIntegrationMinetweaker.queueAdd(() -> {
+        ModIntegrationCrafttweaker.queueAdd(() -> {
             FluidStack out = CraftTweakerMC.getLiquidStack(output);
             FluidStack in_a = CraftTweakerMC.getLiquidStack(input_a);
             FluidStack in_b = CraftTweakerMC.getLiquidStack(input_b);
@@ -65,7 +68,7 @@ public class MTAlloyingCrucibleHandler
             }
             catch (IllegalArgumentException e)
             {
-                MTHelper.printCrt("Invalid alloying crucible recipe: " + e.getMessage());
+                CrTHelper.printCrt("Invalid alloying crucible recipe: " + e.getMessage());
                 return;
             }
             CraftTweakerAPI.apply(new AlloyingCrucibleAction(recipe).action_add);
@@ -75,7 +78,7 @@ public class MTAlloyingCrucibleHandler
     @ZenMethod
     static public void removeRecipe(ILiquidStack input_a, ILiquidStack input_b)
     {
-        ModIntegrationMinetweaker.queueRemove(() -> {
+        ModIntegrationCrafttweaker.queueRemove(() -> {
             FluidStack in_a = CraftTweakerMC.getLiquidStack(input_a);
             FluidStack in_b = CraftTweakerMC.getLiquidStack(input_b);
 
@@ -87,7 +90,7 @@ public class MTAlloyingCrucibleHandler
             if (recipe == null)
             {
                 recipe = AlloyingCrucibleRecipeManager.INSTANCE.findRecipe(in_a, in_b);
-                MTHelper.printCrt("Alloy mixer recipe not found.");
+                CrTHelper.printCrt("Alloy mixer recipe not found.");
                 return;
             }
             CraftTweakerAPI.apply(new AlloyingCrucibleAction(recipe).action_remove);
@@ -97,6 +100,6 @@ public class MTAlloyingCrucibleHandler
     @ZenMethod
     public static void clear()
     {
-        ModIntegrationMinetweaker.queueClear(AlloyingCrucibleRecipeManager.INSTANCE.getRecipes());
+        ModIntegrationCrafttweaker.queueClear(AlloyingCrucibleRecipeManager.INSTANCE.getRecipes());
     }
 }

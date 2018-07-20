@@ -2,7 +2,7 @@ package exter.foundry.api.recipe.matcher;
 
 import java.util.List;
 
-import exter.foundry.integration.minetweaker.MTHelper;
+import exter.foundry.integration.crafttweaker.CrTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -58,6 +58,6 @@ public class ItemStackMatcher implements IItemMatcher
     @Override
     public String toString()
     {
-        return "ItemStackMatcher(Stack: " + MTHelper.getItemDescription(match) + ")";
+        return "ItemStackMatcher(Stack: " + CrTHelper.getItemDescription(match) + ")";
     }
 }

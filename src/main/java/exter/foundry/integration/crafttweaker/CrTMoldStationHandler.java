@@ -1,17 +1,19 @@
-package exter.foundry.integration.minetweaker;
+package exter.foundry.integration.crafttweaker;
 
 import crafttweaker.CraftTweakerAPI;
+import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import exter.foundry.api.recipe.IMoldRecipe;
-import exter.foundry.integration.ModIntegrationMinetweaker;
+import exter.foundry.integration.ModIntegrationCrafttweaker;
 import exter.foundry.recipes.MoldRecipe;
 import exter.foundry.recipes.manager.MoldRecipeManager;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.foundry.MoldStation")
-public class MTMoldStationHandler
+@ZenRegister
+public class CrTMoldStationHandler
 {
     public static class MoldStationAction extends AddRemoveAction
     {
@@ -44,7 +46,7 @@ public class MTMoldStationHandler
                 builder.append(String.format(" %d", r));
                 comma = true;
             }
-            builder.append(String.format("] ) -> %s", MTHelper.getItemDescription(recipe.getOutput())));
+            builder.append(String.format("] ) -> %s", CrTHelper.getItemDescription(recipe.getOutput())));
             return builder.toString();
         }
 
@@ -64,7 +66,7 @@ public class MTMoldStationHandler
     @ZenMethod
     static public void addRecipe(IItemStack output, int width, int height, int[] grid)
     {
-        ModIntegrationMinetweaker.queueAdd(() -> {
+        ModIntegrationCrafttweaker.queueAdd(() -> {
             IMoldRecipe recipe = null;
             try
             {
@@ -72,7 +74,7 @@ public class MTMoldStationHandler
             }
             catch (IllegalArgumentException e)
             {
-                MTHelper.printCrt("Invalid mold station recipe: " + e.getMessage());
+                CrTHelper.printCrt("Invalid mold station recipe: " + e.getMessage());
                 return;
             }
             CraftTweakerAPI.apply(new MoldStationAction(recipe).action_add);
@@ -82,7 +84,7 @@ public class MTMoldStationHandler
     @ZenMethod
     static public void removeRecipe(int[] grid)
     {
-        ModIntegrationMinetweaker.queueRemove(() -> {
+        ModIntegrationCrafttweaker.queueRemove(() -> {
             if (grid.length != 36)
             {
                 CraftTweakerAPI.logWarning("Invalid mold station grid size: expected 36 instead of " + grid.length);
@@ -101,6 +103,6 @@ public class MTMoldStationHandler
     @ZenMethod
     public static void clear()
     {
-        ModIntegrationMinetweaker.queueClear(MoldRecipeManager.INSTANCE.getRecipes());
+        ModIntegrationCrafttweaker.queueClear(MoldRecipeManager.INSTANCE.getRecipes());
     }
 }

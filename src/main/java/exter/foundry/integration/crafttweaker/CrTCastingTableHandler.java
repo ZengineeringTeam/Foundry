@@ -1,16 +1,17 @@
-package exter.foundry.integration.minetweaker;
+package exter.foundry.integration.crafttweaker;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import crafttweaker.CraftTweakerAPI;
+import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.liquid.ILiquidStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import exter.foundry.api.recipe.ICastingTableRecipe;
 import exter.foundry.api.recipe.ICastingTableRecipe.TableType;
 import exter.foundry.api.recipe.matcher.ItemStackMatcher;
-import exter.foundry.integration.ModIntegrationMinetweaker;
+import exter.foundry.integration.ModIntegrationCrafttweaker;
 import exter.foundry.recipes.CastingTableRecipe;
 import exter.foundry.recipes.manager.CastingTableRecipeManager;
 import net.minecraftforge.fluids.FluidStack;
@@ -18,7 +19,8 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.foundry.CastingTable")
-public class MTCastingTableHandler
+@ZenRegister
+public class CrTCastingTableHandler
 {
     public static class CastingTableAction extends AddRemoveAction
     {
@@ -40,8 +42,8 @@ public class MTCastingTableHandler
         @Override
         public String getDescription()
         {
-            return String.format("( %s, %s ) -> %s", MTHelper.getFluidDescription(recipe.getInput()),
-                    recipe.getTableType().toString(), MTHelper.getItemDescription(recipe.getOutput()));
+            return String.format("( %s, %s ) -> %s", CrTHelper.getFluidDescription(recipe.getInput()),
+                    recipe.getTableType().toString(), CrTHelper.getItemDescription(recipe.getOutput()));
         }
 
         @Override
@@ -78,7 +80,7 @@ public class MTCastingTableHandler
 
     static private void addRecipe(IItemStack output, ILiquidStack input, ICastingTableRecipe.TableType table)
     {
-        ModIntegrationMinetweaker.queueAdd(() -> {
+        ModIntegrationCrafttweaker.queueAdd(() -> {
             ItemStackMatcher out = new ItemStackMatcher(CraftTweakerMC.getItemStack(output));
             FluidStack in = CraftTweakerMC.getLiquidStack(input);
             CastingTableRecipe recipe;
@@ -88,7 +90,7 @@ public class MTCastingTableHandler
             }
             catch (IllegalArgumentException e)
             {
-                MTHelper.printCrt("Invalid casting recipe: " + e.getMessage());
+                CrTHelper.printCrt("Invalid casting recipe: " + e.getMessage());
                 return;
             }
             CraftTweakerAPI.apply(new CastingTableAction(recipe).action_add);
@@ -121,7 +123,7 @@ public class MTCastingTableHandler
 
     static public void removeRecipe(ILiquidStack input, ICastingTableRecipe.TableType table)
     {
-        ModIntegrationMinetweaker.queueRemove(() -> {
+        ModIntegrationCrafttweaker.queueRemove(() -> {
             ICastingTableRecipe recipe = CastingTableRecipeManager.INSTANCE
                     .findRecipe(CraftTweakerMC.getLiquidStack(input), table);
             if (recipe == null)
@@ -142,31 +144,31 @@ public class MTCastingTableHandler
     @ZenMethod
     public static void clearRods()
     {
-        ModIntegrationMinetweaker.queueClear(CastingTableRecipeManager.INSTANCE.getRecipes(TableType.ROD));
+        ModIntegrationCrafttweaker.queueClear(CastingTableRecipeManager.INSTANCE.getRecipes(TableType.ROD));
     }
 
     @ZenMethod
     public static void clearPlates()
     {
-        ModIntegrationMinetweaker.queueClear(CastingTableRecipeManager.INSTANCE.getRecipes(TableType.PLATE));
+        ModIntegrationCrafttweaker.queueClear(CastingTableRecipeManager.INSTANCE.getRecipes(TableType.PLATE));
     }
 
     @ZenMethod
     public static void clearIngots()
     {
-        ModIntegrationMinetweaker.queueClear(CastingTableRecipeManager.INSTANCE.getRecipes(TableType.INGOT));
+        ModIntegrationCrafttweaker.queueClear(CastingTableRecipeManager.INSTANCE.getRecipes(TableType.INGOT));
     }
 
     @ZenMethod
     public static void clearBlocks()
     {
-        ModIntegrationMinetweaker.queueClear(CastingTableRecipeManager.INSTANCE.getRecipes(TableType.BLOCK));
+        ModIntegrationCrafttweaker.queueClear(CastingTableRecipeManager.INSTANCE.getRecipes(TableType.BLOCK));
     }
 
     @ZenMethod
     public static void clearAll()
     {
-        ModIntegrationMinetweaker.queueClear(() -> {
+        ModIntegrationCrafttweaker.queueClear(() -> {
             Map<TableType, Map<String, ICastingTableRecipe>> recipes = CastingTableRecipeManager.INSTANCE
                     .getRecipesMap();
             for (TableType type : TableType.values())

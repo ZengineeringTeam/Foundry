@@ -1,18 +1,20 @@
-package exter.foundry.integration.minetweaker;
+package exter.foundry.integration.crafttweaker;
 
 import crafttweaker.CraftTweakerAPI;
+import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import exter.foundry.api.recipe.IBurnerHeaterFuel;
-import exter.foundry.integration.ModIntegrationMinetweaker;
+import exter.foundry.integration.ModIntegrationCrafttweaker;
 import exter.foundry.recipes.BurnerHeaterFuel;
 import exter.foundry.recipes.manager.BurnerHeaterFuelManager;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.foundry.BurnerHeater")
-public class MTBurnerFuelHandler
+@ZenRegister
+public class CrTBurnerFuelHandler
 {
     public static class BurnerFuelAction extends AddRemoveAction
     {
@@ -33,7 +35,7 @@ public class MTBurnerFuelHandler
         @Override
         public String getDescription()
         {
-            return String.format("%s -> (Time: %s | Heat: %s)", MTHelper.getItemDescription(fuel.getFuel()),
+            return String.format("%s -> (Time: %s | Heat: %s)", CrTHelper.getItemDescription(fuel.getFuel()),
                     fuel.getBurnTime(), fuel.getHeat());
         }
 
@@ -53,16 +55,16 @@ public class MTBurnerFuelHandler
     @ZenMethod
     public static void addFuel(IIngredient fuel, int time, int heat)
     {
-        ModIntegrationMinetweaker.queueAdd(() -> {
+        ModIntegrationCrafttweaker.queueAdd(() -> {
             CraftTweakerAPI.apply(
-                    new BurnerFuelAction(new BurnerHeaterFuel(MTHelper.getIngredient(fuel), time, heat)).action_add);
+                    new BurnerFuelAction(new BurnerHeaterFuel(CrTHelper.getIngredient(fuel), time, heat)).action_add);
         });
     }
 
     @ZenMethod
     public static void removeFuel(IItemStack stack)
     {
-        ModIntegrationMinetweaker.queueRemove(() -> {
+        ModIntegrationCrafttweaker.queueRemove(() -> {
             IBurnerHeaterFuel fuel = null;
             for (IBurnerHeaterFuel f : BurnerHeaterFuelManager.INSTANCE.getFuels())
             {
@@ -76,13 +78,13 @@ public class MTBurnerFuelHandler
             if (fuel != null)
                 CraftTweakerAPI.apply(new BurnerFuelAction(fuel).action_remove);
             else
-                MTHelper.printCrt("No burner fuel found for " + stack);
+                CrTHelper.printCrt("No burner fuel found for " + stack);
         });
     }
 
     @ZenMethod
     public static void clear()
     {
-        ModIntegrationMinetweaker.queueClear(BurnerHeaterFuelManager.INSTANCE.getFuels());
+        ModIntegrationCrafttweaker.queueClear(BurnerHeaterFuelManager.INSTANCE.getFuels());
     }
 }
