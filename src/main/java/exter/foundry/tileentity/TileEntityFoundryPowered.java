@@ -44,18 +44,14 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
         }
     }
 
-    static public int RATIO_RF = 1;
-    static public int RATIO_EU = 4;
+    public static int RATIO_RF = 1;
+    public static int RATIO_EU = 4;
 
     private boolean added_enet;
-    protected boolean update_energy;
-    protected boolean update_energy_tick;
 
     public TileEntityFoundryPowered()
     {
         energyStorage = new EnergyStorageMachine(getFoundryEnergyCapacity(), 512, 0);
-        update_energy = false;
-        update_energy_tick = true;
         added_enet = false;
     }
 
@@ -142,14 +138,12 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
     @Override
     protected void onInitialize()
     {
-        update_energy_tick = true;
     }
 
     @Override
     public void readFromNBT(NBTTagCompound compound)
     {
         super.readFromNBT(compound);
-        System.out.println(compound);
         if (compound.hasKey("energy"))
         {
             energyStorage.setEnergy(compound.getInteger("energy"));
@@ -221,10 +215,6 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
     @Override
     protected void updateServer()
     {
-        if (update_energy_tick)
-        {
-            update_energy_tick = false;
-        }
     }
 
     public int useFoundryEnergy(int amount, boolean do_use)
@@ -241,7 +231,6 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
         }
         super.writeToNBT(compound);
         compound.setInteger("energy", energyStorage.getEnergyStored());
-        System.out.println(compound);
         return compound;
     }
 }

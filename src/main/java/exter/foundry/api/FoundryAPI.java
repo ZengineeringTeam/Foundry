@@ -13,6 +13,7 @@ import exter.foundry.api.recipe.manager.IInfuserRecipeManager;
 import exter.foundry.api.recipe.manager.IMeltingRecipeManager;
 import exter.foundry.api.recipe.manager.IMoldRecipeManager;
 import exter.foundry.api.registry.IFluidRegistry;
+import exter.foundry.recipes.manager.BurnerHeaterFuelManager;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 
@@ -159,11 +160,11 @@ public class FoundryAPI
     public static IAtomizerRecipeManager ATOMIZER_MANAGER;
     public static IMoldRecipeManager MOLD_MANAGER;
     public static IBurnerHeaterFuelManager BURNER_HEATER_FUEL;
+    public static BurnerHeaterFuelManager FLUID_HEATER_FUEL;
 
     public static IMaterialRegistry MATERIALS;
     public static IFluidRegistry FLUIDS;
 
     @CapabilityInject(IHeatProvider.class)
     public static Capability<IHeatProvider> HEAT_PROVIDER_CAP;
-
 }

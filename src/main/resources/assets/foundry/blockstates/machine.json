@@ -9,6 +9,7 @@
     "machine=heater_induction": { "model": "foundry:machineinductionheater" },
     "machine=crucible_advanced": { "model": "foundry:machinecrucibleadvanced" },
     "machine=crucible_standard": { "model": "foundry:machinecruciblestandard" },
-    "machine=alloying_crucible": { "model": "foundry:machinealloyingcrucible" }
+    "machine=alloying_crucible": { "model": "foundry:machinealloyingcrucible" },
+    "machine=fluid_heater": { "model": "foundry:machinefluidheater" }
   }
 }

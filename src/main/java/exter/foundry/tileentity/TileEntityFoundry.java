@@ -23,6 +23,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
@@ -39,7 +40,7 @@ import net.minecraftforge.items.ItemStackHandler;
 /**
  * Base class for all machines.
  */
-public abstract class TileEntityFoundry extends TileEntity implements ITickable, IInventory
+public abstract class TileEntityFoundry extends TileEntity implements ITickable, IInventory, ICapabilityProvider
 {
     /**
      * Links an item slot to a tank for filling/draining containers.

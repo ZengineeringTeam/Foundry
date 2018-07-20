@@ -30,6 +30,7 @@ import exter.foundry.tileentity.TileEntityCastingTableBlock;
 import exter.foundry.tileentity.TileEntityCastingTableIngot;
 import exter.foundry.tileentity.TileEntityCastingTablePlate;
 import exter.foundry.tileentity.TileEntityCastingTableRod;
+import exter.foundry.tileentity.TileEntityFluidHeater;
 import exter.foundry.tileentity.TileEntityInductionHeater;
 import exter.foundry.tileentity.TileEntityMaterialRouter;
 import exter.foundry.tileentity.TileEntityMeltingCrucibleAdvanced;
@@ -99,6 +100,7 @@ public class Foundry
         GameRegistry.registerTileEntity(TileEntityCastingTableBlock.class, MODID + ":cast_table_block");
         GameRegistry.registerTileEntity(TileEntityMeltingCrucibleAdvanced.class, MODID + ":melt_crucible_advanced");
         GameRegistry.registerTileEntity(TileEntityAlloyingCrucible.class, MODID + ":alloy_crucible");
+        GameRegistry.registerTileEntity(TileEntityFluidHeater.class, MODID + ":fluid_heater");
 
         proxy.init();
     }
@@ -140,6 +142,7 @@ public class Foundry
 
         FoundryAPI.MATERIALS = MaterialRegistry.INSTANCE;
         FoundryAPI.BURNER_HEATER_FUEL = BurnerHeaterFuelManager.INSTANCE;
+        FoundryAPI.FLUID_HEATER_FUEL = BurnerHeaterFuelManager.INSTANCE;
 
         CapabilityHeatProvider.init();
 

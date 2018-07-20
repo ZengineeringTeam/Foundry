@@ -8,7 +8,7 @@ import net.minecraft.util.EnumFacing;
 
 public abstract class TileEntityFoundryHeatable extends TileEntityFoundry
 {
-    static public final int TEMP_MIN = 29000;
+    static public final int TEMP_MIN = 30000;
 
     static public int getMaxHeatRecieve(int max_heat, int temp_loss_rate)
     {

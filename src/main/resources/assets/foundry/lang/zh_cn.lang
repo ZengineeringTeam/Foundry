@@ -192,6 +192,7 @@ tile.foundry.alloy_mixer.name=合金混合机
 tile.foundry.infuser.name=金属注入机
 tile.foundry.router.name=材料路由器
 tile.foundry.heater_induction.name=感应加热器
+tile.foundry.fluid_heater.name=流体加热器
 tile.foundry.alloying_crucible.name=合金坩埚
 tile.foundry.casting_table.ingot.name=锭铸造台
 tile.foundry.casting_table.plate.name=板铸造台

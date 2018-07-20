@@ -1,13 +1,13 @@
 package exter.foundry.block;
 
 import java.util.List;
-import java.util.Random;
 
 import exter.foundry.Foundry;
 import exter.foundry.creativetab.FoundryTab;
 import exter.foundry.proxy.CommonProxy;
 import exter.foundry.tileentity.TileEntityAlloyMixer;
 import exter.foundry.tileentity.TileEntityAlloyingCrucible;
+import exter.foundry.tileentity.TileEntityFluidHeater;
 import exter.foundry.tileentity.TileEntityFoundry;
 import exter.foundry.tileentity.TileEntityInductionHeater;
 import exter.foundry.tileentity.TileEntityMaterialRouter;
@@ -51,7 +51,8 @@ public class BlockMachine extends Block implements ITileEntityProvider, IBlockVa
         INDUCTIONHEATER(5, "heater_induction"),
         CRUCIBLE_ADVANCED(6, "crucible_advanced"),
         CRUCIBLE_STANDARD(7, "crucible_standard"),
-        ALLOYING_CRUCIBLE(8, "alloying_crucible");
+        ALLOYING_CRUCIBLE(8, "alloying_crucible"),
+        FLUID_HEATER(9, "fluid_heater");
 
         static public EnumMachine fromID(int num)
         {
@@ -101,8 +102,6 @@ public class BlockMachine extends Block implements ITileEntityProvider, IBlockVa
 
     public static final PropertyEnum<EnumMachine> MACHINE = PropertyEnum.create("machine", EnumMachine.class);
 
-    private final Random rand = new Random();
-
     public BlockMachine()
     {
         super(Material.IRON);
@@ -134,9 +133,9 @@ public class BlockMachine extends Block implements ITileEntityProvider, IBlockVa
 
                 if (!is.isEmpty())
                 {
-                    double drop_x = rand.nextFloat() * 0.3 + 0.35;
-                    double drop_y = rand.nextFloat() * 0.3 + 0.35;
-                    double drop_z = rand.nextFloat() * 0.3 + 0.35;
+                    double drop_x = RANDOM.nextFloat() * 0.3 + 0.35;
+                    double drop_y = RANDOM.nextFloat() * 0.3 + 0.35;
+                    double drop_z = RANDOM.nextFloat() * 0.3 + 0.35;
                     EntityItem entityitem = new EntityItem(world, pos.getX() + drop_x, pos.getY() + drop_y,
                             pos.getZ() + drop_z, is);
                     entityitem.setPickupDelay(10);
@@ -184,6 +183,8 @@ public class BlockMachine extends Block implements ITileEntityProvider, IBlockVa
             return new TileEntityMeltingCrucibleStandard();
         case ALLOYING_CRUCIBLE:
             return new TileEntityAlloyingCrucible();
+        case FLUID_HEATER:
+            return new TileEntityFluidHeater();
         }
         return null;
     }
@@ -254,6 +255,7 @@ public class BlockMachine extends Block implements ITileEntityProvider, IBlockVa
         }
         else
         {
+            // TODO: ItemContainer
             switch (state.getValue(MACHINE))
             {
             case CRUCIBLE_BASIC:

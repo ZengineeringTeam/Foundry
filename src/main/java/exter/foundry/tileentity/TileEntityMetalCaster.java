@@ -53,8 +53,6 @@ public class TileEntityMetalCaster extends TileEntityFoundryPowered
 
         addContainerSlot(new ContainerSlot(0, INVENTORY_CONTAINER_DRAIN, false));
         addContainerSlot(new ContainerSlot(0, INVENTORY_CONTAINER_FILL, true));
-
-        update_energy = true;
     }
 
     private void beginCasting()

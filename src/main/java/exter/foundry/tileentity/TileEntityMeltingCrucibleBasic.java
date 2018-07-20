@@ -18,14 +18,14 @@ import net.minecraftforge.items.IItemHandler;
 public class TileEntityMeltingCrucibleBasic extends TileEntityFoundryHeatable
 {
 
-    static public final int SMELT_TIME = 5000000;
+    public static final int SMELT_TIME = 5000000;
 
-    static public final int INVENTORY_INPUT = 0;
-    static public final int INVENTORY_CONTAINER_DRAIN = 1;
-    static public final int INVENTORY_CONTAINER_FILL = 2;
+    public static final int INVENTORY_INPUT = 0;
+    public static final int INVENTORY_CONTAINER_DRAIN = 1;
+    public static final int INVENTORY_CONTAINER_FILL = 2;
 
-    static private final Set<Integer> IH_SLOTS_INPUT = ImmutableSet.of(INVENTORY_INPUT);
-    static private final Set<Integer> IH_SLOTS_OUTPUT = ImmutableSet.of();
+    private static final Set<Integer> IH_SLOTS_INPUT = ImmutableSet.of(INVENTORY_INPUT);
+    private static final Set<Integer> IH_SLOTS_OUTPUT = ImmutableSet.of();
 
     private final FluidTank tank;
     private final IFluidHandler fluid_handler;
