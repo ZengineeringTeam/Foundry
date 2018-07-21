@@ -16,7 +16,7 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 
-public class TileEntityMetalCaster extends TileEntityFoundryPowered
+public class TileEntityMetalCaster extends TileEntityPowered
 {
     static public final int CAST_TIME = 400000;
 
@@ -267,5 +267,11 @@ public class TileEntityMetalCaster extends TileEntityFoundryPowered
         super.writeToNBT(compound);
         compound.setInteger("progress", progress);
         return compound;
+    }
+
+    @Override
+    public int getFoundryEnergyCapacity()
+    {
+        return 40000;
     }
 }

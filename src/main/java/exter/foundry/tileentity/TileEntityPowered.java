@@ -19,7 +19,7 @@ import net.minecraftforge.fml.common.Optional;
  * Base class for all machines.
  */
 @Optional.Interface(iface = "ic2.api.energy.tile.IEnergySink", modid = "ic2")
-public abstract class TileEntityFoundryPowered extends TileEntityFoundry implements IEnergySink
+public abstract class TileEntityPowered extends TileEntityFoundry implements IEnergySink
 {
     protected final EnergyStorageMachine energyStorage;
 
@@ -49,7 +49,7 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
 
     private boolean added_enet;
 
-    public TileEntityFoundryPowered()
+    public TileEntityPowered()
     {
         energyStorage = new EnergyStorageMachine(getFoundryEnergyCapacity(), 512, 0);
         added_enet = false;
@@ -82,10 +82,7 @@ public abstract class TileEntityFoundryPowered extends TileEntityFoundry impleme
         return (double) (getFoundryEnergyCapacity() - getStoredFoundryEnergy()) / RATIO_EU;
     }
 
-    public int getFoundryEnergyCapacity()
-    {
-        return energyStorage.getMaxEnergyStored();
-    }
+    public abstract int getFoundryEnergyCapacity();
 
     @Optional.Method(modid = "ic2")
     @Override

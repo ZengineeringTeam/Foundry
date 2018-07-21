@@ -9,7 +9,7 @@ import exter.foundry.Foundry;
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.recipe.IMeltingRecipe;
 import exter.foundry.gui.GuiMeltingCrucible;
-import exter.foundry.tileentity.TileEntityFoundryHeatable;
+import exter.foundry.tileentity.TileEntityHeatable;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.IDrawable;
@@ -129,8 +129,8 @@ public class MeltingJEI
             this.recipe = recipe;
             ResourceLocation background_location = new ResourceLocation(Foundry.MODID, "textures/gui/crucible.png");
             temp = new DrawableResource(background_location, 176, 53,
-                    (recipe.getMeltingPoint() * 100 - TileEntityFoundryHeatable.TEMP_MIN) * 54
-                            / (500000 - TileEntityFoundryHeatable.TEMP_MIN),
+                    (recipe.getMeltingPoint() * 100 - TileEntityHeatable.TEMP_MIN) * 54
+                            / (500000 - TileEntityHeatable.TEMP_MIN),
                     12, 0, 0, 0, 0, 256, 256);
         }
 

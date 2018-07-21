@@ -16,7 +16,7 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 
-public class TileEntityMetalInfuser extends TileEntityFoundryPowered
+public class TileEntityMetalInfuser extends TileEntityPowered
 {
 
     static public final int INVENTORY_SUBSTANCE_INPUT = 0;
@@ -221,5 +221,11 @@ public class TileEntityMetalInfuser extends TileEntityFoundryPowered
         compound.setInteger("progress", progress);
         compound.setInteger("extract_time", extract_energy);
         return compound;
+    }
+
+    @Override
+    public int getFoundryEnergyCapacity()
+    {
+        return 3000;
     }
 }

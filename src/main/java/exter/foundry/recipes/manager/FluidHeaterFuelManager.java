@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 
 import exter.foundry.api.recipe.IFluidHeaterFuel;
 import exter.foundry.recipes.FluidHeaterFuel;
-import exter.foundry.tileentity.TileEntityFoundryHeatable;
+import exter.foundry.tileentity.TileEntityHeatable;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.Fluid;
 
@@ -56,7 +56,7 @@ public class FluidHeaterFuelManager implements exter.foundry.api.recipe.manager.
     @Override
     public int getHeatNeeded(int heat_loss_rate, int temperature)
     {
-        return TileEntityFoundryHeatable.getMaxHeatRecieve(temperature, heat_loss_rate);
+        return TileEntityHeatable.getMaxHeatRecieve(temperature, heat_loss_rate);
     }
 
     @Override

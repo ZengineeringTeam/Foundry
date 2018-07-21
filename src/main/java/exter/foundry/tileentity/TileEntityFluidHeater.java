@@ -97,7 +97,7 @@ public class TileEntityFluidHeater extends TileEntityFoundry
         return tank;
     }
 
-    private static int MAX_PROVIDE = TileEntityFoundryHeatable.getMaxHeatRecieve(350000,
+    private static int MAX_PROVIDE = TileEntityHeatable.getMaxHeatRecieve(350000,
             FoundryAPI.CRUCIBLE_BASIC_TEMP_LOSS_RATE);
 
     private class HeatProvider implements IHeatProvider
@@ -111,7 +111,7 @@ public class TileEntityFluidHeater extends TileEntityFoundry
                 return 0;
             }
             IFluidHeaterFuel fuel = FluidHeaterFuelManager.INSTANCE.getFuel(fluidStack.getFluid());
-            if (fuel != null && fuel.getHeat() > TileEntityFoundryHeatable.TEMP_MIN)
+            if (fuel != null && fuel.getHeat() > TileEntityHeatable.TEMP_MIN)
             {
                 return Math.min(fuel.getHeat(), MAX_PROVIDE);
             }

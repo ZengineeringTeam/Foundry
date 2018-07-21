@@ -6,7 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 
-public abstract class TileEntityFoundryHeatable extends TileEntityFoundry
+public abstract class TileEntityHeatable extends TileEntityFoundry
 {
     static public final int TEMP_MIN = 30000;
 
@@ -17,7 +17,7 @@ public abstract class TileEntityFoundryHeatable extends TileEntityFoundry
 
     private int heat;
 
-    public TileEntityFoundryHeatable()
+    public TileEntityHeatable()
     {
         super();
         heat = TEMP_MIN;

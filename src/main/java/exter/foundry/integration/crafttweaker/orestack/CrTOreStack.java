@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import crafttweaker.annotations.BracketHandler;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemCondition;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.item.IItemTransformer;
+import crafttweaker.api.item.IItemTransformerNew;
 import crafttweaker.api.item.IngredientOr;
 import crafttweaker.api.liquid.ILiquidStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
@@ -15,6 +17,7 @@ import crafttweaker.api.player.IPlayer;
 import exter.foundry.api.recipe.matcher.OreMatcher;
 import net.minecraft.item.ItemStack;
 
+@BracketHandler(priority = 100)
 public class CrTOreStack implements IIngredient
 {
     private final OreMatcher stack;
@@ -137,5 +140,35 @@ public class CrTOreStack implements IIngredient
     public IIngredient transform(IItemTransformer arg0)
     {
         return this;
+    }
+
+    @Override
+    public IIngredient transformNew(IItemTransformerNew transformer)
+    {
+        return this;
+    }
+
+    @Override
+    public IItemStack applyNewTransform(IItemStack item)
+    {
+        return item;
+    }
+
+    @Override
+    public boolean hasNewTransformers()
+    {
+        return false;
+    }
+
+    @Override
+    public String toCommandString()
+    {
+        return stack.toString();
+    }
+
+    @Override
+    public String toString()
+    {
+        return toCommandString();
     }
 }

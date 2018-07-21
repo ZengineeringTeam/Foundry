@@ -65,7 +65,7 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
         }
     }
 
-    private static int DEFAULT_HEAT_PROVIDE = TileEntityFoundryHeatable.getMaxHeatRecieve(170000,
+    private static int DEFAULT_HEAT_PROVIDE = TileEntityHeatable.getMaxHeatRecieve(170000,
             FoundryAPI.CRUCIBLE_BASIC_TEMP_LOSS_RATE);
     static private final Set<Integer> IH_SLOTS_INPUT = ImmutableSet.of(0, 1, 2, 3);
     static private final Set<Integer> IH_SLOTS_OUTPUT = ImmutableSet.of();

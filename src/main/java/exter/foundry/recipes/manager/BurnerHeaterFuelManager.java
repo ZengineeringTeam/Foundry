@@ -6,7 +6,7 @@ import exter.foundry.api.recipe.IBurnerHeaterFuel;
 import exter.foundry.api.recipe.manager.IBurnerHeaterFuelManager;
 import exter.foundry.api.recipe.matcher.IItemMatcher;
 import exter.foundry.recipes.BurnerHeaterFuel;
-import exter.foundry.tileentity.TileEntityFoundryHeatable;
+import exter.foundry.tileentity.TileEntityHeatable;
 import exter.foundry.util.MiscUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -54,7 +54,7 @@ public class BurnerHeaterFuelManager implements IBurnerHeaterFuelManager
     @Override
     public int getHeatNeeded(int temperature, int temp_loss_rate)
     {
-        return TileEntityFoundryHeatable.getMaxHeatRecieve(temperature, temp_loss_rate);
+        return TileEntityHeatable.getMaxHeatRecieve(temperature, temp_loss_rate);
     }
 
     @Override

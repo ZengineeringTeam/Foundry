@@ -8,7 +8,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fml.common.Optional;
 
-public class TileEntityInductionHeater extends TileEntityFoundryPowered
+public class TileEntityInductionHeater extends TileEntityPowered
 {
     private class HeatProvider implements IHeatProvider
     {
@@ -23,7 +23,7 @@ public class TileEntityInductionHeater extends TileEntityFoundryPowered
         }
     }
 
-    private static int MAX_PROVIDE = TileEntityFoundryHeatable.getMaxHeatRecieve(350000,
+    private static int MAX_PROVIDE = TileEntityHeatable.getMaxHeatRecieve(350000,
             FoundryAPI.CRUCIBLE_BASIC_TEMP_LOSS_RATE);
 
     private final HeatProvider heat_provider;
@@ -73,6 +73,12 @@ public class TileEntityInductionHeater extends TileEntityFoundryPowered
     public boolean hasCapability(Capability<?> cap, EnumFacing facing)
     {
         return cap == FoundryAPI.HEAT_PROVIDER_CAP && facing == EnumFacing.UP || super.hasCapability(cap, facing);
+    }
+
+    @Override
+    public int getFoundryEnergyCapacity()
+    {
+        return 25000;
     }
 
     @Override

@@ -15,7 +15,7 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 
-public class TileEntityMeltingCrucibleBasic extends TileEntityFoundryHeatable
+public class TileEntityMeltingCrucibleBasic extends TileEntityHeatable
 {
 
     public static final int SMELT_TIME = 5000000;
