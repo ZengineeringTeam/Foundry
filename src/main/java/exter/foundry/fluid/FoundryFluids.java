@@ -94,7 +94,7 @@ public class FoundryFluids
         int temp = 1550;
         BlockFluidInteractive pyrotheum = (BlockFluidInteractive) TFFluids.blockFluidPyrotheum;
         BlockFluidInteractive mana = (BlockFluidInteractive) TFFluids.blockFluidMana;
-        liquid_glass = FoundryFluidRegistry.INSTANCE.registerSpecialLiquidMetal(registry, "glass", temp, 12, "glass",
+        liquid_glass = FoundryFluidRegistry.INSTANCE.registerLiquidGlass(registry, "glass", temp, 12, "glass",
                 0x40FFFFFF, Blocks.GLASS.getDefaultState());
         pyrotheum.addInteraction(Blocks.SAND, liquid_glass.getBlock());
         pyrotheum.addInteraction(Blocks.GLASS, liquid_glass.getBlock());
@@ -114,7 +114,7 @@ public class FoundryFluids
             int meta = dye.getMetadata();
 
             stained_glass = stained_glass.withProperty(BlockColored.COLOR, dye);
-            liquid_glass_colored[meta] = FoundryFluidRegistry.INSTANCE.registerSpecialLiquidMetal(registry,
+            liquid_glass_colored[meta] = FoundryFluidRegistry.INSTANCE.registerLiquidGlass(registry,
                     "glass_" + name, temp, 12, "glass", fluid_color, stained_glass);
             pyrotheum.addInteraction(stained_glass, liquid_glass_colored[meta].getBlock());
             mana.addInteraction(liquid_glass_colored[meta].getBlock(), Blocks.SAND);

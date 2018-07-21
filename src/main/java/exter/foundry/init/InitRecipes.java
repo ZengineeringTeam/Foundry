@@ -41,6 +41,11 @@ public class InitRecipes
     public static void init()
     {
         registerMachineRecipes();
+
+        if (FoundryConfig.recipe_glass)
+        {
+            registerGlassRecipes();
+        }
     }
 
     static public void postInit()
@@ -104,7 +109,7 @@ public class InitRecipes
         {
             FluidLiquidMetal fluid = FoundryFluidRegistry.INSTANCE.getFluid(name);
             name = MiscUtil.upperCaseFirstChar(name);
-            if (!fluid.special)
+            if (!fluid.glass)
             {
                 FluidStack fluidstack = new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_INGOT);
                 List<ItemStack> ores = OreDictionary.doesOreNameExist("ingot" + name)
@@ -148,56 +153,54 @@ public class InitRecipes
         InitHardCore.init();
     }
 
-    static public void preInit()
+    private static void registerGlassRecipes()
     {
+        final String[] oredict_names = { "Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGray",
+                "Gray", "Pink", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White" };
 
-        if (FoundryConfig.recipe_glass)
+        int temp = 1550;
+        int melt = 500;
+        Fluid liquid_glass = FoundryFluids.liquid_glass;
+
+        MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("sand"), new FluidStack(liquid_glass, 1000), temp, melt);
+        MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("blockGlassColorless"),
+                new FluidStack(liquid_glass, 1000), temp, melt);
+        MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("paneGlassColorless"), new FluidStack(liquid_glass, 375),
+                temp, melt);
+        CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS), new FluidStack(liquid_glass, 1000),
+                ItemMold.SubItem.BLOCK.getItem(), false, null, 400);
+        CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS_PANE),
+                new FluidStack(liquid_glass, 375), ItemMold.SubItem.PLATE.getItem(), false, null, 100);
+        CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS),
+                new FluidStack(liquid_glass, 1000), ICastingTableRecipe.TableType.BLOCK);
+        CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS_PANE),
+                new FluidStack(liquid_glass, 375), ICastingTableRecipe.TableType.PLATE);
+        for (EnumDyeColor dye : EnumDyeColor.values())
         {
-            final String[] oredict_names = { "dyeBlack", "dyeRed", "dyeGreen", "dyeBrown", "dyeBlue", "dyePurple",
-                    "dyeCyan", "dyeLightGray", "dyeGray", "dyePink", "dyeLime", "dyeYellow", "dyeLightBlue",
-                    "dyeMagenta", "dyeOrange", "dyeWhite" };
 
-            int temp = 1550;
-            int melt = 500;
-            Fluid liquid_glass = FoundryFluids.liquid_glass;
+            int meta = dye.getMetadata();
+            ItemStack stained_glass = new ItemStack(Blocks.STAINED_GLASS, 1, meta);
+            ItemStack stained_glass_pane = new ItemStack(Blocks.STAINED_GLASS_PANE, 1, meta);
 
-            MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.SAND),
-                    new FluidStack(liquid_glass, 1000), temp, melt);
-            MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS),
-                    new FluidStack(liquid_glass, 1000), temp, melt);
-            MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS_PANE),
-                    new FluidStack(liquid_glass, 375), temp, melt);
-            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS),
-                    new FluidStack(liquid_glass, 1000), ItemMold.SubItem.BLOCK.getItem(), false, null, 400);
-            CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS),
-                    new FluidStack(liquid_glass, 1000), ICastingTableRecipe.TableType.BLOCK);
-            for (EnumDyeColor dye : EnumDyeColor.values())
-            {
+            Fluid liquid_glass_colored = FoundryFluids.liquid_glass_colored[meta];
 
-                int meta = dye.getMetadata();
-                ItemStack stained_glass = new ItemStack(Blocks.STAINED_GLASS, 1, meta);
+            MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("blockGlass" + oredict_names[dye.getDyeDamage()]),
+                    new FluidStack(liquid_glass_colored, 1000), temp, melt);
+            MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("paneGlass" + oredict_names[dye.getDyeDamage()]),
+                    new FluidStack(liquid_glass_colored, 375), temp, melt);
+            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stained_glass),
+                    new FluidStack(liquid_glass_colored, 1000), ItemMold.SubItem.BLOCK.getItem(), false, null, 400);
+            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stained_glass_pane),
+                    new FluidStack(liquid_glass_colored, 375), ItemMold.SubItem.PLATE.getItem(), false, null, 100);
+            CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stained_glass),
+                    new FluidStack(liquid_glass_colored, 1000), ICastingTableRecipe.TableType.BLOCK);
+            CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stained_glass_pane),
+                    new FluidStack(liquid_glass_colored, 375), ICastingTableRecipe.TableType.PLATE);
 
-                Fluid liquid_glass_colored = FoundryFluids.liquid_glass_colored[meta];
-
-                MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stained_glass),
-                        new FluidStack(liquid_glass_colored, 1000), temp, melt);
-                MeltingRecipeManager.INSTANCE.addRecipe(
-                        new ItemStackMatcher(new ItemStack(Blocks.STAINED_GLASS_PANE, 1, meta)),
-                        new FluidStack(liquid_glass_colored, 375), temp, melt);
-                CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stained_glass),
-                        new FluidStack(liquid_glass_colored, 1000), ItemMold.SubItem.BLOCK.getItem(), false, null, 400);
-                CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stained_glass),
-                        new FluidStack(liquid_glass_colored, 1000), ICastingTableRecipe.TableType.BLOCK);
-
-                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_glass_colored, 2000),
-                        new FluidStack(liquid_glass, 2000), new OreMatcher(oredict_names[dye.getDyeDamage()]), 5000);
-            }
+            InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_glass_colored, 2000),
+                    new FluidStack(liquid_glass, 2000), new OreMatcher("dye" + oredict_names[dye.getDyeDamage()]),
+                    5000);
         }
-        registerCrafting();
-    }
-
-    public static void registerCrafting()
-    {
     }
 
     static public void registerMachineRecipes()
@@ -206,7 +209,7 @@ public class InitRecipes
         for (String name : FoundryFluidRegistry.INSTANCE.getFluidNames())
         {
             FluidLiquidMetal fluid = FoundryFluidRegistry.INSTANCE.getFluid(name);
-            if (!fluid.special)
+            if (!fluid.glass)
             {
                 FoundryUtils.registerBasicMeltingRecipes(name, fluid);
             }
@@ -360,7 +363,7 @@ public class InitRecipes
     {
         name = MiscUtil.upperCaseFirstChar(name);
 
-        if (fluid.special)
+        if (fluid.glass)
         {
             return;
         }

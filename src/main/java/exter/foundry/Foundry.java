@@ -40,6 +40,7 @@ import exter.foundry.tileentity.TileEntityMeltingCrucibleStandard;
 import exter.foundry.tileentity.TileEntityMetalCaster;
 import exter.foundry.tileentity.TileEntityMetalInfuser;
 import exter.foundry.tileentity.TileEntityMoldStation;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -86,22 +87,30 @@ public class Foundry
         ModIntegrationManager.init();
         InitRecipes.init();
 
-        GameRegistry.registerTileEntity(TileEntityMeltingCrucibleBasic.class, MODID + ":melt_crucible_basic");
-        GameRegistry.registerTileEntity(TileEntityMeltingCrucibleStandard.class, MODID + ":melt_crucible_standard");
-        GameRegistry.registerTileEntity(TileEntityMetalCaster.class, MODID + ":metal_caster");
-        GameRegistry.registerTileEntity(TileEntityAlloyMixer.class, MODID + ":alloy_mixer");
-        GameRegistry.registerTileEntity(TileEntityMetalInfuser.class, MODID + ":metal_infuser");
-        GameRegistry.registerTileEntity(TileEntityMoldStation.class, MODID + ":mold_station");
-        GameRegistry.registerTileEntity(TileEntityMaterialRouter.class, MODID + ":material_router");
-        GameRegistry.registerTileEntity(TileEntityInductionHeater.class, MODID + ":induction_heater");
-        GameRegistry.registerTileEntity(TileEntityBurnerHeater.class, MODID + ":burner_heater");
-        GameRegistry.registerTileEntity(TileEntityCastingTableIngot.class, MODID + ":cast_table_ingot");
-        GameRegistry.registerTileEntity(TileEntityCastingTablePlate.class, MODID + ":cast_table_plate");
-        GameRegistry.registerTileEntity(TileEntityCastingTableRod.class, MODID + ":cast_table_rod");
-        GameRegistry.registerTileEntity(TileEntityCastingTableBlock.class, MODID + ":cast_table_block");
-        GameRegistry.registerTileEntity(TileEntityMeltingCrucibleAdvanced.class, MODID + ":melt_crucible_advanced");
-        GameRegistry.registerTileEntity(TileEntityAlloyingCrucible.class, MODID + ":alloy_crucible");
-        GameRegistry.registerTileEntity(TileEntityFluidHeater.class, MODID + ":fluid_heater");
+        GameRegistry.registerTileEntity(TileEntityMeltingCrucibleBasic.class,
+                new ResourceLocation(MODID, "melt_crucible_basic"));
+        GameRegistry.registerTileEntity(TileEntityMeltingCrucibleStandard.class,
+                new ResourceLocation(MODID, "melt_crucible_standard"));
+        GameRegistry.registerTileEntity(TileEntityMetalCaster.class, new ResourceLocation(MODID, "metal_caster"));
+        GameRegistry.registerTileEntity(TileEntityAlloyMixer.class, new ResourceLocation(MODID, "alloy_mixer"));
+        GameRegistry.registerTileEntity(TileEntityMetalInfuser.class, new ResourceLocation(MODID, "metal_infuser"));
+        GameRegistry.registerTileEntity(TileEntityMoldStation.class, new ResourceLocation(MODID, "mold_station"));
+        GameRegistry.registerTileEntity(TileEntityMaterialRouter.class, new ResourceLocation(MODID, "material_router"));
+        GameRegistry.registerTileEntity(TileEntityInductionHeater.class,
+                new ResourceLocation(MODID, "induction_heater"));
+        GameRegistry.registerTileEntity(TileEntityBurnerHeater.class, new ResourceLocation(MODID, "burner_heater"));
+        GameRegistry.registerTileEntity(TileEntityCastingTableIngot.class,
+                new ResourceLocation(MODID, "cast_table_ingot"));
+        GameRegistry.registerTileEntity(TileEntityCastingTablePlate.class,
+                new ResourceLocation(MODID, "cast_table_plate"));
+        GameRegistry.registerTileEntity(TileEntityCastingTableRod.class, new ResourceLocation(MODID, "cast_table_rod"));
+        GameRegistry.registerTileEntity(TileEntityCastingTableBlock.class,
+                new ResourceLocation(MODID, "cast_table_block"));
+        GameRegistry.registerTileEntity(TileEntityMeltingCrucibleAdvanced.class,
+                new ResourceLocation(MODID, "melt_crucible_advanced"));
+        GameRegistry.registerTileEntity(TileEntityAlloyingCrucible.class,
+                new ResourceLocation(MODID, "alloy_crucible"));
+        GameRegistry.registerTileEntity(TileEntityFluidHeater.class, new ResourceLocation(MODID, "fluid_heater"));
 
         proxy.init();
     }

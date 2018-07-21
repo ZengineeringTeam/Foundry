@@ -17,6 +17,9 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fluids.FluidStack;
@@ -37,7 +40,22 @@ public class CastingTableRenderer extends TileEntitySpecialRenderer<TileEntityCa
 
     private final String item_texture;
 
-    private final Map<HashableItem, Integer> colors;
+    private final static Map<HashableItem, Integer> colors;
+
+    static
+    {
+        colors = new HashMap<>(17);
+        colors.put(new HashableItem(new ItemStack(Blocks.GLASS_PANE)), 0x40FFFFFF);
+        for (EnumDyeColor dye : EnumDyeColor.values())
+        {
+            int color = ItemDye.DYE_COLORS[dye.getDyeDamage()];
+            int c1 = 63 + (color & 0xFF) * 3 / 4;
+            int c2 = 63 + (color >> 8 & 0xFF) * 3 / 4;
+            int c3 = 63 + (color >> 16 & 0xFF) * 3 / 4;
+            int fluid_color = c1 | c2 << 8 | c3 << 16 | 100 << 24;
+            colors.put(new HashableItem(new ItemStack(Blocks.STAINED_GLASS_PANE, 1, dye.getMetadata())), fluid_color);
+        }
+    }
 
     public CastingTableRenderer(int left, int right, int top, int bottom, int low, int high, String item_texture)
     {
@@ -48,7 +66,6 @@ public class CastingTableRenderer extends TileEntitySpecialRenderer<TileEntityCa
         this.low = (double) low / 16 + 0.01;
         this.high = (high - 0.1) / 16;
         this.item_texture = item_texture;
-        colors = new HashMap<>();
     }
 
     protected int getItemColor(ItemStack stack)
@@ -102,9 +119,12 @@ public class CastingTableRenderer extends TileEntitySpecialRenderer<TileEntityCa
                     }
                 }
             }
-            r /= count;
-            g /= count;
-            b /= count;
+            if (count > 0)
+            {
+                r /= count;
+                g /= count;
+                b /= count;
+            }
             color = 0xFF000000 | r & 0xFF | (g & 0xFF) << 8 | (b & 0xFF) << 16;
             colors.put(new HashableItem(stack), color);
         }

@@ -72,18 +72,18 @@ public class FoundryFluidRegistry implements IFluidRegistry
         return fluid;
     }
 
-    public FluidLiquidMetal registerSpecialLiquidMetal(IForgeRegistry<Block> registry, String metal_name, int temperature, int luminosity, IBlockState solid)
+    public FluidLiquidMetal registerLiquidGlass(IForgeRegistry<Block> registry, String glass_name, int temperature, int luminosity, IBlockState solid)
     {
-        return registerSpecialLiquidMetal(registry, metal_name, temperature, luminosity, metal_name, 0xFFFFFF, solid);
+        return registerLiquidGlass(registry, glass_name, temperature, luminosity, glass_name, 0xFFFFFF, solid);
     }
 
-    public FluidLiquidMetal registerSpecialLiquidMetal(IForgeRegistry<Block> registry, String metal_name, int temperature, int luminosity, String texture, int color, IBlockState solid)
+    public FluidLiquidMetal registerLiquidGlass(IForgeRegistry<Block> registry, String glass_name, int temperature, int luminosity, String texture, int color, IBlockState solid)
     {
-        FluidLiquidMetal fluid = new FluidLiquidMetal(metal_name, color, true, temperature, luminosity);
+        FluidLiquidMetal fluid = new FluidLiquidMetal(glass_name, color, true, temperature, luminosity);
         FluidRegistry.registerFluid(fluid);
         FluidRegistry.addBucketForFluid(fluid);
 
-        Block liquid_block = new BlockLiquidMetal(fluid, metal_name, solid);
+        Block liquid_block = new BlockLiquidMetal(fluid, glass_name, solid);
         registry.register(liquid_block);
         fluid.setBlock(liquid_block);
 
