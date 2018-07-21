@@ -1,5 +1,7 @@
 package exter.foundry.fluid;
 
+import cofh.core.fluid.BlockFluidInteractive;
+import cofh.thermalfoundation.init.TFFluids;
 import exter.foundry.config.FoundryConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
@@ -90,8 +92,14 @@ public class FoundryFluids
          */
 
         int temp = 1550;
+        BlockFluidInteractive pyrotheum = (BlockFluidInteractive) TFFluids.blockFluidPyrotheum;
+        BlockFluidInteractive mana = (BlockFluidInteractive) TFFluids.blockFluidMana;
         liquid_glass = FoundryFluidRegistry.INSTANCE.registerSpecialLiquidMetal(registry, "glass", temp, 12, "glass",
                 0x40FFFFFF, Blocks.GLASS.getDefaultState());
+        pyrotheum.addInteraction(Blocks.SAND, liquid_glass.getBlock());
+        pyrotheum.addInteraction(Blocks.GLASS, liquid_glass.getBlock());
+        mana.addInteraction(liquid_glass.getBlock(), Blocks.SAND);
+        mana.addInteraction(Blocks.STAINED_GLASS, Blocks.SAND);
         IBlockState stained_glass = Blocks.STAINED_GLASS.getDefaultState();
         for (EnumDyeColor dye : EnumDyeColor.values())
         {
@@ -105,9 +113,11 @@ public class FoundryFluids
 
             int meta = dye.getMetadata();
 
+            stained_glass = stained_glass.withProperty(BlockColored.COLOR, dye);
             liquid_glass_colored[meta] = FoundryFluidRegistry.INSTANCE.registerSpecialLiquidMetal(registry,
-                    "glass_" + name, temp, 12, "glass", fluid_color,
-                    stained_glass.withProperty(BlockColored.COLOR, dye));
+                    "glass_" + name, temp, 12, "glass", fluid_color, stained_glass);
+            pyrotheum.addInteraction(stained_glass, liquid_glass_colored[meta].getBlock());
+            mana.addInteraction(liquid_glass_colored[meta].getBlock(), Blocks.SAND);
         }
     }
 }

@@ -3,6 +3,7 @@ package exter.foundry.block;
 import java.util.List;
 import java.util.Random;
 
+import cofh.thermalfoundation.init.TFFluids;
 import exter.foundry.creativetab.FoundryTab;
 import exter.foundry.util.MiscUtil;
 import net.minecraft.block.Block;
@@ -200,8 +201,9 @@ public class BlockLiquidMetal extends BlockFluidClassic
 
     private boolean tryToHarden(World world, BlockPos pos, BlockPos npos, IBlockState state)
     {
-        //Check if block is in contact with water.
-        if (world.getBlockState(npos).getMaterial() == Material.WATER)
+        // Check if block is in contact with water.
+        IBlockState nstate = world.getBlockState(npos);
+        if (nstate.getBlock() == TFFluids.blockFluidCryotheum || nstate.getMaterial() == Material.WATER)
         {
             world.setBlockState(pos, state);
             world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.BLOCK_LAVA_EXTINGUISH,

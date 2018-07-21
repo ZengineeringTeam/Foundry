@@ -120,17 +120,14 @@ public class CommonProxy implements IGuiHandler
 
     public void init()
     {
-
     }
 
     public void postInit()
     {
-
     }
 
     public void preInit()
     {
-
     }
 
     public String translate(String string, Object... args)

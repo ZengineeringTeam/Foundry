@@ -27,6 +27,9 @@ minecraft {
 
 repositories {
     maven {
+        url = "http://maven.covers1624.net"
+    }
+    maven {
         url "http://dvs1.progwml6.com/files/maven"
     }
 	maven {
@@ -44,9 +47,10 @@ dependencies {
     deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.9.+"
     deobfCompile "mezz.jei:jei_1.12.2:+"
 	deobfCompile "mcp.mobius.waila:Hwyla:+"
-	deobfCompile "slimeknights:TConstruct:1.12.2-+"
-	deobfCompile "slimeknights.mantle:Mantle:1.12-+"
+	//deobfCompile "slimeknights:TConstruct:1.12.2-+"
+	//deobfCompile "slimeknights.mantle:Mantle:1.12-+"
 	//deobfCompile "com.enderio:EnderIO:1.12.2-+"
+	compile "cofh:CoFHCore:1.12.2-4.5.0.+:deobf"
 }
 
 
