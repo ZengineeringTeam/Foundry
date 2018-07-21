@@ -75,7 +75,7 @@ public class JEIFoundryPlugin implements IModPlugin
         registry.handleRecipes(IMoldRecipe.class, MoldStationJEI.Wrapper::new, FoundryJEIConstants.MOLD_UID);
         registry.addRecipes(MoldRecipeManager.INSTANCE.getRecipes(), FoundryJEIConstants.MOLD_UID);
 
-        registry.addRecipeCatalyst(FoundryBlocks.block_machine.asItemStack(BlockMachine.EnumMachine.ALLOYMIXER),
+        registry.addRecipeCatalyst(FoundryBlocks.block_machine.asItemStack(BlockMachine.EnumMachine.ALLOY_MIXER),
                 FoundryJEIConstants.AM_UID);
         registry.handleRecipes(IAlloyMixerRecipe.class, AlloyMixerJEI.Wrapper::new, FoundryJEIConstants.AM_UID);
         registry.addRecipes(AlloyMixerRecipeManager.INSTANCE.getRecipes(), FoundryJEIConstants.AM_UID);

@@ -8,7 +8,7 @@ import javax.annotation.Nonnull;
 import exter.foundry.Foundry;
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.recipe.IMeltingRecipe;
-import exter.foundry.gui.GuiMeltingCrucible;
+import exter.foundry.client.gui.GuiMeltingCrucible;
 import exter.foundry.tileentity.TileEntityHeatable;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;

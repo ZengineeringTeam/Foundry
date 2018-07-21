@@ -1,12 +1,13 @@
-package exter.foundry.gui;
+package exter.foundry.client.gui;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
+import exter.foundry.Foundry;
+import exter.foundry.client.gui.button.GuiButtonFoundry;
 import exter.foundry.container.ContainerMetalCaster;
-import exter.foundry.gui.button.GuiButtonFoundry;
 import exter.foundry.tileentity.TileEntityFoundry.RedstoneMode;
 import exter.foundry.tileentity.TileEntityMetalCaster;
 import net.minecraft.client.gui.GuiButton;
@@ -20,7 +21,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class GuiMetalCaster extends GuiFoundry
 {
 
-    private static final ResourceLocation GUI_TEXTURE = new ResourceLocation("foundry:textures/gui/caster.png");
+    private static final ResourceLocation GUI_TEXTURE = new ResourceLocation(Foundry.MODID, "textures/gui/caster.png");
 
     public static final int TANK_HEIGHT = 47;
     private static final int TANK_X = 39;

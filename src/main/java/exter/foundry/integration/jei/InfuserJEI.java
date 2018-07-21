@@ -8,7 +8,7 @@ import javax.annotation.Nonnull;
 import exter.foundry.Foundry;
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.recipe.IInfuserRecipe;
-import exter.foundry.gui.GuiMetalInfuser;
+import exter.foundry.client.gui.GuiMetalInfuser;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.IDrawable;

@@ -7,7 +7,7 @@ import javax.annotation.Nonnull;
 
 import exter.foundry.Foundry;
 import exter.foundry.api.recipe.IAlloyMixerRecipe;
-import exter.foundry.gui.GuiAlloyMixer;
+import exter.foundry.client.gui.GuiAlloyMixer;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.IDrawable;

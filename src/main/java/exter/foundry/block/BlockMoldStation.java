@@ -56,7 +56,7 @@ public class BlockMoldStation extends BlockFoundrySidedMachine
         }
         else
         {
-            player.openGui(Foundry.INSTANCE, CommonProxy.GUI_MOLDSTATION, world, pos.getX(), pos.getY(), pos.getZ());
+            player.openGui(Foundry.INSTANCE, CommonProxy.GUI_MOLD_STATION, world, pos.getX(), pos.getY(), pos.getZ());
             return true;
         }
     }

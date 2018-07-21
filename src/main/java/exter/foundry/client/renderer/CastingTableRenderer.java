@@ -1,4 +1,4 @@
-package exter.foundry.tileentity.renderer;
+package exter.foundry.client.renderer;
 
 import java.util.HashMap;
 import java.util.List;

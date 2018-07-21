@@ -30,12 +30,14 @@ public class TileEntityFluidHeater extends TileEntityFoundry
                 return canFill() && FluidHeaterFuelManager.INSTANCE.getFuel(fluid.getFluid()) != null;
             }
         };
+        addContainerSlot(new ContainerSlot(0, INVENTORY_CONTAINER_DRAIN, false));
+        addContainerSlot(new ContainerSlot(0, INVENTORY_CONTAINER_FILL, true));
     }
 
     @Override
     public int getSizeInventory()
     {
-        return 0;
+        return 2;
     }
 
     @Override

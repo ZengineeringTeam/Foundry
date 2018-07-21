@@ -11,7 +11,7 @@ import exter.foundry.Foundry;
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.recipe.ICastingRecipe;
 import exter.foundry.api.recipe.matcher.IItemMatcher;
-import exter.foundry.gui.GuiMetalCaster;
+import exter.foundry.client.gui.GuiMetalCaster;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.IDrawable;

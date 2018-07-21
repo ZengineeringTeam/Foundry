@@ -9,7 +9,7 @@ import com.google.common.collect.ImmutableList;
 
 import exter.foundry.Foundry;
 import exter.foundry.api.recipe.IAlloyingCrucibleRecipe;
-import exter.foundry.gui.GuiAlloyingCrucible;
+import exter.foundry.client.gui.GuiAlloyingCrucible;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.gui.IDrawable;

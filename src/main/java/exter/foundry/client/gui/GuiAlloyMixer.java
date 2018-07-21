@@ -1,12 +1,13 @@
-package exter.foundry.gui;
+package exter.foundry.client.gui;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
+import exter.foundry.Foundry;
+import exter.foundry.client.gui.button.GuiButtonFoundry;
 import exter.foundry.container.ContainerAlloyMixer;
-import exter.foundry.gui.button.GuiButtonFoundry;
 import exter.foundry.tileentity.TileEntityAlloyMixer;
 import exter.foundry.tileentity.TileEntityFoundry.RedstoneMode;
 import net.minecraft.client.gui.GuiButton;
@@ -19,7 +20,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiAlloyMixer extends GuiFoundry
 {
-    private static final ResourceLocation GUI_TEXTURE = new ResourceLocation("foundry:textures/gui/alloymixer.png");
+    private static final ResourceLocation GUI_TEXTURE = new ResourceLocation(Foundry.MODID,
+            "textures/gui/alloymixer.png");
 
     public static final int TANK_HEIGHT = 35;
 

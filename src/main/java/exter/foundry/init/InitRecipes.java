@@ -347,7 +347,7 @@ public class InitRecipes
                 BurnerHeaterFuelManager.INSTANCE.getHeatNeeded(220000, FoundryAPI.CRUCIBLE_BASIC_TEMP_LOSS_RATE));
 
         FluidHeaterFuelManager.INSTANCE.addFuel(FluidRegistry.LAVA);
-        FluidHeaterFuelManager.INSTANCE.addFuel(TFFluids.fluidPetrotheum);
+        FluidHeaterFuelManager.INSTANCE.addFuel(TFFluids.fluidPyrotheum);
     }
 
     static ItemStack mold_ingot = ItemMold.SubItem.INGOT.getItem();

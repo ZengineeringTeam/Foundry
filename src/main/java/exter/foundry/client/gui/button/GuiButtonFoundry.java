@@ -1,4 +1,4 @@
-package exter.foundry.gui.button;
+package exter.foundry.client.gui.button;
 
 import org.lwjgl.opengl.GL11;
 

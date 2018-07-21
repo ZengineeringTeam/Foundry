@@ -1,4 +1,4 @@
-package exter.foundry.gui;
+package exter.foundry.client.gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,8 +7,9 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
+import exter.foundry.Foundry;
+import exter.foundry.client.gui.button.GuiButtonFoundry;
 import exter.foundry.container.ContainerMoldStation;
-import exter.foundry.gui.button.GuiButtonFoundry;
 import exter.foundry.tileentity.TileEntityMoldStation;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
@@ -23,7 +24,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class GuiMoldStation extends GuiFoundry
 {
 
-    public static final ResourceLocation GUI_TEXTURE = new ResourceLocation("foundry:textures/gui/moldstation.png");
+    public static final ResourceLocation GUI_TEXTURE = new ResourceLocation(Foundry.MODID,
+            "textures/gui/moldstation.png");
 
     public static final int BURN_X = 119;
     public static final int BURN_Y = 59;

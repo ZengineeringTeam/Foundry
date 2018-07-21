@@ -56,7 +56,7 @@ public class BlockBurnerHeater extends BlockFoundrySidedMachine
         }
         else
         {
-            player.openGui(Foundry.INSTANCE, CommonProxy.GUI_BURNERHEATER, world, pos.getX(), pos.getY(), pos.getZ());
+            player.openGui(Foundry.INSTANCE, CommonProxy.GUI_BURNER_HEATER, world, pos.getX(), pos.getY(), pos.getZ());
             return true;
         }
     }

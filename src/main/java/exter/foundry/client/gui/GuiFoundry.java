@@ -1,4 +1,4 @@
-package exter.foundry.gui;
+package exter.foundry.client.gui;
 
 import java.util.List;
 

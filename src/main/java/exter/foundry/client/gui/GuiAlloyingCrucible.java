@@ -1,10 +1,11 @@
-package exter.foundry.gui;
+package exter.foundry.client.gui;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
+import exter.foundry.Foundry;
 import exter.foundry.container.ContainerAlloyingCrucible;
 import exter.foundry.tileentity.TileEntityAlloyingCrucible;
 import net.minecraft.client.resources.I18n;
@@ -16,8 +17,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiAlloyingCrucible extends GuiFoundry
 {
-    private static final ResourceLocation GUI_TEXTURE = new ResourceLocation(
-            "foundry:textures/gui/alloyingcrucible.png");
+    private static final ResourceLocation GUI_TEXTURE = new ResourceLocation(Foundry.MODID,
+            "textures/gui/alloyingcrucible.png");
 
     public static final int TANK_HEIGHT = 35;
 

@@ -45,10 +45,10 @@ public class BlockMachine extends Block implements ITileEntityProvider, IBlockVa
     {
         CRUCIBLE_BASIC(0, "crucible_basic"),
         CASTER(1, "caster"),
-        ALLOYMIXER(2, "alloy_mixer"),
+        ALLOY_MIXER(2, "alloy_mixer"),
         INFUSER(3, "infuser"),
-        MATERIALROUTER(4, "router"),
-        INDUCTIONHEATER(5, "heater_induction"),
+        MATERIAL_ROUTER(4, "router"),
+        INDUCTION_HEATER(5, "heater_induction"),
         CRUCIBLE_ADVANCED(6, "crucible_advanced"),
         CRUCIBLE_STANDARD(7, "crucible_standard"),
         ALLOYING_CRUCIBLE(8, "alloying_crucible"),
@@ -169,13 +169,13 @@ public class BlockMachine extends Block implements ITileEntityProvider, IBlockVa
             return new TileEntityMeltingCrucibleBasic();
         case CASTER:
             return new TileEntityMetalCaster();
-        case ALLOYMIXER:
+        case ALLOY_MIXER:
             return new TileEntityAlloyMixer();
         case INFUSER:
             return new TileEntityMetalInfuser();
-        case MATERIALROUTER:
+        case MATERIAL_ROUTER:
             return new TileEntityMaterialRouter();
-        case INDUCTIONHEATER:
+        case INDUCTION_HEATER:
             return new TileEntityInductionHeater();
         case CRUCIBLE_ADVANCED:
             return new TileEntityMeltingCrucibleAdvanced();
@@ -249,41 +249,41 @@ public class BlockMachine extends Block implements ITileEntityProvider, IBlockVa
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hit_x, float hit_y, float hit_z)
     {
-        if (world.isRemote)
+        // TODO: ItemContainer
+        int gui = -1;
+        switch (state.getValue(MACHINE))
         {
-            return true;
+        case CRUCIBLE_BASIC:
+        case CRUCIBLE_STANDARD:
+        case CRUCIBLE_ADVANCED:
+            gui = CommonProxy.GUI_CRUCIBLE;
+            break;
+        case CASTER:
+            gui = CommonProxy.GUI_CASTER;
+            break;
+        case ALLOY_MIXER:
+            gui = CommonProxy.GUI_ALLOY_MIXER;
+            break;
+        case INFUSER:
+            gui = CommonProxy.GUI_INFUSER;
+            break;
+        case MATERIAL_ROUTER:
+            gui = CommonProxy.GUI_MATERIAL_ROUTER;
+            break;
+        case ALLOYING_CRUCIBLE:
+            gui = CommonProxy.GUI_ALLOYING_CRUCIBLE;
+            break;
+        case FLUID_HEATER:
+            gui = CommonProxy.GUI_FLUID_HEATER;
+            break;
+        default:
+            return false;
         }
-        else
+        if (!world.isRemote && gui >= 0)
         {
-            // TODO: ItemContainer
-            switch (state.getValue(MACHINE))
-            {
-            case CRUCIBLE_BASIC:
-            case CRUCIBLE_STANDARD:
-            case CRUCIBLE_ADVANCED:
-                player.openGui(Foundry.INSTANCE, CommonProxy.GUI_CRUCIBLE, world, pos.getX(), pos.getY(), pos.getZ());
-                break;
-            case CASTER:
-                player.openGui(Foundry.INSTANCE, CommonProxy.GUI_CASTER, world, pos.getX(), pos.getY(), pos.getZ());
-                break;
-            case ALLOYMIXER:
-                player.openGui(Foundry.INSTANCE, CommonProxy.GUI_ALLOYMIXER, world, pos.getX(), pos.getY(), pos.getZ());
-                break;
-            case INFUSER:
-                player.openGui(Foundry.INSTANCE, CommonProxy.GUI_INFUSER, world, pos.getX(), pos.getY(), pos.getZ());
-                break;
-            case MATERIALROUTER:
-                player.openGui(Foundry.INSTANCE, CommonProxy.GUI_MATERIALROUTER, world, pos.getX(), pos.getY(),
-                        pos.getZ());
-                break;
-            case ALLOYING_CRUCIBLE:
-                player.openGui(Foundry.INSTANCE, CommonProxy.GUI_ALLOYINGCRUCIBLE, world, pos.getX(), pos.getY(),
-                        pos.getZ());
-                break;
-            default:
-                return false;
-            }
-            return true;
+            player.openGui(Foundry.INSTANCE, gui, world, pos.getX(), pos.getY(), pos.getZ());
         }
+        return true;
     }
+
 }

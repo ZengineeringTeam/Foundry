@@ -3,6 +3,8 @@ package exter.foundry.proxy;
 import java.util.List;
 
 import exter.foundry.Foundry;
+import exter.foundry.client.renderer.CastingTableRenderer;
+import exter.foundry.client.renderer.CastingTableRendererBlock;
 import exter.foundry.integration.ModIntegrationManager;
 import exter.foundry.material.MaterialRegistry;
 import exter.foundry.material.OreDictMaterial;
@@ -11,8 +13,6 @@ import exter.foundry.tileentity.TileEntityCastingTableBlock;
 import exter.foundry.tileentity.TileEntityCastingTableIngot;
 import exter.foundry.tileentity.TileEntityCastingTablePlate;
 import exter.foundry.tileentity.TileEntityCastingTableRod;
-import exter.foundry.tileentity.renderer.CastingTableRenderer;
-import exter.foundry.tileentity.renderer.CastingTableRendererBlock;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;

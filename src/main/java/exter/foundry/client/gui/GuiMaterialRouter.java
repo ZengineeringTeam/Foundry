@@ -1,4 +1,4 @@
-package exter.foundry.gui;
+package exter.foundry.client.gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,8 +7,9 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
+import exter.foundry.Foundry;
+import exter.foundry.client.gui.button.GuiButtonFoundry;
 import exter.foundry.container.ContainerMaterialRouter;
-import exter.foundry.gui.button.GuiButtonFoundry;
 import exter.foundry.material.MaterialRegistry;
 import exter.foundry.tileentity.TileEntityMaterialRouter;
 import net.minecraft.client.gui.GuiButton;
@@ -66,7 +67,7 @@ public class GuiMaterialRouter extends GuiFoundry
         public void drawTooltip(int x, int y)
         {
             List<String> tooltip = new ArrayList<>();
-            tooltip.add(new TextComponentTranslation("foundry.router.material." + name).getUnformattedText());
+            tooltip.add(new TextComponentTranslation(Foundry.MODID + ".router.material." + name).getUnformattedText());
             drawHoveringText(tooltip, x, y, fontRenderer);
         }
 
@@ -96,7 +97,7 @@ public class GuiMaterialRouter extends GuiFoundry
         public void drawTooltip(int x, int y)
         {
             List<String> tooltip = new ArrayList<>();
-            tooltip.add(new TextComponentTranslation("foundry.router.type." + name).getUnformattedText());
+            tooltip.add(new TextComponentTranslation(Foundry.MODID + ".router.type." + name).getUnformattedText());
             drawHoveringText(tooltip, x, y, fontRenderer);
         }
 

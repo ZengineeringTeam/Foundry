@@ -1,7 +1,8 @@
-package exter.foundry.gui;
+package exter.foundry.client.gui;
 
 import org.lwjgl.opengl.GL11;
 
+import exter.foundry.Foundry;
 import exter.foundry.container.ContainerBurnerHeater;
 import exter.foundry.tileentity.TileEntityBurnerHeater;
 import net.minecraft.client.resources.I18n;
@@ -14,7 +15,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class GuiBurnerHeater extends GuiFoundry
 {
 
-    public static final ResourceLocation GUI_TEXTURE = new ResourceLocation("foundry:textures/gui/burnerheater.png");
+    public static final ResourceLocation GUI_TEXTURE = new ResourceLocation(Foundry.MODID,
+            "textures/gui/burnerheater.png");
 
     public static final int BURN_X = 80;
     public static final int BURN_Y = 17;

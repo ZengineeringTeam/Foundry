@@ -1,12 +1,13 @@
-package exter.foundry.gui;
+package exter.foundry.client.gui;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
+import exter.foundry.Foundry;
+import exter.foundry.client.gui.button.GuiButtonFoundry;
 import exter.foundry.container.ContainerMeltingCrucible;
-import exter.foundry.gui.button.GuiButtonFoundry;
 import exter.foundry.tileentity.TileEntityFoundry.RedstoneMode;
 import exter.foundry.tileentity.TileEntityHeatable;
 import exter.foundry.tileentity.TileEntityMeltingCrucibleBasic;
@@ -21,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class GuiMeltingCrucible extends GuiFoundry
 {
 
-    public static final ResourceLocation GUI_TEXTURE = new ResourceLocation("foundry:textures/gui/crucible.png");
+    public static final ResourceLocation GUI_TEXTURE = new ResourceLocation(Foundry.MODID, "textures/gui/crucible.png");
 
     public static final int TANK_WIDTH = 16;
     public static final int TANK_HEIGHT = 47;
@@ -150,14 +151,14 @@ public class GuiMeltingCrucible extends GuiFoundry
 
         if (isPointInRegion(TANK_X, TANK_Y, 16, TANK_HEIGHT, mousex, mousey))
         {
-            List<String> currenttip = new ArrayList<>();
+            List<String> currenttip = new ArrayList<>(1);
             addTankTooltip(currenttip, mousex, mousey, te_crucible.getTank(0));
             drawHoveringText(currenttip, mousex, mousey, fontRenderer);
         }
 
         if (isPointInRegion(HEAT_BAR_X, HEAT_BAR_Y, HEAT_BAR_WIDTH, HEAT_BAR_HEIGHT, mousex, mousey))
         {
-            List<String> currenttip = new ArrayList<>();
+            List<String> currenttip = new ArrayList<>(2);
             int heat = te_crucible.getTemperature() / 100;
             int melt_point = te_crucible.getMeltingPoint() / 100;
             currenttip.add(I18n.format("gui.foundry.crucible.temperature", heat));
@@ -169,7 +170,7 @@ public class GuiMeltingCrucible extends GuiFoundry
         }
         if (isPointInRegion(RSMODE_X, RSMODE_Y, button_mode.width, button_mode.height, mousex, mousey))
         {
-            List<String> currenttip = new ArrayList<>();
+            List<String> currenttip = new ArrayList<>(1);
             currenttip.add(getRedstoenModeText(te_crucible.getRedstoneMode()));
             drawHoveringText(currenttip, mousex, mousey, fontRenderer);
         }
