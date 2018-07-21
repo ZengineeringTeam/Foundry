@@ -41,11 +41,6 @@ public class InitRecipes
     public static void init()
     {
         registerMachineRecipes();
-
-        if (FoundryConfig.recipe_glass)
-        {
-            registerGlassRecipes();
-        }
     }
 
     static public void postInit()
@@ -262,6 +257,11 @@ public class InitRecipes
         if (FoundryConfig.recipe_equipment)
         {
             InitToolRecipes.init();
+        }
+
+        if (FoundryConfig.recipe_glass)
+        {
+            registerGlassRecipes();
         }
 
         //Base casting recipes.

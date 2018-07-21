@@ -24,6 +24,7 @@ import exter.foundry.tileentity.TileEntityMeltingCrucibleBasic;
 import exter.foundry.tileentity.TileEntityMetalCaster;
 import exter.foundry.tileentity.TileEntityMetalInfuser;
 import exter.foundry.tileentity.TileEntityMoldStation;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -43,7 +44,7 @@ public class CommonProxy implements IGuiHandler
     static public final int GUI_ALLOYINGCRUCIBLE = 7;
 
     @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
+    public GuiContainer getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
         BlockPos pos = new BlockPos(x, y, z);
         switch (ID)
