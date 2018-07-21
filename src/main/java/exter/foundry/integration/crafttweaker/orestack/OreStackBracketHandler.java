@@ -4,6 +4,7 @@ import java.util.List;
 
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.BracketHandler;
+import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IngredientAny;
 import crafttweaker.zenscript.IBracketHandler;

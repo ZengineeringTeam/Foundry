@@ -21,7 +21,6 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.foundry.Casting")
-@ZenRegister
 public class CrTCastingHandler
 {
     public static class CastingAction extends AddRemoveAction

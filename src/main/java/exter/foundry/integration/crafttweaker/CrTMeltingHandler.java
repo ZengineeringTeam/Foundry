@@ -15,7 +15,6 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.foundry.Melting")
-@ZenRegister
 public class CrTMeltingHandler
 {
     public static class MeltingAction extends AddRemoveAction

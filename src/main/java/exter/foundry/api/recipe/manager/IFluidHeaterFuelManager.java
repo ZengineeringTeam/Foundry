@@ -11,7 +11,7 @@ public interface IFluidHeaterFuelManager
 
     public void addFuel(Fluid fluid);
 
-    public IFluidHeaterFuel getFuel(Fluid item);
+    public IFluidHeaterFuel getFuel(Fluid fluid);
 
     public List<IFluidHeaterFuel> getFuels();
 

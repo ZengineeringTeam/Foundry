@@ -9,9 +9,9 @@ import exter.foundry.config.FoundryConfig;
 import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.init.InitRecipes;
 import exter.foundry.integration.ModIntegrationBotania;
+import exter.foundry.integration.ModIntegrationCrafttweaker;
 import exter.foundry.integration.ModIntegrationEnderIO;
 import exter.foundry.integration.ModIntegrationManager;
-import exter.foundry.integration.ModIntegrationCrafttweaker;
 import exter.foundry.material.MaterialRegistry;
 import exter.foundry.network.MessageTileEntitySync;
 import exter.foundry.proxy.CommonProxy;
@@ -20,6 +20,7 @@ import exter.foundry.recipes.manager.AlloyingCrucibleRecipeManager;
 import exter.foundry.recipes.manager.BurnerHeaterFuelManager;
 import exter.foundry.recipes.manager.CastingRecipeManager;
 import exter.foundry.recipes.manager.CastingTableRecipeManager;
+import exter.foundry.recipes.manager.FluidHeaterFuelManager;
 import exter.foundry.recipes.manager.InfuserRecipeManager;
 import exter.foundry.recipes.manager.MeltingRecipeManager;
 import exter.foundry.recipes.manager.MoldRecipeManager;
@@ -142,7 +143,7 @@ public class Foundry
 
         FoundryAPI.MATERIALS = MaterialRegistry.INSTANCE;
         FoundryAPI.BURNER_HEATER_FUEL = BurnerHeaterFuelManager.INSTANCE;
-        FoundryAPI.FLUID_HEATER_FUEL = BurnerHeaterFuelManager.INSTANCE;
+        FoundryAPI.FLUID_HEATER_FUEL = FluidHeaterFuelManager.INSTANCE;
 
         CapabilityHeatProvider.init();
 

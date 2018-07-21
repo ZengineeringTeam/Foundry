@@ -14,7 +14,6 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.foundry.Infuser")
-@ZenRegister
 public class CrTInfuserHandler
 {
     public static class InfuserAction extends AddRemoveAction

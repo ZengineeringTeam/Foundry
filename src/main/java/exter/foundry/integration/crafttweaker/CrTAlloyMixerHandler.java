@@ -13,7 +13,6 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.foundry.AlloyMixer")
-@ZenRegister
 public class CrTAlloyMixerHandler
 {
     public static class AlloyMixerAction extends AddRemoveAction

@@ -13,7 +13,6 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.foundry.BurnerHeater")
-@ZenRegister
 public class CrTBurnerFuelHandler
 {
     public static class BurnerFuelAction extends AddRemoveAction

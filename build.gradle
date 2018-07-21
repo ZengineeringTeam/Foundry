@@ -17,7 +17,7 @@ group = "exter.foundry"
 archivesBaseName = "ZenFoundry"
 
 minecraft {
-    version = "1.12.2-14.23.1.2599"
+    version = "1.12.2-14.23.4.2705"
     runDir = "run"
     mappings = "snapshot_20180119"
 	makeObfSourceJar = false
@@ -41,7 +41,7 @@ repositories {
 }
 
 dependencies {
-    deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.0.+"
+    deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.9.+"
     deobfCompile "mezz.jei:jei_1.12.2:+"
 	deobfCompile "mcp.mobius.waila:Hwyla:+"
 	deobfCompile "slimeknights:TConstruct:1.12.2-+"

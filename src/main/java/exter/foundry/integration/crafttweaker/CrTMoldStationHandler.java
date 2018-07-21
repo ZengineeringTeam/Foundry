@@ -12,7 +12,6 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.foundry.MoldStation")
-@ZenRegister
 public class CrTMoldStationHandler
 {
     public static class MoldStationAction extends AddRemoveAction

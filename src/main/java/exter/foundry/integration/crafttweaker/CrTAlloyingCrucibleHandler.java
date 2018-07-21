@@ -13,7 +13,6 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.foundry.AlloyingCrucible")
-@ZenRegister
 public class CrTAlloyingCrucibleHandler
 {
     public static class AlloyingCrucibleAction extends AddRemoveAction

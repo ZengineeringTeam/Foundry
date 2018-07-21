@@ -6,6 +6,15 @@ import java.util.List;
 
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.mc1120.CraftTweaker;
+import exter.foundry.integration.crafttweaker.CrTAlloyMixerHandler;
+import exter.foundry.integration.crafttweaker.CrTAlloyingCrucibleHandler;
+import exter.foundry.integration.crafttweaker.CrTBurnerFuelHandler;
+import exter.foundry.integration.crafttweaker.CrTCastingHandler;
+import exter.foundry.integration.crafttweaker.CrTCastingTableHandler;
+import exter.foundry.integration.crafttweaker.CrTFluidFuelHandler;
+import exter.foundry.integration.crafttweaker.CrTInfuserHandler;
+import exter.foundry.integration.crafttweaker.CrTMeltingHandler;
+import exter.foundry.integration.crafttweaker.CrTMoldStationHandler;
 import exter.foundry.integration.crafttweaker.orestack.OreStackBracketHandler;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.relauncher.Side;
@@ -72,6 +81,15 @@ public class ModIntegrationCrafttweaker implements IModIntegration
     public void onPreInit(Configuration config)
     {
         CraftTweakerAPI.registerBracketHandler(new OreStackBracketHandler());
+        CraftTweakerAPI.registerClass(CrTMeltingHandler.class);
+        CraftTweakerAPI.registerClass(CrTCastingHandler.class);
+        CraftTweakerAPI.registerClass(CrTCastingTableHandler.class);
+        CraftTweakerAPI.registerClass(CrTAlloyMixerHandler.class);
+        CraftTweakerAPI.registerClass(CrTAlloyingCrucibleHandler.class);
+        CraftTweakerAPI.registerClass(CrTInfuserHandler.class);
+        CraftTweakerAPI.registerClass(CrTMoldStationHandler.class);
+        CraftTweakerAPI.registerClass(CrTBurnerFuelHandler.class);
+        CraftTweakerAPI.registerClass(CrTFluidFuelHandler.class);
     }
 
     public static void queueAdd(Runnable action)
