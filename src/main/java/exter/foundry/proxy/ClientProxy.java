@@ -30,11 +30,11 @@ public class ClientProxy extends CommonProxy
     {
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCastingTableIngot.class,
-                new CastingTableRenderer(6, 10, 4, 12, 9, 12, "foundry:blocks/castingtable_top_ingot"));
+                new CastingTableRenderer(6, 10, 4, 12, 13, 16));
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCastingTablePlate.class,
-                new CastingTableRenderer(3, 13, 3, 13, 11, 12, "foundry:blocks/castingtable_top_plate"));
+                new CastingTableRenderer(3, 13, 3, 13, 14, 16));
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCastingTableRod.class,
-                new CastingTableRenderer(7, 9, 2, 14, 10, 12, "foundry:blocks/castingtable_top_rod"));
+                new CastingTableRenderer(7, 9, 2, 14, 14, 16));
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCastingTableBlock.class,
                 new CastingTableRendererBlock());
 

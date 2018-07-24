@@ -53,7 +53,7 @@ public abstract class TileEntityHeatable extends TileEntityFoundry
                 int temp_heater = Math.max(0, heater.provideHeat(temp_max, temp_last));
                 int receive = getHeatRecieve(temp_heater);
                 heat += receive;
-                System.out.println("receive: "+receive);
+                //                System.out.println("receive: "+receive);
             }
             heat -= getTemperatureLoss(temp_last);
         }

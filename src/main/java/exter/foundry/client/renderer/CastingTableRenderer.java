@@ -31,14 +31,12 @@ public class CastingTableRenderer extends TileEntitySpecialRenderer<TileEntityCa
 {
     static private final EnumFacing[] facings = new EnumFacing[] { null, EnumFacing.DOWN, EnumFacing.UP,
             EnumFacing.NORTH, EnumFacing.SOUTH, EnumFacing.NORTH, EnumFacing.EAST, EnumFacing.WEST };
-    private final double left;
-    private final double right;
-    private final double top;
-    private final double bottom;
-    private final double low;
-    private final double high;
-
-    private final String item_texture;
+    protected final double left;
+    protected final double right;
+    protected final double top;
+    protected final double bottom;
+    protected final double low;
+    protected final double high;
 
     private final static Map<HashableItem, Integer> colors;
 
@@ -57,7 +55,7 @@ public class CastingTableRenderer extends TileEntitySpecialRenderer<TileEntityCa
         }
     }
 
-    public CastingTableRenderer(int left, int right, int top, int bottom, int low, int high, String item_texture)
+    public CastingTableRenderer(int left, int right, int top, int bottom, int low, int high)
     {
         this.left = (double) left / 16 - 0.005;
         this.right = (double) right / 16 + 0.005;
@@ -65,7 +63,6 @@ public class CastingTableRenderer extends TileEntitySpecialRenderer<TileEntityCa
         this.bottom = (double) bottom / 16 + 0.005;
         this.low = (double) low / 16 + 0.01;
         this.high = (high - 0.1) / 16;
-        this.item_texture = item_texture;
     }
 
     protected int getItemColor(ItemStack stack)
@@ -131,11 +128,6 @@ public class CastingTableRenderer extends TileEntitySpecialRenderer<TileEntityCa
         return color;
     }
 
-    protected TextureAtlasSprite getItemTexture(ItemStack stack)
-    {
-        return Minecraft.getMinecraft().getTextureMapBlocks().getTextureExtry(item_texture);
-    }
-
     @Override
     public void render(TileEntityCastingTableBase te, double x, double y, double z, float partialTicks, int destroyStage, float a)
     {
@@ -150,35 +142,9 @@ public class CastingTableRenderer extends TileEntitySpecialRenderer<TileEntityCa
         GL11.glTranslatef((float) x, (float) y, (float) z);
         if (!te.getStackInSlot(0).isEmpty())
         {
-            ItemStack stack = te.getStackInSlot(0);
-            TextureAtlasSprite texture = getItemTexture(stack);
-            int color = getItemColor(stack);
-            float alpha = (color >> 24 & 255) / 255.0F;
-            float red = (color >> 16 & 255) / 255.0F;
-            float green = (color >> 8 & 255) / 255.0F;
-            float blue = (color & 255) / 255.0F;
-            boolean lock = uvLockItem();
-            double min_u = texture.getInterpolatedU((lock ? left : 0) * 16);
-            double min_v = texture.getInterpolatedV((lock ? top : 0) * 16);
-            double max_u = texture.getInterpolatedU((lock ? right : 1) * 16);
-            double max_v = texture.getInterpolatedV((lock ? bottom : 1) * 16);
-            if (fluid != null)
-            {
-                GlStateManager.depthMask(false);
-            }
-            BufferBuilder tessellator = Tessellator.getInstance().getBuffer();
-            tessellator.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
-            tessellator.pos(left, high, bottom).tex(min_u, max_v).color(red, green, blue, alpha).endVertex();
-            tessellator.pos(right, high, bottom).tex(max_u, max_v).color(red, green, blue, alpha).endVertex();
-            tessellator.pos(right, high, top).tex(max_u, min_v).color(red, green, blue, alpha).endVertex();
-            tessellator.pos(left, high, top).tex(min_u, min_v).color(red, green, blue, alpha).endVertex();
-            Tessellator.getInstance().draw();
-            if (fluid != null)
-            {
-                GlStateManager.depthMask(true);
-            }
+            renderItem(te.getStackInSlot(0), fluid);
         }
-        if (fluid != null)
+        else if (fluid != null)
         {
             TextureAtlasSprite texture = Minecraft.getMinecraft().getTextureMapBlocks()
                     .getAtlasSprite(fluid.getFluid().getStill(fluid).toString());
@@ -220,6 +186,31 @@ public class CastingTableRenderer extends TileEntitySpecialRenderer<TileEntityCa
         GlStateManager.enableLighting();
         GlStateManager.disableBlend();
         GL11.glPopMatrix();
+    }
+
+    protected void renderItem(ItemStack item, FluidStack fluid)
+    {
+        int color = getItemColor(item);
+        float alpha = (color >> 24 & 255) / 255.0F;
+        float red = (color >> 16 & 255) / 255.0F;
+        float green = (color >> 8 & 255) / 255.0F;
+        float blue = (color & 255) / 255.0F;
+        boolean lock = uvLockItem();
+        if (fluid != null)
+        {
+            GlStateManager.depthMask(false);
+        }
+        BufferBuilder tessellator = Tessellator.getInstance().getBuffer();
+        tessellator.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
+        tessellator.pos(left, high, bottom).color(red, green, blue, alpha).endVertex();
+        tessellator.pos(right, high, bottom).color(red, green, blue, alpha).endVertex();
+        tessellator.pos(right, high, top).color(red, green, blue, alpha).endVertex();
+        tessellator.pos(left, high, top).color(red, green, blue, alpha).endVertex();
+        Tessellator.getInstance().draw();
+        if (fluid != null)
+        {
+            GlStateManager.depthMask(true);
+        }
     }
 
     protected boolean uvLockItem()
