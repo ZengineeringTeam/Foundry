@@ -13,7 +13,7 @@ public class CapabilityHeatProvider
     {
 
         @Override
-        public int provideHeat(int max_heat)
+        public int provideHeat(int max_heat, int heat)
         {
             return 0;
         }

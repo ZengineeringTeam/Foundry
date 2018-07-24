@@ -5,16 +5,19 @@ import exter.foundry.api.heatable.IHeatProvider;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.MathHelper;
 
 public abstract class TileEntityHeatable extends TileEntityFoundry
 {
-    static public final int TEMP_MIN = 30000;
+    public static final int TEMP_MIN = 30000;
 
-    static public int getMaxHeatRecieve(int max_heat, int temp_loss_rate)
+    public static int getStableTemperatureNeed(int temperature, int loss_rate)
     {
-        return (max_heat - TEMP_MIN) / temp_loss_rate;
+        return Math.floorDiv(temperature * loss_rate - TEMP_MIN, loss_rate - 1);
     }
 
+    private final int MAX_HEAT_RECEIVE = getStableTemperatureNeed(getMaxTemperature(), getTemperatureLossRate())
+            - getMaxTemperature();
     private int heat;
 
     public TileEntityHeatable()
@@ -35,41 +38,11 @@ public abstract class TileEntityHeatable extends TileEntityFoundry
         return null;
     }
 
-    abstract protected int getMaxTemperature();
-
-    public final int getTemperature()
-    {
-        return heat;
-    }
-
-    abstract protected int getTemperatureLossRate();
-
-    @Override
-    public void readFromNBT(NBTTagCompound compund)
-    {
-        super.readFromNBT(compund);
-
-        if (compund.hasKey("heat"))
-        {
-            heat = compund.getInteger("heat");
-            if (heat < TEMP_MIN)
-            {
-                heat = TEMP_MIN;
-            }
-            int temp_max = getMaxTemperature();
-            if (heat > temp_max)
-            {
-                heat = temp_max;
-            }
-        }
-    }
-
     @Override
     protected void updateServer()
     {
-        int last_heat = heat;
-
         int temp_max = getMaxTemperature();
+        int temp_last = heat;
 
         if (canReceiveHeat())
         {
@@ -77,18 +50,40 @@ public abstract class TileEntityHeatable extends TileEntityFoundry
 
             if (heater != null)
             {
-                heat += heater.provideHeat(getMaxHeatRecieve(temp_max, getTemperatureLossRate()));
+                int temp_heater = Math.max(0, heater.provideHeat(temp_max, temp_last));
+                int receive = getHeatRecieve(temp_heater);
+                heat += receive;
+                System.out.println("receive: "+receive);
             }
+            heat -= getTemperatureLoss(temp_last);
         }
-        heat -= (heat - TEMP_MIN) / getTemperatureLossRate();
-        if (heat > temp_max)
+
+        heat = MathHelper.clamp(heat, TEMP_MIN, temp_max);
+    }
+
+    private int getHeatRecieve(int temp_heater)
+    {
+        if (heat > temp_heater)
         {
-            heat = temp_max;
+            return 0;
         }
-        if (heat < TEMP_MIN)
-        {
-            heat = TEMP_MIN;
-        }
+        return Math.min(MAX_HEAT_RECEIVE, getTemperatureLoss(temp_heater));
+    }
+
+    public int getTemperatureLoss(int heat)
+    {
+        //        System.out.println("(" + heat + " - " + TEMP_MIN + ") / " + getTemperatureLossRate() + " = "
+        //                + (heat - TEMP_MIN) / getTemperatureLossRate());
+        return (heat - TEMP_MIN) / getTemperatureLossRate();
+    }
+
+    abstract public int getMaxTemperature();
+
+    abstract public int getTemperatureLossRate();
+
+    public final int getTemperature()
+    {
+        return heat;
     }
 
     @Override
@@ -102,4 +97,16 @@ public abstract class TileEntityHeatable extends TileEntityFoundry
         compound.setInteger("heat", heat);
         return compound;
     }
+
+    @Override
+    public void readFromNBT(NBTTagCompound compund)
+    {
+        super.readFromNBT(compund);
+
+        if (compund.hasKey("heat"))
+        {
+            heat = MathHelper.clamp(compund.getInteger("heat"), TEMP_MIN, getMaxTemperature());
+        }
+    }
+
 }

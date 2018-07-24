@@ -210,19 +210,6 @@ public class BlockCastingTable extends Block implements ITileEntityProvider, IBl
     }
 
     @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-    {
-        if (state.getValue(TABLE) == EnumTable.BLOCK)
-        {
-            return AABB_BLOCK;
-        }
-        else
-        {
-            return AABB;
-        }
-    }
-
-    @Override
     public int getMetaFromState(IBlockState state)
     {
         return state.getValue(TABLE).id;

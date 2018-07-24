@@ -17,7 +17,5 @@ public interface IBurnerHeaterFuelManager
 
     public List<IBurnerHeaterFuel> getFuels();
 
-    public int getHeatNeeded(int heat_loss_rate, int temperature);
-
     public void removeFuel(IBurnerHeaterFuel fuel);
 }

@@ -14,7 +14,8 @@ public interface IHeatProvider
     /**
      * Called by Melting Crucibles to request heat from the heater block.
      * @param max_heat Heat requested in 1/100 of degK.
+     * @param heat
      * @return Heat provided in 1/100 of degK.
      */
-    public int provideHeat(int max_heat);
+    public int provideHeat(int max_heat, int heat);
 }

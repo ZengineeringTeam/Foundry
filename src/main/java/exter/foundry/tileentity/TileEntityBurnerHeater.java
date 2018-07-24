@@ -10,7 +10,6 @@ import exter.foundry.api.recipe.IBurnerHeaterFuel;
 import exter.foundry.block.BlockBurnerHeater;
 import exter.foundry.recipes.manager.BurnerHeaterFuelManager;
 import exter.foundry.tileentity.itemhandler.ItemHandlerFuel;
-import exter.foundry.util.MiscUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -31,42 +30,18 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
     private class HeatProvider implements IHeatProvider
     {
         @Override
-        public int provideHeat(int max_heat)
+        public int provideHeat(int max_heat, int heat)
         {
-            if (burn_time > 0 && max_heat > 0)
+            if (isBurning())
             {
-                if (max_heat > 0)
-                {
-                    if (max_heat > heat_provide)
-                    {
-                        max_heat = heat_provide;
-                    }
-                    int last_burn_time = burn_time;
-                    burn_time -= MiscUtil.divCeil(max_heat * 10, heat_provide);
-                    if (burn_time < 0)
-                    {
-                        burn_time = 0;
-                    }
-
-                    if (last_burn_time != burn_time || update_burn_times)
-                    {
-                        if (last_burn_time * burn_time == 0)
-                        {
-                            ((BlockBurnerHeater) getBlockType()).setMachineState(world, getPos(),
-                                    world.getBlockState(getPos()), burn_time > 0);
-                        }
-                        //                        updateValue("BurnTime", burn_time);
-                    }
-                }
-                return max_heat;
+                heat = (int) (heat_provide * (0.4D + ((double) burn_time / (double) item_burn_time) * 0.6D));
+                return heat;
             }
 
             return 0;
         }
     }
 
-    private static int DEFAULT_HEAT_PROVIDE = TileEntityHeatable.getMaxHeatRecieve(170000,
-            FoundryAPI.CRUCIBLE_BASIC_TEMP_LOSS_RATE);
     static private final Set<Integer> IH_SLOTS_INPUT = ImmutableSet.of(0, 1, 2, 3);
     static private final Set<Integer> IH_SLOTS_OUTPUT = ImmutableSet.of();
     static private final Set<Integer> IH_SLOTS_FUEL = ImmutableSet.of(0, 1, 2, 3);
@@ -76,16 +51,13 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
 
     private int heat_provide;
 
-    private boolean update_burn_times;
     private final HeatProvider heat_provider;
     private final ItemHandlerFuel item_handler;
 
     public TileEntityBurnerHeater()
     {
-        burn_time = 0;
-        item_burn_time = 0;
-        update_burn_times = false;
-        heat_provide = DEFAULT_HEAT_PROVIDE;
+        burn_time = item_burn_time = 0;
+//        heat_provide = DEFAULT_HEAT_PROVIDE;
         heat_provider = new HeatProvider();
         item_handler = new ItemHandlerFuel(this, getSizeInventory(), IH_SLOTS_INPUT, IH_SLOTS_OUTPUT, IH_SLOTS_FUEL);
     }
@@ -96,10 +68,10 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
     {
         if (!world.isRemote)
         {
-            heat_provide = DEFAULT_HEAT_PROVIDE;
-            burn_time = 2000;
-            item_burn_time = 1999;
-            update_burn_times = true;
+//            heat_provide = DEFAULT_HEAT_PROVIDE;
+            item_burn_time = burn_time = 200;
+            ((BlockBurnerHeater) getBlockType()).setMachineState(world, getPos(), world.getBlockState(getPos()),
+                    burn_time > 0);
             markDirty();
         }
     }
@@ -108,7 +80,6 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
     @Override
     public void boostCookTime()
     {
-
     }
 
     @Optional.Method(modid = "Botania")
@@ -207,13 +178,11 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
     @Override
     protected void onInitialize()
     {
-
     }
 
     @Override
     public void openInventory(EntityPlayer player)
     {
-
     }
 
     @Override
@@ -248,16 +217,14 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
     @Override
     protected void updateClient()
     {
-
     }
 
     @Override
     protected void updateServer()
     {
         int last_burn_time = burn_time;
-        int last_item_burn_time = item_burn_time;
 
-        if (burn_time < 10)
+        if (--burn_time <= 0) // TODO: do not consume when no receiver
         {
             for (int i = 0; i < 4; i++)
             {
@@ -268,13 +235,13 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
                     IBurnerHeaterFuel fuel = BurnerHeaterFuelManager.INSTANCE.getFuel(item);
                     if (fuel != null)
                     {
-                        burn = fuel.getBurnTime() * 10;
+                        burn = fuel.getBurnTime();
                         heat_provide = fuel.getHeat();
                     }
                     else
                     {
-                        burn = TileEntityFurnace.getItemBurnTime(item) * 10;
-                        heat_provide = DEFAULT_HEAT_PROVIDE;
+                        burn = TileEntityFurnace.getItemBurnTime(item);
+//                        heat_provide = DEFAULT_HEAT_PROVIDE;
                     }
                     if (burn > 0)
                     {
@@ -292,21 +259,14 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
             }
         }
 
-        if (last_burn_time != burn_time || update_burn_times)
+        if (last_burn_time != burn_time)
         {
-            if (last_burn_time * burn_time == 0)
+            if (last_burn_time == 0 || burn_time == 0)
             {
                 ((BlockBurnerHeater) getBlockType()).setMachineState(world, getPos(), world.getBlockState(getPos()),
                         burn_time > 0);
             }
-            //            updateValue("BurnTime", burn_time);
         }
-
-        //        if (last_item_burn_time != item_burn_time || update_burn_times)
-        //        {
-        //            updateValue("ItemBurnTime", item_burn_time);
-        //        }
-        update_burn_times = false;
     }
 
     @Override

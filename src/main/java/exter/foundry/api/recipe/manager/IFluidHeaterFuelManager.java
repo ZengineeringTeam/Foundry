@@ -15,7 +15,5 @@ public interface IFluidHeaterFuelManager
 
     public List<IFluidHeaterFuel> getFuels();
 
-    public int getHeatNeeded(int heat_loss_rate, int temperature);
-
     public void removeFuel(IFluidHeaterFuel fuel);
 }

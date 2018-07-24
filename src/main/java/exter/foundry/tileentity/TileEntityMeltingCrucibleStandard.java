@@ -11,7 +11,7 @@ public class TileEntityMeltingCrucibleStandard extends TileEntityMeltingCrucible
     }
 
     @Override
-    protected int getTemperatureLossRate()
+    public int getTemperatureLossRate()
     {
         return FoundryAPI.CRUCIBLE_STANDARD_TEMP_LOSS_RATE;
     }

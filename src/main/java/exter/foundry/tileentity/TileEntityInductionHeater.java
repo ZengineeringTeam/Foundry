@@ -13,18 +13,12 @@ public class TileEntityInductionHeater extends TileEntityPowered
     private class HeatProvider implements IHeatProvider
     {
         @Override
-        public int provideHeat(int max_heat)
+        public int provideHeat(int max_heat, int heat)
         {
-            if (max_heat > MAX_PROVIDE)
-            {
-                max_heat = MAX_PROVIDE;
-            }
-            return useFoundryEnergy(max_heat * 3 / 2, true) * 2 / 3;
+            useFoundryEnergy(max_heat * 3 / 20, true); // TODO: dynamic
+            return max_heat;
         }
     }
-
-    private static int MAX_PROVIDE = TileEntityHeatable.getMaxHeatRecieve(350000,
-            FoundryAPI.CRUCIBLE_BASIC_TEMP_LOSS_RATE);
 
     private final HeatProvider heat_provider;
 
