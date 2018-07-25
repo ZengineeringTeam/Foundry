@@ -42,6 +42,7 @@ public abstract class TileEntityCastingTableBase extends TileEntityFoundry
             if (doDrain)
             {
                 setRecipe(tank.getFluid());
+                sendDataToClientSide();
             }
             return result;
         }
@@ -57,6 +58,7 @@ public abstract class TileEntityCastingTableBase extends TileEntityFoundry
             if (doDrain)
             {
                 setRecipe(tank.getFluid());
+                sendDataToClientSide();
             }
             return result;
         }
@@ -76,6 +78,7 @@ public abstract class TileEntityCastingTableBase extends TileEntityFoundry
             if (doFill && (tank.getFluid() == null || tank.getFluid().amount == 0))
             {
                 setRecipe(resource);
+                sendDataToClientSide();
             }
             return fillTank(0, resource, doFill);
         }
@@ -95,9 +98,9 @@ public abstract class TileEntityCastingTableBase extends TileEntityFoundry
         }
 
         @Override
-        protected boolean canExtract(int slot)
+        protected boolean canInsert(int slot, ItemStack stack)
         {
-            return progress == 0;
+            return false;
         }
     }
 
@@ -213,7 +216,6 @@ public abstract class TileEntityCastingTableBase extends TileEntityFoundry
         {
             recipe = null;
             tank.setCapacity(getDefaultCapacity());
-            sendDataToClientSide();
             return;
         }
 
@@ -257,7 +259,7 @@ public abstract class TileEntityCastingTableBase extends TileEntityFoundry
             progress = CAST_TIME;
         }
 
-        if (last_progress != progress)
+        if (last_progress != progress && last_progress % 10 == 0)
         {
             sendDataToClientSide();
         }
