@@ -1,7 +1,6 @@
 package exter.foundry.block;
 
 import java.util.List;
-import java.util.Random;
 
 import exter.foundry.Foundry;
 import exter.foundry.api.recipe.ICastingTableRecipe.TableType;
@@ -85,12 +84,7 @@ public class BlockCastingTable extends Block implements ITileEntityProvider, IBl
         }
     }
 
-    protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.75D, 1.0D);
-    protected static final AxisAlignedBB AABB_BLOCK = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D);
-
     public static final PropertyEnum<EnumTable> TABLE = PropertyEnum.create("type", EnumTable.class);
-
-    private final Random rand = new Random();
 
     public BlockCastingTable()
     {
@@ -129,9 +123,9 @@ public class BlockCastingTable extends Block implements ITileEntityProvider, IBl
 
                 if (!is.isEmpty())
                 {
-                    double drop_x = rand.nextFloat() * 0.3 + 0.35;
-                    double drop_y = rand.nextFloat() * 0.3 + 0.35;
-                    double drop_z = rand.nextFloat() * 0.3 + 0.35;
+                    double drop_x = Block.RANDOM.nextFloat() * 0.3 + 0.35;
+                    double drop_y = Block.RANDOM.nextFloat() * 0.3 + 0.35;
+                    double drop_z = Block.RANDOM.nextFloat() * 0.3 + 0.35;
                     EntityItem entityitem = new EntityItem(world, pos.getX() + drop_x, pos.getY() + drop_y,
                             pos.getZ() + drop_z, is);
                     entityitem.setPickupDelay(10);
@@ -167,10 +161,9 @@ public class BlockCastingTable extends Block implements ITileEntityProvider, IBl
             return new TileEntityCastingTablePlate();
         case ROD:
             return new TileEntityCastingTableRod();
-        case BLOCK:
+        default:
             return new TileEntityCastingTableBlock();
         }
-        return null;
     }
 
     @Override
@@ -182,7 +175,7 @@ public class BlockCastingTable extends Block implements ITileEntityProvider, IBl
     @Override
     public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face)
     {
-        return face == EnumFacing.DOWN;
+        return face != EnumFacing.UP;
     }
 
     private void dropCastingTableOutput(EntityPlayer player, World world, BlockPos pos, IBlockState state)
@@ -284,4 +277,9 @@ public class BlockCastingTable extends Block implements ITileEntityProvider, IBl
             return false;
         }
     }
+
+    public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side)
+    {
+        return side != EnumFacing.UP;
+    };
 }
