@@ -195,22 +195,25 @@ public class CastingTableRenderer extends TileEntitySpecialRenderer<TileEntityCa
         float red = (color >> 16 & 255) / 255.0F;
         float green = (color >> 8 & 255) / 255.0F;
         float blue = (color & 255) / 255.0F;
-        boolean lock = uvLockItem();
         if (fluid != null)
         {
             GlStateManager.depthMask(false);
         }
-        BufferBuilder tessellator = Tessellator.getInstance().getBuffer();
-        tessellator.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
-        tessellator.pos(left, high, bottom).color(red, green, blue, alpha).endVertex();
-        tessellator.pos(right, high, bottom).color(red, green, blue, alpha).endVertex();
-        tessellator.pos(right, high, top).color(red, green, blue, alpha).endVertex();
-        tessellator.pos(left, high, top).color(red, green, blue, alpha).endVertex();
+
+        GlStateManager.disableTexture2D();
+        BufferBuilder buffer = Tessellator.getInstance().getBuffer();
+        buffer.begin(GL11.GL_POLYGON, DefaultVertexFormats.POSITION_COLOR); // TODO
+        buffer.pos(left, high, bottom).color(red, green, blue, alpha).endVertex();
+        buffer.pos(right, high, bottom).color(red, green, blue, alpha).endVertex();
+        buffer.pos(right, high, top).color(red, green, blue, alpha).endVertex();
+        buffer.pos(left, high, top).color(red, green, blue, alpha).endVertex();
         Tessellator.getInstance().draw();
         if (fluid != null)
         {
             GlStateManager.depthMask(true);
         }
+
+        GlStateManager.enableTexture2D();
     }
 
     protected boolean uvLockItem()
