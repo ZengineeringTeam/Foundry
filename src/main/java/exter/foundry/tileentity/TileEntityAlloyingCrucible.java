@@ -115,12 +115,12 @@ public class TileEntityAlloyingCrucible extends TileEntityFoundry
         fluid_handler = new FluidHandler();
         progress = 0;
 
-        addContainerSlot(new ContainerSlot(TANK_INPUT_A, INVENTORY_CONTAINER_INPUT_A_DRAIN, false));
-        addContainerSlot(new ContainerSlot(TANK_INPUT_A, INVENTORY_CONTAINER_INPUT_A_FILL, true));
-        addContainerSlot(new ContainerSlot(TANK_INPUT_B, INVENTORY_CONTAINER_INPUT_B_DRAIN, false));
-        addContainerSlot(new ContainerSlot(TANK_INPUT_B, INVENTORY_CONTAINER_INPUT_B_FILL, true));
-        addContainerSlot(new ContainerSlot(TANK_OUTPUT, INVENTORY_CONTAINER_OUTPUT_DRAIN, false));
-        addContainerSlot(new ContainerSlot(TANK_OUTPUT, INVENTORY_CONTAINER_OUTPUT_FILL, true));
+        addContainerSlot(new ContainerSlot(TANK_INPUT_A, INVENTORY_CONTAINER_INPUT_A_DRAIN,
+                INVENTORY_CONTAINER_INPUT_A_FILL, false));
+        addContainerSlot(new ContainerSlot(TANK_INPUT_B, INVENTORY_CONTAINER_INPUT_B_DRAIN,
+                INVENTORY_CONTAINER_INPUT_B_FILL, false));
+        addContainerSlot(new ContainerSlot(TANK_OUTPUT, INVENTORY_CONTAINER_OUTPUT_DRAIN,
+                INVENTORY_CONTAINER_OUTPUT_FILL, false));
     }
 
     private boolean canOutput(IAlloyingCrucibleRecipe recipe)

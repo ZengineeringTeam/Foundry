@@ -87,16 +87,16 @@ public class TileEntityAlloyMixer extends TileEntityPowered
         }
     }
 
-    static public final int INVENTORY_CONTAINER_INPUT_0_DRAIN = 0;
-    static public final int INVENTORY_CONTAINER_INPUT_0_FILL = 1;
-    static public final int INVENTORY_CONTAINER_INPUT_1_DRAIN = 2;
-    static public final int INVENTORY_CONTAINER_INPUT_1_FILL = 3;
-    static public final int INVENTORY_CONTAINER_INPUT_2_DRAIN = 4;
-    static public final int INVENTORY_CONTAINER_INPUT_2_FILL = 5;
-    static public final int INVENTORY_CONTAINER_INPUT_3_DRAIN = 6;
-    static public final int INVENTORY_CONTAINER_INPUT_3_FILL = 7;
-    static public final int INVENTORY_CONTAINER_OUTPUT_DRAIN = 8;
-    static public final int INVENTORY_CONTAINER_OUTPUT_FILL = 9;
+    static public final int INVENTORY_CONTAINER_INPUT_0_INPUT = 0;
+    static public final int INVENTORY_CONTAINER_INPUT_0_OUTPUT = 1;
+    static public final int INVENTORY_CONTAINER_INPUT_1_INPUT = 2;
+    static public final int INVENTORY_CONTAINER_INPUT_1_OUTPUT = 3;
+    static public final int INVENTORY_CONTAINER_INPUT_2_INPUT = 4;
+    static public final int INVENTORY_CONTAINER_INPUT_2_OUTPUT = 5;
+    static public final int INVENTORY_CONTAINER_INPUT_3_INPUT = 6;
+    static public final int INVENTORY_CONTAINER_INPUT_3_OUTPUT = 7;
+    static public final int INVENTORY_CONTAINER_OUTPUT_INPUT = 8;
+    static public final int INVENTORY_CONTAINER_OUTPUT_OUTPUT = 9;
 
     static public final int TANK_INPUT_0 = 0;
     static public final int TANK_INPUT_1 = 1;
@@ -122,16 +122,12 @@ public class TileEntityAlloyMixer extends TileEntityPowered
         }
         fluid_handler = new FluidHandler();
 
-        addContainerSlot(new ContainerSlot(TANK_INPUT_0, INVENTORY_CONTAINER_INPUT_0_DRAIN, false));
-        addContainerSlot(new ContainerSlot(TANK_INPUT_0, INVENTORY_CONTAINER_INPUT_0_FILL, true));
-        addContainerSlot(new ContainerSlot(TANK_INPUT_1, INVENTORY_CONTAINER_INPUT_1_DRAIN, false));
-        addContainerSlot(new ContainerSlot(TANK_INPUT_1, INVENTORY_CONTAINER_INPUT_1_FILL, true));
-        addContainerSlot(new ContainerSlot(TANK_INPUT_2, INVENTORY_CONTAINER_INPUT_2_DRAIN, false));
-        addContainerSlot(new ContainerSlot(TANK_INPUT_2, INVENTORY_CONTAINER_INPUT_2_FILL, true));
-        addContainerSlot(new ContainerSlot(TANK_INPUT_3, INVENTORY_CONTAINER_INPUT_3_DRAIN, false));
-        addContainerSlot(new ContainerSlot(TANK_INPUT_3, INVENTORY_CONTAINER_INPUT_3_FILL, true));
-        addContainerSlot(new ContainerSlot(TANK_OUTPUT, INVENTORY_CONTAINER_OUTPUT_DRAIN, false));
-        addContainerSlot(new ContainerSlot(TANK_OUTPUT, INVENTORY_CONTAINER_OUTPUT_FILL, true));
+        addContainerSlot(new ContainerSlot(TANK_INPUT_0, INVENTORY_CONTAINER_INPUT_0_INPUT, INVENTORY_CONTAINER_INPUT_0_OUTPUT, false));
+        addContainerSlot(new ContainerSlot(TANK_INPUT_1, INVENTORY_CONTAINER_INPUT_1_INPUT, INVENTORY_CONTAINER_INPUT_1_OUTPUT, false));
+        addContainerSlot(new ContainerSlot(TANK_INPUT_2, INVENTORY_CONTAINER_INPUT_2_INPUT, INVENTORY_CONTAINER_INPUT_2_OUTPUT, false));
+        addContainerSlot(new ContainerSlot(TANK_INPUT_3, INVENTORY_CONTAINER_INPUT_3_INPUT, INVENTORY_CONTAINER_INPUT_3_OUTPUT, false));
+        addContainerSlot(new ContainerSlot(TANK_OUTPUT, INVENTORY_CONTAINER_OUTPUT_INPUT,
+                INVENTORY_CONTAINER_OUTPUT_OUTPUT, false));
     }
 
     @Override

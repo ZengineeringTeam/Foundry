@@ -36,6 +36,7 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -249,7 +250,15 @@ public class BlockMachine extends Block implements ITileEntityProvider, IBlockVa
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hit_x, float hit_y, float hit_z)
     {
-        // TODO: ItemContainer
+        TileEntityFoundry te = (TileEntityFoundry) world.getTileEntity(pos);
+        for (int i = 0; i < te.getTankCount(); i++)
+        {
+            if (FluidUtil.interactWithFluidHandler(player, hand, te.getTank(i)))
+            {
+                return true;
+            }
+        }
+
         int gui = -1;
         switch (state.getValue(MACHINE))
         {

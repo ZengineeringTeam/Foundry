@@ -21,8 +21,8 @@ public class TileEntityMeltingCrucibleBasic extends TileEntityHeatable
     public static final int SMELT_TIME = 5000000;
 
     public static final int INVENTORY_INPUT = 0;
-    public static final int INVENTORY_CONTAINER_DRAIN = 1;
-    public static final int INVENTORY_CONTAINER_FILL = 2;
+    public static final int INVENTORY_CONTAINER_INPUT = 1;
+    public static final int INVENTORY_CONTAINER_OUTPUT = 2;
 
     private static final Set<Integer> IH_SLOTS_INPUT = ImmutableSet.of(INVENTORY_INPUT);
     private static final Set<Integer> IH_SLOTS_OUTPUT = ImmutableSet.of();
@@ -46,8 +46,7 @@ public class TileEntityMeltingCrucibleBasic extends TileEntityHeatable
         melt_point = 0;
         current_recipe = null;
 
-        addContainerSlot(new ContainerSlot(0, INVENTORY_CONTAINER_DRAIN, false));
-        addContainerSlot(new ContainerSlot(0, INVENTORY_CONTAINER_FILL, true));
+        addContainerSlot(new ContainerSlot(0, INVENTORY_CONTAINER_INPUT, INVENTORY_CONTAINER_OUTPUT, false));
     }
 
     @Override

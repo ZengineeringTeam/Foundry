@@ -27,6 +27,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.FluidTankPropertiesWrapper;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -47,82 +48,97 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
      */
     public class ContainerSlot
     {
-        public final boolean fill;
-        public final int tank_slot;
-        public final int slot;
+        final boolean fill;
+        final int tank_slot;
+        final int input_slot;
+        final int output_slot;
 
         public final Fluid fluid;
 
-        public ContainerSlot(int container_tank, int container_slot, boolean container_fill)
+        public ContainerSlot(int tank_slot, int input_slot, int output_slot, boolean fill)
         {
-            this(container_tank, container_slot, container_fill, null);
+            this(tank_slot, input_slot, output_slot, fill, null);
         }
 
-        public ContainerSlot(int container_tank, int container_slot, boolean container_fill, Fluid container_fluid)
+        public ContainerSlot(int tank_slot, int input_slot, int output_slot, boolean fill, Fluid container_fluid)
         {
-            tank_slot = container_tank;
-            slot = container_slot;
-            fill = container_fill;
+            this.tank_slot = tank_slot;
+            this.input_slot = input_slot;
+            this.output_slot = output_slot;
+            this.fill = fill;
             fluid = container_fluid;
         }
 
-        public void update()
+        public void update() // TODO: plenty of bugs
         {
             if (container_timer > 0)
                 return;
-            ItemStack stack = getStackInSlot(slot);
-            if (stack.getCount() > 1)
+            ItemStack stackInput = getStackInSlot(input_slot);
+            ItemStack stackOutput = getStackInSlot(output_slot);
+            if (stackInput.isEmpty() || !stackOutput.isEmpty())
+            {
                 return;
+            }
 
             FluidTank tank = getTank(tank_slot);
-            if (fill)
+            if (stackInput.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null))
             {
-                if (stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null))
-                {
-                    IFluidHandler handler = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-                    FluidStack drained = tank.drain(Fluid.BUCKET_VOLUME, false);
-                    if (drained == null || drained.amount == 0 || fluid != null && drained.getFluid() != fluid)
-                    {
-                        return;
-                    }
+                IFluidHandlerItem handler = stackInput
+                        .getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+                //                ItemStack stackOutput = getStackInSlot(output_slot);
+                //                if (!stackOutput.isEmpty() && (stackOutput.getCount() >= stackInput.getMaxStackSize()
+                //                        || !stackInput.isItemEqual(stackOutput)
+                //                        || !ItemStack.areItemStackTagsEqual(stackInput, stackOutput)))
+                //                {
+                //                    container_timer = 10;
+                //                    return;
+                //                }
 
-                    int filled = handler.fill(drained, false);
-                    if (filled == 0)
+                FluidStack transfer;
+                FluidStack sample = handler.drain(Integer.MAX_VALUE, false);
+                boolean isEmpty = sample == null;
+                boolean isFull = handler.fill(sample, false) <= 0;
+                boolean flag = false;
+                if ((fill && !isEmpty) || (!fill && isFull))
+                {
+                    transfer = FluidUtil.tryFluidTransfer(tank, handler, Fluid.BUCKET_VOLUME, true);
+                    if (handler.drain(Integer.MAX_VALUE, false) == null) // is empty
                     {
-                        return;
+                        inventory.set(output_slot, handler.getContainer());
+                        inventory.set(input_slot, ItemStack.EMPTY);
+                        updateInventoryItem(input_slot);
+                        updateInventoryItem(output_slot);
+                        flag = true;
                     }
-                    drained.amount = filled;
-                    drained = tank.drain(filled, true);
-                    handler.fill(drained, true);
-                    updateTank(tank_slot);
-                    updateInventoryItem(slot);
-                    container_timer = filled / 25;
                 }
-            }
-            else
-            {
-                if (stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null))
+                else
                 {
-                    IFluidHandler handler = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-                    FluidStack drained = handler.drain(Fluid.BUCKET_VOLUME, false);
-                    if (drained == null || drained.amount == 0 || fluid != null && drained.getFluid() != fluid)
+                    transfer = FluidUtil.tryFluidTransfer(handler, tank, Fluid.BUCKET_VOLUME, true);
+                    if (handler.fill(sample, false) <= 0) // is full
                     {
-                        return;
+                        inventory.set(output_slot, handler.getContainer());
+                        inventory.set(input_slot, ItemStack.EMPTY);
+                        updateInventoryItem(input_slot);
+                        updateInventoryItem(output_slot);
+                        flag = true;
                     }
-
-                    int filled = tank.fill(drained, false);
-                    if (filled == 0)
+                }
+                if (transfer != null)
+                {
+                    container_timer = transfer.amount / 25;
+                    if (!flag)
                     {
-                        return;
+                        inventory.set(input_slot, handler.getContainer());
+                        updateInventoryItem(input_slot);
                     }
-                    drained.amount = filled;
-                    drained = handler.drain(filled, true);
-                    tank.fill(drained, true);
-                    container_timer = filled / 25;
-                    if (handler instanceof IFluidHandlerItem && handler.getTankProperties()[0].getContents() == null)
-                        TileEntityFoundry.this.setStackInSlot(slot, ((IFluidHandlerItem) handler).getContainer());
                     updateTank(tank_slot);
-                    updateInventoryItem(slot);
+                }
+                else
+                {
+                    inventory.set(output_slot, inventory.get(input_slot));
+                    inventory.set(input_slot, ItemStack.EMPTY);
+                    updateInventoryItem(input_slot);
+                    updateInventoryItem(output_slot);
                 }
             }
         }
@@ -289,7 +305,7 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
 
     public TileEntityFoundry()
     {
-        conatiner_slots = new ArrayList<>();
+        conatiner_slots = new ArrayList<>(5);
         last_redstone_signal = false;
         redstone_signal = false;
         initialized = false;

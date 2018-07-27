@@ -20,10 +20,10 @@ public class TileEntityMetalInfuser extends TileEntityPowered
 {
 
     static public final int INVENTORY_SUBSTANCE_INPUT = 0;
-    static public final int INVENTORY_CONTAINER_INPUT_DRAIN = 1;
-    static public final int INVENTORY_CONTAINER_INPUT_FILL = 2;
-    static public final int INVENTORY_CONTAINER_OUTPUT_DRAIN = 3;
-    static public final int INVENTORY_CONTAINER_OUTPUT_FILL = 4;
+    static public final int INVENTORY_CONTAINER_INPUT_INPUT = 1;
+    static public final int INVENTORY_CONTAINER_INPUT_OUTPUT = 2;
+    static public final int INVENTORY_CONTAINER_OUTPUT_INPUT = 3;
+    static public final int INVENTORY_CONTAINER_OUTPUT_OUTPUT = 4;
 
     static public final int TANK_INPUT = 0;
     static public final int TANK_OUTPUT = 1;
@@ -55,10 +55,10 @@ public class TileEntityMetalInfuser extends TileEntityPowered
 
         current_recipe = null;
 
-        addContainerSlot(new ContainerSlot(TANK_INPUT, INVENTORY_CONTAINER_INPUT_DRAIN, false));
-        addContainerSlot(new ContainerSlot(TANK_INPUT, INVENTORY_CONTAINER_INPUT_FILL, true));
-        addContainerSlot(new ContainerSlot(TANK_OUTPUT, INVENTORY_CONTAINER_OUTPUT_DRAIN, false));
-        addContainerSlot(new ContainerSlot(TANK_OUTPUT, INVENTORY_CONTAINER_OUTPUT_FILL, true));
+        addContainerSlot(
+                new ContainerSlot(TANK_INPUT, INVENTORY_CONTAINER_INPUT_INPUT, INVENTORY_CONTAINER_INPUT_OUTPUT, false));
+        addContainerSlot(new ContainerSlot(TANK_OUTPUT, INVENTORY_CONTAINER_OUTPUT_INPUT,
+                INVENTORY_CONTAINER_OUTPUT_OUTPUT, false));
     }
 
     private void checkCurrentRecipe()

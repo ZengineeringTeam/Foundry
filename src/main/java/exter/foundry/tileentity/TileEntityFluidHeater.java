@@ -16,8 +16,8 @@ public class TileEntityFluidHeater extends TileEntityFoundry
     private final FluidTank tank;
     private final HeatProvider heatProvider = new HeatProvider();
 
-    public static final int INVENTORY_CONTAINER_DRAIN = 0;
-    public static final int INVENTORY_CONTAINER_FILL = 1;
+    public static final int INVENTORY_CONTAINER_INPUT = 0;
+    public static final int INVENTORY_CONTAINER_OUTPUT = 1;
 
     public TileEntityFluidHeater()
     {
@@ -30,8 +30,7 @@ public class TileEntityFluidHeater extends TileEntityFoundry
                 return canFill() && FluidHeaterFuelManager.INSTANCE.getFuel(fluid.getFluid()) != null;
             }
         };
-        addContainerSlot(new ContainerSlot(0, INVENTORY_CONTAINER_DRAIN, false));
-        addContainerSlot(new ContainerSlot(0, INVENTORY_CONTAINER_FILL, true));
+        addContainerSlot(new ContainerSlot(0, INVENTORY_CONTAINER_INPUT, INVENTORY_CONTAINER_OUTPUT, true));
     }
 
     @Override

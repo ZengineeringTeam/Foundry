@@ -7,9 +7,9 @@ import net.minecraft.item.ItemStack;
 public class SlotOutput extends Slot
 {
 
-    public SlotOutput(IInventory par1iInventory, int par2, int par3, int par4)
+    public SlotOutput(IInventory inventoryIn, int index, int xPosition, int yPosition)
     {
-        super(par1iInventory, par2, par3, par4);
+        super(inventoryIn, index, xPosition, yPosition);
     }
 
     @Override

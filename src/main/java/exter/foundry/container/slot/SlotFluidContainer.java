@@ -13,14 +13,14 @@ public class SlotFluidContainer extends Slot
     }
 
     @Override
-    public int getSlotStackLimit()
+    public boolean isItemValid(ItemStack stack)
     {
-        return 1;
+        return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
     }
 
     @Override
-    public boolean isItemValid(ItemStack stack)
+    public int getSlotStackLimit()
     {
-        return stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+        return 1;
     }
 }

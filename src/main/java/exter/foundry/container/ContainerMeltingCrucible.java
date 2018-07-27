@@ -1,10 +1,10 @@
 package exter.foundry.container;
 
 import exter.foundry.container.slot.SlotFluidContainer;
+import exter.foundry.container.slot.SlotOutput;
 import exter.foundry.recipes.manager.MeltingRecipeManager;
 import exter.foundry.tileentity.TileEntityMeltingCrucibleBasic;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -43,9 +43,8 @@ public class ContainerMeltingCrucible extends ContainerFoundry
             }
         });
         addSlotToContainer(
-                new SlotFluidContainer(te_icf, TileEntityMeltingCrucibleBasic.INVENTORY_CONTAINER_DRAIN, 135, 22));
-        addSlotToContainer(
-                new SlotFluidContainer(te_icf, TileEntityMeltingCrucibleBasic.INVENTORY_CONTAINER_FILL, 135, 53));
+                new SlotFluidContainer(te_icf, TileEntityMeltingCrucibleBasic.INVENTORY_CONTAINER_INPUT, 135, 22));
+        addSlotToContainer(new SlotOutput(te_icf, TileEntityMeltingCrucibleBasic.INVENTORY_CONTAINER_OUTPUT, 135, 53));
 
         //Player Inventory
         for (i = 0; i < 3; ++i)
@@ -88,17 +87,17 @@ public class ContainerMeltingCrucible extends ContainerFoundry
 
             if (slot_index >= SLOTS_INVENTORY && slot_index <= SLOTS_HOTBAR + 9)
             {
-                if (stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null))
+                if (stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null))
                 {
-                    FluidStack f = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null)
+                    FluidStack f = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)
                             .getTankProperties()[0].getContents();
-                    if (f != null && mergeItemStack(stack, TileEntityMeltingCrucibleBasic.INVENTORY_CONTAINER_DRAIN,
-                            TileEntityMeltingCrucibleBasic.INVENTORY_CONTAINER_DRAIN + 1, false))
+                    if (f != null && mergeItemStack(stack, TileEntityMeltingCrucibleBasic.INVENTORY_CONTAINER_INPUT,
+                            TileEntityMeltingCrucibleBasic.INVENTORY_CONTAINER_INPUT + 1, false))
                     {
                         return ItemStack.EMPTY;
                     }
-                    else if (mergeItemStack(stack, TileEntityMeltingCrucibleBasic.INVENTORY_CONTAINER_FILL,
-                            TileEntityMeltingCrucibleBasic.INVENTORY_CONTAINER_FILL + 1, false))
+                    else if (mergeItemStack(stack, TileEntityMeltingCrucibleBasic.INVENTORY_CONTAINER_OUTPUT,
+                            TileEntityMeltingCrucibleBasic.INVENTORY_CONTAINER_OUTPUT + 1, false))
                     {
                         return ItemStack.EMPTY;
                     }

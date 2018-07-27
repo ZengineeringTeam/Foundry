@@ -42,8 +42,8 @@ public class ContainerMetalCaster extends ContainerFoundry
         addSlotToContainer(new SlotOutput(te_caster, TileEntityMetalCaster.INVENTORY_OUTPUT, 86, 51));
         addSlotToContainer(new SlotCasterMold(te_caster, TileEntityMetalCaster.INVENTORY_MOLD, 66, 21));
         addSlotToContainer(new Slot(te_caster, TileEntityMetalCaster.INVENTORY_EXTRA, 86, 21));
-        addSlotToContainer(new SlotFluidContainer(te_caster, TileEntityMetalCaster.INVENTORY_CONTAINER_DRAIN, 11, 21));
-        addSlotToContainer(new SlotFluidContainer(te_caster, TileEntityMetalCaster.INVENTORY_CONTAINER_FILL, 11, 51));
+        addSlotToContainer(new SlotFluidContainer(te_caster, TileEntityMetalCaster.INVENTORY_CONTAINER_INPUT, 11, 21));
+        addSlotToContainer(new SlotOutput(te_caster, TileEntityMetalCaster.INVENTORY_CONTAINER_OUTPUT, 11, 51));
         for (i = 0; i < 3; ++i)
         {
             for (j = 0; j < 3; ++j)
@@ -116,7 +116,7 @@ public class ContainerMetalCaster extends ContainerFoundry
                 }
                 else
                 {
-                    if (!mergeItemStack(stack, SLOTS_TE, TileEntityMetalCaster.INVENTORY_CONTAINER_FILL + 1, true))
+                    if (!mergeItemStack(stack, SLOTS_TE, TileEntityMetalCaster.INVENTORY_CONTAINER_OUTPUT + 1, true))
                     {
                         return ItemStack.EMPTY;
                     }

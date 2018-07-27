@@ -1,6 +1,7 @@
 package exter.foundry.container;
 
 import exter.foundry.container.slot.SlotFluidContainer;
+import exter.foundry.container.slot.SlotOutput;
 import exter.foundry.tileentity.TileEntityFluidHeater;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
@@ -33,8 +34,8 @@ public class ContainerFluidHeater extends ContainerFoundry
         te_tank.openInventory(player);
         int i, j;
 
-        addSlotToContainer(new SlotFluidContainer(te_tank, TileEntityFluidHeater.INVENTORY_CONTAINER_DRAIN, 94, 20));
-        addSlotToContainer(new SlotFluidContainer(te_tank, TileEntityFluidHeater.INVENTORY_CONTAINER_FILL, 94, 48));
+        addSlotToContainer(new SlotFluidContainer(te_tank, TileEntityFluidHeater.INVENTORY_CONTAINER_INPUT, 94, 20));
+        addSlotToContainer(new SlotOutput(te_tank, TileEntityFluidHeater.INVENTORY_CONTAINER_OUTPUT, 94, 48));
 
         //Player Inventory
         for (i = 0; i < 3; ++i)
@@ -77,17 +78,17 @@ public class ContainerFluidHeater extends ContainerFoundry
 
             if (slot_index >= SLOTS_INVENTORY && slot_index <= SLOTS_HOTBAR + 9)
             {
-                if (stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null))
+                if (stack.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null))
                 {
-                    FluidStack f = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null)
+                    FluidStack f = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null)
                             .getTankProperties()[0].getContents();
-                    if (f != null && mergeItemStack(stack, TileEntityFluidHeater.INVENTORY_CONTAINER_DRAIN,
-                            TileEntityFluidHeater.INVENTORY_CONTAINER_DRAIN + 1, false))
+                    if (f != null && mergeItemStack(stack, TileEntityFluidHeater.INVENTORY_CONTAINER_INPUT,
+                            TileEntityFluidHeater.INVENTORY_CONTAINER_INPUT + 1, false))
                     {
                         return ItemStack.EMPTY;
                     }
-                    else if (mergeItemStack(stack, TileEntityFluidHeater.INVENTORY_CONTAINER_FILL,
-                            TileEntityFluidHeater.INVENTORY_CONTAINER_FILL + 1, false))
+                    else if (mergeItemStack(stack, TileEntityFluidHeater.INVENTORY_CONTAINER_OUTPUT,
+                            TileEntityFluidHeater.INVENTORY_CONTAINER_OUTPUT + 1, false))
                     {
                         return ItemStack.EMPTY;
                     }

@@ -25,8 +25,8 @@ public class TileEntityMetalCaster extends TileEntityPowered
     static public final int INVENTORY_OUTPUT = 0;
     static public final int INVENTORY_MOLD = 1;
     static public final int INVENTORY_EXTRA = 2;
-    static public final int INVENTORY_CONTAINER_DRAIN = 3;
-    static public final int INVENTORY_CONTAINER_FILL = 4;
+    static public final int INVENTORY_CONTAINER_INPUT = 3;
+    static public final int INVENTORY_CONTAINER_OUTPUT = 4;
     static public final int INVENTORY_MOLD_STORAGE = 5;
     static public final int INVENTORY_MOLD_STORAGE_SIZE = 9;
 
@@ -51,8 +51,7 @@ public class TileEntityMetalCaster extends TileEntityPowered
 
         current_recipe = null;
 
-        addContainerSlot(new ContainerSlot(0, INVENTORY_CONTAINER_DRAIN, false));
-        addContainerSlot(new ContainerSlot(0, INVENTORY_CONTAINER_FILL, true));
+        addContainerSlot(new ContainerSlot(0, INVENTORY_CONTAINER_INPUT, INVENTORY_CONTAINER_OUTPUT, false));
     }
 
     private void beginCasting()

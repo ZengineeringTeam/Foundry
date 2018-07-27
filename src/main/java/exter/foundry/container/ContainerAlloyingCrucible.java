@@ -1,6 +1,7 @@
 package exter.foundry.container;
 
 import exter.foundry.container.slot.SlotFluidContainer;
+import exter.foundry.container.slot.SlotOutput;
 import exter.foundry.tileentity.TileEntityAlloyingCrucible;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -34,15 +35,15 @@ public class ContainerAlloyingCrucible extends ContainerFoundry
 
         addSlotToContainer(new SlotFluidContainer(te_alloyingcrucible,
                 TileEntityAlloyingCrucible.INVENTORY_CONTAINER_INPUT_A_DRAIN, 35, 17));
-        addSlotToContainer(new SlotFluidContainer(te_alloyingcrucible,
+        addSlotToContainer(new SlotOutput(te_alloyingcrucible,
                 TileEntityAlloyingCrucible.INVENTORY_CONTAINER_INPUT_A_FILL, 35, 92));
         addSlotToContainer(new SlotFluidContainer(te_alloyingcrucible,
                 TileEntityAlloyingCrucible.INVENTORY_CONTAINER_INPUT_B_DRAIN, 125, 17));
-        addSlotToContainer(new SlotFluidContainer(te_alloyingcrucible,
+        addSlotToContainer(new SlotOutput(te_alloyingcrucible,
                 TileEntityAlloyingCrucible.INVENTORY_CONTAINER_INPUT_B_FILL, 125, 92));
         addSlotToContainer(new SlotFluidContainer(te_alloyingcrucible,
                 TileEntityAlloyingCrucible.INVENTORY_CONTAINER_OUTPUT_DRAIN, 80, 17));
-        addSlotToContainer(new SlotFluidContainer(te_alloyingcrucible,
+        addSlotToContainer(new SlotOutput(te_alloyingcrucible,
                 TileEntityAlloyingCrucible.INVENTORY_CONTAINER_OUTPUT_FILL, 80, 92));
 
         //Player Inventory
