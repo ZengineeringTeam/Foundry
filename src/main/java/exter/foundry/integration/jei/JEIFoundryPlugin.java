@@ -17,6 +17,7 @@ import exter.foundry.recipes.manager.AlloyMixerRecipeManager;
 import exter.foundry.recipes.manager.AlloyingCrucibleRecipeManager;
 import exter.foundry.recipes.manager.CastingRecipeManager;
 import exter.foundry.recipes.manager.CastingTableRecipeManager;
+import exter.foundry.recipes.manager.FluidHeaterFuelManager;
 import exter.foundry.recipes.manager.InfuserRecipeManager;
 import exter.foundry.recipes.manager.MeltingRecipeManager;
 import exter.foundry.recipes.manager.MoldRecipeManager;
@@ -27,6 +28,7 @@ import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 
 @JEIPlugin
 public class JEIFoundryPlugin implements IModPlugin
@@ -86,6 +88,13 @@ public class JEIFoundryPlugin implements IModPlugin
                 FoundryJEIConstants.AC_UID);
         registry.addRecipes(AlloyingCrucibleRecipeManager.INSTANCE.getRecipes(), FoundryJEIConstants.AC_UID);
 
+        registry.addRecipeCatalyst(FoundryBlocks.block_machine.asItemStack(BlockMachine.EnumMachine.FLUID_HEATER),
+                FoundryJEIConstants.FLUID_HEATER_UID);
+        NonNullList<FluidHeaterJEI.Wrapper> fuels = NonNullList.create();
+        FluidHeaterFuelManager.INSTANCE.getFuels()
+                .forEach(f -> fuels.add(new FluidHeaterJEI.Wrapper(registry.getJeiHelpers().getGuiHelper(), f)));
+        registry.addRecipes(fuels, FoundryJEIConstants.FLUID_HEATER_UID);
+
         registry.addRecipeCatalyst(FoundryBlocks.block_casting_table.asItemStack(BlockCastingTable.EnumTable.INGOT),
                 "foundry.casting_table.ingot");
 
@@ -116,8 +125,8 @@ public class JEIFoundryPlugin implements IModPlugin
         registry.addRecipeCategories(new MoldStationJEI.Category(helpers), new MeltingJEI.Category(helpers),
                 new CastingJEI.Category(helpers), new AlloyMixerJEI.Category(helpers),
                 new AlloyingCrucibleJEI.Category(helpers), new InfuserJEI.Category(helpers),
-                table_ingot.new Category(helpers), table_plate.new Category(helpers), table_rod.new Category(helpers),
-                table_block.new Category(helpers));
+                new FluidHeaterJEI.Category(helpers.getGuiHelper()), table_ingot.new Category(helpers),
+                table_plate.new Category(helpers), table_rod.new Category(helpers), table_block.new Category(helpers));
     }
 
     private void setupTable(IModRegistry registry, CastingTableJEI table)

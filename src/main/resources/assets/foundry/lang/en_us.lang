@@ -243,6 +243,7 @@ gui.jei.foundry.alloymixer=Alloy Mixer
 gui.jei.foundry.alloyingcrucible=Alloying Crucible
 gui.jei.foundry.infuser=Metal Infuser
 gui.jei.foundry.mold=Mold Station
+gui.jei.foundry.fluidheater=Fluid Heater Fuels
 gui.jei.foundry.casting_table.ingot=Ingot Casting Table
 gui.jei.foundry.casting_table.plate=Plate Casting Table
 gui.jei.foundry.casting_table.rod=Rod Casting Table

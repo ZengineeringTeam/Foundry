@@ -249,6 +249,7 @@ gui.jei.foundry.alloymixer=合金混合机
 gui.jei.foundry.alloyingcrucible=合金坩埚
 gui.jei.foundry.infuser=金属注入机
 gui.jei.foundry.mold=铸型加工站
+gui.jei.foundry.fluidheater=流体加热器燃料
 gui.jei.foundry.casting_table.ingot=锭铸造台
 gui.jei.foundry.casting_table.plate=板铸造台
 gui.jei.foundry.casting_table.rod=杆铸造台

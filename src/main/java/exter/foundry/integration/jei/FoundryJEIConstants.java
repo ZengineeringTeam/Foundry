@@ -11,5 +11,6 @@ public class FoundryJEIConstants
     public static final String MOLD_UID = Foundry.MODID + ".mold";
     public static final String AM_UID = Foundry.MODID + ".alloymixer";
     public static final String AC_UID = Foundry.MODID + ".alloyingcrucible";
+    public static final String FLUID_HEATER_UID = Foundry.MODID + ".fluidheater";
 
 }
