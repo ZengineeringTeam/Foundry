@@ -53,20 +53,12 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
         final int input_slot;
         final int output_slot;
 
-        public final Fluid fluid;
-
         public ContainerSlot(int tank_slot, int input_slot, int output_slot, boolean fill)
-        {
-            this(tank_slot, input_slot, output_slot, fill, null);
-        }
-
-        public ContainerSlot(int tank_slot, int input_slot, int output_slot, boolean fill, Fluid container_fluid)
         {
             this.tank_slot = tank_slot;
             this.input_slot = input_slot;
             this.output_slot = output_slot;
             this.fill = fill;
-            fluid = container_fluid;
         }
 
         public void update() // TODO: plenty of bugs
