@@ -182,22 +182,20 @@ public class BlockCastingTable extends Block implements ITileEntityProvider, IBl
     {
         TileEntity te = world.getTileEntity(pos);
 
-        if (te != null && te instanceof TileEntityCastingTableBase && !world.isRemote)
+        if (te != null && te instanceof TileEntityCastingTableBase)
         {
             TileEntityCastingTableBase te_ct = (TileEntityCastingTableBase) te;
-            if (te_ct.getProgress() == 0)
+            ItemStack is = te_ct.getStackInSlot(0);
+
+            if (!is.isEmpty())
             {
-                ItemStack is = te_ct.getStackInSlot(0);
-
-                if (!is.isEmpty())
-                {
-                    EntityItem entityitem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 0.9375,
-                            pos.getZ() + 0.5, is);
-                    entityitem.setPickupDelay(1);
-
-                    world.spawnEntity(entityitem);
-                    te_ct.setInventorySlotContents(0, ItemStack.EMPTY);
-                }
+                EntityItem entityitem = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, is);
+                entityitem.setDefaultPickupDelay();
+                entityitem.motionX = RANDOM.nextGaussian() * 0.05D;
+                entityitem.motionY = RANDOM.nextGaussian() * 0.05D + 0.2D;
+                entityitem.motionZ = RANDOM.nextGaussian() * 0.05D;
+                world.spawnEntity(entityitem);
+                te_ct.setInventorySlotContents(0, ItemStack.EMPTY);
             }
         }
     }
@@ -267,15 +265,17 @@ public class BlockCastingTable extends Block implements ITileEntityProvider, IBl
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hit_x, float hit_y, float hit_z)
     {
-        if (world.isRemote)
+        TileEntity te = world.getTileEntity(pos);
+        if (te == null || !(te instanceof TileEntityCastingTableBase)
+                || ((TileEntityCastingTableBase) te).getStackInSlot(0).isEmpty())
         {
-            return true;
-        }
-        else
-        {
-            dropCastingTableOutput(player, world, pos, state);
             return false;
         }
+        if (!world.isRemote)
+        {
+            dropCastingTableOutput(player, world, pos, state);
+        }
+        return true;
     }
 
     public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side)

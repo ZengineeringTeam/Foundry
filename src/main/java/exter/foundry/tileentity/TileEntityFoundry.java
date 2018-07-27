@@ -89,7 +89,7 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
                 FluidStack transfer;
                 FluidStack sample = handler.drain(Integer.MAX_VALUE, false);
                 boolean isEmpty = sample == null;
-                boolean isFull = handler.fill(sample, false) <= 0;
+                boolean isFull = isEmpty ? false : handler.fill(sample, false) <= 0;
                 boolean flag = false;
                 if ((fill && !isEmpty) || (!fill && isFull))
                 {
@@ -125,7 +125,7 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
                     }
                     updateTank(tank_slot);
                 }
-                else
+                else if (!flag)
                 {
                     inventory.set(output_slot, inventory.get(input_slot));
                     inventory.set(input_slot, ItemStack.EMPTY);
