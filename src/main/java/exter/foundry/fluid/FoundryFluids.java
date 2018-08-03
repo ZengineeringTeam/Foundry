@@ -40,7 +40,6 @@ public class FoundryFluids
     public static Fluid liquid_signalum;
     public static Fluid liquid_lumium;
     public static Fluid liquid_enderium;
-    public static Fluid liquid_osmium;
     public static Fluid liquid_uranium;
     public static Fluid liquid_cobalt;
     public static Fluid liquid_titanium;
@@ -78,7 +77,6 @@ public class FoundryFluids
         liquid_signalum = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "signalum", 2800, 15, 0xD84100);
         liquid_lumium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "lumium", 2500, 15, 0xFFFF7F);
         liquid_enderium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "enderium", 3800, 12, 0x007068);
-        liquid_osmium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "osmium", 3300, 15, 0xBFD0FF);
         if (!FoundryConfig.recipe_alumina_melts_to_aluminium)
         {
             liquid_alumina = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "alumina", 2100, 12, 0xFFFFFF);

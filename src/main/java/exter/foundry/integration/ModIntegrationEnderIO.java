@@ -161,18 +161,18 @@ public class ModIntegrationEnderIO implements IModIntegration
     {
         IForgeRegistry<Block> registry = e.getRegistry();
         liquid_redstone_alloy = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "redstone_alloy", 1000, 14,
-                0xFFFFFFFF);
+                0x732828);
         liquid_energetic_alloy = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "energetic_alloy", 2500,
-                15, 0xFFFFFFFF);
+                15, 0xF05A0A);
         liquid_vibrant_alloy = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "vibrant_alloy", 2500, 15,
-                0xFFFFFF);
+                0x82A532);
         liquid_dark_steel = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "dark_steel", 1850, 12,
-                0xFFFFFF);
+                0x333333);
         liquid_electrical_steel = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "electrical_steel", 1850,
-                15, 0xFFFFFFFF);
+                15, 0x747474);
         liquid_phased_iron = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "pulsating_iron", 1850, 15,
-                0xFFFFFF);
-        liquid_soularium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "soularium", 1350, 12, 0xFFFFFF);
+                0x69EB87);
+        liquid_soularium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "soularium", 1350, 12, 0x5A3228);
 
         FoundryUtils.registerBasicMeltingRecipes("redstone_alloy", liquid_redstone_alloy);
         FoundryUtils.registerBasicMeltingRecipes("energetic_alloy", liquid_energetic_alloy);
