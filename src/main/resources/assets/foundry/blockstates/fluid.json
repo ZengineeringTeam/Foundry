@@ -175,10 +175,10 @@
         "fluid": "terrasteel"
       }
     },
-    "elvenelementium": {
+    "elven_elementium": {
       "model": "forge:fluid",
       "custom": {
-        "fluid": "elvenelementium"
+        "fluid": "elven_elementium"
       }
     },
     "redstone_alloy": {

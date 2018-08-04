@@ -205,8 +205,20 @@ public class MiscUtil
 
     public static String upperCaseFirstChar(String s)
     {
-        char ch = s.charAt(0);
-        return Character.toUpperCase(s.charAt(0)) + s.substring(1);
+        StringBuffer sb = new StringBuffer(s);
+        for (int i = 0; i < sb.length() - 1; i++)
+        {
+            if (i == 0)
+            {
+                sb.setCharAt(0, Character.toUpperCase(sb.charAt(0)));
+            }
+            else if (sb.charAt(i) == '_')
+            {
+                sb.deleteCharAt(i);
+                sb.setCharAt(i, Character.toUpperCase(sb.charAt(i)));
+            }
+        }
+        return sb.toString();
     }
 
 }
