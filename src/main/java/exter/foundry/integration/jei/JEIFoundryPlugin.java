@@ -10,6 +10,12 @@ import exter.foundry.api.recipe.IMoldRecipe;
 import exter.foundry.block.BlockCastingTable;
 import exter.foundry.block.BlockMachine;
 import exter.foundry.block.FoundryBlocks;
+import exter.foundry.client.gui.GuiAlloyMixer;
+import exter.foundry.client.gui.GuiAlloyingCrucible;
+import exter.foundry.client.gui.GuiMeltingCrucible;
+import exter.foundry.client.gui.GuiMetalCaster;
+import exter.foundry.client.gui.GuiMetalInfuser;
+import exter.foundry.client.gui.GuiMoldStation;
 import exter.foundry.container.ContainerMeltingCrucible;
 import exter.foundry.container.ContainerMetalCaster;
 import exter.foundry.container.ContainerMetalInfuser;
@@ -48,6 +54,7 @@ public class JEIFoundryPlugin implements IModPlugin
         transferRegistry.addRecipeTransferHandler(ContainerMeltingCrucible.class, FoundryJEIConstants.MELT_UID,
                 ContainerMeltingCrucible.SLOTS_TE, ContainerMeltingCrucible.SLOTS_TE_SIZE,
                 ContainerMeltingCrucible.SLOTS_INVENTORY, 36);
+        registry.addRecipeClickArea(GuiMeltingCrucible.class, 79, 23, 22, 15, FoundryJEIConstants.MELT_UID);
         registry.addRecipeCatalyst(FoundryBlocks.block_machine.asItemStack(BlockMachine.EnumMachine.CRUCIBLE_BASIC),
                 FoundryJEIConstants.MELT_UID);
         registry.addRecipeCatalyst(FoundryBlocks.block_machine.asItemStack(BlockMachine.EnumMachine.CRUCIBLE_STANDARD),
@@ -60,6 +67,7 @@ public class JEIFoundryPlugin implements IModPlugin
         transferRegistry.addRecipeTransferHandler(ContainerMetalCaster.class, FoundryJEIConstants.CAST_UID,
                 ContainerMetalCaster.SLOTS_TE, ContainerMetalCaster.SLOTS_TE_SIZE, ContainerMetalCaster.SLOTS_INVENTORY,
                 36);
+        registry.addRecipeClickArea(GuiMetalCaster.class, 60, 51, 22, 15, FoundryJEIConstants.CAST_UID);
         registry.addRecipeCatalyst(FoundryBlocks.block_machine.asItemStack(BlockMachine.EnumMachine.CASTER),
                 FoundryJEIConstants.CAST_UID);
         registry.handleRecipes(ICastingRecipe.class, CastingJEI.Wrapper::new, FoundryJEIConstants.CAST_UID);
@@ -68,22 +76,28 @@ public class JEIFoundryPlugin implements IModPlugin
         transferRegistry.addRecipeTransferHandler(ContainerMetalInfuser.class, FoundryJEIConstants.INF_UID,
                 ContainerMetalInfuser.SLOTS_TE, ContainerMetalInfuser.SLOTS_TE_SIZE,
                 ContainerMetalInfuser.SLOTS_INVENTORY, 36);
+        registry.addRecipeClickArea(GuiMetalInfuser.class, 49, 59, 22, 15, FoundryJEIConstants.INF_UID);
+        registry.addRecipeClickArea(GuiMetalInfuser.class, 96, 59, 22, 15, FoundryJEIConstants.INF_UID);
         registry.addRecipeCatalyst(FoundryBlocks.block_machine.asItemStack(BlockMachine.EnumMachine.INFUSER),
                 FoundryJEIConstants.INF_UID);
         registry.handleRecipes(IInfuserRecipe.class, InfuserJEI.Wrapper::new, FoundryJEIConstants.INF_UID);
         registry.addRecipes(InfuserRecipeManager.INSTANCE.getRecipes(), FoundryJEIConstants.INF_UID);
 
         registry.addRecipeCatalyst(new ItemStack(FoundryBlocks.block_mold_station), FoundryJEIConstants.MOLD_UID);
+        registry.addRecipeClickArea(GuiMoldStation.class, 117, 39, 22, 15, FoundryJEIConstants.MOLD_UID);
         registry.handleRecipes(IMoldRecipe.class, MoldStationJEI.Wrapper::new, FoundryJEIConstants.MOLD_UID);
         registry.addRecipes(MoldRecipeManager.INSTANCE.getRecipes(), FoundryJEIConstants.MOLD_UID);
 
         registry.addRecipeCatalyst(FoundryBlocks.block_machine.asItemStack(BlockMachine.EnumMachine.ALLOY_MIXER),
                 FoundryJEIConstants.AM_UID);
+        registry.addRecipeClickArea(GuiAlloyMixer.class, 108, 55, 22, 15, FoundryJEIConstants.AM_UID);
         registry.handleRecipes(IAlloyMixerRecipe.class, AlloyMixerJEI.Wrapper::new, FoundryJEIConstants.AM_UID);
         registry.addRecipes(AlloyMixerRecipeManager.INSTANCE.getRecipes(), FoundryJEIConstants.AM_UID);
 
         registry.addRecipeCatalyst(FoundryBlocks.block_machine.asItemStack(BlockMachine.EnumMachine.ALLOYING_CRUCIBLE),
                 FoundryJEIConstants.AC_UID);
+        registry.addRecipeClickArea(GuiAlloyingCrucible.class, 54, 55, 22, 15, FoundryJEIConstants.AC_UID);
+        registry.addRecipeClickArea(GuiAlloyingCrucible.class, 100, 55, 22, 15, FoundryJEIConstants.AC_UID);
         registry.handleRecipes(IAlloyingCrucibleRecipe.class, AlloyingCrucibleJEI.Wrapper::new,
                 FoundryJEIConstants.AC_UID);
         registry.addRecipes(AlloyingCrucibleRecipeManager.INSTANCE.getRecipes(), FoundryJEIConstants.AC_UID);
