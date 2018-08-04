@@ -11,6 +11,8 @@ import exter.foundry.recipes.manager.CastingRecipeManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -20,7 +22,7 @@ public class TileEntityMetalCaster extends TileEntityPowered
 {
     static public final int CAST_TIME = 400000;
 
-    static public final int ENERGY_REQUIRED = 10000;
+    static public final int ENERGY_REQUIRED = FoundryConfig.metalCasterPower ? 10000 : 0;
 
     static public final int INVENTORY_OUTPUT = 0;
     static public final int INVENTORY_MOLD = 1;
@@ -272,5 +274,25 @@ public class TileEntityMetalCaster extends TileEntityPowered
     public int getFoundryEnergyCapacity()
     {
         return 40000;
+    }
+
+    @Override
+    public boolean hasCapability(Capability<?> cap, EnumFacing facing)
+    {
+        if (cap == CapabilityEnergy.ENERGY)
+        {
+            return FoundryConfig.metalCasterPower;
+        }
+        return super.hasCapability(cap, facing);
+    }
+
+    @Override
+    public <T> T getCapability(Capability<T> cap, EnumFacing facing)
+    {
+        if (!FoundryConfig.metalCasterPower && cap == CapabilityEnergy.ENERGY)
+        {
+            return null;
+        }
+        return super.getCapability(cap, facing);
     }
 }

@@ -8,6 +8,7 @@ import cofh.thermalfoundation.ThermalFoundation;
 import exter.foundry.Foundry;
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.block.BlockMachine;
+import exter.foundry.tileentity.TileEntityHeatable;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -29,6 +30,9 @@ public class FoundryConfig
     public static Set<String> hardcore_furnace_keep_ingots;
     public static boolean hardcore_remove_ingot_nugget = false;
     public static boolean hardcore_remove_block_ingot = false;
+
+    public static int default_burner_fuel_heat;
+    public static int default_burner_exoflame_heat;
 
     public static boolean metalCasterPower = true;
     public static boolean crtError = true;
@@ -75,6 +79,11 @@ public class FoundryConfig
                 "If the Metal Caster requires power to operate.");
         if (!metalCasterPower)
             BlockMachine.EnumMachine.CASTER.setTooltip("caster2");
+        default_burner_fuel_heat = config.getInt("default_burner_fuel_heat", "general", 1000,
+                TileEntityHeatable.TEMP_MIN, Integer.MAX_VALUE, "default_burner_fuel_heat");
+        default_burner_exoflame_heat = config.getInt("default_burner_exoflame_heat", "general",
+                default_burner_fuel_heat * 3, TileEntityHeatable.TEMP_MIN, Integer.MAX_VALUE,
+                "default_burner_exoflame_heat");
 
         crtError = config.getBoolean("CrT Errors", "general", true,
                 "If foundry's CraftTweaker integration logs errors instead of info");

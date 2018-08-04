@@ -48,10 +48,9 @@ public class GuiBurnerHeater extends GuiFoundry
         int window_y = (height - ySize) / 2;
         drawTexturedModalRect(window_x, window_y, 0, 0, xSize, ySize);
 
-        if (te_bh.getItemBurnTime() > 0)
+        if (te_bh.isBurning())
         {
-            int burn = te_bh.getBurningTime() * BURN_HEIGHT / te_bh.getItemBurnTime();
-
+            int burn = (int) (((te_bh.getSumBoost() - 0.4D) * 5 / 3) * BURN_HEIGHT);
             if (burn > 0)
             {
                 drawTexturedModalRect(window_x + BURN_X, window_y + BURN_Y + BURN_HEIGHT - burn, BURN_OVERLAY_X,

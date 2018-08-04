@@ -1,17 +1,22 @@
 package exter.foundry.tileentity;
 
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.heatable.IHeatProvider;
 import exter.foundry.api.recipe.IBurnerHeaterFuel;
 import exter.foundry.block.BlockBurnerHeater;
+import exter.foundry.config.FoundryConfig;
 import exter.foundry.recipes.manager.BurnerHeaterFuelManager;
 import exter.foundry.tileentity.itemhandler.ItemHandlerFuel;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -19,6 +24,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.items.IItemHandler;
@@ -34,7 +40,7 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
         {
             if (isBurning())
             {
-                heat = (int) (heat_provide * (0.4D + ((double) burn_time / (double) item_burn_time) * 0.6D));
+                heat = (int) (getSumBoost() * getHeat());
                 return heat;
             }
 
@@ -42,22 +48,94 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
         }
     }
 
-    static private final Set<Integer> IH_SLOTS_INPUT = ImmutableSet.of(0, 1, 2, 3);
-    static private final Set<Integer> IH_SLOTS_OUTPUT = ImmutableSet.of();
-    static private final Set<Integer> IH_SLOTS_FUEL = ImmutableSet.of(0, 1, 2, 3);
+    public double getSumBoost()
+    {
+        int count = (int) fuels.stream().filter(Fuel::isBurning).count();
+        if (count == 0)
+        {
+            return 0;
+        }
+        if (count == fuels.size())
+        {
+            return 1;
+        }
+        double sum = 0;
+        for (Fuel fuel : fuels)
+        {
+            if (fuel.isBurning())
+            {
+                sum += fuel.getBoost();
+            }
+        }
+        return 0.4D + count * 0.15D + sum * (fuels.size() - count) * 0.15D / count;
+    }
 
-    private int burn_time;
-    private int item_burn_time;
+    public int getHeat()
+    {
+        int sum = 0;
+        int count = 0;
+        for (Fuel fuel : fuels)
+        {
+            if (fuel.isBurning())
+            {
+                ++count;
+                sum += fuel.heat;
+            }
+        }
+        return count == 0 ? TileEntityHeatable.TEMP_MIN : sum / count;
+    }
 
-    private int heat_provide;
+    private static final Set<Integer> IH_SLOTS_INPUT = ImmutableSet.of(0, 1, 2, 3);
+    private static final Set<Integer> IH_SLOTS_OUTPUT = ImmutableSet.of();
+    private static final Set<Integer> IH_SLOTS_FUEL = ImmutableSet.of(0, 1, 2, 3);
+
+    public static class Fuel implements INBTSerializable<NBTTagCompound>
+    {
+        public int burnTime;
+        public int totalBurnTime;
+        public int heat;
+
+        public boolean isBurning()
+        {
+            return totalBurnTime > 0;
+        }
+
+        public double getBoost()
+        {
+            if (totalBurnTime == 0)
+            {
+                return 0;
+            }
+            return (double) burnTime / totalBurnTime;
+        }
+
+        @Override
+        public NBTTagCompound serializeNBT()
+        {
+            NBTTagCompound tag = new NBTTagCompound();
+            tag.setInteger("time", burnTime);
+            tag.setInteger("total", totalBurnTime);
+            return tag;
+        }
+
+        @Override
+        public void deserializeNBT(NBTTagCompound nbt)
+        {
+            if (nbt != null)
+            {
+                burnTime = nbt.hasKey("time") ? nbt.getInteger("time") : burnTime;
+                totalBurnTime = nbt.hasKey("total") ? nbt.getInteger("total") : totalBurnTime;
+            }
+        }
+    }
+
+    private List<Fuel> fuels = ImmutableList.of(new Fuel(), new Fuel(), new Fuel(), new Fuel());
 
     private final HeatProvider heat_provider;
     private final ItemHandlerFuel item_handler;
 
     public TileEntityBurnerHeater()
     {
-        burn_time = item_burn_time = 0;
-//        heat_provide = DEFAULT_HEAT_PROVIDE;
         heat_provider = new HeatProvider();
         item_handler = new ItemHandlerFuel(this, getSizeInventory(), IH_SLOTS_INPUT, IH_SLOTS_OUTPUT, IH_SLOTS_FUEL);
     }
@@ -68,10 +146,16 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
     {
         if (!world.isRemote)
         {
-//            heat_provide = DEFAULT_HEAT_PROVIDE;
-            item_burn_time = burn_time = 200;
+            for (Fuel fuel : fuels)
+            {
+                if (!fuel.isBurning())
+                {
+                    fuel.burnTime = fuel.totalBurnTime = 200;
+                    fuel.heat = FoundryConfig.default_burner_exoflame_heat;
+                }
+            }
             ((BlockBurnerHeater) getBlockType()).setMachineState(world, getPos(), world.getBlockState(getPos()),
-                    burn_time > 0);
+                    isBurning());
             markDirty();
         }
     }
@@ -86,25 +170,27 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
     @Override
     public boolean canSmelt()
     {
-        return true;
+        return !fuels.stream().allMatch(Fuel::isBurning);
     }
 
     @Override
     public void closeInventory(EntityPlayer player)
     {
-
-    }
-
-    public int getBurningTime()
-    {
-        return burn_time;
     }
 
     @Optional.Method(modid = "Botania")
     @Override
     public int getBurnTime()
     {
-        return burn_time <= 1 ? 0 : burn_time - 1;
+        int time = 0;
+        for (Fuel fuel : fuels)
+        {
+            if (time == 0 || time > fuel.burnTime)
+            {
+                time = fuel.burnTime;
+            }
+        }
+        return time;
     }
 
     @Override
@@ -121,11 +207,6 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
     public int getInventoryStackLimit()
     {
         return 64;
-    }
-
-    public int getItemBurnTime()
-    {
-        return item_burn_time;
     }
 
     @Override
@@ -160,7 +241,7 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
 
     public boolean isBurning()
     {
-        return burn_time > 0;
+        return fuels.stream().anyMatch(Fuel::isBurning);
     }
 
     @Override
@@ -186,29 +267,6 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound tag)
-    {
-        super.readFromNBT(tag);
-        if (tag.hasKey("BurnTime"))
-        {
-            burn_time = tag.getInteger("BurnTime");
-        }
-        if (tag.hasKey("ItemBurnTime"))
-        {
-            item_burn_time = tag.getInteger("ItemBurnTime");
-        }
-        if (tag.hasKey("HeatProvide"))
-        {
-            heat_provide = tag.getInteger("HeatProvide");
-        }
-        if (world != null && !world.isRemote)
-        {
-            ((BlockBurnerHeater) getBlockType()).setMachineState(world, getPos(), world.getBlockState(getPos()),
-                    burn_time > 0);
-        }
-    }
-
-    @Override
     public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate)
     {
         return oldState.getBlock() != newSate.getBlock();
@@ -222,64 +280,113 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
     @Override
     protected void updateServer()
     {
-        int last_burn_time = burn_time;
-
-        if (--burn_time <= 0) // TODO: do not consume when no receiver
+        boolean updated = false;
+        List<Fuel> burnings = fuels.stream().filter(Fuel::isBurning).collect(Collectors.toList());
+        if (burnings.size() > 0)
         {
-            for (int i = 0; i < 4; i++)
+            int times = Math.max(1, burnings.size() - 1);
+            for (int i = 0; i < times; i++)
             {
-                ItemStack item = getStackInSlot(i);
-                if (!item.isEmpty())
+                int index = getWorld().rand.nextInt(burnings.size());
+                Fuel fuel = burnings.get(index);
+                if (--fuel.burnTime == 0)
                 {
-                    int burn = 0;
-                    IBurnerHeaterFuel fuel = BurnerHeaterFuelManager.INSTANCE.getFuel(item);
-                    if (fuel != null)
+                    fuel.heat = TileEntityHeatable.TEMP_MIN;
+                    fuel.totalBurnTime = 0;
+                    if (!tryBurnItemInSlot(index))
                     {
-                        burn = fuel.getBurnTime();
-                        heat_provide = fuel.getHeat();
+                        burnings.remove(index);
                     }
-                    else
-                    {
-                        burn = TileEntityFurnace.getItemBurnTime(item);
-//                        heat_provide = DEFAULT_HEAT_PROVIDE;
-                    }
-                    if (burn > 0)
-                    {
-                        burn_time += burn;
-                        item_burn_time = burn_time;
-                        item.shrink(1);
-                        if (item.isEmpty())
-                        {
-                            setStackInSlot(i, item.getItem().getContainerItem(item));
-                        }
-                        updateInventoryItem(i);
-                        break;
-                    }
+                    updated = true;
                 }
             }
         }
 
-        if (last_burn_time != burn_time)
+        for (int i = 0; i < fuels.size(); i++)
         {
-            if (last_burn_time == 0 || burn_time == 0)
+            if (!fuels.get(i).isBurning())
             {
-                ((BlockBurnerHeater) getBlockType()).setMachineState(world, getPos(), world.getBlockState(getPos()),
-                        burn_time > 0);
+                if (tryBurnItemInSlot(i))
+                {
+                    updated = true;
+                }
             }
+        }
+
+        if (updated)
+        {
+            ((BlockBurnerHeater) getBlockType()).setMachineState(world, getPos(), world.getBlockState(getPos()),
+                    isBurning());
+        }
+    }
+
+    public boolean tryBurnItemInSlot(int slot)
+    {
+        ItemStack stack = getStackInSlot(slot);
+        if (!stack.isEmpty())
+        {
+            if (stack.getItem() == Items.LAVA_BUCKET)
+            {
+                return false;
+            }
+            int burnTime = 0;
+            Fuel fuel = fuels.get(slot);
+            IBurnerHeaterFuel ifuel = BurnerHeaterFuelManager.INSTANCE.getFuel(stack);
+            if (ifuel != null)
+            {
+                fuel.totalBurnTime = fuel.burnTime = ifuel.getBurnTime();
+                fuel.heat = ifuel.getHeat();
+            }
+            else
+            {
+                int time = TileEntityFurnace.getItemBurnTime(stack);
+                if (time <= 0)
+                {
+                    return false;
+                }
+                fuel.totalBurnTime = fuel.burnTime = time;
+                fuel.heat = FoundryConfig.default_burner_fuel_heat;
+            }
+            ItemStack stackCopy = stack.copy();
+            stack.shrink(1);
+            if (stack.isEmpty())
+            {
+                setInventorySlotContents(slot, stackCopy.getItem().getContainerItem(stackCopy));
+            }
+            updateInventoryItem(slot);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound tag)
+    {
+        super.readFromNBT(tag);
+        for (int i = 0; i < fuels.size(); i++)
+        {
+            fuels.get(i).deserializeNBT(tag.getCompoundTag("Fuel_" + i));
+        }
+        if (world != null && !world.isRemote)
+        {
+            ((BlockBurnerHeater) getBlockType()).setMachineState(world, getPos(), world.getBlockState(getPos()),
+                    isBurning());
         }
     }
 
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound)
+    public NBTTagCompound writeToNBT(NBTTagCompound tag)
     {
-        if (compound == null)
+        if (tag == null)
         {
-            compound = new NBTTagCompound();
+            tag = new NBTTagCompound();
         }
-        super.writeToNBT(compound);
-        compound.setInteger("BurnTime", burn_time);
-        compound.setInteger("ItemBurnTime", item_burn_time);
-        compound.setInteger("HeatProvide", heat_provide);
-        return compound;
+        super.writeToNBT(tag);
+        for (int i = 0; i < fuels.size(); i++)
+        {
+            tag.setTag("Fuel_" + i, fuels.get(i).serializeNBT());
+        }
+
+        return tag;
     }
 }

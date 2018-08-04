@@ -92,7 +92,7 @@ public class FluidHeaterJEI
         public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY)
         {
             flame.draw(minecraft, 2, 0);
-            minecraft.fontRenderer.drawString(fuel.getHeat() / 100 + "K", 44, 13, Color.gray.getRGB());
+            minecraft.fontRenderer.drawString(fuel.getHeat() / 100 + "K 1Tick", 44, 13, Color.gray.getRGB());
         }
 
     }
