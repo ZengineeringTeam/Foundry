@@ -157,6 +157,18 @@
         "fluid": "osmium"
       }
     },
+    "refined_obsidian": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "refined_obsidian"
+      }
+    },
+    "refined_glowstone": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "refined_glowstone"
+      }
+    },
     "alumina": {
       "model": "forge:fluid",
       "custom": {

@@ -1,5 +1,6 @@
 package exter.foundry;
 
+import exter.foundry.integration.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -8,10 +9,6 @@ import exter.foundry.capability.CapabilityHeatProvider;
 import exter.foundry.config.FoundryConfig;
 import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.init.InitRecipes;
-import exter.foundry.integration.ModIntegrationBotania;
-import exter.foundry.integration.ModIntegrationCrafttweaker;
-import exter.foundry.integration.ModIntegrationEnderIO;
-import exter.foundry.integration.ModIntegrationManager;
 import exter.foundry.material.MaterialRegistry;
 import exter.foundry.network.MessageTileEntitySync;
 import exter.foundry.proxy.CommonProxy;
@@ -137,6 +134,8 @@ public class Foundry
             ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationEnderIO());
         if (Loader.isModLoaded("botania"))
             ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationBotania());
+        if (Loader.isModLoaded("mekanism"))
+            ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationMekanism());
         if (Loader.isModLoaded("crafttweaker"))
             ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationCrafttweaker());
 
