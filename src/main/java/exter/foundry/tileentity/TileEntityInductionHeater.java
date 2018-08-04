@@ -15,8 +15,8 @@ public class TileEntityInductionHeater extends TileEntityPowered
         @Override
         public int provideHeat(int max_heat, int heat)
         {
-            useFoundryEnergy(max_heat * 3 / 20, true); // TODO: dynamic
-            return max_heat;
+            int used = useFoundryEnergy(max_heat * 3 / 20, true); // TODO: dynamic
+            return used * 20 / 3;
         }
     }
 
