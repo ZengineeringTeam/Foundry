@@ -16,8 +16,7 @@ public abstract class TileEntityHeatable extends TileEntityFoundry
         return Math.floorDiv(temperature * loss_rate - TEMP_MIN, loss_rate - 1);
     }
 
-    private final int MAX_HEAT_RECEIVE = getStableTemperatureNeed(getMaxTemperature(), getTemperatureLossRate())
-            - getMaxTemperature();
+    private final int MAX_HEAT_RECEIVE = getStableTemperatureNeed(getMaxTemperature(), getTemperatureLossRate()) - getMaxTemperature();
     private int heat;
 
     public TileEntityHeatable()
@@ -51,17 +50,18 @@ public abstract class TileEntityHeatable extends TileEntityFoundry
             if (heater != null)
             {
                 int temp_heater = Math.max(0, heater.provideHeat(temp_max, temp_last));
-                int receive = getHeatRecieve(temp_heater);
+                int receive = getHeatReceive(temp_heater);
                 heat += receive;
                 //                System.out.println("receive: "+receive);
             }
-            heat -= getTemperatureLoss(temp_last);
         }
+
+        heat -= getTemperatureLoss(temp_last);
 
         heat = MathHelper.clamp(heat, TEMP_MIN, temp_max);
     }
 
-    private int getHeatRecieve(int temp_heater)
+    private int getHeatReceive(int temp_heater)
     {
         if (heat > temp_heater)
         {

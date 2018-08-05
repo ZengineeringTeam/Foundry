@@ -18,3 +18,8 @@
 
 *.launch
 *.hprof
+
+## idea
+*.iml
+*.ipr
+*.iws

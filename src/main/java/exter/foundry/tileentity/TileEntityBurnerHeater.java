@@ -1,12 +1,7 @@
 package exter.foundry.tileentity;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.heatable.IHeatProvider;
 import exter.foundry.api.recipe.IBurnerHeaterFuel;
@@ -30,20 +25,29 @@ import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.items.IItemHandler;
 import vazkii.botania.api.item.IExoflameHeatable;
 
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Optional.Interface(iface = "vazkii.botania.api.item.IExoflameHeatable", modid = "Botania")
 public class TileEntityBurnerHeater extends TileEntityFoundry implements IExoflameHeatable
 {
+    private boolean updated = false;
+
     private class HeatProvider implements IHeatProvider
     {
         @Override
         public int provideHeat(int max_heat, int heat)
         {
+            if (fuels.stream().filter(Fuel::isBurning).count() < 4)
+            {
+                tryBurnNextFuel();
+            }
             if (isBurning())
             {
                 heat = (int) (getSumBoost() * getHeat());
                 return heat;
             }
-
             return 0;
         }
     }
@@ -154,8 +158,7 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
                     fuel.heat = FoundryConfig.default_burner_exoflame_heat;
                 }
             }
-            ((BlockBurnerHeater) getBlockType()).setMachineState(world, getPos(), world.getBlockState(getPos()),
-                    isBurning());
+            ((BlockBurnerHeater) getBlockType()).setMachineState(world, getPos(), world.getBlockState(getPos()), isBurning());
             markDirty();
         }
     }
@@ -253,7 +256,7 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
     @Override
     public boolean isUsableByPlayer(EntityPlayer par1EntityPlayer)
     {
-        return world.getTileEntity(getPos()) != this ? false : par1EntityPlayer.getDistanceSq(getPos()) <= 64.0D;
+        return world.getTileEntity(getPos()) == this && par1EntityPlayer.getDistanceSq(getPos()) <= 64.0D;
     }
 
     @Override
@@ -280,7 +283,6 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
     @Override
     protected void updateServer()
     {
-        boolean updated = false;
         List<Fuel> burnings = fuels.stream().filter(Fuel::isBurning).collect(Collectors.toList());
         if (burnings.size() > 0)
         {
@@ -293,15 +295,21 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
                 {
                     fuel.heat = TileEntityHeatable.TEMP_MIN;
                     fuel.totalBurnTime = 0;
-                    if (!tryBurnItemInSlot(index))
-                    {
-                        burnings.remove(index);
-                    }
+                    burnings.remove(index);
                     updated = true;
                 }
             }
         }
 
+        if (updated)
+        {
+            ((BlockBurnerHeater) getBlockType()).setMachineState(world, getPos(), world.getBlockState(getPos()), isBurning());
+            updated = false;
+        }
+    }
+
+    private void tryBurnNextFuel()
+    {
         for (int i = 0; i < fuels.size(); i++)
         {
             if (!fuels.get(i).isBurning())
@@ -312,15 +320,9 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
                 }
             }
         }
-
-        if (updated)
-        {
-            ((BlockBurnerHeater) getBlockType()).setMachineState(world, getPos(), world.getBlockState(getPos()),
-                    isBurning());
-        }
     }
 
-    public boolean tryBurnItemInSlot(int slot)
+    private boolean tryBurnItemInSlot(int slot)
     {
         ItemStack stack = getStackInSlot(slot);
         if (!stack.isEmpty())
@@ -329,15 +331,13 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
             {
                 return false;
             }
-            int burnTime = 0;
             Fuel fuel = fuels.get(slot);
             IBurnerHeaterFuel ifuel = BurnerHeaterFuelManager.INSTANCE.getFuel(stack);
             if (ifuel != null)
             {
                 fuel.totalBurnTime = fuel.burnTime = ifuel.getBurnTime();
                 fuel.heat = ifuel.getHeat();
-            }
-            else
+            } else
             {
                 int time = TileEntityFurnace.getItemBurnTime(stack);
                 if (time <= 0)
@@ -369,8 +369,7 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
         }
         if (world != null && !world.isRemote)
         {
-            ((BlockBurnerHeater) getBlockType()).setMachineState(world, getPos(), world.getBlockState(getPos()),
-                    isBurning());
+            ((BlockBurnerHeater) getBlockType()).setMachineState(world, getPos(), world.getBlockState(getPos()), isBurning());
         }
     }
 
