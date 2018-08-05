@@ -20,6 +20,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class FoundryFluids
 {
     public static Fluid liquid_iron;
+    public static Fluid liquid_refined_iron;
     public static Fluid liquid_gold;
     public static Fluid liquid_copper;
     public static Fluid liquid_tin;
@@ -52,7 +53,7 @@ public class FoundryFluids
     {
         IForgeRegistry<Block> registry = event.getRegistry();
         liquid_iron = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "iron", 1540, 10, 0xa81212);
-        liquid_iron = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "refined_iron", 2000, 10, 0xa81212); // TODO
+        liquid_refined_iron = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "refined_iron", 2000, 10, 0xa81212); // TODO
         liquid_gold = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "gold", 1350, 15, 0xf6d609);
         liquid_copper = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "copper", 1300, 15, 0xed9f07);
         liquid_tin = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "tin", 550, 0, 0xc1cddc);
