@@ -256,7 +256,7 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
     @Override
     public boolean isUsableByPlayer(EntityPlayer par1EntityPlayer)
     {
-        return world.getTileEntity(getPos()) != this ? false : par1EntityPlayer.getDistanceSq(getPos()) <= 64.0D;
+        return world.getTileEntity(getPos()) == this && par1EntityPlayer.getDistanceSq(getPos()) <= 64.0D;
     }
 
     @Override
@@ -295,10 +295,7 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
                 {
                     fuel.heat = TileEntityHeatable.TEMP_MIN;
                     fuel.totalBurnTime = 0;
-                    //if (!tryBurnItemInSlot(index))
-                    //{
                     burnings.remove(index);
-                    //}
                     updated = true;
                 }
             }
@@ -325,7 +322,7 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
         }
     }
 
-    public boolean tryBurnItemInSlot(int slot)
+    private boolean tryBurnItemInSlot(int slot)
     {
         ItemStack stack = getStackInSlot(slot);
         if (!stack.isEmpty())
@@ -334,7 +331,6 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
             {
                 return false;
             }
-            int burnTime = 0;
             Fuel fuel = fuels.get(slot);
             IBurnerHeaterFuel ifuel = BurnerHeaterFuelManager.INSTANCE.getFuel(stack);
             if (ifuel != null)
