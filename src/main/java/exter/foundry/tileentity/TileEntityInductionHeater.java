@@ -15,12 +15,8 @@ public class TileEntityInductionHeater extends TileEntityPowered
         @Override
         public int provideHeat(int max_heat, int heat)
         {
-            if (world.isBlockPowered(pos))
-            {
-                int used = useFoundryEnergy(max_heat * 3 / 20, true); // TODO: dynamic
-                return used * 20 / 3;
-            }
-            return 0;
+            int used = useFoundryEnergy(max_heat * 3 / 20, true); // TODO: dynamic
+            return used * 20 / 3;
         }
     }
 
