@@ -1,5 +1,5 @@
 {
-    "parent": "minecraft:block/cube",
+    "parent": "block/cube",
     "textures": {
         "particle": "foundry:blocks/caster_sides",
         "up": "foundry:blocks/caster_top",

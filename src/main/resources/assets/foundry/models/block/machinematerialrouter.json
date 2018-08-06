@@ -1,5 +1,5 @@
 {
-    "parent": "minecraft:block/cube",
+    "parent": "block/cube",
     "textures": {
         "particle": "foundry:blocks/materialrouter_0",
         "up": "foundry:blocks/materialrouter_1",

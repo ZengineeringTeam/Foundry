@@ -1,5 +1,5 @@
 {
-    "parent": "minecraft:block/cube",
+    "parent": "block/cube",
     "textures": {
         "particle": "foundry:blocks/inductionheater_sides",
         "up": "foundry:blocks/inductionheater_top",

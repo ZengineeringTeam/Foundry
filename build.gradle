@@ -66,3 +66,9 @@ processResources
     }
 }
 
+jar {
+    exclude "**/*.bat"
+    exclude "**/*.psd"
+    exclude "**/*.d"
+    exclude "**/*.exe"
+}

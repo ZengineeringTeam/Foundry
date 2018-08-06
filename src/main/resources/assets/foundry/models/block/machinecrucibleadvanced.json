@@ -1,5 +1,5 @@
 {
-    "parent": "minecraft:block/cube",
+    "parent": "block/cube",
     "textures": {
         "particle": "foundry:blocks/crucible_advanced_sides",
         "up": "foundry:blocks/crucible_advanced_top",
