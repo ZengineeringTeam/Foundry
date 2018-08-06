@@ -95,25 +95,6 @@ public class ModIntegrationMekanism  implements IModIntegration
             return;
         }
 
-        ItemStack osmium_block = getItemStack("basicblock", 0);
-        ItemStack refined_obsidian_block = getItemStack("basicblock", 2);
-        ItemStack refined_glowstone_block = getItemStack("basicblock", 4);
-        ItemStack mold_block = ItemMold.SubItem.BLOCK.getItem();
-
-        MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(osmium_block),
-                new FluidStack(liquid_osmium, FoundryAPI.getAmountBlock()));
-        MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(refined_obsidian_block),
-                new FluidStack(liquid_refined_obsidian, FoundryAPI.getAmountBlock()));
-        MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(refined_glowstone_block),
-                new FluidStack(liquid_refined_glowstone, FoundryAPI.getAmountBlock()));
-
-        CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(osmium_block),
-                new FluidStack(liquid_osmium, FoundryAPI.getAmountBlock()), mold_block, false, null);
-        CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(refined_obsidian_block),
-                new FluidStack(liquid_refined_obsidian, FoundryAPI.getAmountBlock()), mold_block, false, null);
-        CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(refined_glowstone_block),
-                new FluidStack(liquid_refined_glowstone, FoundryAPI.getAmountBlock()), mold_block, false, null);
-
         /* Mekanism Tools are in another pack, so I can't make support by myself. I need your help!
         if (FoundryConfig.recipe_equipment)
         {

@@ -189,11 +189,11 @@ public class ModIntegrationBotania implements IModIntegration
     public void registerFluids(Register<Block> e)
     {
         IForgeRegistry<Block> registry = e.getRegistry();
-        liquid_manasteel = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "manasteel", 1950, 15, 0x54E5FF);
+        liquid_manasteel = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "manasteel", 1950, 15, 0x2050EA);
         liquid_terrasteel = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "terrasteel", 2100, 15,
-                0x00FF00);
+                0x5AFF0A);
         liquid_elementium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "elven_elementium", 2400, 15,
-                0xF66AFD);
+                0xE60082);
 
         FoundryUtils.registerBasicMeltingRecipes("manasteel", liquid_manasteel);
         FoundryUtils.registerBasicMeltingRecipes("terrasteel", liquid_terrasteel);
