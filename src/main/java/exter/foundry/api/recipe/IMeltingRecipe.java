@@ -36,4 +36,6 @@ public interface IMeltingRecipe
      * @return true, if the item matches, false otherwise.
      */
     public boolean matchesRecipe(ItemStack item);
+
+    public String toString();
 }
