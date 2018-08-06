@@ -1,7 +1,6 @@
 package exter.foundry.recipes.manager;
 
-import java.util.List;
-
+import exter.foundry.Foundry;
 import exter.foundry.api.recipe.IMeltingRecipe;
 import exter.foundry.api.recipe.manager.IMeltingRecipeManager;
 import exter.foundry.api.recipe.matcher.IItemMatcher;
@@ -11,23 +10,28 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.FluidStack;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class MeltingRecipeManager implements IMeltingRecipeManager
 {
 
     public static final MeltingRecipeManager INSTANCE = new MeltingRecipeManager();
 
     private final NonNullList<IMeltingRecipe> recipes;
+    private final Map<IMeltingRecipe, String> desc;
 
     private MeltingRecipeManager()
     {
         recipes = NonNullList.create();
+        desc = new HashMap<>();
     }
 
     @Override
     public void addRecipe(IItemMatcher solid, FluidStack fluid_stack)
     {
-        if (!MiscUtil.isInvalid(solid))
-            addRecipe(solid, fluid_stack, fluid_stack.getFluid().getTemperature(), 100);
+        if (!MiscUtil.isInvalid(solid)) addRecipe(solid, fluid_stack, fluid_stack.getFluid().getTemperature(), 100);
     }
 
     @Override
@@ -44,18 +48,22 @@ public class MeltingRecipeManager implements IMeltingRecipeManager
 
     public void addRecipe(IMeltingRecipe recipe)
     {
+        if (desc.values().stream().anyMatch(k -> k.equals(recipe.toString())))
+        {
+            Foundry.LOGGER.warn("Detected duplicated recipe: " + recipe.toString());
+            return;
+        }
         recipes.add(recipe);
+        desc.put(recipe, recipe.toString());
     }
 
     @Override
     public IMeltingRecipe findRecipe(ItemStack item)
     {
-        if (item.isEmpty())
-            return null;
+        if (item.isEmpty()) return null;
         for (IMeltingRecipe r : recipes)
         {
-            if (r.matchesRecipe(item))
-                return r;
+            if (r.matchesRecipe(item)) return r;
         }
         return null;
     }
