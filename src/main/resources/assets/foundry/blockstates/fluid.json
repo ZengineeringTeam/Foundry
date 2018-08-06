@@ -7,12 +7,6 @@
         "fluid": "iron"
       }
     },
-    "refined_iron": {
-      "model": "forge:fluid",
-      "custom": {
-        "fluid": "refined_iron"
-      }
-    },
     "gold": {
       "model": "forge:fluid",
       "custom": {
@@ -109,22 +103,10 @@
         "fluid": "aluminium"
       }
     },
-    "chrome": {
-      "model": "forge:fluid",
-      "custom": {
-        "fluid": "chrome"
-      }
-    },
     "cobalt": {
       "model": "forge:fluid",
       "custom": {
         "fluid": "cobalt"
-      }
-    },
-    "titanium": {
-      "model": "forge:fluid",
-      "custom": {
-        "fluid": "titanium"
       }
     },
     "iridium": {
@@ -233,6 +215,30 @@
       "model": "forge:fluid",
       "custom": {
         "fluid": "soularium"
+      }
+    },
+    "chrome": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "chrome"
+      }
+    },
+    "titanium": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "titanium"
+      }
+    },
+    "tungsten": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "tungsten"
+      }
+    },
+    "refined_iron": {
+      "model": "forge:fluid",
+      "custom": {
+        "fluid": "refined_iron"
       }
     },
     "glass": {

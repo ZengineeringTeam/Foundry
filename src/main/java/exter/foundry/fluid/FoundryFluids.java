@@ -20,7 +20,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class FoundryFluids
 {
     public static Fluid liquid_iron;
-    public static Fluid liquid_refined_iron;
     public static Fluid liquid_gold;
     public static Fluid liquid_copper;
     public static Fluid liquid_tin;
@@ -37,13 +36,11 @@ public class FoundryFluids
     public static Fluid liquid_platinum;
     public static Fluid liquid_aluminium;
     public static Fluid liquid_alumina;
-    public static Fluid liquid_chrome;
     public static Fluid liquid_signalum;
     public static Fluid liquid_lumium;
     public static Fluid liquid_enderium;
     public static Fluid liquid_uranium;
     public static Fluid liquid_cobalt;
-    public static Fluid liquid_titanium;
     public static Fluid liquid_iridium;
     public static Fluid liquid_glass;
     public static Fluid[] liquid_glass_colored = new Fluid[16];
@@ -53,7 +50,6 @@ public class FoundryFluids
     {
         IForgeRegistry<Block> registry = event.getRegistry();
         liquid_iron = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "iron", 1540, 10, 0xa81212);
-        liquid_refined_iron = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "refined_iron", 2000, 10, 0xa81212); // TODO
         liquid_gold = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "gold", 1350, 15, 0xf6d609);
         liquid_copper = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "copper", 1300, 15, 0xed9f07);
         liquid_tin = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "tin", 550, 0, 0xc1cddc);
@@ -71,10 +67,8 @@ public class FoundryFluids
         liquid_lead = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "lead", 650, 0, 0x4d4968);
         liquid_platinum = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "platinum", 2100, 15, 0xB7E7FF);
         liquid_aluminium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "aluminium", 900, 0, 0xefe0d5);
-        liquid_chrome = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "chrome", 2200, 10, 0x90C9C9);
         liquid_cobalt = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "cobalt", 1500, 8, 0x2882d4);
-        liquid_titanium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "titanium", 1700, 8, 0x3C372F);
-        liquid_iridium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "iridium", 2450, 12, 0xFDFDFD);
+        liquid_iridium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "iridium", 2450, 12, 0xBABADA);
         liquid_signalum = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "signalum", 2800, 15, 0xD84100);
         liquid_lumium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "lumium", 2500, 15, 0xFFFF7F);
         liquid_enderium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "enderium", 3800, 12, 0x007068);

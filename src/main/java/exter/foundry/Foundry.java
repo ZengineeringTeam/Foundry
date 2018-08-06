@@ -136,6 +136,8 @@ public class Foundry
             ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationBotania());
         if (Loader.isModLoaded("mekanism"))
             ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationMekanism());
+        if (Loader.isModLoaded("techreborn"))
+            ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationTechReborn());
         if (Loader.isModLoaded("crafttweaker"))
             ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationCrafttweaker());
 
