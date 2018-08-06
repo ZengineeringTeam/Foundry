@@ -280,9 +280,16 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
     {
     }
 
+    private int buf = 5;
+
     @Override
     protected void updateServer()
     {
+        if (buf-- < 0)
+        {
+            buf = 5;
+            averageFuels();
+        }
         List<Fuel> burnings = fuels.stream().filter(Fuel::isBurning).collect(Collectors.toList());
         if (burnings.size() > 0)
         {
@@ -317,6 +324,30 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
                 if (tryBurnItemInSlot(i))
                 {
                     updated = true;
+                }
+            }
+        }
+    }
+
+    private void averageFuels()
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+            if (inventory.get(i).isEmpty()) continue;
+            for (int j = 0; j < 4; j++)
+            {
+                if (i == j) continue;
+                if (inventory.get(j).isEmpty())
+                {
+                    inventory.get(i).shrink(1);
+                    inventory.set(j, new ItemStack(inventory.get(i).getItem(), 1));
+                } else
+                {
+                    if (inventory.get(i).getItem().equals(inventory.get(j).getItem()) && inventory.get(i).getCount() > inventory.get(j).getCount())
+                    {
+                        inventory.get(i).shrink(1);
+                        inventory.get(j).grow(1);
+                    }
                 }
             }
         }
