@@ -1,5 +1,6 @@
 package exter.foundry.tileentity;
 
+import exter.foundry.FoundryRegistry;
 import exter.foundry.api.recipe.IMoldRecipe;
 import exter.foundry.block.BlockMoldStation;
 import exter.foundry.item.FoundryItems;
@@ -224,12 +225,6 @@ public class TileEntityMoldStation extends TileEntityFoundry implements IExoflam
         return grid[slot];
     }
 
-    @Override
-    public int getInventoryStackLimit()
-    {
-        return 64;
-    }
-
     public int getItemBurnTime()
     {
         return item_burn_time;
@@ -273,18 +268,12 @@ public class TileEntityMoldStation extends TileEntityFoundry implements IExoflam
     {
         switch (slot)
         {
-        case SLOT_OUTPUT:
-            return false;
+        case SLOT_BLOCK:
+            return stack.getItem() == FoundryRegistry.CLAYBLOCK.getItem();
         case SLOT_FUEL:
             return TileEntityFurnace.isItemFuel(stack);
         }
-        return true;
-    }
-
-    @Override
-    public boolean isUsableByPlayer(EntityPlayer par1EntityPlayer)
-    {
-        return world.getTileEntity(getPos()) != this ? false : par1EntityPlayer.getDistanceSq(getPos()) <= 64.0D;
+        return false;
     }
 
     public void mend(final NonNullList<Boolean> pattern, int depth)

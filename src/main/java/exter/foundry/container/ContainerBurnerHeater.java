@@ -1,5 +1,6 @@
 package exter.foundry.container;
 
+import exter.foundry.container.slot.SlotFuel;
 import exter.foundry.recipes.manager.BurnerHeaterFuelManager;
 import exter.foundry.tileentity.TileEntityBurnerHeater;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,19 +38,7 @@ public class ContainerBurnerHeater extends ContainerFoundry
         {
             for (j = 0; j < 2; ++j)
             {
-                addSlotToContainer(new Slot(te_burner, i * 2 + j, 71 + i * 18, 34 + j * 18)
-                {
-                    @Override
-                    public boolean isItemValid(ItemStack stack)
-                    {
-                        if (stack.getItem() == Items.LAVA_BUCKET)
-                        {
-                            return false;
-                        }
-                        return BurnerHeaterFuelManager.INSTANCE.getFuel(stack) != null
-                                || TileEntityFurnace.isItemFuel(stack);
-                    }
-                });
+                addSlotToContainer(new SlotFuel(te_burner, i * 2 + j, 71 + i * 18, 34 + j * 18));
             }
         }
 
