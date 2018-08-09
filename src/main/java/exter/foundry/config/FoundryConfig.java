@@ -39,6 +39,8 @@ public class FoundryConfig
 
     public static String prefModID = ThermalFoundation.MOD_ID;
 
+    public static boolean castingTableUncrafting = true;
+
     static public void load(File file)
     {
         config = new Configuration(file);
@@ -87,6 +89,9 @@ public class FoundryConfig
 
         crtError = config.getBoolean("CrT Errors", "general", true,
                 "If foundry's CraftTweaker integration logs errors instead of info");
+
+        castingTableUncrafting = config.getBoolean("Casting Table Uncrafting", "general", true,
+                "Casting Table Uncrafting");
 
         FoundryAPI.FLUID_AMOUNT_INGOT = config.getInt("Fluid Ingot Value", "general", FoundryAPI.FLUID_AMOUNT_INGOT, 36,
                 Integer.MAX_VALUE, "The value, in mB, of an ingot.");

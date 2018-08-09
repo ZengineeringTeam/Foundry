@@ -3,8 +3,12 @@ package exter.foundry.block;
 import java.util.List;
 
 import exter.foundry.Foundry;
+import exter.foundry.FoundryRegistry;
 import exter.foundry.api.recipe.ICastingTableRecipe.TableType;
+import exter.foundry.config.FoundryConfig;
 import exter.foundry.creativetab.FoundryTab;
+import exter.foundry.item.FoundryItems;
+import exter.foundry.item.ItemMold;
 import exter.foundry.tileentity.TileEntityCastingTableBase;
 import exter.foundry.tileentity.TileEntityCastingTableBlock;
 import exter.foundry.tileentity.TileEntityCastingTableIngot;
@@ -123,18 +127,17 @@ public class BlockCastingTable extends Block implements ITileEntityProvider, IBl
 
                 if (!is.isEmpty())
                 {
-                    double drop_x = Block.RANDOM.nextFloat() * 0.3 + 0.35;
-                    double drop_y = Block.RANDOM.nextFloat() * 0.3 + 0.35;
-                    double drop_z = Block.RANDOM.nextFloat() * 0.3 + 0.35;
+                    double drop_x = RANDOM.nextFloat() * 0.3 + 0.35;
+                    double drop_y = RANDOM.nextFloat() * 0.3 + 0.35;
+                    double drop_z = RANDOM.nextFloat() * 0.3 + 0.35;
                     EntityItem entityitem = new EntityItem(world, pos.getX() + drop_x, pos.getY() + drop_y,
                             pos.getZ() + drop_z, is);
-                    entityitem.setPickupDelay(10);
+                    entityitem.setDefaultPickupDelay();
 
                     world.spawnEntity(entityitem);
                 }
             }
         }
-        world.removeTileEntity(pos);
         super.breakBlock(world, pos, state);
     }
 
@@ -170,6 +173,34 @@ public class BlockCastingTable extends Block implements ITileEntityProvider, IBl
     public int damageDropped(IBlockState state)
     {
         return getMetaFromState(state);
+    }
+
+    @Override
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+    {
+        if (FoundryConfig.castingTableUncrafting)
+        {
+            drops.add(FoundryRegistry.BARREL);
+            ItemStack stack = ItemStack.EMPTY;
+            switch (state.getValue(TABLE))
+            {
+            case INGOT:
+                stack = ItemMold.SubItem.INGOT.getItem();
+                break;
+            case PLATE:
+                stack = ItemMold.SubItem.PLATE.getItem();
+                break;
+            case ROD:
+                stack = ItemMold.SubItem.ROD.getItem();
+                break;
+            default:
+            }
+            drops.add(stack);
+        }
+        else
+        {
+            super.getDrops(drops, world, pos, state, fortune);
+        }
     }
 
     @Override

@@ -1,0 +1,21 @@
+{
+  "type": "forge:ore_shaped",
+  "result": {
+    "item": "foundry:casting_table",
+    "data": 2
+  },
+  "pattern": [
+    "M",
+    "B"
+  ],
+  "key": {
+    "M": {
+      "item": "foundry:mold",
+      "data": 3
+    },
+    "B": {
+      "item": "ceramics:porcelain_barrel",
+      "data": 0
+    }
+  }
+}

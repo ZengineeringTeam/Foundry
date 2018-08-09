@@ -16,6 +16,6 @@ public class FoundryRegistry
     @ItemStackHolder("ceramics:clay_soft")
     public static final ItemStack CLAYBLOCK = ItemStack.EMPTY;
 
-    @ItemStackHolder("ceramics:clay_hard")
-    public static final ItemStack BRICKBLOCK = ItemStack.EMPTY;
+    @ItemStackHolder("ceramics:porcelain_barrel")
+    public static final ItemStack BARREL = ItemStack.EMPTY;
 }
