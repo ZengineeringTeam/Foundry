@@ -47,7 +47,7 @@ public class GuiAlloyMixer extends GuiFoundry
         allowUserInput = false;
         ySize = 209;
         te_alloymixer = am;
-        STRING_MACHINE = I18n.format("tile.foundry.alloying_crucible.name");
+        STRING_MACHINE = I18n.format("tile.foundry.alloy_mixer.name");
     }
 
     @Override
