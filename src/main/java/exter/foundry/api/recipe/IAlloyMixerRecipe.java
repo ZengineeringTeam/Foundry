@@ -24,5 +24,5 @@ public interface IAlloyMixerRecipe
      * @param order [Output] Order in which the input fluids are matched.
      * @return true if the fluids matches, false otherwise.
      */
-    public boolean matchesRecipe(FluidStack[] inputs, int[] order);
+    public boolean matchesRecipe(List<FluidStack> inputs);
 }

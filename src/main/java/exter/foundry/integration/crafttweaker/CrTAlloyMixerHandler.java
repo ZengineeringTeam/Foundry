@@ -1,7 +1,10 @@
 package exter.foundry.integration.crafttweaker;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import crafttweaker.CraftTweakerAPI;
-import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.liquid.ILiquidStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import exter.foundry.api.recipe.IAlloyMixerRecipe;
@@ -96,15 +99,10 @@ public class CrTAlloyMixerHandler
     {
         ModIntegrationCrafttweaker.queueRemove(() -> {
 
-            FluidStack[] in = new FluidStack[inputs.length];
+            List<FluidStack> ins = Arrays.asList(inputs).stream().map(CraftTweakerMC::getLiquidStack)
+                    .collect(Collectors.toList());
 
-            int i;
-            for (i = 0; i < inputs.length; i++)
-            {
-                in[i] = CraftTweakerMC.getLiquidStack(inputs[i]);
-            }
-
-            IAlloyMixerRecipe recipe = AlloyMixerRecipeManager.INSTANCE.findRecipe(in, null);
+            IAlloyMixerRecipe recipe = AlloyMixerRecipeManager.INSTANCE.findRecipe(ins);
             if (recipe == null)
             {
                 CraftTweakerAPI.logWarning("Alloy mixer recipe not found.");

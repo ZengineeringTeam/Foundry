@@ -1,19 +1,20 @@
 package exter.foundry.recipes;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import com.google.common.collect.ImmutableList;
 
 import exter.foundry.api.recipe.IAlloyMixerRecipe;
 import net.minecraftforge.fluids.FluidStack;
+import scala.actors.threadpool.Arrays;
 
 /*
  * Alloy Mixer recipe manager
  */
 public class AlloyMixerRecipe implements IAlloyMixerRecipe
 {
-
-    static private final boolean[] matched = new boolean[4];
     public List<FluidStack> inputs;
 
     public FluidStack output;
@@ -21,7 +22,7 @@ public class AlloyMixerRecipe implements IAlloyMixerRecipe
     public AlloyMixerRecipe(FluidStack out, FluidStack[] in)
     {
         output = out.copy();
-        if (in == null)
+        if (in == null || in.length == 0)
         {
             throw new IllegalArgumentException("Alloy mixer recipe inputs cannot be null");
         }
@@ -29,17 +30,13 @@ public class AlloyMixerRecipe implements IAlloyMixerRecipe
         {
             throw new IllegalArgumentException("Alloy mixer recipe cannot have more the 4 inputs");
         }
-        inputs = new ArrayList<>();
-        int i;
-        for (i = 0; i < in.length; i++)
+
+        inputs = ImmutableList.copyOf(sortedFluids(Arrays.asList(in)));
+
+        if (inputs.contains(null))
         {
-            if (in[i] == null)
-            {
-                throw new IllegalArgumentException("Alloy mixer recipe input cannot be null");
-            }
-            inputs.add(in[i].copy());
+            throw new IllegalArgumentException("Alloy mixer recipe input cannot be null");
         }
-        inputs = Collections.unmodifiableList(inputs);
     }
 
     @Override
@@ -55,45 +52,52 @@ public class AlloyMixerRecipe implements IAlloyMixerRecipe
     }
 
     @Override
-    public boolean matchesRecipe(FluidStack[] in, int[] order)
+    public boolean matchesRecipe(List<FluidStack> ins)
     {
-        int matches = 0;
-        int i;
-        if (order != null && order.length < inputs.size())
-        {
-            order = null;
-        }
-
-        if (in.length < inputs.size())
+        if (inputs.size() != ins.size())
         {
             return false;
         }
-
-        for (i = 0; i < 4; i++)
+        ins = sortedFluids(ins);
+        for (int i = 0; i < inputs.size(); i++)
         {
-            matched[i] = false;
-        }
-
-        for (i = 0; i < in.length; i++)
-        {
-            if (in[i] != null)
+            FluidStack input = inputs.get(i);
+            FluidStack in = ins.get(i);
+            if (!input.isFluidEqual(in) || in.amount < input.amount)
             {
-                int j;
-                for (j = 0; j < inputs.size(); j++)
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static List<FluidStack> sortedFluids(List<FluidStack> fluidStacks)
+    {
+        return fluidStacks.stream().sorted(new Comp()).collect(Collectors.toList());
+    }
+
+    public static void mergeFluids(List<FluidStack> fluidStacks)
+    {
+        for (int i = 0; i + 1 < fluidStacks.size(); i++)
+        {
+            FluidStack fs = fluidStacks.get(i);
+            for (int j = i + 1; j < fluidStacks.size(); j++)
+            {
+                if (fs.isFluidEqual(fluidStacks.get(j)))
                 {
-                    if (!matched[j] && in[i].containsFluid(inputs.get(j)))
-                    {
-                        matched[j] = true;
-                        matches++;
-                        if (order != null)
-                        {
-                            order[j] = i;
-                        }
-                        break;
-                    }
+                    fluidStacks.get(j).amount += fs.amount;
+                    fluidStacks.set(i, null);
                 }
             }
         }
-        return matches == inputs.size();
+    }
+
+    public static class Comp implements Comparator<FluidStack>
+    {
+        @Override
+        public int compare(FluidStack o1, FluidStack o2)
+        {
+            return Integer.compare(o1.hashCode(), o2.hashCode());
+        }
     }
 }

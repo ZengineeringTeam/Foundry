@@ -14,12 +14,9 @@ public class AlloyMixerRecipeManager implements IAlloyMixerRecipeManager
 
     private final NonNullList<IAlloyMixerRecipe> recipes;
 
-    private final int[] recipe_order;
-
     private AlloyMixerRecipeManager()
     {
         recipes = NonNullList.create();
-        recipe_order = new int[4];
     }
 
     @Override
@@ -34,28 +31,17 @@ public class AlloyMixerRecipeManager implements IAlloyMixerRecipeManager
     }
 
     @Override
-    public IAlloyMixerRecipe findRecipe(FluidStack[] in, int[] order)
+    public IAlloyMixerRecipe findRecipe(List<FluidStack> in)
     {
-        int inputs = 0;
-        IAlloyMixerRecipe result = null;
-        if (order != null && order.length < 4)
-        {
-            order = null;
-        }
+        in = AlloyMixerRecipe.sortedFluids(in);
         for (IAlloyMixerRecipe r : recipes)
         {
-            List<FluidStack> rinputs = r.getInputs();
-            if (r.matchesRecipe(in, recipe_order) && rinputs.size() > inputs)
+            if (r.matchesRecipe(in))
             {
-                if (order != null)
-                {
-                    System.arraycopy(recipe_order, 0, order, 0, recipe_order.length);
-                }
-                inputs = rinputs.size();
-                result = r;
+                return r;
             }
         }
-        return result;
+        return null;
     }
 
     @Override

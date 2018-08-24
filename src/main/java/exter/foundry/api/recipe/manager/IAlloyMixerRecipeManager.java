@@ -14,15 +14,7 @@ public interface IAlloyMixerRecipeManager
      */
     public void addRecipe(FluidStack out, FluidStack... in);
 
-    /**
-     * Find a valid recipe that contains the given inputs.
-     * A recipe is found if the recipe's inputs contains the fluid in the parameters.
-     * @param in_a FluidStack for the first input.
-     * @param in_b FluidStack for the second input.
-     * @param order [Output] Order in which the input fluids are matched.
-     * @return
-     */
-    public IAlloyMixerRecipe findRecipe(FluidStack[] in, int[] order);
+    public IAlloyMixerRecipe findRecipe(List<FluidStack> in);
 
     /**
      * Get a list of all the recipes

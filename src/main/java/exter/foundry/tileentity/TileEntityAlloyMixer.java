@@ -1,9 +1,11 @@
 package exter.foundry.tileentity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.recipe.IAlloyMixerRecipe;
+import exter.foundry.recipes.AlloyMixerRecipe;
 import exter.foundry.recipes.manager.AlloyMixerRecipeManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -107,10 +109,6 @@ public class TileEntityAlloyMixer extends TileEntityPowered
     private final FluidTank[] tanks;
     private final IFluidHandler fluid_handler;
 
-    private final int[] recipe_order = new int[4];
-
-    private final FluidStack[] input_tank_fluids = new FluidStack[4];
-
     public TileEntityAlloyMixer()
     {
         super();
@@ -122,10 +120,14 @@ public class TileEntityAlloyMixer extends TileEntityPowered
         }
         fluid_handler = new FluidHandler();
 
-        addContainerSlot(new ContainerSlot(TANK_INPUT_0, INVENTORY_CONTAINER_INPUT_0_INPUT, INVENTORY_CONTAINER_INPUT_0_OUTPUT, false));
-        addContainerSlot(new ContainerSlot(TANK_INPUT_1, INVENTORY_CONTAINER_INPUT_1_INPUT, INVENTORY_CONTAINER_INPUT_1_OUTPUT, false));
-        addContainerSlot(new ContainerSlot(TANK_INPUT_2, INVENTORY_CONTAINER_INPUT_2_INPUT, INVENTORY_CONTAINER_INPUT_2_OUTPUT, false));
-        addContainerSlot(new ContainerSlot(TANK_INPUT_3, INVENTORY_CONTAINER_INPUT_3_INPUT, INVENTORY_CONTAINER_INPUT_3_OUTPUT, false));
+        addContainerSlot(new ContainerSlot(TANK_INPUT_0, INVENTORY_CONTAINER_INPUT_0_INPUT,
+                INVENTORY_CONTAINER_INPUT_0_OUTPUT, false));
+        addContainerSlot(new ContainerSlot(TANK_INPUT_1, INVENTORY_CONTAINER_INPUT_1_INPUT,
+                INVENTORY_CONTAINER_INPUT_1_OUTPUT, false));
+        addContainerSlot(new ContainerSlot(TANK_INPUT_2, INVENTORY_CONTAINER_INPUT_2_INPUT,
+                INVENTORY_CONTAINER_INPUT_2_OUTPUT, false));
+        addContainerSlot(new ContainerSlot(TANK_INPUT_3, INVENTORY_CONTAINER_INPUT_3_INPUT,
+                INVENTORY_CONTAINER_INPUT_3_OUTPUT, false));
         addContainerSlot(new ContainerSlot(TANK_OUTPUT, INVENTORY_CONTAINER_OUTPUT_INPUT,
                 INVENTORY_CONTAINER_OUTPUT_OUTPUT, false));
     }
@@ -193,12 +195,19 @@ public class TileEntityAlloyMixer extends TileEntityPowered
         }
 
         int i;
+        List<FluidStack> input_tank_fluids = new ArrayList<>(4);
         for (i = 0; i < 4; i++)
         {
-            input_tank_fluids[i] = tanks[i].getFluid();
+            FluidStack fs = tanks[i].getFluid();
+            if (fs != null)
+            {
+                input_tank_fluids.add(fs.copy());
+            }
         }
 
-        IAlloyMixerRecipe recipe = AlloyMixerRecipeManager.INSTANCE.findRecipe(input_tank_fluids, recipe_order);
+        AlloyMixerRecipe.mergeFluids(input_tank_fluids);
+        input_tank_fluids.removeIf(f -> f == null || f.amount == 0);
+        IAlloyMixerRecipe recipe = AlloyMixerRecipeManager.INSTANCE.findRecipe(input_tank_fluids);
         if (recipe == null)
         {
             return;
@@ -210,7 +219,8 @@ public class TileEntityAlloyMixer extends TileEntityPowered
             {
                 return;
             }
-            if (!recipe.matchesRecipe(input_tank_fluids, recipe_order))
+            input_tank_fluids.removeIf(f -> f == null || f.amount == 0);
+            if (!recipe.matchesRecipe(input_tank_fluids))
             {
                 return;
             }
@@ -228,12 +238,25 @@ public class TileEntityAlloyMixer extends TileEntityPowered
             useFoundryEnergy(required_energy, true);
             energy_used += required_energy;
             tanks[TANK_OUTPUT].fill(output, true);
-            updateTank(TANK_OUTPUT);
             List<FluidStack> inputs = recipe.getInputs();
-            for (i = 0; i < inputs.size(); i++)
+            for (FluidStack input : inputs)
             {
-                tanks[recipe_order[i]].drain(inputs.get(i).amount, true);
-                updateTank(recipe_order[i]);
+                FluidStack shouldDrain = input.copy();
+                for (FluidTank tank : tanks)
+                {
+                    if (shouldDrain.isFluidEqual(tank.getFluid()))
+                    {
+                        FluidStack drained = tank.drain(shouldDrain, true);
+                        if (drained != null)
+                        {
+                            shouldDrain.amount -= drained.amount;
+                        }
+                        if (shouldDrain.amount <= 0)
+                        {
+                            continue;
+                        }
+                    }
+                }
             }
         }
     }
