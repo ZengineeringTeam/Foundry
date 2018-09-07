@@ -132,9 +132,9 @@ public class FoundryUtils
         if (!boots.isEmpty())
         {
             FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(boots),
-                    new FluidStack(fluid, FoundryAPI.getAmountHelm()));
+                    new FluidStack(fluid, FoundryAPI.getAmountBoots()));
             FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(boots),
-                    new FluidStack(fluid, FoundryAPI.getAmountHelm()), SubItem.BOOTS.getItem(), false, null);
+                    new FluidStack(fluid, FoundryAPI.getAmountBoots()), SubItem.BOOTS.getItem(), false, null);
         }
 
         ItemStack pickaxe = new ItemStack(
