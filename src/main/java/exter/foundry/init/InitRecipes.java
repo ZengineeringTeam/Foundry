@@ -209,9 +209,9 @@ public class InitRecipes
                 FoundryUtils.registerBasicMeltingRecipes(name, fluid);
             }
         }
-        //FoundryUtils.registerBasicMeltingRecipes("Chromium", LiquidMetalRegistry.instance.getFluid("chrome"));
+        // FoundryUtils.registerBasicMeltingRecipes("Chromium", LiquidMetalRegistry.instance.getFluid("chrome"));
         FoundryUtils.registerBasicMeltingRecipes("Aluminum", FoundryFluidRegistry.INSTANCE.getFluid("aluminium"));
-        FoundryUtils.registerBasicMeltingRecipes("Constantan", FoundryFluidRegistry.INSTANCE.getFluid("constantan"));
+        // FoundryUtils.registerBasicMeltingRecipes("Constantan", FoundryFluidRegistry.INSTANCE.getFluid("constantan"));
 
         MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("dustRedstone"),
                 new FluidStack(TFFluids.fluidRedstone, 100));
