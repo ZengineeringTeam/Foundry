@@ -2,6 +2,7 @@
 /.gradle
 /build
 /output
+/out
 
 ## ForgeGradle
 /run
