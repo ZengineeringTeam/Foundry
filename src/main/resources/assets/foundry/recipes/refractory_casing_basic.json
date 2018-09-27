@@ -1,0 +1,22 @@
+{
+  "type": "forge:ore_shaped",
+  "result": {
+    "item": "foundry:componentblock",
+    "data": 2
+  },
+  "pattern": [
+    "BPB",
+    "P P",
+	"BPB"
+  ],
+  "key": {
+    "B": {
+      "type": "forge:ore_dict",
+      "ore": "ingotBronze"
+    },
+    "P": {
+      "item": "ceramics:unfired_clay",
+      "data": 5
+    }
+  }
+}

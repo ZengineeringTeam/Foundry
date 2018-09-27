@@ -1,0 +1,30 @@
+{
+  "type": "forge:ore_shaped",
+  "result": {
+    "item": "foundry:machine",
+    "data": 7
+  },
+  "pattern": [
+    "POP",
+    "PRP",
+	"PCP"
+  ],
+  "key": {
+    "P": {
+      "item": "ceramics:unfired_clay",
+      "data": 5
+    },
+	"O": {
+      "item": "minecraft:cauldron",
+      "data": 0
+    },
+    "R": {
+      "item": "foundry:componentblock",
+      "data": 0
+    },
+    "C": {
+      "type": "forge:ore_dict",
+      "ore": "plateCopper"
+    }
+  }
+}

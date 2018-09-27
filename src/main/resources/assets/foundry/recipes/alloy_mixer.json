@@ -1,0 +1,26 @@
+{
+  "type": "forge:ore_shaped",
+  "result": {
+    "item": "foundry:machine",
+    "data": 2
+  },
+  "pattern": [
+    " P ",
+    "GRG",
+	" P "
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateInvar"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "gearInvar"
+    },
+    "R": {
+      "item": "foundry:componentblock",
+      "data": 0
+    }
+  }
+}

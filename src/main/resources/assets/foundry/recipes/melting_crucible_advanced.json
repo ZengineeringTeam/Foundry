@@ -1,0 +1,30 @@
+{
+  "type": "forge:ore_shaped",
+  "result": {
+    "item": "foundry:machine",
+    "data": 6
+  },
+  "pattern": [
+    "SCS",
+    "SRS",
+	"SPS"
+  ],
+  "key": {
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "ingotSignalum"
+    },
+	"C": {
+      "item": "minecraft:cauldron",
+      "data": 0
+    },
+    "R": {
+      "item": "foundry:componentblock",
+      "data": 0
+    },
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateSilver"
+    }
+  }
+}

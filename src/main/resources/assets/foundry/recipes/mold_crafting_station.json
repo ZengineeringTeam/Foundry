@@ -1,0 +1,30 @@
+{
+  "type": "forge:ore_shaped",
+  "result": {
+    "item": "foundry:mold_station",
+    "data": 0
+  },
+  "pattern": [
+    "PCP",
+    "PSP",
+	"PFP"
+  ],
+  "key": {
+    "P": {
+      "item": "ceramics:unfired_clay",
+      "data": 5
+    },
+    "C": {
+      "item": "minecraft:crafting_table",
+      "data": 0
+    },
+    "S": {
+      "item": "minecraft:stone_slab",
+      "data": 0
+    },
+    "F": {
+      "item": "minecraft:furnace",
+      "data": 0
+    }
+  }
+}

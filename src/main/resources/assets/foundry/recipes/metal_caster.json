@@ -1,0 +1,34 @@
+{
+  "type": "forge:ore_shaped",
+  "result": {
+    "item": "foundry:machine",
+    "data": 1
+  },
+  "pattern": [
+    " B ",
+    "PRP",
+	"ICI"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:bucket",
+      "data": 0
+    },
+    "P": {
+      "item": "minecraft:piston",
+      "data": 0
+    },
+    "R": {
+      "item": "foundry:componentblock",
+      "data": 0
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "gearInvar"
+    },
+    "C": {
+      "item": "thermalfoundation:material",
+      "data": 513
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "type": "forge:ore_shaped",
+  "result": {
+    "item": "foundry:machine",
+    "data": 5
+  },
+  "pattern": [
+    "PPP",
+    "CRC",
+	"GCG"
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateCopper"
+    },
+    "C": {
+      "item": "thermalfoundation:material",
+      "data": 513
+    },
+    "R": {
+      "item": "foundry:componentblock",
+      "data": 0
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "gearConstantan"
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "type": "forge:ore_shaped",
+  "result": {
+    "item": "foundry:machine",
+    "data": 3
+  },
+  "pattern": [
+    " P ",
+    "IRI",
+	"CSC"
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:piston",
+      "data": 0
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "plateIron"
+    },
+    "R": {
+      "item": "foundry:componentblock",
+      "data": 0
+    },
+    "C": {
+      "type": "forge:ore_dict",
+      "ore": "gearConstantan"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "dustRedstone"
+    }
+  }
+}

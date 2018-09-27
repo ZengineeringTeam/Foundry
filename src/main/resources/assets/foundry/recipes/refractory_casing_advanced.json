@@ -1,0 +1,22 @@
+{
+  "type": "forge:ore_shaped",
+  "result": {
+    "item": "foundry:componentblock",
+    "data": 1
+  },
+  "pattern": [
+    "PSP",
+    "S S",
+	"PSP"
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateSteel"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "ingotSignalum"
+    }
+  }
+}

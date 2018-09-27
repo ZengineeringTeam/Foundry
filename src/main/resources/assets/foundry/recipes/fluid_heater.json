@@ -1,0 +1,34 @@
+{
+  "type": "forge:ore_shaped",
+  "result": {
+    "item": "foundry:machine",
+    "data": 9
+  },
+  "pattern": [
+    "PPP",
+    "TRT",
+	"GCG"
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plateCopper"
+    },
+    "T": {
+      "type": "forge:ore_dict",
+      "ore": "ingotInvar"
+    },
+    "R": {
+      "item": "foundry:componentblock",
+      "data": 0
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "gearBronze"
+    },
+    "C": {
+      "item": "minecraft:cauldron",
+      "data": 0
+    }
+  }
+}

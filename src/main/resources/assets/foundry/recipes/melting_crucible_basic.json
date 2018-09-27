@@ -1,0 +1,30 @@
+{
+  "type": "forge:ore_shaped",
+  "result": {
+    "item": "foundry:machine",
+    "data": 0
+  },
+  "pattern": [
+    "PBP",
+    "PRP",
+	"PCP"
+  ],
+  "key": {
+    "P": {
+      "item": "ceramics:unfired_clay",
+      "data": 5
+    },
+	"B": {
+      "item": "foundry:bronze_cauldron",
+      "data": 0
+    },
+    "R": {
+      "item": "foundry:componentblock",
+      "data": 2
+    },
+    "C": {
+      "type": "forge:ore_dict",
+      "ore": "ingotCopper"
+    }
+  }
+}

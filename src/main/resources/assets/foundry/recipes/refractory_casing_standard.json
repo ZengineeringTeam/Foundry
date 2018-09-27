@@ -1,0 +1,22 @@
+{
+  "type": "forge:ore_shaped",
+  "result": {
+    "item": "foundry:componentblock",
+    "data": 0
+  },
+  "pattern": [
+    "IPI",
+    "P P",
+	"IPI"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "plateIron"
+    },
+    "P": {
+      "item": "ceramics:unfired_clay",
+      "data": 5
+    }
+  }
+}

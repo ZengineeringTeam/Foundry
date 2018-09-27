@@ -1,0 +1,30 @@
+{
+  "type": "forge:ore_shaped",
+  "result": {
+    "item": "foundry:machine",
+    "data": 8
+  },
+  "pattern": [
+    " C ",
+    "BRB",
+	"PPP"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:cauldron",
+      "data": 0
+    },
+    "B": {
+      "item": "minecraft:bucket",
+      "data": 0
+    },
+    "R": {
+      "item": "foundry:componentblock",
+      "data": 0
+    },
+    "P": {
+      "item": "ceramics:unfired_clay",
+      "data": 5
+    }
+  }
+}

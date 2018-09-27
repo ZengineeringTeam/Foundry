@@ -1,0 +1,26 @@
+{
+  "type": "forge:ore_shaped",
+  "result": {
+    "item": "foundry:burner_heater",
+    "data": 0
+  },
+  "pattern": [
+    "C",
+    "R",
+	"F"
+  ],
+  "key": {
+    "C": {
+      "type": "forge:ore_dict",
+      "ore": "ingotCopper"
+    },
+    "R": {
+      "item": "foundry:componentblock",
+      "data": 0
+    },
+    "F": {
+      "item": "minecraft:furnace",
+      "data": 0
+    }
+  }
+}
