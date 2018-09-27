@@ -34,10 +34,10 @@ public class MeltingRecipe implements IMeltingRecipe
 
         if (fluid_stack == null)
             throw new IllegalArgumentException("Melting recipe fluid cannot be null.");
-        if (melt <= 295)
-            throw new IllegalArgumentException("Melting recipe melting point must be > 295.");
+        if (melt < 296)
+            melt = 296;
         if (speed < 1)
-            throw new IllegalArgumentException("Melting recipe speed must be > 0.");
+            speed = 1;
 
         solid = item;
         fluid = fluid_stack.copy();
