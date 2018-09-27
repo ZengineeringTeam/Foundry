@@ -26,7 +26,10 @@ public class TileEntityAlloyMixer extends TileEntityPowered
             props = new IFluidTankProperties[getTankCount()];
             for (int i = 0; i < props.length; i++)
             {
-                props[i] = new FluidTankPropertiesWrapper(getTank(i));
+                props[i] = new FluidTankPropertiesWrapper(getTank(i))
+                {
+
+                };
             }
         }
 
@@ -108,6 +111,7 @@ public class TileEntityAlloyMixer extends TileEntityPowered
 
     private final FluidTank[] tanks;
     private final IFluidHandler fluid_handler;
+    private boolean changed = false;
 
     public TileEntityAlloyMixer()
     {
@@ -116,7 +120,14 @@ public class TileEntityAlloyMixer extends TileEntityPowered
         tanks = new FluidTank[5];
         for (int i = 0; i < tanks.length; i++)
         {
-            tanks[i] = new FluidTank(FoundryAPI.ALLOYMIXER_TANK_CAPACITY);
+            tanks[i] = new FluidTank(FoundryAPI.ALLOYMIXER_TANK_CAPACITY)
+            {
+                @Override
+                protected void onContentsChanged()
+                {
+                    changed = true;
+                }
+            };
         }
         fluid_handler = new FluidHandler();
 
@@ -162,10 +173,18 @@ public class TileEntityAlloyMixer extends TileEntityPowered
         return false;
     }
 
+    @Override
+    protected void onEnergyChanged()
+    {
+        changed = true;
+    }
+
     private void mixAlloy()
     {
+        System.out.println("mix");
         if (getStoredFoundryEnergy() < 10)
         {
+            changed = false;
             return;
         }
         boolean do_mix = false;
@@ -210,6 +229,7 @@ public class TileEntityAlloyMixer extends TileEntityPowered
         IAlloyMixerRecipe recipe = AlloyMixerRecipeManager.INSTANCE.findRecipe(input_tank_fluids);
         if (recipe == null)
         {
+            changed = false;
             return;
         }
         int energy_used = 0;
@@ -228,11 +248,13 @@ public class TileEntityAlloyMixer extends TileEntityPowered
 
             if (tanks[TANK_OUTPUT].fill(output, false) < output.amount)
             {
+                changed = false;
                 return;
             }
             int required_energy = 10 * output.amount;
             if (useFoundryEnergy(required_energy, false) < required_energy)
             {
+                changed = false;
                 return;
             }
             useFoundryEnergy(required_energy, true);
@@ -270,8 +292,7 @@ public class TileEntityAlloyMixer extends TileEntityPowered
     @Override
     protected void updateServer()
     {
-        super.updateServer();
-        if (tanks[TANK_OUTPUT].getFluidAmount() < tanks[TANK_OUTPUT].getCapacity()
+        if (changed && tanks[TANK_OUTPUT].getFluidAmount() < tanks[TANK_OUTPUT].getCapacity()
                 && (tanks[TANK_INPUT_0].getFluidAmount() > 0 || tanks[TANK_INPUT_1].getFluidAmount() > 0
                         || tanks[TANK_INPUT_2].getFluidAmount() > 0 || tanks[TANK_INPUT_3].getFluidAmount() > 0))
         {
