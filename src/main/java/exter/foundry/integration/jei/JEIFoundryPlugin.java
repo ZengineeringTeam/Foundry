@@ -109,18 +109,6 @@ public class JEIFoundryPlugin implements IModPlugin
                 .forEach(f -> fuels.add(new FluidHeaterJEI.Wrapper(registry.getJeiHelpers().getGuiHelper(), f)));
         registry.addRecipes(fuels, FoundryJEIConstants.FLUID_HEATER_UID);
 
-        registry.addRecipeCatalyst(FoundryBlocks.block_casting_table.asItemStack(BlockCastingTable.EnumTable.INGOT),
-                "foundry.casting_table.ingot");
-
-        registry.addRecipeCatalyst(FoundryBlocks.block_casting_table.asItemStack(BlockCastingTable.EnumTable.PLATE),
-                "foundry.casting_table.plate");
-
-        registry.addRecipeCatalyst(FoundryBlocks.block_casting_table.asItemStack(BlockCastingTable.EnumTable.ROD),
-                "foundry.casting_table.rod");
-
-        registry.addRecipeCatalyst(FoundryBlocks.block_casting_table.asItemStack(BlockCastingTable.EnumTable.BLOCK),
-                "foundry.casting_table.block");
-
         setupTable(registry, table_ingot);
         setupTable(registry, table_plate);
         setupTable(registry, table_rod);
