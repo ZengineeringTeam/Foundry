@@ -181,7 +181,6 @@ public class TileEntityAlloyMixer extends TileEntityPowered
 
     private void mixAlloy()
     {
-        System.out.println("mix");
         if (getStoredFoundryEnergy() < 10)
         {
             changed = false;
