@@ -18,6 +18,7 @@ import mezz.jei.api.gui.IGuiFluidStackGroup;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
@@ -112,13 +113,13 @@ public class InfuserJEI
                     false, tank_overlay);
             guiFluidStacks.init(1, false, 108, 2, 16, GuiMetalInfuser.TANK_HEIGHT, FoundryAPI.INFUSER_TANK_CAPACITY,
                     false, tank_overlay);
-            guiFluidStacks.set(0, ingredients.getInputs(FluidStack.class).get(0));
-            guiFluidStacks.set(1, ingredients.getOutputs(FluidStack.class).get(0));
+            guiFluidStacks.set(0, ingredients.getInputs(VanillaTypes.FLUID).get(0));
+            guiFluidStacks.set(1, ingredients.getOutputs(VanillaTypes.FLUID).get(0));
 
             IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
 
             guiItemStacks.init(0, true, 14, 17);
-            guiItemStacks.set(0, ingredients.getInputs(ItemStack.class).get(0));
+            guiItemStacks.set(0, ingredients.getInputs(VanillaTypes.ITEM).get(0));
         }
     }
 

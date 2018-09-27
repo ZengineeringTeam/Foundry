@@ -16,6 +16,7 @@ import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiFluidStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.util.Translator;
@@ -138,8 +139,8 @@ public class AlloyingCrucibleJEI
         @Override
         public void getIngredients(IIngredients ingredients)
         {
-            ingredients.setOutput(FluidStack.class, recipe.getOutput());
-            ingredients.setInputs(FluidStack.class, ImmutableList.of(recipe.getInputA(), recipe.getInputB()));
+            ingredients.setOutput(VanillaTypes.FLUID, recipe.getOutput());
+            ingredients.setInputs(VanillaTypes.FLUID, ImmutableList.of(recipe.getInputA(), recipe.getInputB()));
         }
 
         @Override

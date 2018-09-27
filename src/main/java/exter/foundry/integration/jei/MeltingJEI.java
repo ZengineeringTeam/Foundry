@@ -19,6 +19,7 @@ import mezz.jei.api.gui.IGuiFluidStackGroup;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.gui.elements.DrawableResource;
@@ -155,8 +156,8 @@ public class MeltingJEI
         @Override
         public void getIngredients(IIngredients ingredients)
         {
-            ingredients.setInputLists(ItemStack.class, Collections.singletonList(recipe.getInput().getItems()));
-            ingredients.setOutput(FluidStack.class, recipe.getOutput());
+            ingredients.setInputLists(VanillaTypes.ITEM, Collections.singletonList(recipe.getInput().getItems()));
+            ingredients.setOutput(VanillaTypes.FLUID, recipe.getOutput());
         }
 
         @Override

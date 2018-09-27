@@ -16,6 +16,7 @@ import mezz.jei.api.gui.IGuiFluidStackGroup;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.IStackHelper;
@@ -140,8 +141,8 @@ public class CastingTableJEI
         @Override
         public void getIngredients(IIngredients ingredients)
         {
-            ingredients.setInput(FluidStack.class, recipe.getInput());
-            ingredients.setOutput(ItemStack.class, recipe.getOutput());
+            ingredients.setInput(VanillaTypes.FLUID, recipe.getInput());
+            ingredients.setOutput(VanillaTypes.ITEM, recipe.getOutput());
         }
 
         public String getName()

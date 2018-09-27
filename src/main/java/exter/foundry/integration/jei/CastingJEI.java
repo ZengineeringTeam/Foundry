@@ -21,6 +21,7 @@ import mezz.jei.api.gui.IGuiFluidStackGroup;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
@@ -116,10 +117,10 @@ public class CastingJEI
             gui_items.init(2, true, 47, 4);
             gui_fluids.init(3, true, 1, 5, 16, GuiMetalCaster.TANK_HEIGHT, FoundryAPI.CASTER_TANK_CAPACITY, false,
                     tank_overlay);
-            gui_items.set(0, ingredients.getOutputs(ItemStack.class).get(0));
-            gui_items.set(1, ingredients.getInputs(ItemStack.class).get(0));
-            gui_items.set(2, ingredients.getInputs(ItemStack.class).get(1));
-            gui_fluids.set(3, ingredients.getInputs(FluidStack.class).get(0));
+            gui_items.set(0, ingredients.getOutputs(VanillaTypes.ITEM).get(0));
+            gui_items.set(1, ingredients.getInputs(VanillaTypes.ITEM).get(0));
+            gui_items.set(2, ingredients.getInputs(VanillaTypes.ITEM).get(1));
+            gui_fluids.set(3, ingredients.getInputs(VanillaTypes.FLUID).get(0));
         }
     }
 

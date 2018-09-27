@@ -11,6 +11,7 @@ import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.gui.IGuiFluidStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.config.Constants;
@@ -85,7 +86,7 @@ public class FluidHeaterJEI
         @Override
         public void getIngredients(IIngredients ingredients)
         {
-            ingredients.setInput(FluidStack.class, new FluidStack(fuel.getFluid(), 1));
+            ingredients.setInput(VanillaTypes.FLUID, new FluidStack(fuel.getFluid(), 1));
         }
 
         @Override

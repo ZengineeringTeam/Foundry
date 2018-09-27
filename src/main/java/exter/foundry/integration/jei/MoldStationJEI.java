@@ -16,6 +16,7 @@ import mezz.jei.api.gui.IDrawableStatic;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.gui.elements.DrawableResource;
@@ -162,7 +163,7 @@ public class MoldStationJEI
         @Override
         public void getIngredients(IIngredients ingredients)
         {
-            ingredients.setOutput(ItemStack.class, recipe.getOutput());
+            ingredients.setOutput(VanillaTypes.ITEM, recipe.getOutput());
         }
 
         @Override
