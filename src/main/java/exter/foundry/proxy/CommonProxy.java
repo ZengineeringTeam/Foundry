@@ -27,10 +27,8 @@ import exter.foundry.tileentity.TileEntityMeltingCrucibleBasic;
 import exter.foundry.tileentity.TileEntityMetalCaster;
 import exter.foundry.tileentity.TileEntityMetalInfuser;
 import exter.foundry.tileentity.TileEntityMoldStation;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
@@ -48,7 +46,7 @@ public class CommonProxy implements IGuiHandler
     public static final int GUI_FLUID_HEATER = 8;
 
     @Override
-    public GuiContainer getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
+    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
         BlockPos pos = new BlockPos(x, y, z);
         switch (ID)
@@ -103,7 +101,7 @@ public class CommonProxy implements IGuiHandler
     }
 
     @Override
-    public Container getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
+    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
         BlockPos pos = new BlockPos(x, y, z);
         switch (ID)
