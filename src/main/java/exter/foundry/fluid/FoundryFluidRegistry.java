@@ -2,9 +2,9 @@ package exter.foundry.fluid;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.WeakHashMap;
 
 import exter.foundry.api.registry.IFluidRegistry;
 import exter.foundry.block.BlockLiquidMetal;
@@ -21,7 +21,7 @@ public class FoundryFluidRegistry implements IFluidRegistry
 
     public static final FoundryFluidRegistry INSTANCE = new FoundryFluidRegistry();
 
-    private final Map<String, FluidLiquidMetal> map = new WeakHashMap<>();
+    private final Map<String, FluidLiquidMetal> map = new LinkedHashMap<>();
 
     private FoundryFluidRegistry()
     {
