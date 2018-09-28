@@ -26,10 +26,7 @@ public class TileEntityAlloyMixer extends TileEntityPowered
             props = new IFluidTankProperties[getTankCount()];
             for (int i = 0; i < props.length; i++)
             {
-                props[i] = new FluidTankPropertiesWrapper(getTank(i))
-                {
-
-                };
+                props[i] = new FluidTankPropertiesWrapper(getTank(i));
             }
         }
 

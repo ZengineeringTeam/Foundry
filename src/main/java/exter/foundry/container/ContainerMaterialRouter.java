@@ -57,6 +57,12 @@ public class ContainerMaterialRouter extends ContainerFoundry
     }
 
     @Override
+    public void detectAndSendChanges()
+    {
+        // NO-OP
+    }
+
+    @Override
     public boolean canInteractWith(EntityPlayer par1EntityPlayer)
     {
         return te_router.isUsableByPlayer(par1EntityPlayer);
