@@ -21,7 +21,7 @@ public class FluidLiquidMetal extends Fluid
         this.glass = glass;
         setTemperature(temperature);
         setLuminosity(luminosity);
-        setDensity(2000);
+        setDensity(glass ? 2600 : 12000);
     }
 
     @Override
