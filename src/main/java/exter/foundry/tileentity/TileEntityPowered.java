@@ -33,14 +33,40 @@ public abstract class TileEntityPowered extends TileEntityFoundry implements IEn
         public void setEnergy(int energy)
         {
             energy = Math.min(energy, getMaxEnergyStored());
+            onEnergyChanged();
         }
 
         public int useEnergy(int maxExtract, boolean simulate)
         {
             int energyExtracted = Math.min(energy, maxExtract);
-            if (!simulate)
+            if (!simulate && energyExtracted != 0)
+            {
                 energy -= energyExtracted;
+                onEnergyChanged();
+            }
             return energyExtracted;
+        }
+
+        @Override
+        public int extractEnergy(int maxExtract, boolean simulate)
+        {
+            int ret = super.extractEnergy(maxExtract, simulate);
+            if (!simulate && ret != 0)
+            {
+                onEnergyChanged();
+            }
+            return ret;
+        }
+
+        @Override
+        public int receiveEnergy(int maxReceive, boolean simulate)
+        {
+            int ret = super.receiveEnergy(maxReceive, simulate);
+            if (!simulate && ret != 0)
+            {
+                onEnergyChanged();
+            }
+            return ret;
         }
     }
 
@@ -53,6 +79,11 @@ public abstract class TileEntityPowered extends TileEntityFoundry implements IEn
     {
         energyStorage = new EnergyStorageMachine(getFoundryEnergyCapacity(), 512, 0);
         added_enet = false;
+    }
+
+    protected void onEnergyChanged()
+    {
+
     }
 
     @Optional.Method(modid = "ic2")
