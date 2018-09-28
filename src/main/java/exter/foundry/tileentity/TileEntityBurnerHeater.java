@@ -271,16 +271,9 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
     {
     }
 
-    private int buf = 5;
-
     @Override
     protected void updateServer()
     {
-        if (buf-- < 0)
-        {
-            buf = 5;
-            averageFuels();
-        }
         List<Fuel> burnings = fuels.stream().filter(Fuel::isBurning).collect(Collectors.toList());
         if (burnings.size() > 0)
         {
