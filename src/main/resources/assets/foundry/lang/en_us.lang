@@ -214,6 +214,7 @@ tile.foundry.alloying_crucible.tooltip=Mixes 2 molten metals to make alloys.
 tile.foundry.infuser.tooltip=Infuses items into molten metals.//Requires RF, FE, or Tesla to operate.
 tile.foundry.router.tooltip=Sorts items by material and type.
 tile.foundry.heater_induction.tooltip=Uses energy to generate heat for a Melting Crucible.//Requires RF, FE, or Tesla to operate.
+tile.foundry.fluid_heater.tooltip=Uses fluid with high temperature to generate heat for a Mleting Crucible.
 tile.foundry.casting_table.ingot.tooltip=Used to cast ingots from molten metal.//Right click to remove the ingot after it's solidified.
 tile.foundry.casting_table.plate.tooltip=Used to cast plates from molten metal.//Right click to remove the plate after it's solidified.
 tile.foundry.casting_table.rod.tooltip=Used to cast rods from molten metal.//Right click to remove the rod after it's solidified.

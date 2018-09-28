@@ -214,6 +214,7 @@ tile.foundry.alloying_crucible.tooltip=混合 2 种熔融金属以制取合金�
 tile.foundry.infuser.tooltip=将物品中注入到熔融金属中。//需要 RF、FE 或 Tesla 来运行。
 tile.foundry.router.tooltip=根据材料和种类对物品分类。
 tile.foundry.heater_induction.tooltip=用能量为熔炼坩埚供热。// 需要 RF、FE 或 Tesla 来运行。
+tile.foundry.fluid_heater.tooltip=用高温流体为熔炼坩埚供热。
 tile.foundry.casting_table.ingot.tooltip=用于将熔融金属铸造成锭。//待其凝固后右击以取出锭。
 tile.foundry.casting_table.plate.tooltip=用于将熔融金属铸造成板。//待其凝固后右击以取出板。
 tile.foundry.casting_table.rod.tooltip=用于将熔融金属铸造成杆。//待其凝固后右击以取出杆。
