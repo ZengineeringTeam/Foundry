@@ -1,5 +1,6 @@
 package exter.foundry.recipes;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,7 +9,6 @@ import com.google.common.collect.ImmutableList;
 
 import exter.foundry.api.recipe.IAlloyMixerRecipe;
 import net.minecraftforge.fluids.FluidStack;
-import scala.actors.threadpool.Arrays;
 
 /*
  * Alloy Mixer recipe manager
