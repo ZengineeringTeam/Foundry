@@ -20,7 +20,7 @@
     },
     "R": {
       "item": "foundry:componentblock",
-      "data": 0
+      "data": 1
     },
     "P": {
       "type": "forge:ore_dict",

@@ -1,13 +1,13 @@
 {
     "parent": "block/cube",
     "textures": {
-        "particle": "foundry:blocks/crucible_advanced_sides",
+        "particle": "foundry:blocks/casing_advanced",
         "up": "foundry:blocks/crucible_advanced_top",
-        "down": "foundry:blocks/crucible_advanced_bottom",
-        "east": "foundry:blocks/crucible_advanced_sides",
-        "west": "foundry:blocks/crucible_advanced_sides",
-        "north": "foundry:blocks/crucible_advanced_sides",
-        "south": "foundry:blocks/crucible_advanced_sides"
+        "down": "foundry:blocks/heater_advanced",
+        "east": "foundry:blocks/casing_advanced",
+        "west": "foundry:blocks/casing_advanced",
+        "north": "foundry:blocks/casing_advanced",
+        "south": "foundry:blocks/casing_advanced"
     }
 }
 

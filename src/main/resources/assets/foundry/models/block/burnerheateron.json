@@ -1,10 +1,10 @@
 {
     "parent": "foundry:block/orientable",
     "textures": {
-        "particle": "foundry:blocks/burnerheater_front_off",
-        "top": "foundry:blocks/burnerheater_top",
-        "bottom": "foundry:blocks/burnerheater_bottom",
-        "front": "foundry:blocks/burnerheater_front_on",
-        "side": "foundry:blocks/burnerheater_side"
+        "particle": "foundry:blocks/burner_heater_front_off",
+        "top": "foundry:blocks/heater_basic",
+        "bottom": "foundry:blocks/burner_heater_bottom",
+        "front": "foundry:blocks/burner_heater_front_on",
+        "side": "foundry:blocks/burner_heater_side"
     }
 }

@@ -1,13 +1,13 @@
 {
     "parent": "block/cube",
     "textures": {
-        "particle": "foundry:blocks/infuser_sides",
+        "particle": "foundry:blocks/machine_electric",
         "up": "foundry:blocks/infuser_top",
-        "down": "foundry:blocks/infuser_bottom",
-        "east": "foundry:blocks/infuser_sides",
-        "west": "foundry:blocks/infuser_sides",
-        "north": "foundry:blocks/infuser_sides",
-        "south": "foundry:blocks/infuser_sides"
+        "down": "foundry:blocks/machine_bottom",
+        "east": "foundry:blocks/machine_electric",
+        "west": "foundry:blocks/machine_electric",
+        "north": "foundry:blocks/machine_electric",
+        "south": "foundry:blocks/machine_electric"
     }
 }
 

@@ -1,13 +1,13 @@
 {
     "parent": "block/cube",
     "textures": {
-        "particle": "foundry:blocks/alloymixer_sides",
-        "up": "foundry:blocks/alloymixer_top",
-        "down": "foundry:blocks/alloymixer_bottom",
-        "east": "foundry:blocks/alloymixer_sides",
-        "west": "foundry:blocks/alloymixer_sides",
-        "north": "foundry:blocks/alloymixer_sides",
-        "south": "foundry:blocks/alloymixer_sides"
+        "particle": "foundry:blocks/machine_electric",
+        "up": "foundry:blocks/alloy_mixer_top",
+        "down": "foundry:blocks/machine_bottom",
+        "east": "foundry:blocks/machine_electric",
+        "west": "foundry:blocks/machine_electric",
+        "north": "foundry:blocks/machine_electric",
+        "south": "foundry:blocks/machine_electric"
     }
 }
 

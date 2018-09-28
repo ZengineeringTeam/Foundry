@@ -2,6 +2,6 @@
   "parent": "block/cube_all",
   "textures":
   {
-    "all": "foundry:blocks/casing_inferno"
+    "all": "foundry:blocks/casing_advanced"
   }
 }

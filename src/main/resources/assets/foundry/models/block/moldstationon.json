@@ -1,10 +1,10 @@
 {
     "parent": "foundry:block/orientable",
     "textures": {
-        "particle": "foundry:blocks/moldstation_front_off",
-        "top": "foundry:blocks/moldstation_top",
-        "bottom": "foundry:blocks/moldstation_bottom",
-        "front": "foundry:blocks/moldstation_front_on",
-        "side": "foundry:blocks/moldstation_side"
+        "particle": "foundry:blocks/mold_station_front_off",
+        "top": "foundry:blocks/mold_station_top",
+        "bottom": "foundry:blocks/mold_station_bottom",
+        "front": "foundry:blocks/mold_station_front_on",
+        "side": "foundry:blocks/mold_station_side"
     }
 }

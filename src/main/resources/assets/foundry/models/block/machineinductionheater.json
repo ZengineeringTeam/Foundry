@@ -1,13 +1,13 @@
 {
     "parent": "block/cube",
     "textures": {
-        "particle": "foundry:blocks/inductionheater_sides",
-        "up": "foundry:blocks/inductionheater_top",
-        "down": "foundry:blocks/inductionheater_bottom",
-        "east": "foundry:blocks/inductionheater_sides",
-        "west": "foundry:blocks/inductionheater_sides",
-        "north": "foundry:blocks/inductionheater_sides",
-        "south": "foundry:blocks/inductionheater_sides"
+        "particle": "foundry:blocks/machine_electric",
+        "up": "foundry:blocks/heater_standard",
+        "down": "foundry:blocks/machine_bottom",
+        "east": "foundry:blocks/machine_electric",
+        "west": "foundry:blocks/machine_electric",
+        "north": "foundry:blocks/machine_electric",
+        "south": "foundry:blocks/machine_electric"
     }
 }
 

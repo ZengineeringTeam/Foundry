@@ -1,13 +1,13 @@
 {
     "parent": "block/cube",
     "textures": {
-        "particle": "foundry:blocks/crucible_sides",
+        "particle": "foundry:blocks/casing",
         "up": "foundry:blocks/crucible_top",
-        "down": "foundry:blocks/crucible_bottom",
-        "east": "foundry:blocks/crucible_sides",
-        "west": "foundry:blocks/crucible_sides",
-        "north": "foundry:blocks/crucible_sides",
-        "south": "foundry:blocks/crucible_sides"
+        "down": "foundry:blocks/heater_standard",
+        "east": "foundry:blocks/casing",
+        "west": "foundry:blocks/casing",
+        "north": "foundry:blocks/casing",
+        "south": "foundry:blocks/casing"
     }
 }
 
