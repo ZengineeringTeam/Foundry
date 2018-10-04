@@ -311,7 +311,7 @@ public class InitRecipes
                         new FluidStack(FoundryFluids.liquid_alumina, 54), new OreMatcher("dustSmallCoal"), 60000);
             if (OreDictionary.doesOreNameExist("dustSmallCharcoal"))
                 InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_aluminium, 54),
-                        new FluidStack(FoundryFluids.liquid_iron, 54), new OreMatcher("dustSmallCharcoal"), 60000);
+                        new FluidStack(FoundryFluids.liquid_alumina, 54), new OreMatcher("dustSmallCharcoal"), 60000);
         }
 
         BurnerHeaterFuelManager.INSTANCE.addFuel(new ItemStackMatcher(new ItemStack(Items.COAL, 1, 0)), // Coal
