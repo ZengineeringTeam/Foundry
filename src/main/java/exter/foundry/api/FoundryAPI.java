@@ -118,6 +118,11 @@ public class FoundryAPI
         return FLUID_AMOUNT_INGOT * 3;
     }
 
+    public static int getAmountExcavator()
+    {
+        return FLUID_AMOUNT_INGOT * 3;
+    }
+
     public static int getAmountShield()
     {
         return FLUID_AMOUNT_INGOT * 6;

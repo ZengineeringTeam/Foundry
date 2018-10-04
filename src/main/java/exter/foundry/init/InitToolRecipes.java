@@ -32,6 +32,7 @@ public class InitToolRecipes
         ItemStack mold_hammer = ItemMold.SubItem.HAMMER.getItem();
         ItemStack mold_sickle = ItemMold.SubItem.SICKLE.getItem();
         ItemStack mold_shears = ItemMold.SubItem.SHEARS.getItem();
+        ItemStack mold_excavator = ItemMold.SubItem.EXCAVATOR.getItem();
         ItemStack mold_shield = ItemMold.SubItem.SHIELD.getItem();
 
         MoldRecipeManager.INSTANCE.addRecipe(mold_helmet, 4, 3, new int[] { 3, 3, 3, 3, 3, 1, 1, 3, 3, 1, 1, 3 });
@@ -54,19 +55,22 @@ public class InitToolRecipes
                 new int[] { 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0 });
 
         MoldRecipeManager.INSTANCE.addRecipe(mold_hoe, 3, 5,
-                new int[] { 0, 2, 2, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, });
+                new int[] { 0, 2, 2, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1 });
 
         MoldRecipeManager.INSTANCE.addRecipe(mold_sword, 3, 6,
-                new int[] { 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 2, 1, 0, 1, 0, });
+                new int[] { 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 2, 1, 0, 1, 0 });
 
         MoldRecipeManager.INSTANCE.addRecipe(mold_hammer, 5, 6,
-                new int[] { 3, 2, 2, 2, 3, 3, 4, 4, 4, 3, 3, 2, 3, 2, 3, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, });
+                new int[] { 3, 2, 2, 2, 3, 3, 4, 4, 4, 3, 3, 2, 3, 2, 3, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0 });
 
         MoldRecipeManager.INSTANCE.addRecipe(mold_sickle, 5, 6,
-                new int[] { 3, 3, 3, 3, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 2, 3, 3, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, });
+                new int[] { 3, 3, 3, 3, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 2, 3, 3, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0 });
 
         MoldRecipeManager.INSTANCE.addRecipe(mold_shears, 5, 6,
-                new int[] { 2, 3, 0, 3, 2, 2, 3, 0, 3, 2, 2, 3, 0, 3, 2, 2, 0, 0, 0, 2, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, });
+                new int[] { 2, 3, 0, 3, 2, 2, 3, 0, 3, 2, 2, 3, 0, 3, 2, 2, 0, 0, 0, 2, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0 });
+
+        MoldRecipeManager.INSTANCE.addRecipe(mold_excavator, 6, 6,
+                new int[] { 0, 0, 0, 3, 3, 3, 0, 0, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3, 0, 0, 1, 0, 3, 0, 0, 1, 0, 0, 0, 0, 0 });
 
         // TODO: mold recipes
         // TODO: melting recipes

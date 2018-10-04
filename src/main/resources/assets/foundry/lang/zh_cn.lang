@@ -244,6 +244,7 @@ item.foundry.mold.nugget.name=粒铸型
 item.foundry.mold.sickle.name=镰刀铸型
 item.foundry.mold.shears.name=剪刀铸型
 item.foundry.mold.hammer.name=锤铸型
+item.foundry.mold.excavator.name=开掘铲铸型
 
 gui.jei.foundry.melting=熔炼坩埚
 gui.jei.foundry.melting.point=%d K

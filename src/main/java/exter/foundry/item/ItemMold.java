@@ -35,6 +35,7 @@ public class ItemMold extends Item
         HAMMER(17, "hammer"),
         SICKLE(18, "sickle"),
         SHEARS(19, "shears"),
+        EXCAVATOR(20, "excavator"),
         SHIELD(-1, "shield");
 
         static private final Map<Integer, SubItem> value_map = new HashMap<>();

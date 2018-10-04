@@ -104,6 +104,8 @@ public class FoundryUtils
                 ForgeRegistries.ITEMS.getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "tool.sickle_" + name)));
         ItemStack shears = new ItemStack(
                 ForgeRegistries.ITEMS.getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "tool.shears_" + name)));
+        ItemStack excavator = new ItemStack(
+                ForgeRegistries.ITEMS.getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "tool.excavator_" + name)));
 
         if (!helm.isEmpty())
         {
@@ -213,6 +215,14 @@ public class FoundryUtils
                     new FluidStack(fluid, FoundryAPI.getAmountHammer()));
             FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(hammer),
                     new FluidStack(fluid, FoundryAPI.getAmountHammer()), SubItem.HAMMER.getItem(), false, stick);
+        }
+
+        if (!excavator.isEmpty())
+        {
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(excavator),
+                    new FluidStack(fluid, FoundryAPI.getAmountExcavator()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(excavator),
+                    new FluidStack(fluid, FoundryAPI.getAmountExcavator()), SubItem.EXCAVATOR.getItem(), false, stick);
         }
 
         if (!shield.isEmpty())

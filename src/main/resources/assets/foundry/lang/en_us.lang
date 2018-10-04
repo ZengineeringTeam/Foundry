@@ -244,6 +244,7 @@ item.foundry.mold.nugget.name=Nugget Mold
 item.foundry.mold.sickle.name=Sickle Mold
 item.foundry.mold.shears.name=Shears Mold
 item.foundry.mold.hammer.name=Hammer Mold
+item.foundry.mold.excavator.name=Excavator Mold
 
 gui.jei.foundry.melting=Melting Crucible
 gui.jei.foundry.melting.point=%d K
