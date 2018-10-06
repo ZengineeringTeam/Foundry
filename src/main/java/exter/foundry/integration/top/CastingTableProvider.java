@@ -46,7 +46,7 @@ public class CastingTableProvider implements IProbeInfoProvider {
                                 int contents = fluidStack == null ? 0 : fluidStack.amount;
                                 if (fluidStack != null) {
                                     Fluid fluid = fluidStack.getFluid();
-                                    probeInfo.text(I18n.translateToLocalFormatted(Foundry.MODID + ".compat.top.liquid") + fluidStack.getLocalizedName());
+                                    probeInfo.text(I18n.translateToLocalFormatted(Foundry.MODID + ".compat.top.liquid") + " " + fluidStack.getLocalizedName());
                                     probeInfo.progress(contents, maxContents,
                                             probeInfo.defaultProgressStyle()
                                                     .suffix(" mB / " + maxContents + " mB")
