@@ -183,7 +183,6 @@ foundry.router.type.Cable=Cable
 foundry.router.type.NativeCluster=Native Cluster
 foundry.router.type.PoorOre=Poor Ore
 
-foundry.compat.top.liquid=Liquid:
 foundry.compat.top.progress=Progress:
 
 itemGroup.foundry=Foundry

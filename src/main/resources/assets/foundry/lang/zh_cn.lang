@@ -183,7 +183,6 @@ foundry.router.type.Cable=线缆
 foundry.router.type.NativeCluster=纯净的矿簇
 foundry.router.type.PoorOre=贫矿
 
-foundry.compat.top.liquid=流体：
 foundry.compat.top.progress=进度：
 
 itemGroup.foundry=金属工坊
