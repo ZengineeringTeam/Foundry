@@ -149,14 +149,18 @@ public class CastingTableRenderer extends TileEntitySpecialRenderer<TileEntityCa
             TextureAtlasSprite texture = Minecraft.getMinecraft().getTextureMapBlocks()
                     .getAtlasSprite(fluid.getFluid().getStill(fluid).toString());
 
-            int color = fluid.getFluid().getColor();
-            int light = te.getWorld().getCombinedLight(te.getPos(), fluid.getFluid().getLuminosity());
+            int color = fluid.getFluid().getColor(fluid);
+            int light = te.getWorld().getCombinedLight(te.getPos(), fluid.getFluid().getLuminosity(fluid));
 
-            double progress = (double) te.getProgress() / TileEntityCastingTableBase.CAST_TIME;
-            progress = Math.sqrt(progress);
+            double progress;
             if (te.getStackInSlot(0).isEmpty())
             {
                 progress = 1.0f;
+            }
+            else
+            {
+                progress = (double) te.getProgress() / TileEntityCastingTableBase.CAST_TIME;
+                progress = Math.sqrt(progress);
             }
             float alpha = (color >> 24 & 255) / 255.0F * (float) progress;
             float red = (color >> 16 & 255) / 255.0F;
@@ -169,16 +173,16 @@ public class CastingTableRenderer extends TileEntitySpecialRenderer<TileEntityCa
             double min_v = texture.getInterpolatedV(top * 16);
             double max_u = texture.getInterpolatedU(right * 16);
             double max_v = texture.getInterpolatedV(bottom * 16);
-            double fluid_z = (double) fluid.amount / te.getTank(0).getCapacity() * (high - low) + low;
+            double fluid_y = (double) fluid.amount / te.getTank(0).getCapacity() * (high - low) + low;
             BufferBuilder tessellator = Tessellator.getInstance().getBuffer();
             tessellator.begin(7, DefaultVertexFormats.BLOCK);
-            tessellator.pos(left, fluid_z, bottom).color(red, green, blue, alpha).tex(min_u, max_v).lightmap(l1, l2)
+            tessellator.pos(left, fluid_y, bottom).color(red, green, blue, alpha).tex(min_u, max_v).lightmap(l1, l2)
                     .endVertex();
-            tessellator.pos(right, fluid_z, bottom).color(red, green, blue, alpha).tex(max_u, max_v).lightmap(l1, l2)
+            tessellator.pos(right, fluid_y, bottom).color(red, green, blue, alpha).tex(max_u, max_v).lightmap(l1, l2)
                     .endVertex();
-            tessellator.pos(right, fluid_z, top).color(red, green, blue, alpha).tex(max_u, min_v).lightmap(l1, l2)
+            tessellator.pos(right, fluid_y, top).color(red, green, blue, alpha).tex(max_u, min_v).lightmap(l1, l2)
                     .endVertex();
-            tessellator.pos(left, fluid_z, top).color(red, green, blue, alpha).tex(min_u, min_v).lightmap(l1, l2)
+            tessellator.pos(left, fluid_y, top).color(red, green, blue, alpha).tex(min_u, min_v).lightmap(l1, l2)
                     .endVertex();
             Tessellator.getInstance().draw();
         }
