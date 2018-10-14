@@ -1,0 +1,7 @@
+{
+  "parent": "foundry:item/mold",
+  "textures":
+  {
+    "layer0": "foundry:items/mold_excavator"
+  }
+}

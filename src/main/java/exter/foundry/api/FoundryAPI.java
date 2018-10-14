@@ -55,7 +55,7 @@ public class FoundryAPI
 
     public static int getAmountOre()
     {
-        return FLUID_AMOUNT_ORE == 0 ? FLUID_AMOUNT_INGOT : FLUID_AMOUNT_ORE;
+        return FLUID_AMOUNT_ORE == 0 ? FLUID_AMOUNT_INGOT * 2 : FLUID_AMOUNT_ORE;
     }
 
     public static int getAmountGear()
@@ -114,6 +114,11 @@ public class FoundryAPI
     }
 
     public static int getAmountSickle()
+    {
+        return FLUID_AMOUNT_INGOT * 3;
+    }
+
+    public static int getAmountExcavator()
     {
         return FLUID_AMOUNT_INGOT * 3;
     }

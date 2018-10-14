@@ -17,6 +17,7 @@ fluid.aluminium=Molten Aluminium
 fluid.platinum=Molten Platinum
 fluid.iridium=Molten Iridium
 fluid.chrome=Molten Chrome
+fluid.tungsten=Molten Tungsten
 fluid.cobalt=Molten Cobalt
 fluid.uranium=Molten Uranium
 fluid.titanium=Molten Titanium
@@ -59,7 +60,7 @@ fluid.refined_obsidian=Molten Refined Obsidian
 fluid.refined_glowstone=Molten Refined Glowstone
 
 foundry.router.material._Any=All
-foundry.router.material.Aluminum=Aluminum
+foundry.router.material.Aluminium=Aluminum
 foundry.router.material.Carbon=Carbon
 foundry.router.material.Chromium=Chromium
 foundry.router.material.Cobalt=Cobalt
@@ -76,6 +77,7 @@ foundry.router.material.Tin=Tin
 foundry.router.material.Titanium=Titanium
 foundry.router.material.Tungsten=Tungsten
 foundry.router.material.Uranium=Uranium
+foundry.router.material.Chrome=Chrome
 foundry.router.material.Zinc=Zinc
 foundry.router.material.Stone=Stone
 foundry.router.material.Gunpowder=Gunpowder
@@ -87,6 +89,7 @@ foundry.router.material.Brass=Brass
 foundry.router.material.Bronze=Bronze
 foundry.router.material.Cobaltite=Cobaltite
 foundry.router.material.Constantan=Constantan
+foundry.router.material.Cupronickel=Cupronickel
 foundry.router.material.Diamond=Diamond
 foundry.router.material.Electrum=Electrum
 foundry.router.material.Emerald=Emerald
@@ -180,6 +183,8 @@ foundry.router.type.Cable=Cable
 foundry.router.type.NativeCluster=Native Cluster
 foundry.router.type.PoorOre=Poor Ore
 
+foundry.compat.top.progress=Progress:
+
 itemGroup.foundry=Foundry
 
 tile.foundry.casing_standard.name=Refractory Casing (Standard)
@@ -244,6 +249,7 @@ item.foundry.mold.nugget.name=Nugget Mold
 item.foundry.mold.sickle.name=Sickle Mold
 item.foundry.mold.shears.name=Shears Mold
 item.foundry.mold.hammer.name=Hammer Mold
+item.foundry.mold.excavator.name=Excavator Mold
 
 gui.jei.foundry.melting=Melting Crucible
 gui.jei.foundry.melting.point=%d K

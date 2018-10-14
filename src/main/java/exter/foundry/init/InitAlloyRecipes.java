@@ -15,6 +15,8 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import static exter.foundry.api.FoundryAPI.FLUID_AMOUNT_INGOT;
+
 public class InitAlloyRecipes
 {
     // Create recipes for all alloy making machines.
@@ -88,16 +90,22 @@ public class InitAlloyRecipes
 
         if (FoundryConfig.recipe_steel)
         {
-            InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_steel, 36),
-                    new FluidStack(FoundryFluids.liquid_iron, 36), new OreMatcher("dustCoal"), 160000);
-            InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_steel, 12),
-                    new FluidStack(FoundryFluids.liquid_iron, 12), new OreMatcher("dustCharcoal"), 160000);
+            InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT / 4),
+                    new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT / 4), new OreMatcher("dustCoal"), 2000);
+            InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT / 4),
+                    new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT / 4), new OreMatcher("dustCharcoal"), 4000);
             if (OreDictionary.doesOreNameExist("dustSmallCoal"))
-                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_steel, 9),
-                        new FluidStack(FoundryFluids.liquid_iron, 9), new OreMatcher("dustSmallCoal"), 40000);
+                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT / 16),
+                        new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT / 16), new OreMatcher("dustSmallCoal"), 500);
             if (OreDictionary.doesOreNameExist("dustSmallCharcoal"))
-                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_steel, 3),
-                        new FluidStack(FoundryFluids.liquid_iron, 3), new OreMatcher("dustSmallCharcoal"), 40000);
+                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT / 16),
+                        new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT / 16), new OreMatcher("dustSmallCharcoal"), 1000);
+            if (OreDictionary.doesOreNameExist("fuelCoke"))
+                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT),
+                        new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT), new OreMatcher("fuelCoke"), 5000);
+            if (OreDictionary.doesOreNameExist("dustCoke"))
+                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT),
+                        new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT), new OreMatcher("dustCoke"), 4000);
         }
     }
 }

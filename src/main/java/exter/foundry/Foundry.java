@@ -56,7 +56,7 @@ import net.minecraftforge.fml.relauncher.Side;
         modid = Foundry.MODID,
         name = Foundry.MODNAME,
         version = "@VERSION_INJECT@",
-        dependencies = "after:jei@[4.12,);required-after:ceramics;required-after:thermalfoundation;after:mekanism"
+        dependencies = "after:jei@[4.12,);required-after:ceramics;required-after:thermalfoundation;after:mekanism;after:enderio;after:botania;after:techreborn;"
 )
 public class Foundry
 {
@@ -140,6 +140,8 @@ public class Foundry
             ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationTechReborn());
         if (Loader.isModLoaded("crafttweaker"))
             ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationCrafttweaker());
+        if (Loader.isModLoaded("theoneprobe"))
+            ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationTheOneProbe());
 
         FoundryAPI.FLUIDS = FoundryFluidRegistry.INSTANCE;
 
