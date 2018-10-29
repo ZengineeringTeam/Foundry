@@ -1,5 +1,7 @@
 package exter.foundry.init;
 
+import static exter.foundry.api.FoundryAPI.FLUID_AMOUNT_INGOT;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +36,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
-
-import static exter.foundry.api.FoundryAPI.FLUID_AMOUNT_INGOT;
 
 public class InitRecipes
 {
@@ -195,8 +195,7 @@ public class InitRecipes
                     new FluidStack(liquid_glass_colored, 375), ICastingTableRecipe.TableType.PLATE);
 
             InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_glass_colored, 2000),
-                    new FluidStack(liquid_glass, 2000), new OreMatcher("dye" + oredict_names[dye.getDyeDamage()]),
-                    500);
+                    new FluidStack(liquid_glass, 2000), new OreMatcher("dye" + oredict_names[dye.getDyeDamage()]), 500);
         }
     }
 
@@ -225,6 +224,14 @@ public class InitRecipes
                 new FluidStack(TFFluids.fluidGlowstone, 1000), TFFluids.fluidGlowstone.getTemperature(), 90);
         MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Items.ENDER_PEARL),
                 new FluidStack(TFFluids.fluidEnder, 250), TFFluids.fluidEnder.getTemperature(), 75);
+        MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.ICE),
+                new FluidStack(FluidRegistry.WATER, 1000), 350, 200);
+        MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.PACKED_ICE),
+                new FluidStack(FluidRegistry.WATER, 6000), 500, 200);
+        MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.SNOW),
+                new FluidStack(FluidRegistry.WATER, 500), 325, 200);
+        MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Items.SNOWBALL),
+                new FluidStack(FluidRegistry.WATER, 125), 325, 200);
 
         MoldRecipeManager.INSTANCE.addRecipe(ItemMold.SubItem.INGOT.getItem(), 2, 4,
                 new int[] { 2, 2, 2, 2, 2, 2, 2, 2 });
@@ -275,18 +282,15 @@ public class InitRecipes
         addDefaultCasting(FoundryFluidRegistry.INSTANCE.getFluid("aluminium"), "Aluminum");
         addDefaultCasting(FoundryFluidRegistry.INSTANCE.getFluid("constantan"), "Constantan");
 
-        AlloyMixerRecipeManager.INSTANCE.addRecipe(
-                new FluidStack(FoundryFluids.liquid_lumium, FLUID_AMOUNT_INGOT),
+        AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_lumium, FLUID_AMOUNT_INGOT),
                 new FluidStack(TFFluids.fluidGlowstone, 250),
                 new FluidStack(FoundryFluids.liquid_tin, FLUID_AMOUNT_INGOT / 4 * 3),
                 new FluidStack(FoundryFluids.liquid_silver, FLUID_AMOUNT_INGOT / 4));
-        AlloyMixerRecipeManager.INSTANCE.addRecipe(
-                new FluidStack(FoundryFluids.liquid_signalum, FLUID_AMOUNT_INGOT),
+        AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_signalum, FLUID_AMOUNT_INGOT),
                 new FluidStack(TFFluids.fluidRedstone, 250),
                 new FluidStack(FoundryFluids.liquid_copper, FLUID_AMOUNT_INGOT / 4 * 3),
                 new FluidStack(FoundryFluids.liquid_silver, FLUID_AMOUNT_INGOT / 4));
-        AlloyMixerRecipeManager.INSTANCE.addRecipe(
-                new FluidStack(FoundryFluids.liquid_enderium, FLUID_AMOUNT_INGOT),
+        AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_enderium, FLUID_AMOUNT_INGOT),
                 new FluidStack(TFFluids.fluidEnder, 250),
                 new FluidStack(FoundryFluids.liquid_lead, FLUID_AMOUNT_INGOT / 4 * 3),
                 new FluidStack(FoundryFluids.liquid_platinum, FLUID_AMOUNT_INGOT / 4));
@@ -304,16 +308,24 @@ public class InitRecipes
         }
         else
         {
-            InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_aluminium, FLUID_AMOUNT_INGOT * 2),
-                    new FluidStack(FoundryFluids.liquid_alumina, FLUID_AMOUNT_INGOT * 2), new OreMatcher("dustCoal"), 2400);
-            InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_aluminium, FLUID_AMOUNT_INGOT * 2),
-                    new FluidStack(FoundryFluids.liquid_alumina, FLUID_AMOUNT_INGOT * 2), new OreMatcher("dustCharcoal"), 2400);
+            InfuserRecipeManager.INSTANCE.addRecipe(
+                    new FluidStack(FoundryFluids.liquid_aluminium, FLUID_AMOUNT_INGOT * 2),
+                    new FluidStack(FoundryFluids.liquid_alumina, FLUID_AMOUNT_INGOT * 2), new OreMatcher("dustCoal"),
+                    2400);
+            InfuserRecipeManager.INSTANCE.addRecipe(
+                    new FluidStack(FoundryFluids.liquid_aluminium, FLUID_AMOUNT_INGOT * 2),
+                    new FluidStack(FoundryFluids.liquid_alumina, FLUID_AMOUNT_INGOT * 2),
+                    new OreMatcher("dustCharcoal"), 2400);
             if (OreDictionary.doesOreNameExist("dustSmallCoal"))
-                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_aluminium, FLUID_AMOUNT_INGOT / 2),
-                        new FluidStack(FoundryFluids.liquid_alumina, FLUID_AMOUNT_INGOT / 2), new OreMatcher("dustSmallCoal"), 600);
+                InfuserRecipeManager.INSTANCE.addRecipe(
+                        new FluidStack(FoundryFluids.liquid_aluminium, FLUID_AMOUNT_INGOT / 2),
+                        new FluidStack(FoundryFluids.liquid_alumina, FLUID_AMOUNT_INGOT / 2),
+                        new OreMatcher("dustSmallCoal"), 600);
             if (OreDictionary.doesOreNameExist("dustSmallCharcoal"))
-                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_aluminium, FLUID_AMOUNT_INGOT / 2),
-                        new FluidStack(FoundryFluids.liquid_alumina, FLUID_AMOUNT_INGOT / 2), new OreMatcher("dustSmallCharcoal"), 600);
+                InfuserRecipeManager.INSTANCE.addRecipe(
+                        new FluidStack(FoundryFluids.liquid_aluminium, FLUID_AMOUNT_INGOT / 2),
+                        new FluidStack(FoundryFluids.liquid_alumina, FLUID_AMOUNT_INGOT / 2),
+                        new OreMatcher("dustSmallCharcoal"), 600);
         }
 
         BurnerHeaterFuelManager.INSTANCE.addFuel(new ItemStackMatcher(new ItemStack(Items.COAL, 1, 0)), // Coal

@@ -34,8 +34,8 @@ public class MeltingRecipe implements IMeltingRecipe
 
         if (fluid_stack == null)
             throw new IllegalArgumentException("Melting recipe fluid cannot be null.");
-        if (melt < 296)
-            melt = 296;
+        if (melt < 301)
+            melt = 301;
         if (speed < 1)
             speed = 1;
 
