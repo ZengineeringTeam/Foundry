@@ -131,6 +131,13 @@ public class CastingTableRenderer extends TileEntitySpecialRenderer<TileEntityCa
     @Override
     public void render(TileEntityCastingTableBase te, double x, double y, double z, float partialTicks, int destroyStage, float a)
     {
+        super.render(te, x, y, z, partialTicks, destroyStage, a);
+
+        Minecraft mc = Minecraft.getMinecraft();
+        if (y > mc.player.eyeHeight)
+        {
+            return;
+        }
         FluidStack fluid = te.getTank(0).getFluid();
         GL11.glPushMatrix();
         GlStateManager.disableLighting();
@@ -146,7 +153,7 @@ public class CastingTableRenderer extends TileEntitySpecialRenderer<TileEntityCa
         }
         else if (fluid != null)
         {
-            TextureAtlasSprite texture = Minecraft.getMinecraft().getTextureMapBlocks()
+            TextureAtlasSprite texture = mc.getTextureMapBlocks()
                     .getAtlasSprite(fluid.getFluid().getStill(fluid).toString());
 
             int color = fluid.getFluid().getColor(fluid);
