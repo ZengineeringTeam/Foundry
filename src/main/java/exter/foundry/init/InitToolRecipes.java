@@ -1,10 +1,10 @@
 package exter.foundry.init;
 
-import java.util.Map.Entry;
+import com.google.common.collect.ImmutableList;
 
+import cofh.thermalfoundation.ThermalFoundation;
 import exter.foundry.api.FoundryUtils;
 import exter.foundry.api.recipe.matcher.OreMatcher;
-import exter.foundry.fluid.FluidLiquidMetal;
 import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.fluid.FoundryFluids;
 import exter.foundry.item.ItemMold;
@@ -12,6 +12,7 @@ import exter.foundry.recipes.manager.MoldRecipeManager;
 import exter.foundry.util.MiscUtil;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.config.Configuration;
 
 public class InitToolRecipes
 {
@@ -126,9 +127,12 @@ public class InitToolRecipes
         //                new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "???"))),
         //                FoundryFluids.liquid_gold, 6, ItemMold.SubItem.BOOTS);
 
-        for (Entry<String, FluidLiquidMetal> metal : FoundryFluidRegistry.INSTANCE.getMap().entrySet())
+        Configuration cfg = ThermalFoundation.CONFIG.getConfiguration();
+        for (String name : ImmutableList.of("copper", "tin", "silver", "lead", "aluminum", "nickel", "platinum",
+                "steel", "electrum", "invar", "bronze", "constantan", "iron", "gold"))
         {
-            FoundryUtils.tryAddToolArmorRecipes(metal.getKey(), metal.getValue());
+            FoundryUtils.tryAddToolArmorRecipes(cfg, name,
+                    FoundryFluidRegistry.INSTANCE.getFluid(name.equals("aluminum") ? "aluminium" : name));
         }
     }
 }
