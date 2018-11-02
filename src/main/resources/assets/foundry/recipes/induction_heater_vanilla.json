@@ -2,8 +2,11 @@
   "type": "forge:ore_shaped",
   "conditions": [
     {
-      "type": "forge:mod_loaded",
-      "modid": "thermalfoundation"
+      "type": "forge:not",
+      "value": {
+        "type": "forge:mod_loaded",
+        "modid": "thermalfoundation"
+      }
     }
   ],
   "result": {
@@ -21,8 +24,8 @@
       "ore": "plateCopper"
     },
     "C": {
-      "item": "thermalfoundation:material",
-      "data": 513
+      "type": "forge:ore_dict",
+      "ore": "blockRedstone"
     },
     "R": {
       "item": "foundry:componentblock",

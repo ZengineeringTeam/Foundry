@@ -15,8 +15,7 @@
       "ore": "ingotSignalum"
     },
 	"C": {
-      "item": "minecraft:cauldron",
-      "data": 0
+      "item": "minecraft:cauldron"
     },
     "R": {
       "item": "foundry:componentblock",
