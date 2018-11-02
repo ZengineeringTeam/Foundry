@@ -127,14 +127,5 @@ public class InitToolRecipes
         //        MiscUtil.registerCasting(
         //                new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "???"))),
         //                FoundryFluids.liquid_gold, 6, ItemMold.SubItem.BOOTS);
-
-        if (Loader.isModLoaded("thermalfoundation")) {
-            Configuration cfg = ThermalFoundation.CONFIG.getConfiguration();
-            for (String name : ImmutableList.of("copper", "tin", "silver", "lead", "aluminum", "nickel", "platinum",
-                    "steel", "electrum", "invar", "bronze", "constantan", "iron", "gold")) {
-                FoundryUtils.tryAddToolArmorRecipes(cfg, name,
-                        FoundryFluidRegistry.INSTANCE.getFluid(name.equals("aluminum") ? "aluminium" : name));
-            }
-        }
     }
 }

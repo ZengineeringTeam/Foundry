@@ -5,7 +5,6 @@ import static exter.foundry.api.FoundryAPI.FLUID_AMOUNT_INGOT;
 import java.util.ArrayList;
 import java.util.List;
 
-import cofh.thermalfoundation.init.TFFluids;
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.FoundryUtils;
 import exter.foundry.api.recipe.ICastingTableRecipe;
@@ -19,7 +18,6 @@ import exter.foundry.item.ItemMold;
 import exter.foundry.material.MaterialRegistry;
 import exter.foundry.material.OreDictMaterial;
 import exter.foundry.material.OreDictType;
-import exter.foundry.recipes.manager.AlloyMixerRecipeManager;
 import exter.foundry.recipes.manager.BurnerHeaterFuelManager;
 import exter.foundry.recipes.manager.CastingRecipeManager;
 import exter.foundry.recipes.manager.CastingTableRecipeManager;
@@ -35,7 +33,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class InitRecipes
@@ -215,19 +212,6 @@ public class InitRecipes
         FoundryUtils.registerBasicMeltingRecipes("Aluminum", FoundryFluidRegistry.INSTANCE.getFluid("aluminium"));
         // FoundryUtils.registerBasicMeltingRecipes("Constantan", FoundryFluidRegistry.INSTANCE.getFluid("constantan"));
 
-        if (Loader.isModLoaded("thermalfoundation")) {
-            MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("dustRedstone"),
-                    new FluidStack(TFFluids.fluidRedstone, 100));
-            MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("blockRedstone"),
-                    new FluidStack(TFFluids.fluidRedstone, 900));
-            MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("dustGlowstone"),
-                    new FluidStack(TFFluids.fluidGlowstone, 250), TFFluids.fluidGlowstone.getTemperature(), 90);
-            MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("glowstone"),
-                    new FluidStack(TFFluids.fluidGlowstone, 1000), TFFluids.fluidGlowstone.getTemperature(), 90);
-            MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Items.ENDER_PEARL),
-                    new FluidStack(TFFluids.fluidEnder, 250), TFFluids.fluidEnder.getTemperature(), 75);
-        }
-
         MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.ICE),
                 new FluidStack(FluidRegistry.WATER, 1000), 350, 200);
         MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.PACKED_ICE),
@@ -285,21 +269,6 @@ public class InitRecipes
 
         addDefaultCasting(FoundryFluidRegistry.INSTANCE.getFluid("aluminium"), "Aluminum");
         addDefaultCasting(FoundryFluidRegistry.INSTANCE.getFluid("constantan"), "Constantan");
-
-        if (Loader.isModLoaded("thermalfoundation")) {
-            AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_lumium, FLUID_AMOUNT_INGOT),
-                    new FluidStack(TFFluids.fluidGlowstone, 250),
-                    new FluidStack(FoundryFluids.liquid_tin, FLUID_AMOUNT_INGOT / 4 * 3),
-                    new FluidStack(FoundryFluids.liquid_silver, FLUID_AMOUNT_INGOT / 4));
-            AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_signalum, FLUID_AMOUNT_INGOT),
-                    new FluidStack(TFFluids.fluidRedstone, 250),
-                    new FluidStack(FoundryFluids.liquid_copper, FLUID_AMOUNT_INGOT / 4 * 3),
-                    new FluidStack(FoundryFluids.liquid_silver, FLUID_AMOUNT_INGOT / 4));
-            AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_enderium, FLUID_AMOUNT_INGOT),
-                    new FluidStack(TFFluids.fluidEnder, 250),
-                    new FluidStack(FoundryFluids.liquid_lead, FLUID_AMOUNT_INGOT / 4 * 3),
-                    new FluidStack(FoundryFluids.liquid_platinum, FLUID_AMOUNT_INGOT / 4));
-        }
 
         if (FoundryConfig.recipe_alumina_melts_to_aluminium)
         {
@@ -361,10 +330,6 @@ public class InitRecipes
         BurnerHeaterFuelManager.INSTANCE.addFuel(new ItemStackMatcher(Items.BLAZE_ROD), 2000, 220000);
 
         FluidHeaterFuelManager.INSTANCE.addFuel(FluidRegistry.LAVA);
-
-        if (Loader.isModLoaded("thermalfoundation")) {
-            FluidHeaterFuelManager.INSTANCE.addFuel(TFFluids.fluidPyrotheum);
-        }
     }
 
     static ItemStack mold_ingot = ItemMold.SubItem.INGOT.getItem();

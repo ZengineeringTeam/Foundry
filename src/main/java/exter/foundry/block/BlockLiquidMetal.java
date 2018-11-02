@@ -3,7 +3,7 @@ package exter.foundry.block;
 import java.util.List;
 import java.util.Random;
 
-import cofh.thermalfoundation.init.TFFluids;
+import exter.foundry.FoundryRegistry;
 import exter.foundry.creativetab.FoundryTab;
 import exter.foundry.util.MiscUtil;
 import net.minecraft.block.Block;
@@ -26,7 +26,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -205,13 +204,7 @@ public class BlockLiquidMetal extends BlockFluidClassic
         // Check if block is in contact with water.
         IBlockState nstate = world.getBlockState(npos);
 
-        boolean isLiquid = nstate.getMaterial() == Material.WATER;
-
-        if (Loader.isModLoaded("thermalfoundation")) {
-            isLiquid = isLiquid || nstate.getBlock() == TFFluids.blockFluidCryotheum;
-        }
-
-        if (isLiquid)
+        if (nstate.getMaterial() == Material.WATER || nstate.getBlock() == FoundryRegistry.CRYOTHEUM)
         {
             world.setBlockState(pos, state);
             world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.BLOCK_LAVA_EXTINGUISH,

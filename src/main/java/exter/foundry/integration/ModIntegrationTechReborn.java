@@ -43,7 +43,7 @@ public class ModIntegrationTechReborn implements IModIntegration
     @Override
     public String getName()
     {
-        return "TechReborn";
+        return TECHREBORN;
     }
 
     @Override

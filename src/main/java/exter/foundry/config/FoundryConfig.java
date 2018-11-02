@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
-import cofh.thermalfoundation.ThermalFoundation;
 import exter.foundry.Foundry;
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.block.BlockMachine;
@@ -44,7 +43,7 @@ public class FoundryConfig
 
     static {
         if (Loader.isModLoaded("thermalfoundation")) {
-            prefModID = ThermalFoundation.MOD_ID;
+            prefModID = "thermalfoundation";
         }
     }
 

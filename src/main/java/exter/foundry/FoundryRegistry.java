@@ -1,8 +1,11 @@
 package exter.foundry;
 
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.registry.GameRegistry.ItemStackHolder;
+import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 
 @EventBusSubscriber
 public class FoundryRegistry
@@ -18,4 +21,7 @@ public class FoundryRegistry
 
     @ItemStackHolder("ceramics:porcelain_barrel")
     public static final ItemStack BARREL = ItemStack.EMPTY;
+
+    @ObjectHolder("thermalfoundation:fluid_cryotheum")
+    public static final Block CRYOTHEUM = null;
 }
