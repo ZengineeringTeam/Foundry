@@ -1,13 +1,10 @@
 package exter.foundry.container;
 
 import exter.foundry.container.slot.SlotFuel;
-import exter.foundry.recipes.manager.BurnerHeaterFuelManager;
 import exter.foundry.tileentity.TileEntityBurnerHeater;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntityFurnace;
 
 public class ContainerBurnerHeater extends ContainerFoundry
 {

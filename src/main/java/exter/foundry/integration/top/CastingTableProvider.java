@@ -4,18 +4,12 @@ import exter.foundry.Foundry;
 import exter.foundry.block.BlockCastingTable;
 import exter.foundry.tileentity.TileEntityCastingTableBase;
 import mcjty.theoneprobe.api.*;
-import mcjty.theoneprobe.config.Config;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
 public class CastingTableProvider implements IProbeInfoProvider
 {

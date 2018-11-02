@@ -42,6 +42,7 @@ public class CastingTableRendererBlock extends CastingTableRenderer
         return null;
     }
 
+    @Override
     protected void renderItem(ItemStack item, FluidStack fluid)
     {
         int color = getItemColor(item);

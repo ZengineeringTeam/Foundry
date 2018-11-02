@@ -1,20 +1,10 @@
 package exter.foundry.api;
 
-import cofh.core.util.helpers.StringHelper;
-import cofh.thermalfoundation.ThermalFoundation;
-import cofh.thermalfoundation.init.TFProps;
-import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.api.recipe.matcher.OreMatcher;
-import exter.foundry.item.ItemMold.SubItem;
 import exter.foundry.util.MiscUtil;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class FoundryUtils

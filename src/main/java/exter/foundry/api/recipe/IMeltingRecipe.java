@@ -37,5 +37,6 @@ public interface IMeltingRecipe
      */
     public boolean matchesRecipe(ItemStack item);
 
+    @Override
     public String toString();
 }

@@ -1,19 +1,12 @@
 package exter.foundry.init;
 
-import com.google.common.collect.ImmutableList;
-
-import cofh.thermalfoundation.ThermalFoundation;
-import exter.foundry.api.FoundryUtils;
 import exter.foundry.api.recipe.matcher.OreMatcher;
-import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.fluid.FoundryFluids;
 import exter.foundry.item.ItemMold;
 import exter.foundry.recipes.manager.MoldRecipeManager;
 import exter.foundry.util.MiscUtil;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.Loader;
 
 public class InitToolRecipes
 {

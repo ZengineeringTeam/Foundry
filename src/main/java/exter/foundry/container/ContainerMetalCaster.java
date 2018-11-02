@@ -6,7 +6,6 @@ import exter.foundry.container.slot.SlotOutput;
 import exter.foundry.recipes.manager.CastingRecipeManager;
 import exter.foundry.tileentity.TileEntityMetalCaster;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 

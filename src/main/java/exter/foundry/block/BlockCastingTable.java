@@ -7,7 +7,6 @@ import exter.foundry.FoundryRegistry;
 import exter.foundry.api.recipe.ICastingTableRecipe.TableType;
 import exter.foundry.config.FoundryConfig;
 import exter.foundry.creativetab.FoundryTab;
-import exter.foundry.item.FoundryItems;
 import exter.foundry.item.ItemMold;
 import exter.foundry.tileentity.TileEntityCastingTableBase;
 import exter.foundry.tileentity.TileEntityCastingTableBlock;
@@ -309,6 +308,7 @@ public class BlockCastingTable extends Block implements ITileEntityProvider, IBl
         return true;
     }
 
+    @Override
     public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side)
     {
         return side != EnumFacing.UP;

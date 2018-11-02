@@ -8,7 +8,6 @@ import exter.foundry.api.recipe.IBurnerHeaterFuel;
 import exter.foundry.block.BlockBurnerHeater;
 import exter.foundry.config.FoundryConfig;
 import exter.foundry.recipes.manager.BurnerHeaterFuelManager;
-import exter.foundry.tileentity.itemhandler.ItemHandlerFuel;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;

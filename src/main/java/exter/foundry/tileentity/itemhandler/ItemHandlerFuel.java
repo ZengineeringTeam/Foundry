@@ -2,11 +2,7 @@ package exter.foundry.tileentity.itemhandler;
 
 import java.util.Set;
 
-import com.google.common.collect.ImmutableSet;
-
 import exter.foundry.tileentity.TileEntityFoundry;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntityFurnace;
 
 public class ItemHandlerFuel extends TileEntityFoundry.ItemHandler
 {

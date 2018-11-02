@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import crafttweaker.CraftTweakerAPI;
-import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.liquid.ILiquidStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;

@@ -1,7 +1,6 @@
 package exter.foundry.integration.crafttweaker;
 
 import crafttweaker.CraftTweakerAPI;
-import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import exter.foundry.api.recipe.IMoldRecipe;

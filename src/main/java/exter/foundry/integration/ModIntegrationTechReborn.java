@@ -1,6 +1,5 @@
 package exter.foundry.integration;
 
-import exter.foundry.api.FoundryUtils;
 import exter.foundry.fluid.FluidLiquidMetal;
 import exter.foundry.fluid.FoundryFluidRegistry;
 import net.minecraft.block.Block;

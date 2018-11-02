@@ -1,22 +1,14 @@
 package exter.foundry.integration;
 
-import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.FoundryUtils;
-import exter.foundry.api.recipe.matcher.ItemStackMatcher;
-import exter.foundry.config.FoundryConfig;
 import exter.foundry.fluid.FluidLiquidMetal;
 import exter.foundry.fluid.FoundryFluidRegistry;
-import exter.foundry.item.ItemMold;
-import exter.foundry.recipes.manager.CastingRecipeManager;
-import exter.foundry.recipes.manager.MeltingRecipeManager;
-import exter.foundry.util.MiscUtil;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
