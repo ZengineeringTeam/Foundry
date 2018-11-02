@@ -11,6 +11,7 @@ import exter.foundry.block.BlockMachine;
 import exter.foundry.tileentity.TileEntityHeatable;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -37,9 +38,15 @@ public class FoundryConfig
     public static boolean metalCasterPower = true;
     public static boolean crtError = true;
 
-    public static String prefModID = ThermalFoundation.MOD_ID;
+    public static String prefModID;
 
     public static boolean castingTableUncrafting = true;
+
+    static {
+        if (Loader.isModLoaded("thermalfoundation")) {
+            prefModID = ThermalFoundation.MOD_ID;
+        }
+    }
 
     static public void load(File file)
     {
@@ -74,7 +81,7 @@ public class FoundryConfig
             hardcore_furnace_keep_ingots.add("ingot" + name);
         }
 
-        prefModID = config.getString("Preferred Mod ID", "recipes", ThermalFoundation.MOD_ID,
+        prefModID = config.getString("Preferred Mod ID", "recipes", prefModID,
                 "The priority MODID for Foundry recipes to try using.");
 
         metalCasterPower = config.getBoolean("Metal Caster Power", "general", true,

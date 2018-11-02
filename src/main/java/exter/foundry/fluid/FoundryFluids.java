@@ -12,6 +12,7 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemDye;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -86,19 +87,26 @@ public class FoundryFluids
          */
 
         int temp = 1550;
-        BlockFluidInteractive pyrotheum = (BlockFluidInteractive) TFFluids.blockFluidPyrotheum;
-        BlockFluidInteractive mana = (BlockFluidInteractive) TFFluids.blockFluidMana;
         liquid_glass = FoundryFluidRegistry.INSTANCE.registerLiquidGlass(registry, "glass", temp, 12, "glass",
                 0x40FFFFFF, Blocks.GLASS.getDefaultState());
-        pyrotheum.addInteraction(Blocks.SAND, liquid_glass.getBlock());
-        pyrotheum.addInteraction(Blocks.GLASS, liquid_glass.getBlock());
-        pyrotheum.addInteraction(Blocks.SPONGE.getDefaultState().withProperty(BlockSponge.WET, true),
-                Blocks.SPONGE.getDefaultState().withProperty(BlockSponge.WET, false));
-        mana.addInteraction(liquid_glass.getBlock(), Blocks.SAND);
-        mana.addInteraction(Blocks.STAINED_GLASS, Blocks.SAND);
+
+        BlockFluidInteractive pyrotheum = null;
+        BlockFluidInteractive mana = null;
+
+        if (Loader.isModLoaded("thermalfoundation")) {
+            pyrotheum = (BlockFluidInteractive) TFFluids.blockFluidPyrotheum;
+            mana = (BlockFluidInteractive) TFFluids.blockFluidMana;
+
+            pyrotheum.addInteraction(Blocks.SAND, liquid_glass.getBlock());
+            pyrotheum.addInteraction(Blocks.GLASS, liquid_glass.getBlock());
+            pyrotheum.addInteraction(Blocks.SPONGE.getDefaultState().withProperty(BlockSponge.WET, true),
+                    Blocks.SPONGE.getDefaultState().withProperty(BlockSponge.WET, false));
+            mana.addInteraction(liquid_glass.getBlock(), Blocks.SAND);
+            mana.addInteraction(Blocks.STAINED_GLASS, Blocks.SAND);
+        }
+
         IBlockState stained_glass = Blocks.STAINED_GLASS.getDefaultState();
-        for (EnumDyeColor dye : EnumDyeColor.values())
-        {
+        for (EnumDyeColor dye : EnumDyeColor.values()) {
             String name = dye.getName();
 
             int color = ItemDye.DYE_COLORS[dye.getDyeDamage()];
@@ -112,8 +120,11 @@ public class FoundryFluids
             stained_glass = stained_glass.withProperty(BlockColored.COLOR, dye);
             liquid_glass_colored[meta] = FoundryFluidRegistry.INSTANCE.registerLiquidGlass(registry, "glass_" + name,
                     temp, 12, "glass", fluid_color, stained_glass);
-            pyrotheum.addInteraction(stained_glass, liquid_glass_colored[meta].getBlock());
-            mana.addInteraction(liquid_glass_colored[meta].getBlock(), Blocks.SAND);
+
+            if (Loader.isModLoaded("thermalfoundation")) {
+                pyrotheum.addInteraction(stained_glass, liquid_glass_colored[meta].getBlock());
+                mana.addInteraction(liquid_glass_colored[meta].getBlock(), Blocks.SAND);
+            }
         }
     }
 }
