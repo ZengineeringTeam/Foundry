@@ -11,28 +11,32 @@
   ],
   "result": {
     "item": "foundry:machine",
-    "data": 5
+    "data": 1
   },
   "pattern": [
-    "PPP",
-    "CRC",
-	"GCG"
+    " B ",
+    "PRP",
+	"ICI"
   ],
   "key": {
-    "P": {
-      "type": "forge:ore_dict",
-      "ore": "plateCopper"
+    "B": {
+      "item": "minecraft:bucket",
+      "data": 0
     },
-    "C": {
-      "item": "minecraft:redstone_block"
+    "P": {
+      "item": "minecraft:piston",
+      "data": 0
     },
     "R": {
       "item": "foundry:componentblock",
       "data": 0
     },
-    "G": {
+    "I": {
       "type": "forge:ore_dict",
-      "ore": "gearConstantan"
+      "ore": "gearInvar"
+    },
+    "C": {
+      "item": "minecraft:redstone_block"
     }
   }
 }
