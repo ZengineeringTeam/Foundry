@@ -56,7 +56,7 @@ import net.minecraftforge.fml.relauncher.Side;
         modid = Foundry.MODID,
         name = Foundry.MODNAME,
         version = "@VERSION_INJECT@",
-        dependencies = "after:jei@[4.12,);required-after:ceramics;required-after:thermalfoundation;after:mekanism;after:enderio;after:botania;after:techreborn;"
+        dependencies = "after:jei@[4.12,);required-after:ceramics;required-after:cofhcore;after:thermalfoundation;after:mekanism;after:enderio;after:botania;after:techreborn;"
 )
 public class Foundry
 {

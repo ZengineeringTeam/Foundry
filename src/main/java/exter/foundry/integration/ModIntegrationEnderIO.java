@@ -127,29 +127,30 @@ public class ModIntegrationEnderIO implements IModIntegration
         }
         ItemStack silicon = getItemStack("item_material", 5);
 
-        Fluid liquid_redstone = TFFluids.fluidRedstone;
-        Fluid liquid_enderpearl = TFFluids.fluidEnder;
-        Fluid liquid_glowstone = TFFluids.fluidGlowstone;
+        if (Loader.isModLoaded("thermalfoundation")) {
+            Fluid liquid_redstone = TFFluids.fluidRedstone;
+            Fluid liquid_enderpearl = TFFluids.fluidEnder;
+            Fluid liquid_glowstone = TFFluids.fluidGlowstone;
 
-        if (silicon != null)
-        {
-            InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_redstone_alloy, FLUID_AMOUNT_INGOT),
-                    new FluidStack(liquid_redstone, 100), new ItemStackMatcher(silicon), 12000);
 
-            InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_electrical_steel, FLUID_AMOUNT_INGOT),
-                    new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT), new ItemStackMatcher(silicon), 12000);
+            if (silicon != null) {
+                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_redstone_alloy, FLUID_AMOUNT_INGOT),
+                        new FluidStack(liquid_redstone, 100), new ItemStackMatcher(silicon), 12000);
+
+                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_electrical_steel, FLUID_AMOUNT_INGOT),
+                        new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT), new ItemStackMatcher(silicon), 12000);
+            }
+
+            AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_energetic_alloy, FLUID_AMOUNT_INGOT / 2),
+                    new FluidStack[]{new FluidStack(FoundryFluids.liquid_gold, FLUID_AMOUNT_INGOT / 2), new FluidStack(liquid_redstone, 50),
+                            new FluidStack(liquid_glowstone, 125)});
+
+            AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_vibrant_alloy, FLUID_AMOUNT_INGOT / 2), new FluidStack[]{
+                    new FluidStack(liquid_energetic_alloy, FLUID_AMOUNT_INGOT / 2), new FluidStack(liquid_enderpearl, 125)});
+
+            AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_phased_iron, FLUID_AMOUNT_INGOT / 2), new FluidStack[]{
+                    new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT / 2), new FluidStack(liquid_enderpearl, 125)});
         }
-
-        AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_energetic_alloy, FLUID_AMOUNT_INGOT / 2),
-                new FluidStack[] { new FluidStack(FoundryFluids.liquid_gold, FLUID_AMOUNT_INGOT / 2), new FluidStack(liquid_redstone, 50),
-                        new FluidStack(liquid_glowstone, 125) });
-
-        AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_vibrant_alloy, FLUID_AMOUNT_INGOT / 2), new FluidStack[] {
-                new FluidStack(liquid_energetic_alloy, FLUID_AMOUNT_INGOT / 2), new FluidStack(liquid_enderpearl, 125) });
-
-        AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_phased_iron, FLUID_AMOUNT_INGOT / 2), new FluidStack[] {
-                new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT / 2), new FluidStack(liquid_enderpearl, 125) });
-
         AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_dark_steel, FLUID_AMOUNT_INGOT / 4), new FluidStack[] {
                 new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT / 4), new FluidStack(FluidRegistry.LAVA, 250), });
 

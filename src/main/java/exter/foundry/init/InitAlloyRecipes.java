@@ -90,9 +90,11 @@ public class InitAlloyRecipes
 
         if (FoundryConfig.recipe_steel)
         {
-            InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT / 4),
+            if (OreDictionary.doesOreNameExist("dustCoal"))
+                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT / 4),
                     new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT / 4), new OreMatcher("dustCoal"), 2000);
-            InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT / 4),
+            if (OreDictionary.doesOreNameExist("dustCharcoal"))
+                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT / 4),
                     new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT / 4), new OreMatcher("dustCharcoal"), 4000);
             if (OreDictionary.doesOreNameExist("dustSmallCoal"))
                 InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT / 16),
