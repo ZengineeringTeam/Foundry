@@ -41,10 +41,9 @@ public class FoundryConfig
 
     public static boolean castingTableUncrafting = true;
 
-    static {
-        if (Loader.isModLoaded("thermalfoundation")) {
-            prefModID = "thermalfoundation";
-        }
+    static
+    {
+        prefModID = Loader.isModLoaded("thermalfoundation") ? "thermalfoundation" : "minecraft";
     }
 
     static public void load(File file)
