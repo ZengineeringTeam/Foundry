@@ -22,6 +22,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
@@ -232,5 +233,16 @@ public class BlockLiquidMetal extends BlockFluidClassic
             return true;
         }
         return super.shouldSideBeRendered(state, world, pos, side);
+    }
+
+    @Override
+    public Vec3d getFogColor(World world, BlockPos pos, IBlockState state, Entity entity, Vec3d originalColor, float partialTicks)
+    {
+        int color = getFluid().getColor(world, pos);
+        double a = (color >> 24 & 255) / 255.0F;
+        double r = (color >> 16 & 255) / 255.0F;
+        double g = (color >> 8 & 255) / 255.0F;
+        double b = (color & 255) / 255.0F;
+        return new Vec3d(r * a, g * a, b * a);
     }
 }
