@@ -14,6 +14,16 @@ public class FluidLiquidMetal extends Fluid
     public static final ResourceLocation STILL = new ResourceLocation(Foundry.MODID, "blocks/molten_metal_still");
     public static final ResourceLocation FLOW = new ResourceLocation(Foundry.MODID, "blocks/molten_metal_flow");
 
+    public FluidLiquidMetal(String fluidName, ResourceLocation still, ResourceLocation flowing, int color, boolean glass, int temperature, int luminosity)
+    {
+        super(fluidName, still, flowing);
+        this.color = color;
+        this.glass = glass;
+        setTemperature(temperature);
+        setLuminosity(luminosity);
+        setDensity(glass ? 2600 : 12000);
+    }
+
     public FluidLiquidMetal(String fluidName, int color, boolean glass, int temperature, int luminosity)
     {
         super(fluidName, STILL, FLOW);
