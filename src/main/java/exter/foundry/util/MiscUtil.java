@@ -153,7 +153,13 @@ public class MiscUtil
     @SideOnly(Side.CLIENT)
     public static void localizeTooltip(String key, List<String> tooltip)
     {
-        for (String str : new TextComponentTranslation(key).getUnformattedText().split("//"))
+        // Could eventually be replaced by reflection?
+        String replaced = new TextComponentTranslation(key).getUnformattedText()
+                .replace("$CRUCIBLE_BASIC_MAX_TEMP", Integer.toString(FoundryAPI.CRUCIBLE_BASIC_MAX_TEMP/100))
+                .replace("$CRUCIBLE_STANDARD_MAX_TEMP", Integer.toString(FoundryAPI.CRUCIBLE_STANDARD_MAX_TEMP/100))
+                .replace("$CRUCIBLE_ADVANCED_MAX_TEMP", Integer.toString(FoundryAPI.CRUCIBLE_ADVANCED_MAX_TEMP/100));
+
+        for (String str : replaced.split("//"))
         {
             tooltip.add(TextFormatting.GRAY + str);
         }

@@ -209,9 +209,9 @@ tile.foundry.mold_station.name=铸型加工站
 tile.foundry.burner_heater.name=燃烧加热器
 tile.foundry.bronze_cauldron.name=青铜炼药锅
 
-tile.foundry.crucible_basic.tooltip=熔化矿石和金属。//必须放在加热器方块上。//最高温度可达到 2000 K。
-tile.foundry.crucible_standard.tooltip=熔化矿石和金属。//必须放在加热器方块上。//最高温度可达到 2500 K。
-tile.foundry.crucible_advanced.tooltip=熔化矿石和金属。//必须放在加热器方块上。//最高温度可达到 4000 K。
+tile.foundry.crucible_basic.tooltip=熔化矿石和金属。//必须放在加热器方块上。//最高温度可达到 $CRUCIBLE_BASIC_MAX_TEMP K。
+tile.foundry.crucible_standard.tooltip=熔化矿石和金属。//必须放在加热器方块上。//最高温度可达到 $CRUCIBLE_STANDARD_MAX_TEMP K。
+tile.foundry.crucible_advanced.tooltip=熔化矿石和金属。//必须放在加热器方块上。//最高温度可达到 $CRUCIBLE_ADVANCED_MAX_TEMP K。
 tile.foundry.caster.tooltip=用铸型将熔融金属铸造成物品。//需要 RF、FE 或 Tesla 来运行。
 tile.foundry.caster2.tooltip=用铸型将熔融金属铸造成物品。
 tile.foundry.alloy_mixer.tooltip=混合至多 4 种熔融金属以制取合金。//需要 RF、FE 或 Tesla 来运行。

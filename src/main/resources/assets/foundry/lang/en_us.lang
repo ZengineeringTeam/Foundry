@@ -209,9 +209,9 @@ tile.foundry.mold_station.name=Mold Crafting Station
 tile.foundry.burner_heater.name=Burner Heater
 tile.foundry.bronze_cauldron.name=Bronze Cauldron
 
-tile.foundry.crucible_basic.tooltip=Melts ore and metals.//Must be placed above a heater block.//Can reach up to 2000 K.
-tile.foundry.crucible_standard.tooltip=Melts ore and metals.//Must be placed above a heater block.//Can reach up to 2500 K.
-tile.foundry.crucible_advanced.tooltip=Melts ore and metals.//Must be placed above a heater block.//Can reach up to 4000 K.
+tile.foundry.crucible_basic.tooltip=Melts ore and metals.//Must be placed above a heater block.//Can reach up to $CRUCIBLE_BASIC_MAX_TEMP K.
+tile.foundry.crucible_standard.tooltip=Melts ore and metals.//Must be placed above a heater block.//Can reach up to $CRUCIBLE_STANDARD_MAX_TEMP K.
+tile.foundry.crucible_advanced.tooltip=Melts ore and metals.//Must be placed above a heater block.//Can reach up to $CRUCIBLE_ADVANCED_MAX_TEMP K.
 tile.foundry.caster.tooltip=Casts items from molten metal using mold.//Requires RF, FE, or Tesla to operate.
 tile.foundry.caster2.tooltip=Casts items from molten metal using mold.
 tile.foundry.alloy_mixer.tooltip=Mixes up to 4 molten metals to make alloys.//Requires RF, FE, or Tesla to operate.

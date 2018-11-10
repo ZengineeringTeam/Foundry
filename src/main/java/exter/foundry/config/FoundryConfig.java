@@ -102,6 +102,13 @@ public class FoundryConfig
                 Integer.MAX_VALUE, "The value, in mB, of an ingot.");
         FoundryAPI.FLUID_AMOUNT_ORE = config.getInt("Fluid Ore Value", "general", FoundryAPI.FLUID_AMOUNT_ORE, 0,
                 Integer.MAX_VALUE, "The value, in mB, of an ore.  Set to 0 to use default values.");
+
+        FoundryAPI.CRUCIBLE_BASIC_MAX_TEMP = config.getInt("Crucible (Basic) Max Temperature", "general", FoundryAPI.CRUCIBLE_BASIC_MAX_TEMP, 0,
+                Integer.MAX_VALUE, "Max temperatures for basic crucibles (in 1/100 deg Ks).");
+        FoundryAPI.CRUCIBLE_STANDARD_MAX_TEMP = config.getInt("Crucible (Standard) Max Temperature", "general", FoundryAPI.CRUCIBLE_STANDARD_MAX_TEMP, 0,
+                Integer.MAX_VALUE, "Max temperatures for standard crucibles (in 1/100 deg Ks).");
+        FoundryAPI.CRUCIBLE_ADVANCED_MAX_TEMP = config.getInt("Crucible (Advanced) Max Temperature", "general", FoundryAPI.CRUCIBLE_ADVANCED_MAX_TEMP, 0,
+                Integer.MAX_VALUE, "Max temperatures for advanced crucibles (in 1/100 deg Ks).");
     }
 
     @SubscribeEvent
