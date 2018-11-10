@@ -1,8 +1,6 @@
 package exter.foundry.util;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import exter.foundry.Foundry;
 import exter.foundry.api.FoundryAPI;
@@ -104,12 +102,12 @@ public class MiscUtil
         return null;
     }
 
-    public static ItemStack getModItemFromOreDictionary(String modid, String orename)
+    public static ItemStack getModItemFromOreDictionary(List<String> modid, String orename)
     {
         return getModItemFromOreDictionary(modid, orename, 1);
     }
 
-    public static ItemStack getModItemFromOreDictionary(String modid, String orename, int amount)
+    public static ItemStack getModItemFromOreDictionary(List<String> modid, String orename, int amount)
     {
         return getStackFromDictWithPreference(modid, orename, amount);
     }
@@ -119,24 +117,28 @@ public class MiscUtil
         return OreDictionary.getOres(orename, false);
     }
 
-    public static ItemStack getStackFromDictWithPreference(String domain, String ore, int amount)
+    public static ItemStack getStackFromDictWithPreference(List<String> domains, String ore, int amount)
     {
-        for (ItemStack is : MiscUtil.getOresSafe(ore))
-        {
-            if (is.getItem().getRegistryName().getResourceDomain().equals(domain))
-            {
-                is = is.copy();
-                is.setCount(amount);
-                return is;
+        List<ItemStack> items = MiscUtil.getOresSafe(ore);
+
+        if (items.size() == 0)
+            return ItemStack.EMPTY;
+
+        items.sort(new Comparator<ItemStack>() {
+            @Override
+            public int compare(ItemStack itemStack1, ItemStack itemStack2) {
+                final String stack1ModName = itemStack1.getItem().getRegistryName().getResourceDomain();
+                final String stack2ModName = itemStack2.getItem().getRegistryName().getResourceDomain();
+                final int stackIndex1 = domains.indexOf(stack1ModName);
+                final int stackIndex2 = domains.indexOf(stack2ModName);
+                final boolean sameIndexModAndItem = stackIndex1 == stackIndex2 && stack1ModName.equals(stack2ModName) && itemStack1.getItem() == itemStack2.getItem();
+                return !sameIndexModAndItem ? (stackIndex1 < stackIndex2 ? -1 : 0) : itemStack1.getItemDamage() < itemStack2.getItemDamage() ? -1 : 0;
             }
-        }
-        for (ItemStack is : MiscUtil.getOresSafe(ore))
-        {
-            is = is.copy();
-            is.setCount(amount);
-            return is;
-        }
-        return ItemStack.EMPTY;
+        });
+
+        ItemStack result = items.get(0);
+        result.setCount(amount);
+        return result;
     }
 
     public static boolean isInvalid(IItemMatcher matcher)

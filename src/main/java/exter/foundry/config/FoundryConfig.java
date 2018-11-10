@@ -1,8 +1,7 @@
 package exter.foundry.config;
 
 import java.io.File;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import exter.foundry.Foundry;
 import exter.foundry.api.FoundryAPI;
@@ -37,14 +36,10 @@ public class FoundryConfig
     public static boolean metalCasterPower = true;
     public static boolean crtError = true;
 
-    public static String prefModID;
+    // Mirrored default settings for Unidict for maximum compatibility
+    public static List<String> modPriority = Arrays.asList("minecraft", "thermalfoundation", "substratum", "ic2", "mekanism", "immersiveengineering", "techreborn");
 
     public static boolean castingTableUncrafting = true;
-
-    static
-    {
-        prefModID = Loader.isModLoaded("thermalfoundation") ? "thermalfoundation" : "minecraft";
-    }
 
     static public void load(File file)
     {
@@ -79,8 +74,8 @@ public class FoundryConfig
             hardcore_furnace_keep_ingots.add("ingot" + name);
         }
 
-        prefModID = config.getString("Preferred Mod ID", "recipes", prefModID,
-                "The priority MODID for Foundry recipes to try using.");
+        modPriority = Arrays.asList(config.getStringList("Preferred Mod ID Priority", "recipes", modPriority.toArray(new String[modPriority.size()]),
+                "The priority sorted MODIDs for Foundry recipes to try using."));
 
         metalCasterPower = config.getBoolean("Metal Caster Power", "general", true,
                 "If the Metal Caster requires power to operate.");
