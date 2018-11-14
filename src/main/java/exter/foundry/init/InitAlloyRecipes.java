@@ -15,6 +15,8 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.ArrayList;
+
 import static exter.foundry.api.FoundryAPI.FLUID_AMOUNT_INGOT;
 
 public class InitAlloyRecipes
@@ -22,7 +24,7 @@ public class InitAlloyRecipes
     // Create recipes for all alloy making machines.
     static private void addSimpleAlloy(String output, String input_a, int amount_a, String input_b, int amount_b)
     {
-        ItemStack alloy_ingot = MiscUtil.getModItemFromOreDictionary(FoundryConfig.prefModID, "ingot" + output,
+        ItemStack alloy_ingot = MiscUtil.getModItemFromOreDictionary(FoundryConfig.modPriority, "ingot" + output,
                 amount_a + amount_b);
         if (!alloy_ingot.isEmpty())
         {
