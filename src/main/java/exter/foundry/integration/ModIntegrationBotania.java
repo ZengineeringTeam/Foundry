@@ -2,12 +2,14 @@ package exter.foundry.integration;
 
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.FoundryUtils;
+import exter.foundry.api.recipe.ICastingTableRecipe.TableType;
 import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.config.FoundryConfig;
 import exter.foundry.fluid.FluidLiquidMetal;
 import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.item.ItemMold;
 import exter.foundry.recipes.manager.CastingRecipeManager;
+import exter.foundry.recipes.manager.CastingTableRecipeManager;
 import exter.foundry.recipes.manager.MeltingRecipeManager;
 import exter.foundry.util.MiscUtil;
 import net.minecraft.block.Block;
@@ -22,6 +24,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class ModIntegrationBotania implements IModIntegration
@@ -95,24 +98,27 @@ public class ModIntegrationBotania implements IModIntegration
             return;
         }
 
-        ItemStack manasteel_block = getItemStack("storage", 0);
-        ItemStack terrasteel_block = getItemStack("storage", 1);
-        ItemStack elementium_block = getItemStack("storage", 2);
+        ItemStackMatcher manasteel_block = new ItemStackMatcher(getItemStack("storage", 0));
+        ItemStackMatcher terrasteel_block = new ItemStackMatcher(getItemStack("storage", 1));
+        ItemStackMatcher elementium_block = new ItemStackMatcher(getItemStack("storage", 2));
+
+        FluidStack manasteel_liquid = new FluidStack(liquid_manasteel, FoundryAPI.getAmountBlock());
+        FluidStack terrasteel_liquid = new FluidStack(liquid_terrasteel, FoundryAPI.getAmountBlock());
+        FluidStack elementium_liquid = new FluidStack(liquid_elementium, FoundryAPI.getAmountBlock());
+
         ItemStack mold_block = ItemMold.SubItem.BLOCK.getItem();
 
-        MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(manasteel_block),
-                new FluidStack(liquid_manasteel, FoundryAPI.getAmountBlock()));
-        MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(terrasteel_block),
-                new FluidStack(liquid_terrasteel, FoundryAPI.getAmountBlock()));
-        MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(elementium_block),
-                new FluidStack(liquid_elementium, FoundryAPI.getAmountBlock()));
+        MeltingRecipeManager.INSTANCE.addRecipe(manasteel_block, manasteel_liquid);
+        MeltingRecipeManager.INSTANCE.addRecipe(terrasteel_block, terrasteel_liquid);
+        MeltingRecipeManager.INSTANCE.addRecipe(elementium_block, elementium_liquid);
 
-        CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(manasteel_block),
-                new FluidStack(liquid_manasteel, FoundryAPI.getAmountBlock()), mold_block, false, null);
-        CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(terrasteel_block),
-                new FluidStack(liquid_terrasteel, FoundryAPI.getAmountBlock()), mold_block, false, null);
-        CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(elementium_block),
-                new FluidStack(liquid_elementium, FoundryAPI.getAmountBlock()), mold_block, false, null);
+        CastingRecipeManager.INSTANCE.addRecipe(manasteel_block, manasteel_liquid, mold_block, false, null);
+        CastingRecipeManager.INSTANCE.addRecipe(terrasteel_block, terrasteel_liquid, mold_block, false, null);
+        CastingRecipeManager.INSTANCE.addRecipe(elementium_block, elementium_liquid, mold_block, false, null);
+
+        CastingTableRecipeManager.INSTANCE.addRecipe(manasteel_block, manasteel_liquid, TableType.BLOCK);
+        CastingTableRecipeManager.INSTANCE.addRecipe(terrasteel_block, terrasteel_liquid, TableType.BLOCK);
+        CastingTableRecipeManager.INSTANCE.addRecipe(elementium_block, elementium_liquid, TableType.BLOCK);
 
         if (FoundryConfig.recipe_equipment)
         {
@@ -138,18 +144,13 @@ public class ModIntegrationBotania implements IModIntegration
             ItemStack elementium_leggings = getItemStack("elementiumlegs");
             ItemStack elementium_boots = getItemStack("elementiumboots");
 
-            ItemStack livingwood_twig = getItemStack("manaresource", 3);
-            ItemStack dreamwood_twig = getItemStack("manaresource", 13);
-
-            ItemStack livingsticks1 = livingwood_twig.copy();
-            ItemStack livingsticks2 = livingwood_twig.copy();
-            livingsticks2.setCount(2);
+            ItemStack livingsticks1 = getItemStack("manaresource", 3);
+            ItemStack livingsticks2 = ItemHandlerHelper.copyStackWithSize(livingsticks1, 2);
             ItemStackMatcher extra_sticks1 = new ItemStackMatcher(livingsticks1);
             ItemStackMatcher extra_sticks2 = new ItemStackMatcher(livingsticks2);
 
-            ItemStack dreamsticks1 = dreamwood_twig.copy();
-            ItemStack dreamsticks2 = dreamwood_twig.copy();
-            dreamsticks2.setCount(2);
+            ItemStack dreamsticks1 = getItemStack("manaresource", 13);
+            ItemStack dreamsticks2 = ItemHandlerHelper.copyStackWithSize(dreamsticks1, 2);
             ItemStackMatcher extra_dreamsticks1 = new ItemStackMatcher(dreamsticks1);
             ItemStackMatcher extra_dreamsticks2 = new ItemStackMatcher(dreamsticks2);
 
