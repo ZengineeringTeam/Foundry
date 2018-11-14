@@ -24,8 +24,7 @@ public class InitAlloyRecipes
     // Create recipes for all alloy making machines.
     static private void addSimpleAlloy(String output, String input_a, int amount_a, String input_b, int amount_b)
     {
-        ItemStack alloy_ingot = MiscUtil.getModItemFromOreDictionary(FoundryConfig.modPriority, "ingot" + output,
-                amount_a + amount_b);
+        ItemStack alloy_ingot = MiscUtil.getModItemFromOreDictionary("ingot" + output, amount_a + amount_b);
         if (!alloy_ingot.isEmpty())
         {
             checkAndAddRecipe(alloy_ingot, input_a, amount_a, input_b, amount_b);
@@ -93,23 +92,33 @@ public class InitAlloyRecipes
         if (FoundryConfig.recipe_steel)
         {
             if (OreDictionary.doesOreNameExist("dustCoal"))
-                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT / 4),
-                    new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT / 4), new OreMatcher("dustCoal"), 2000);
+                InfuserRecipeManager.INSTANCE.addRecipe(
+                        new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT / 4),
+                        new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT / 4), new OreMatcher("dustCoal"),
+                        2000);
             if (OreDictionary.doesOreNameExist("dustCharcoal"))
-                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT / 4),
-                    new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT / 4), new OreMatcher("dustCharcoal"), 4000);
+                InfuserRecipeManager.INSTANCE.addRecipe(
+                        new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT / 4),
+                        new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT / 4),
+                        new OreMatcher("dustCharcoal"), 4000);
             if (OreDictionary.doesOreNameExist("dustSmallCoal"))
-                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT / 16),
-                        new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT / 16), new OreMatcher("dustSmallCoal"), 500);
+                InfuserRecipeManager.INSTANCE.addRecipe(
+                        new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT / 16),
+                        new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT / 16),
+                        new OreMatcher("dustSmallCoal"), 500);
             if (OreDictionary.doesOreNameExist("dustSmallCharcoal"))
-                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT / 16),
-                        new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT / 16), new OreMatcher("dustSmallCharcoal"), 1000);
+                InfuserRecipeManager.INSTANCE.addRecipe(
+                        new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT / 16),
+                        new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT / 16),
+                        new OreMatcher("dustSmallCharcoal"), 1000);
             if (OreDictionary.doesOreNameExist("fuelCoke"))
                 InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT),
-                        new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT), new OreMatcher("fuelCoke"), 5000);
+                        new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT), new OreMatcher("fuelCoke"),
+                        5000);
             if (OreDictionary.doesOreNameExist("dustCoke"))
                 InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT),
-                        new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT), new OreMatcher("dustCoke"), 4000);
+                        new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT), new OreMatcher("dustCoke"),
+                        4000);
         }
     }
 }

@@ -7,6 +7,7 @@ import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.FoundryUtils;
 import exter.foundry.api.recipe.matcher.IItemMatcher;
 import exter.foundry.api.recipe.matcher.ItemStackMatcher;
+import exter.foundry.config.FoundryConfig;
 import exter.foundry.item.ItemMold;
 import exter.foundry.recipes.manager.CastingRecipeManager;
 import net.minecraft.block.BlockLiquid;
@@ -24,6 +25,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.oredict.OreDictionary;
 
 /**
@@ -102,43 +104,54 @@ public class MiscUtil
         return null;
     }
 
-    public static ItemStack getModItemFromOreDictionary(List<String> modid, String orename)
+    public static ItemStack getModItemFromOreDictionary(String ore)
     {
-        return getModItemFromOreDictionary(modid, orename, 1);
+        return getModItemFromOreDictionary(ore, 1);
     }
 
-    public static ItemStack getModItemFromOreDictionary(List<String> modid, String orename, int amount)
+    public static ItemStack getModItemFromOreDictionary(String ore, int amount)
     {
-        return getStackFromDictWithPreference(modid, orename, amount);
+        return getStackFromDictWithPreference(ore, amount);
     }
 
-    public static NonNullList<ItemStack> getOresSafe(String orename)
+    public static NonNullList<ItemStack> getOresSafe(String ore)
     {
-        return OreDictionary.getOres(orename, false);
+        return OreDictionary.getOres(ore, false);
     }
 
-    public static ItemStack getStackFromDictWithPreference(List<String> domains, String ore, int amount)
+    public static ItemStack getStackFromDictWithPreference(String ore, int amount)
     {
-        List<ItemStack> items = MiscUtil.getOresSafe(ore);
-
-        if (items.size() == 0)
-            return ItemStack.EMPTY;
-
-        items.sort(new Comparator<ItemStack>() {
-            @Override
-            public int compare(ItemStack itemStack1, ItemStack itemStack2) {
-                final String stack1ModName = itemStack1.getItem().getRegistryName().getResourceDomain();
-                final String stack2ModName = itemStack2.getItem().getRegistryName().getResourceDomain();
-                final int stackIndex1 = domains.indexOf(stack1ModName);
-                final int stackIndex2 = domains.indexOf(stack2ModName);
-                final boolean sameIndexModAndItem = stackIndex1 == stackIndex2 && stack1ModName.equals(stack2ModName) && itemStack1.getItem() == itemStack2.getItem();
-                return !sameIndexModAndItem ? (stackIndex1 < stackIndex2 ? -1 : 0) : itemStack1.getItemDamage() < itemStack2.getItemDamage() ? -1 : 0;
+        ItemStack preferred = ItemStack.EMPTY;
+        int i = Integer.MAX_VALUE;
+        outer:
+        for (ItemStack item : MiscUtil.getOresSafe(ore))
+        {
+            if (i == Integer.MAX_VALUE && preferred.isEmpty())
+            {
+                preferred = item;
             }
-        });
-
-        ItemStack result = items.get(0);
-        result.setCount(amount);
-        return result;
+            String modid = item.getItem().getCreatorModId(item);
+            inner:
+            for (int j = 0; j <= Math.min(i, FoundryConfig.modPriority.length - 1); j++)
+            {
+                if (modid.equals(FoundryConfig.modPriority[j]))
+                {
+                    i = j;
+                    preferred = item;
+                    if (i == 0)
+                    {
+                        break outer;
+                    }
+                    break inner;
+                }
+            }
+        }
+        preferred = ItemHandlerHelper.copyStackWithSize(preferred, amount);
+        if (!preferred.isEmpty() && preferred.getMetadata() == OreDictionary.WILDCARD_VALUE)
+        {
+            preferred.setItemDamage(0);
+        }
+        return preferred;
     }
 
     public static boolean isInvalid(IItemMatcher matcher)

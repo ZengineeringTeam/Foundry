@@ -37,7 +37,7 @@ public class FoundryConfig
     public static boolean crtError = true;
 
     // Mirrored default settings for Unidict for maximum compatibility
-    public static List<String> modPriority = Arrays.asList("minecraft", "thermalfoundation", "substratum", "ic2", "mekanism", "immersiveengineering", "techreborn");
+    public static String[] modPriority;
 
     public static boolean castingTableUncrafting = true;
 
@@ -74,8 +74,10 @@ public class FoundryConfig
             hardcore_furnace_keep_ingots.add("ingot" + name);
         }
 
-        modPriority = Arrays.asList(config.getStringList("Preferred Mod ID Priority", "recipes", modPriority.toArray(new String[modPriority.size()]),
-                "The priority sorted MODIDs for Foundry recipes to try using."));
+        modPriority = config.getStringList("Preferred Mod ID Priority", "recipes",
+                new String[] { "minecraft", "thermalfoundation", "substratum", "ic2", "mekanism",
+                        "immersiveengineering", "techreborn" },
+                "The priority sorted MODIDs for Foundry recipes to try using.");
 
         metalCasterPower = config.getBoolean("Metal Caster Power", "general", true,
                 "If the Metal Caster requires power to operate.");
@@ -98,12 +100,15 @@ public class FoundryConfig
         FoundryAPI.FLUID_AMOUNT_ORE = config.getInt("Fluid Ore Value", "general", FoundryAPI.FLUID_AMOUNT_ORE, 0,
                 Integer.MAX_VALUE, "The value, in mB, of an ore.  Set to 0 to use default values.");
 
-        FoundryAPI.CRUCIBLE_BASIC_MAX_TEMP = config.getInt("Crucible (Basic) Max Temperature", "general", FoundryAPI.CRUCIBLE_BASIC_MAX_TEMP, 0,
-                Integer.MAX_VALUE, "Max temperatures for basic crucibles (in 1/100 deg Ks).");
-        FoundryAPI.CRUCIBLE_STANDARD_MAX_TEMP = config.getInt("Crucible (Standard) Max Temperature", "general", FoundryAPI.CRUCIBLE_STANDARD_MAX_TEMP, 0,
-                Integer.MAX_VALUE, "Max temperatures for standard crucibles (in 1/100 deg Ks).");
-        FoundryAPI.CRUCIBLE_ADVANCED_MAX_TEMP = config.getInt("Crucible (Advanced) Max Temperature", "general", FoundryAPI.CRUCIBLE_ADVANCED_MAX_TEMP, 0,
-                Integer.MAX_VALUE, "Max temperatures for advanced crucibles (in 1/100 deg Ks).");
+        FoundryAPI.CRUCIBLE_BASIC_MAX_TEMP = config.getInt("Crucible (Basic) Max Temperature", "general",
+                FoundryAPI.CRUCIBLE_BASIC_MAX_TEMP, 0, Integer.MAX_VALUE,
+                "Max temperatures for basic crucibles (in 1/100 deg Ks).");
+        FoundryAPI.CRUCIBLE_STANDARD_MAX_TEMP = config.getInt("Crucible (Standard) Max Temperature", "general",
+                FoundryAPI.CRUCIBLE_STANDARD_MAX_TEMP, 0, Integer.MAX_VALUE,
+                "Max temperatures for standard crucibles (in 1/100 deg Ks).");
+        FoundryAPI.CRUCIBLE_ADVANCED_MAX_TEMP = config.getInt("Crucible (Advanced) Max Temperature", "general",
+                FoundryAPI.CRUCIBLE_ADVANCED_MAX_TEMP, 0, Integer.MAX_VALUE,
+                "Max temperatures for advanced crucibles (in 1/100 deg Ks).");
     }
 
     @SubscribeEvent

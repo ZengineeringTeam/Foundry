@@ -351,7 +351,7 @@ public class InitRecipes
         }
 
         // Ingot
-        ItemStack ingot = MiscUtil.getModItemFromOreDictionary(FoundryConfig.modPriority, "ingot" + name);
+        ItemStack ingot = MiscUtil.getModItemFromOreDictionary("ingot" + name);
         if (!ingot.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FLUID_AMOUNT_INGOT);
@@ -361,7 +361,7 @@ public class InitRecipes
         }
 
         // Block
-        ItemStack block = MiscUtil.getModItemFromOreDictionary(FoundryConfig.modPriority, "block" + name);
+        ItemStack block = MiscUtil.getModItemFromOreDictionary("block" + name);
         if (!block.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountBlock());
@@ -371,7 +371,7 @@ public class InitRecipes
         }
 
         // Slab
-        ItemStack slab = MiscUtil.getModItemFromOreDictionary(FoundryConfig.modPriority, "slab" + name);
+        ItemStack slab = MiscUtil.getModItemFromOreDictionary("slab" + name);
         if (!slab.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountBlock() / 2);
@@ -381,7 +381,7 @@ public class InitRecipes
         }
 
         // Stairs
-        ItemStack stairs = MiscUtil.getModItemFromOreDictionary(FoundryConfig.modPriority, "stairs" + name);
+        ItemStack stairs = MiscUtil.getModItemFromOreDictionary("stairs" + name);
         if (!stairs.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountBlock() * 3 / 4);
@@ -391,7 +391,7 @@ public class InitRecipes
         }
 
         // Gear
-        ItemStack gear = MiscUtil.getModItemFromOreDictionary(FoundryConfig.modPriority, "gear" + name);
+        ItemStack gear = MiscUtil.getModItemFromOreDictionary("gear" + name);
         if (!gear.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountGear());
@@ -399,7 +399,7 @@ public class InitRecipes
         }
 
         // Nugget
-        ItemStack nugget = MiscUtil.getModItemFromOreDictionary(FoundryConfig.modPriority, "nugget" + name);
+        ItemStack nugget = MiscUtil.getModItemFromOreDictionary("nugget" + name);
         if (!nugget.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountNugget());
@@ -408,7 +408,7 @@ public class InitRecipes
         }
 
         // Plate
-        ItemStack plate = MiscUtil.getModItemFromOreDictionary(FoundryConfig.modPriority, "plate" + name);
+        ItemStack plate = MiscUtil.getModItemFromOreDictionary("plate" + name);
         if (!plate.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountPlate());
@@ -419,7 +419,7 @@ public class InitRecipes
         }
 
         // Rod
-        ItemStack rod = MiscUtil.getModItemFromOreDictionary(FoundryConfig.modPriority, "rod" + name);
+        ItemStack rod = MiscUtil.getModItemFromOreDictionary("rod" + name);
         if (!rod.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountRod());
