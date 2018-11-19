@@ -337,7 +337,7 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
                     return false;
                 }
                 fuel.totalBurnTime = fuel.burnTime = time;
-                fuel.heat = FoundryConfig.default_burner_fuel_heat;
+                fuel.heat = FoundryConfig.default_burner_fuel_heat * 100;
             }
             ItemStack stackCopy = stack.copy();
             stack.shrink(1);
