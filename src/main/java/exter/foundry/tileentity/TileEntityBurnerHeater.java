@@ -1,7 +1,12 @@
 package exter.foundry.tileentity;
 
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.heatable.IHeatProvider;
 import exter.foundry.api.recipe.IBurnerHeaterFuel;
@@ -23,10 +28,6 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.items.IItemHandler;
 import vazkii.botania.api.item.IExoflameHeatable;
-
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Optional.Interface(iface = "vazkii.botania.api.item.IExoflameHeatable", modid = "Botania")
 public class TileEntityBurnerHeater extends TileEntityFoundry implements IExoflameHeatable
@@ -116,6 +117,7 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
             NBTTagCompound tag = new NBTTagCompound();
             tag.setInteger("time", burnTime);
             tag.setInteger("total", totalBurnTime);
+            tag.setInteger("heat", heat);
             return tag;
         }
 
@@ -126,6 +128,8 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
             {
                 burnTime = nbt.hasKey("time") ? nbt.getInteger("time") : burnTime;
                 totalBurnTime = nbt.hasKey("total") ? nbt.getInteger("total") : totalBurnTime;
+                totalBurnTime = nbt.hasKey("heat") ? nbt.getInteger("heat")
+                        : FoundryConfig.default_burner_fuel_heat * 100;
             }
         }
     }
