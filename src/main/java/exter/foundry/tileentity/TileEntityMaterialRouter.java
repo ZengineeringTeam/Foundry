@@ -321,10 +321,6 @@ public class TileEntityMaterialRouter extends TileEntityFoundry
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
-        if (compound == null)
-        {
-            compound = new NBTTagCompound();
-        }
         super.writeToNBT(compound);
         writeRoutesToNBT(compound);
 

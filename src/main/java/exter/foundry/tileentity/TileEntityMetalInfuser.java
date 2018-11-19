@@ -213,10 +213,6 @@ public class TileEntityMetalInfuser extends TileEntityPowered
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
-        if (compound == null)
-        {
-            compound = new NBTTagCompound();
-        }
         super.writeToNBT(compound);
         compound.setInteger("progress", progress);
         compound.setInteger("extract_time", extract_energy);

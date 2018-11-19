@@ -235,10 +235,6 @@ public class TileEntityAlloyingCrucible extends TileEntityFoundry
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
-        if (compound == null)
-        {
-            compound = new NBTTagCompound();
-        }
         super.writeToNBT(compound);
         compound.setInteger("Progress", progress);
         return compound;

@@ -369,10 +369,6 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound tag)
     {
-        if (tag == null)
-        {
-            tag = new NBTTagCompound();
-        }
         super.writeToNBT(tag);
         for (int i = 0; i < fuels.size(); i++)
         {

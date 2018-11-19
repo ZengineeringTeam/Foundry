@@ -6,6 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.common.util.Constants;
 
 public abstract class TileEntityHeatable extends TileEntityFoundry
 {
@@ -89,10 +90,6 @@ public abstract class TileEntityHeatable extends TileEntityFoundry
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
-        if (compound == null)
-        {
-            compound = new NBTTagCompound();
-        }
         super.writeToNBT(compound);
         compound.setInteger("heat", heat);
         return compound;
@@ -103,7 +100,7 @@ public abstract class TileEntityHeatable extends TileEntityFoundry
     {
         super.readFromNBT(compund);
 
-        if (compund.hasKey("heat"))
+        if (compund.hasKey("heat", Constants.NBT.TAG_INT))
         {
             heat = MathHelper.clamp(compund.getInteger("heat"), TEMP_MIN, getMaxTemperature());
         }

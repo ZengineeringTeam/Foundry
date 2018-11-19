@@ -432,10 +432,6 @@ public class TileEntityMoldStation extends TileEntityFoundry implements IExoflam
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
-        if (compound == null)
-        {
-            compound = new NBTTagCompound();
-        }
         super.writeToNBT(compound);
         compound.setInteger("BurnTime", burn_time);
         compound.setInteger("CookTime", progress);

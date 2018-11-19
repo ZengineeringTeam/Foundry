@@ -235,10 +235,6 @@ public class TileEntityMeltingCrucibleBasic extends TileEntityHeatable
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
-        if (compound == null)
-        {
-            compound = new NBTTagCompound();
-        }
         super.writeToNBT(compound);
         compound.setInteger("melt_point", melt_point);
         compound.setInteger("progress", progress);

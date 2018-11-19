@@ -750,10 +750,6 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
-        if (compound == null)
-        {
-            compound = new NBTTagCompound();
-        }
         int i;
         super.writeToNBT(compound);
         for (i = 0; i < getTankCount(); i++)
@@ -788,6 +784,6 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
     @Override
     public NBTTagCompound getUpdateTag()
     {
-        return writeToNBT(null);
+        return writeToNBT(new NBTTagCompound());
     }
 }
