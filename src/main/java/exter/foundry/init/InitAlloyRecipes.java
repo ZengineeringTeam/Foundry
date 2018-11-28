@@ -76,27 +76,6 @@ public class InitAlloyRecipes
         if (MetalConfig.metals.get("constantan") == MetalConfig.IntegrationStrategy.ENABLED)
             addSimpleAlloy("constantan", "copper", 1, "nickel", 1);
 
-        Fluid liquid_redstone = FluidRegistry.getFluid("liquidredstone");
-        Fluid liquid_glowstone = FluidRegistry.getFluid("liquidglowstone");
-        Fluid liquid_enderpearl = FluidRegistry.getFluid("liquidenderpearl");
-
-        if (MetalConfig.metals.get("signalum") == MetalConfig.IntegrationStrategy.ENABLED && liquid_redstone != null && FoundryFluids.liquid_signalum != null && FoundryFluids.liquid_copper != null && FoundryFluids.liquid_silver != null)
-            AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_signalum, 108),
-                    new FluidStack[] { new FluidStack(FoundryFluids.liquid_copper, 81),
-                            new FluidStack(FoundryFluids.liquid_silver, 27), new FluidStack(liquid_redstone, 250) });
-
-        if (MetalConfig.metals.get("lumium") == MetalConfig.IntegrationStrategy.ENABLED && liquid_glowstone != null && FoundryFluids.liquid_lumium != null && FoundryFluids.liquid_tin != null && FoundryFluids.liquid_silver != null)
-            AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_lumium, 108),
-                    new FluidStack[] { new FluidStack(FoundryFluids.liquid_tin, 81),
-                            new FluidStack(FoundryFluids.liquid_silver, 27), new FluidStack(liquid_glowstone, 250) });
-
-        if (MetalConfig.metals.get("enderium") == MetalConfig.IntegrationStrategy.ENABLED && liquid_enderpearl != null && FoundryFluids.liquid_enderium != null && FoundryFluids.liquid_tin != null && FoundryFluids.liquid_silver != null && FoundryFluids.liquid_platinum != null)
-            AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_enderium, 108),
-                    new FluidStack[] { new FluidStack(FoundryFluids.liquid_tin, 54),
-                            new FluidStack(FoundryFluids.liquid_silver, 27),
-                            new FluidStack(FoundryFluids.liquid_platinum, 27),
-                            new FluidStack(liquid_enderpearl, 250) });
-
         if (MetalConfig.metals.get("steel") == MetalConfig.IntegrationStrategy.ENABLED && FoundryConfig.recipe_steel && FoundryFluids.liquid_steel != null && FoundryFluids.liquid_iron != null)
         {
             if (OreDictionary.doesOreNameExist("dustCoal"))
