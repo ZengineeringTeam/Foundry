@@ -24,21 +24,23 @@ public class InitAlloyRecipes
     // Create recipes for all alloy making machines.
     static private void addSimpleAlloy(String output, String input_a, int amount_a, String input_b, int amount_b)
     {
-        ItemStack alloy_ingot = MiscUtil.getModItemFromOreDictionary("ingot" + output, amount_a + amount_b);
-        if (!alloy_ingot.isEmpty())
-        {
-            checkAndAddRecipe(alloy_ingot, input_a, amount_a, input_b, amount_b);
-        }
-
         Fluid fluid_out = FoundryFluidRegistry.INSTANCE.getFluid(output);
         Fluid fluid_in_a = FoundryFluidRegistry.INSTANCE.getFluid(input_a);
         Fluid fluid_in_b = FoundryFluidRegistry.INSTANCE.getFluid(input_b);
 
-        AlloyingCrucibleRecipeManager.INSTANCE.addRecipe(new FluidStack(fluid_out, (amount_a + amount_b) * 3),
-                new FluidStack(fluid_in_a, amount_a * 3), new FluidStack(fluid_in_b, amount_b * 3));
+        if (fluid_out != null && fluid_in_a != null && fluid_in_b != null) {
+            ItemStack alloy_ingot = MiscUtil.getModItemFromOreDictionary("ingot" + output, amount_a + amount_b);
+            if (!alloy_ingot.isEmpty())
+            {
+                checkAndAddRecipe(alloy_ingot, input_a, amount_a, input_b, amount_b);
+            }
 
-        AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(fluid_out, amount_a + amount_b),
-                new FluidStack[] { new FluidStack(fluid_in_a, amount_a), new FluidStack(fluid_in_b, amount_b) });
+            AlloyingCrucibleRecipeManager.INSTANCE.addRecipe(new FluidStack(fluid_out, (amount_a + amount_b) * 3),
+                    new FluidStack(fluid_in_a, amount_a * 3), new FluidStack(fluid_in_b, amount_b * 3));
+
+            AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(fluid_out, amount_a + amount_b),
+                    new FluidStack[]{new FluidStack(fluid_in_a, amount_a), new FluidStack(fluid_in_b, amount_b)});
+        }
     }
 
     private static void checkAndAddRecipe(ItemStack alloy_ingot, String input_a, int amount_a, String input_b, int amount_b)
@@ -72,24 +74,24 @@ public class InitAlloyRecipes
         Fluid liquid_glowstone = FluidRegistry.getFluid("liquidglowstone");
         Fluid liquid_enderpearl = FluidRegistry.getFluid("liquidenderpearl");
 
-        if (liquid_redstone != null)
+        if (liquid_redstone != null && FoundryFluids.liquid_signalum != null && FoundryFluids.liquid_copper != null && FoundryFluids.liquid_silver != null)
             AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_signalum, 108),
                     new FluidStack[] { new FluidStack(FoundryFluids.liquid_copper, 81),
                             new FluidStack(FoundryFluids.liquid_silver, 27), new FluidStack(liquid_redstone, 250) });
 
-        if (liquid_glowstone != null)
+        if (liquid_glowstone != null && FoundryFluids.liquid_lumium != null && FoundryFluids.liquid_tin != null && FoundryFluids.liquid_silver != null)
             AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_lumium, 108),
                     new FluidStack[] { new FluidStack(FoundryFluids.liquid_tin, 81),
                             new FluidStack(FoundryFluids.liquid_silver, 27), new FluidStack(liquid_glowstone, 250) });
 
-        if (liquid_enderpearl != null)
+        if (liquid_enderpearl != null && FoundryFluids.liquid_enderium != null && FoundryFluids.liquid_tin != null && FoundryFluids.liquid_silver != null && FoundryFluids.liquid_platinum != null)
             AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_enderium, 108),
                     new FluidStack[] { new FluidStack(FoundryFluids.liquid_tin, 54),
                             new FluidStack(FoundryFluids.liquid_silver, 27),
                             new FluidStack(FoundryFluids.liquid_platinum, 27),
                             new FluidStack(liquid_enderpearl, 250) });
 
-        if (FoundryConfig.recipe_steel)
+        if (FoundryConfig.recipe_steel && FoundryFluids.liquid_steel != null && FoundryFluids.liquid_iron != null)
         {
             if (OreDictionary.doesOreNameExist("dustCoal"))
                 InfuserRecipeManager.INSTANCE.addRecipe(

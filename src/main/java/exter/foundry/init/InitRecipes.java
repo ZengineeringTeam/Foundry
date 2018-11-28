@@ -11,6 +11,7 @@ import exter.foundry.api.recipe.ICastingTableRecipe;
 import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.api.recipe.matcher.OreMatcher;
 import exter.foundry.config.FoundryConfig;
+import exter.foundry.config.MetalConfig;
 import exter.foundry.fluid.FluidLiquidMetal;
 import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.fluid.FoundryFluids;
@@ -104,7 +105,7 @@ public class InitRecipes
         {
             FluidLiquidMetal fluid = FoundryFluidRegistry.INSTANCE.getFluid(name);
             name = MiscUtil.upperCaseFirstChar(name);
-            if (!fluid.glass)
+            if (!fluid.glass && (!MetalConfig.metals.containsKey(name.toLowerCase()) || MetalConfig.metals.get(name.toLowerCase()) == MetalConfig.IntegrationStrategy.ENABLED))
             {
                 FluidStack fluidstack = new FluidStack(fluid, FLUID_AMOUNT_INGOT);
                 List<ItemStack> ores = OreDictionary.doesOreNameExist("ingot" + name)
