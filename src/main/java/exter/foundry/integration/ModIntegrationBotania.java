@@ -5,6 +5,7 @@ import exter.foundry.api.FoundryUtils;
 import exter.foundry.api.recipe.ICastingTableRecipe.TableType;
 import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.config.FoundryConfig;
+import exter.foundry.config.MetalConfig;
 import exter.foundry.fluid.FluidLiquidMetal;
 import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.item.ItemMold;
@@ -27,6 +28,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ModIntegrationBotania implements IModIntegration
 {
 
@@ -35,6 +39,8 @@ public class ModIntegrationBotania implements IModIntegration
     private FluidLiquidMetal liquid_manasteel;
     private FluidLiquidMetal liquid_terrasteel;
     private FluidLiquidMetal liquid_elementium;
+
+    private Map<String, MetalConfig.IntegrationStrategy> metalConfigs = new HashMap<>();
 
     private ItemStack getItemStack(String name)
     {
@@ -98,27 +104,34 @@ public class ModIntegrationBotania implements IModIntegration
             return;
         }
 
-        ItemStackMatcher manasteel_block = new ItemStackMatcher(getItemStack("storage", 0));
-        ItemStackMatcher terrasteel_block = new ItemStackMatcher(getItemStack("storage", 1));
-        ItemStackMatcher elementium_block = new ItemStackMatcher(getItemStack("storage", 2));
-
-        FluidStack manasteel_liquid = new FluidStack(liquid_manasteel, FoundryAPI.getAmountBlock());
-        FluidStack terrasteel_liquid = new FluidStack(liquid_terrasteel, FoundryAPI.getAmountBlock());
-        FluidStack elementium_liquid = new FluidStack(liquid_elementium, FoundryAPI.getAmountBlock());
-
         ItemStack mold_block = ItemMold.SubItem.BLOCK.getItem();
 
-        MeltingRecipeManager.INSTANCE.addRecipe(manasteel_block, manasteel_liquid);
-        MeltingRecipeManager.INSTANCE.addRecipe(terrasteel_block, terrasteel_liquid);
-        MeltingRecipeManager.INSTANCE.addRecipe(elementium_block, elementium_liquid);
+        if (MetalConfig.metals.get("manasteel") == MetalConfig.IntegrationStrategy.ENABLED) {
+            ItemStackMatcher manasteel_block = new ItemStackMatcher(getItemStack("storage", 0));
+            FluidStack manasteel_liquid = new FluidStack(liquid_manasteel, FoundryAPI.getAmountBlock());
 
-        CastingRecipeManager.INSTANCE.addRecipe(manasteel_block, manasteel_liquid, mold_block, false, null);
-        CastingRecipeManager.INSTANCE.addRecipe(terrasteel_block, terrasteel_liquid, mold_block, false, null);
-        CastingRecipeManager.INSTANCE.addRecipe(elementium_block, elementium_liquid, mold_block, false, null);
+            MeltingRecipeManager.INSTANCE.addRecipe(manasteel_block, manasteel_liquid);
+            CastingRecipeManager.INSTANCE.addRecipe(manasteel_block, manasteel_liquid, mold_block, false, null);
+            CastingTableRecipeManager.INSTANCE.addRecipe(manasteel_block, manasteel_liquid, TableType.BLOCK);
+        }
 
-        CastingTableRecipeManager.INSTANCE.addRecipe(manasteel_block, manasteel_liquid, TableType.BLOCK);
-        CastingTableRecipeManager.INSTANCE.addRecipe(terrasteel_block, terrasteel_liquid, TableType.BLOCK);
-        CastingTableRecipeManager.INSTANCE.addRecipe(elementium_block, elementium_liquid, TableType.BLOCK);
+        if (MetalConfig.metals.get("terrasteel") == MetalConfig.IntegrationStrategy.ENABLED) {
+            ItemStackMatcher terrasteel_block = new ItemStackMatcher(getItemStack("storage", 1));
+            FluidStack terrasteel_liquid = new FluidStack(liquid_terrasteel, FoundryAPI.getAmountBlock());
+
+            MeltingRecipeManager.INSTANCE.addRecipe(terrasteel_block, terrasteel_liquid);
+            CastingRecipeManager.INSTANCE.addRecipe(terrasteel_block, terrasteel_liquid, mold_block, false, null);
+            CastingTableRecipeManager.INSTANCE.addRecipe(terrasteel_block, terrasteel_liquid, TableType.BLOCK);
+        }
+
+        if (MetalConfig.metals.get("elven_elementium") == MetalConfig.IntegrationStrategy.ENABLED) {
+            ItemStackMatcher elementium_block = new ItemStackMatcher(getItemStack("storage", 2));
+            FluidStack elementium_liquid = new FluidStack(liquid_elementium, FoundryAPI.getAmountBlock());
+
+            MeltingRecipeManager.INSTANCE.addRecipe(elementium_block, elementium_liquid);
+            CastingRecipeManager.INSTANCE.addRecipe(elementium_block, elementium_liquid, mold_block, false, null);
+            CastingTableRecipeManager.INSTANCE.addRecipe(elementium_block, elementium_liquid, TableType.BLOCK);
+        }
 
         if (FoundryConfig.recipe_equipment)
         {
@@ -154,50 +167,67 @@ public class ModIntegrationBotania implements IModIntegration
             ItemStackMatcher extra_dreamsticks1 = new ItemStackMatcher(dreamsticks1);
             ItemStackMatcher extra_dreamsticks2 = new ItemStackMatcher(dreamsticks2);
 
-            MiscUtil.registerCasting(manasteel_pickaxe, liquid_manasteel, 3, ItemMold.SubItem.PICKAXE, extra_sticks2);
-            MiscUtil.registerCasting(manasteel_axe, liquid_manasteel, 3, ItemMold.SubItem.AXE, extra_sticks2);
-            MiscUtil.registerCasting(manasteel_shovel, liquid_manasteel, 1, ItemMold.SubItem.SHOVEL, extra_sticks2);
-            MiscUtil.registerCasting(manasteel_sword, liquid_manasteel, 2, ItemMold.SubItem.SWORD, extra_sticks1);
-            MiscUtil.registerCasting(manasteel_chestplate, liquid_manasteel, 8, ItemMold.SubItem.CHESTPLATE);
-            MiscUtil.registerCasting(manasteel_leggings, liquid_manasteel, 7, ItemMold.SubItem.LEGGINGS);
-            MiscUtil.registerCasting(manasteel_helmet, liquid_manasteel, 5, ItemMold.SubItem.HELMET);
-            MiscUtil.registerCasting(manasteel_boots, liquid_manasteel, 4, ItemMold.SubItem.BOOTS);
+            if (MetalConfig.metals.get("manasteel") == MetalConfig.IntegrationStrategy.ENABLED) {
+                MiscUtil.registerCasting(manasteel_pickaxe, liquid_manasteel, 3, ItemMold.SubItem.PICKAXE, extra_sticks2);
+                MiscUtil.registerCasting(manasteel_axe, liquid_manasteel, 3, ItemMold.SubItem.AXE, extra_sticks2);
+                MiscUtil.registerCasting(manasteel_shovel, liquid_manasteel, 1, ItemMold.SubItem.SHOVEL, extra_sticks2);
+                MiscUtil.registerCasting(manasteel_sword, liquid_manasteel, 2, ItemMold.SubItem.SWORD, extra_sticks1);
+                MiscUtil.registerCasting(manasteel_chestplate, liquid_manasteel, 8, ItemMold.SubItem.CHESTPLATE);
+                MiscUtil.registerCasting(manasteel_leggings, liquid_manasteel, 7, ItemMold.SubItem.LEGGINGS);
+                MiscUtil.registerCasting(manasteel_helmet, liquid_manasteel, 5, ItemMold.SubItem.HELMET);
+                MiscUtil.registerCasting(manasteel_boots, liquid_manasteel, 4, ItemMold.SubItem.BOOTS);
+            }
 
-            MiscUtil.registerCasting(terrasteel_sword,
-                    new FluidStack(liquid_terrasteel, FoundryAPI.FLUID_AMOUNT_INGOT * 2), ItemMold.SubItem.SWORD,
-                    extra_sticks1);
+            if (MetalConfig.metals.get("terrasteel") == MetalConfig.IntegrationStrategy.ENABLED)
+                MiscUtil.registerCasting(terrasteel_sword,
+                        new FluidStack(liquid_terrasteel, FoundryAPI.FLUID_AMOUNT_INGOT * 2), ItemMold.SubItem.SWORD,
+                        extra_sticks1);
 
-            MiscUtil.registerCasting(elementium_pickaxe, liquid_elementium, 3, ItemMold.SubItem.PICKAXE,
-                    extra_dreamsticks2);
-            MiscUtil.registerCasting(elementium_axe, liquid_elementium, 3, ItemMold.SubItem.AXE, extra_dreamsticks2);
-            MiscUtil.registerCasting(elementium_shovel, liquid_elementium, 1, ItemMold.SubItem.SHOVEL,
-                    extra_dreamsticks2);
-            MiscUtil.registerCasting(elementium_sword, liquid_elementium, 2, ItemMold.SubItem.SWORD,
-                    extra_dreamsticks1);
-            MiscUtil.registerCasting(elementium_chestplate, liquid_elementium, 8, ItemMold.SubItem.CHESTPLATE);
-            MiscUtil.registerCasting(elementium_leggings, liquid_elementium, 7, ItemMold.SubItem.LEGGINGS);
-            MiscUtil.registerCasting(elementium_helmet, liquid_elementium, 5, ItemMold.SubItem.HELMET);
-            MiscUtil.registerCasting(elementium_boots, liquid_elementium, 4, ItemMold.SubItem.BOOTS);
+            if (MetalConfig.metals.get("elven_elementium") == MetalConfig.IntegrationStrategy.ENABLED) {
+                MiscUtil.registerCasting(elementium_pickaxe, liquid_elementium, 3, ItemMold.SubItem.PICKAXE,
+                        extra_dreamsticks2);
+                MiscUtil.registerCasting(elementium_axe, liquid_elementium, 3, ItemMold.SubItem.AXE, extra_dreamsticks2);
+                MiscUtil.registerCasting(elementium_shovel, liquid_elementium, 1, ItemMold.SubItem.SHOVEL,
+                        extra_dreamsticks2);
+                MiscUtil.registerCasting(elementium_sword, liquid_elementium, 2, ItemMold.SubItem.SWORD,
+                        extra_dreamsticks1);
+                MiscUtil.registerCasting(elementium_chestplate, liquid_elementium, 8, ItemMold.SubItem.CHESTPLATE);
+                MiscUtil.registerCasting(elementium_leggings, liquid_elementium, 7, ItemMold.SubItem.LEGGINGS);
+                MiscUtil.registerCasting(elementium_helmet, liquid_elementium, 5, ItemMold.SubItem.HELMET);
+                MiscUtil.registerCasting(elementium_boots, liquid_elementium, 4, ItemMold.SubItem.BOOTS);
+            }
         }
     }
 
     @Override
     public void onPreInit(Configuration config)
     {
+        metalConfigs.put("manasteel", MetalConfig.IntegrationStrategy.valueOf(config.getString("manasteel", "Botania", MetalConfig.IntegrationStrategy.ENABLED.name(), "Valid values: ENABLED, DISABLED, NO_RECIPES")));
+
+        metalConfigs.put("terrasteel", MetalConfig.IntegrationStrategy.valueOf(config.getString("terrasteel", "Botania", MetalConfig.IntegrationStrategy.ENABLED.name(), "Valid values: ENABLED, DISABLED, NO_RECIPES")));
+
+        metalConfigs.put("elven_elementium", MetalConfig.IntegrationStrategy.valueOf(config.getString("elementium", "Botania", MetalConfig.IntegrationStrategy.ENABLED.name(), "Valid values: ENABLED, DISABLED, NO_RECIPES")));
     }
 
     @SubscribeEvent
     public void registerFluids(Register<Block> e)
     {
         IForgeRegistry<Block> registry = e.getRegistry();
-        liquid_manasteel = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "manasteel", 1950, 15, 0x2050EA);
-        liquid_terrasteel = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "terrasteel", 2100, 15,
+
+        if (MetalConfig.metals.get("manasteel") != MetalConfig.IntegrationStrategy.DISABLED)
+            liquid_manasteel = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "manasteel", 1950, 15, 0x2050EA);
+        if (MetalConfig.metals.get("terrasteel") != MetalConfig.IntegrationStrategy.DISABLED)
+            liquid_terrasteel = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "terrasteel", 2100, 15,
                 0x5AFF0A);
-        liquid_elementium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "elven_elementium", 2400, 15,
+        if (MetalConfig.metals.get("elven_elementium") != MetalConfig.IntegrationStrategy.DISABLED)
+            liquid_elementium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "elven_elementium", 2400, 15,
                 0xE60082);
 
-        FoundryUtils.registerBasicMeltingRecipes("manasteel", liquid_manasteel);
-        FoundryUtils.registerBasicMeltingRecipes("terrasteel", liquid_terrasteel);
-        FoundryUtils.registerBasicMeltingRecipes("elven_elementium", liquid_elementium);
+        if (MetalConfig.metals.get("manasteel") == MetalConfig.IntegrationStrategy.ENABLED)
+            FoundryUtils.registerBasicMeltingRecipes("manasteel", liquid_manasteel);
+        if (MetalConfig.metals.get("terrasteel") == MetalConfig.IntegrationStrategy.ENABLED)
+            FoundryUtils.registerBasicMeltingRecipes("terrasteel", liquid_terrasteel);
+        if (MetalConfig.metals.get("elven_elementium") == MetalConfig.IntegrationStrategy.ENABLED)
+            FoundryUtils.registerBasicMeltingRecipes("elven_elementium", liquid_elementium);
     }
 }

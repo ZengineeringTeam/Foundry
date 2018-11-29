@@ -45,6 +45,7 @@ public class FoundryConfig
     {
         config = new Configuration(file);
         config.load();
+
         debug = config.getBoolean("debug", "debug", false, "Enable debug logging.");
         recipe_equipment = config.getBoolean("equipment", "recipes", recipe_equipment,
                 "Enable/disable casting recipes for equipment");

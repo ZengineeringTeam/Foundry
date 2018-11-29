@@ -1,6 +1,7 @@
 package exter.foundry.integration;
 
 import exter.foundry.api.FoundryUtils;
+import exter.foundry.config.MetalConfig;
 import exter.foundry.fluid.FluidLiquidMetal;
 import exter.foundry.fluid.FoundryFluidRegistry;
 import net.minecraft.block.Block;
@@ -16,6 +17,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ModIntegrationMekanism  implements IModIntegration
 {
 
@@ -24,6 +28,8 @@ public class ModIntegrationMekanism  implements IModIntegration
     private FluidLiquidMetal liquid_osmium;
     private FluidLiquidMetal liquid_refined_obsidian;
     private FluidLiquidMetal liquid_refined_glowstone;
+
+    private Map<String, MetalConfig.IntegrationStrategy> metalConfigs = new HashMap<>();
 
     private ItemStack getItemStack(String name)
     {
@@ -162,19 +168,29 @@ public class ModIntegrationMekanism  implements IModIntegration
     @Override
     public void onPreInit(Configuration config)
     {
+        metalConfigs.put("osmium", MetalConfig.IntegrationStrategy.valueOf(config.getString("osmium", "Mekanism", MetalConfig.IntegrationStrategy.ENABLED.name(), "Valid values: ENABLED, DISABLED, NO_RECIPES")));
+        metalConfigs.put("refined_obsidian", MetalConfig.IntegrationStrategy.valueOf(config.getString("refined_obsidian", "Mekanism", MetalConfig.IntegrationStrategy.ENABLED.name(), "Valid values: ENABLED, DISABLED, NO_RECIPES")));
+        metalConfigs.put("refined_glowstone", MetalConfig.IntegrationStrategy.valueOf(config.getString("refined_glowstone", "Mekanism", MetalConfig.IntegrationStrategy.ENABLED.name(), "Valid values: ENABLED, DISABLED, NO_RECIPES")));
     }
 
     @SubscribeEvent
     public void registerFluids(RegistryEvent.Register<Block> e)
     {
         IForgeRegistry<Block> registry = e.getRegistry();
-        liquid_osmium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "osmium", 3300, 15, 0xBFD0FF);
-        liquid_refined_obsidian = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "refined_obsidian", 3420, 15, 0x5D00FF);
-        liquid_refined_glowstone = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "refined_glowstone", 3922, 15,
+
+        if (MetalConfig.metals.get("osmium") != MetalConfig.IntegrationStrategy.DISABLED)
+            liquid_osmium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "osmium", 3300, 15, 0xBFD0FF);
+        if (MetalConfig.metals.get("refined_obsidian") != MetalConfig.IntegrationStrategy.DISABLED)
+            liquid_refined_obsidian = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "refined_obsidian", 3420, 15, 0x5D00FF);
+        if (MetalConfig.metals.get("refined_glowstone") != MetalConfig.IntegrationStrategy.DISABLED)
+            liquid_refined_glowstone = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "refined_glowstone", 3922, 15,
                 0xFFFF00);
 
-        FoundryUtils.registerBasicMeltingRecipes("osmium", liquid_osmium);
-        FoundryUtils.registerBasicMeltingRecipes("refined_obsidian", liquid_refined_obsidian);
-        FoundryUtils.registerBasicMeltingRecipes("refined_glowstone", liquid_refined_glowstone);
+        if (MetalConfig.metals.get("osmium") == MetalConfig.IntegrationStrategy.ENABLED)
+            FoundryUtils.registerBasicMeltingRecipes("osmium", liquid_osmium);
+        if (MetalConfig.metals.get("refined_obsidian") == MetalConfig.IntegrationStrategy.ENABLED)
+            FoundryUtils.registerBasicMeltingRecipes("refined_obsidian", liquid_refined_obsidian);
+        if (MetalConfig.metals.get("refined_glowstone") == MetalConfig.IntegrationStrategy.ENABLED)
+            FoundryUtils.registerBasicMeltingRecipes("refined_glowstone", liquid_refined_glowstone);
     }
 }

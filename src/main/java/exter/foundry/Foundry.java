@@ -1,5 +1,6 @@
 package exter.foundry;
 
+import exter.foundry.config.MetalConfig;
 import exter.foundry.integration.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -144,6 +145,8 @@ public class Foundry
             ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationCrafttweaker());
         if (Loader.isModLoaded("theoneprobe"))
             ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationTheOneProbe());
+
+        MetalConfig.load(FoundryConfig.config);
 
         FoundryAPI.FLUIDS = FoundryFluidRegistry.INSTANCE;
 

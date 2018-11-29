@@ -1,6 +1,7 @@
 package exter.foundry.init;
 
 import exter.foundry.api.recipe.matcher.OreMatcher;
+import exter.foundry.config.MetalConfig;
 import exter.foundry.fluid.FoundryFluids;
 import exter.foundry.item.ItemMold;
 import exter.foundry.recipes.manager.MoldRecipeManager;
@@ -69,56 +70,52 @@ public class InitToolRecipes
 
         // TODO: mold recipes
         // TODO: melting recipes
-        MiscUtil.registerCasting(new ItemStack(Items.IRON_PICKAXE), FoundryFluids.liquid_iron, 3,
-                ItemMold.SubItem.PICKAXE, extra_sticks2);
-        MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_PICKAXE), FoundryFluids.liquid_gold, 3,
-                ItemMold.SubItem.PICKAXE, extra_sticks2);
+        if (!MetalConfig.metals.containsKey("iron") || MetalConfig.metals.get("iron") == MetalConfig.IntegrationStrategy.ENABLED) {
+            MiscUtil.registerCasting(new ItemStack(Items.IRON_PICKAXE), FoundryFluids.liquid_iron, 3,
+                    ItemMold.SubItem.PICKAXE, extra_sticks2);
+            MiscUtil.registerCasting(new ItemStack(Items.IRON_AXE), FoundryFluids.liquid_iron, 3, ItemMold.SubItem.AXE,
+                    extra_sticks2);
+            MiscUtil.registerCasting(new ItemStack(Items.IRON_SHOVEL), FoundryFluids.liquid_iron, 1,
+                    ItemMold.SubItem.SHOVEL, extra_sticks2);
+            MiscUtil.registerCasting(new ItemStack(Items.IRON_HOE), FoundryFluids.liquid_iron, 2, ItemMold.SubItem.HOE,
+                    extra_sticks2);
+            MiscUtil.registerCasting(new ItemStack(Items.IRON_SWORD), FoundryFluids.liquid_iron, 2, ItemMold.SubItem.SWORD,
+                    extra_sticks1);
+            MiscUtil.registerCasting(new ItemStack(Items.IRON_HELMET), FoundryFluids.liquid_iron, 5,
+                    ItemMold.SubItem.HELMET);
+            MiscUtil.registerCasting(new ItemStack(Items.IRON_CHESTPLATE), FoundryFluids.liquid_iron, 8,
+                    ItemMold.SubItem.CHESTPLATE);
+            MiscUtil.registerCasting(new ItemStack(Items.IRON_LEGGINGS), FoundryFluids.liquid_iron, 7,
+                    ItemMold.SubItem.LEGGINGS);
+            MiscUtil.registerCasting(new ItemStack(Items.IRON_BOOTS), FoundryFluids.liquid_iron, 4, ItemMold.SubItem.BOOTS);
+            MiscUtil.registerCasting(new ItemStack(Items.SHEARS), FoundryFluids.liquid_iron, 2, ItemMold.SubItem.SHEARS);
 
-        MiscUtil.registerCasting(new ItemStack(Items.IRON_AXE), FoundryFluids.liquid_iron, 3, ItemMold.SubItem.AXE,
-                extra_sticks2);
-        MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_AXE), FoundryFluids.liquid_gold, 3, ItemMold.SubItem.AXE,
-                extra_sticks2);
+            // iron shield?
+            // MiscUtil.registerCasting(new ItemStack(Items.IRON_BOOTS), FoundryFluids.liquid_iron, 4, ItemMold.SubItem.BOOTS);
+            //        MiscUtil.registerCasting(
+            //                new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "???"))),
+            //                FoundryFluids.liquid_gold, 6, ItemMold.SubItem.BOOTS);
+        }
 
-        MiscUtil.registerCasting(new ItemStack(Items.IRON_SHOVEL), FoundryFluids.liquid_iron, 1,
-                ItemMold.SubItem.SHOVEL, extra_sticks2);
-        MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_SHOVEL), FoundryFluids.liquid_gold, 1,
-                ItemMold.SubItem.SHOVEL, extra_sticks2);
-
-        MiscUtil.registerCasting(new ItemStack(Items.IRON_HOE), FoundryFluids.liquid_iron, 2, ItemMold.SubItem.HOE,
-                extra_sticks2);
-        MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_HOE), FoundryFluids.liquid_gold, 2, ItemMold.SubItem.HOE,
-                extra_sticks2);
-
-        MiscUtil.registerCasting(new ItemStack(Items.IRON_SWORD), FoundryFluids.liquid_iron, 2, ItemMold.SubItem.SWORD,
-                extra_sticks1);
-        MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_SWORD), FoundryFluids.liquid_gold, 2,
-                ItemMold.SubItem.SWORD, extra_sticks1);
-
-        MiscUtil.registerCasting(new ItemStack(Items.IRON_HELMET), FoundryFluids.liquid_iron, 5,
-                ItemMold.SubItem.HELMET);
-        MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_HELMET), FoundryFluids.liquid_gold, 5,
-                ItemMold.SubItem.HELMET);
-
-        MiscUtil.registerCasting(new ItemStack(Items.IRON_CHESTPLATE), FoundryFluids.liquid_iron, 8,
-                ItemMold.SubItem.CHESTPLATE);
-        MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_CHESTPLATE), FoundryFluids.liquid_gold, 8,
-                ItemMold.SubItem.CHESTPLATE);
-
-        MiscUtil.registerCasting(new ItemStack(Items.IRON_LEGGINGS), FoundryFluids.liquid_iron, 7,
-                ItemMold.SubItem.LEGGINGS);
-        MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_LEGGINGS), FoundryFluids.liquid_gold, 7,
-                ItemMold.SubItem.LEGGINGS);
-
-        MiscUtil.registerCasting(new ItemStack(Items.IRON_BOOTS), FoundryFluids.liquid_iron, 4, ItemMold.SubItem.BOOTS);
-        MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_BOOTS), FoundryFluids.liquid_gold, 4,
-                ItemMold.SubItem.BOOTS);
-
-        MiscUtil.registerCasting(new ItemStack(Items.SHEARS), FoundryFluids.liquid_iron, 2, ItemMold.SubItem.SHEARS);
-
-        // iron shield?
-        // MiscUtil.registerCasting(new ItemStack(Items.IRON_BOOTS), FoundryFluids.liquid_iron, 4, ItemMold.SubItem.BOOTS);
-        //        MiscUtil.registerCasting(
-        //                new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "???"))),
-        //                FoundryFluids.liquid_gold, 6, ItemMold.SubItem.BOOTS);
+        if (!MetalConfig.metals.containsKey("gold") || MetalConfig.metals.get("gold") == MetalConfig.IntegrationStrategy.ENABLED) {
+            MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_PICKAXE), FoundryFluids.liquid_gold, 3,
+                    ItemMold.SubItem.PICKAXE, extra_sticks2);
+            MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_AXE), FoundryFluids.liquid_gold, 3, ItemMold.SubItem.AXE,
+                    extra_sticks2);
+            MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_SHOVEL), FoundryFluids.liquid_gold, 1,
+                    ItemMold.SubItem.SHOVEL, extra_sticks2);
+            MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_HOE), FoundryFluids.liquid_gold, 2, ItemMold.SubItem.HOE,
+                    extra_sticks2);
+            MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_SWORD), FoundryFluids.liquid_gold, 2,
+                    ItemMold.SubItem.SWORD, extra_sticks1);
+            MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_HELMET), FoundryFluids.liquid_gold, 5,
+                    ItemMold.SubItem.HELMET);
+            MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_CHESTPLATE), FoundryFluids.liquid_gold, 8,
+                    ItemMold.SubItem.CHESTPLATE);
+            MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_LEGGINGS), FoundryFluids.liquid_gold, 7,
+                    ItemMold.SubItem.LEGGINGS);
+            MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_BOOTS), FoundryFluids.liquid_gold, 4,
+                    ItemMold.SubItem.BOOTS);
+        }
     }
 }
