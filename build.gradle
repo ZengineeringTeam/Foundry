@@ -17,7 +17,7 @@ group = "exter.foundry"
 archivesBaseName = "ZenFoundry"
 
 minecraft {
-    version = "1.12.2-14.23.5.2768"
+    version = "1.12.2-14.23.5.2772"
     runDir = "run"
     mappings = "snapshot_20180119"
 	makeObfSourceJar = false
