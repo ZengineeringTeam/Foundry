@@ -1,5 +1,6 @@
 package exter.foundry.integration;
 
+import exter.foundry.config.MetalConfig;
 import exter.foundry.fluid.FluidLiquidMetal;
 import exter.foundry.fluid.FoundryFluidRegistry;
 import net.minecraft.block.Block;
@@ -15,6 +16,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ModIntegrationTechReborn implements IModIntegration
 {
     public static final String TECHREBORN = "techreborn";
@@ -23,6 +27,8 @@ public class ModIntegrationTechReborn implements IModIntegration
     private FluidLiquidMetal liquid_titanium;
     private FluidLiquidMetal liquid_tungsten;
     private FluidLiquidMetal liquid_refined_iron;
+
+    private Map<String, MetalConfig.IntegrationStrategy> metalConfigs = new HashMap<>();
 
     private ItemStack getItemStack(String name)
     {
@@ -90,17 +96,26 @@ public class ModIntegrationTechReborn implements IModIntegration
     @Override
     public void onPreInit(Configuration config)
     {
+        metalConfigs.put("chrome", MetalConfig.IntegrationStrategy.valueOf(config.getString("chrome", "Tech Reborn", MetalConfig.IntegrationStrategy.ENABLED.name(), "Valid values: ENABLED, DISABLED, NO_RECIPES")));
+        metalConfigs.put("titanium", MetalConfig.IntegrationStrategy.valueOf(config.getString("titanium", "Tech Reborn", MetalConfig.IntegrationStrategy.ENABLED.name(), "Valid values: ENABLED, DISABLED, NO_RECIPES")));
+        metalConfigs.put("tungsten", MetalConfig.IntegrationStrategy.valueOf(config.getString("tungsten", "Tech Reborn", MetalConfig.IntegrationStrategy.ENABLED.name(), "Valid values: ENABLED, DISABLED, NO_RECIPES")));
+        metalConfigs.put("refined_iron", MetalConfig.IntegrationStrategy.valueOf(config.getString("refined_iron", "Tech Reborn", MetalConfig.IntegrationStrategy.ENABLED.name(), "Valid values: ENABLED, DISABLED, NO_RECIPES")));
     }
 
     @SubscribeEvent
     public void registerFluids(RegistryEvent.Register<Block> e)
     {
         IForgeRegistry<Block> registry = e.getRegistry();
-        liquid_chrome = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "chrome", 3400, 15, 0xF9AEAE);
-        liquid_titanium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "titanium", 3000, 15, 0x999BFF);
-        liquid_tungsten = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "tungsten", 3950, 15,
+
+        if (MetalConfig.metals.get("chrome") != MetalConfig.IntegrationStrategy.DISABLED)
+            liquid_chrome = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "chrome", 3400, 15, 0xF9AEAE);
+        if (MetalConfig.metals.get("titanium") != MetalConfig.IntegrationStrategy.DISABLED)
+            liquid_titanium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "titanium", 3000, 15, 0x999BFF);
+        if (MetalConfig.metals.get("tungsten") != MetalConfig.IntegrationStrategy.DISABLED)
+            liquid_tungsten = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "tungsten", 3950, 15,
                 0x4A4E51);
-        liquid_refined_iron = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "refined_iron", 1940, 15,
+        if (MetalConfig.metals.get("refined_iron") != MetalConfig.IntegrationStrategy.DISABLED)
+            liquid_refined_iron = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "refined_iron", 1940, 15,
                 0x76A6E9);
 
         /*
