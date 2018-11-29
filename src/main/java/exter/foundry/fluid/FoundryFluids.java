@@ -1,7 +1,6 @@
 package exter.foundry.fluid;
 
 import exter.foundry.config.FoundryConfig;
-import exter.foundry.config.MetalConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.state.IBlockState;
@@ -47,89 +46,46 @@ public class FoundryFluids
     public static void registerFluids(Register<Block> event)
     {
         IForgeRegistry<Block> registry = event.getRegistry();
-        if (MetalConfig.metals.get("iron") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_iron = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "iron", 1540, 10, 0xa81212);
+        String category = "Base Metals";
+        liquid_iron = FoundryFluidRegistry.registerLiquidMetal(registry, "iron", category, 1540, 10, 0xa81212);
+        liquid_gold = FoundryFluidRegistry.registerLiquidMetal(registry, "gold", category, 1350, 15, 0xf6d609);
+        liquid_copper = FoundryFluidRegistry.registerLiquidMetal(registry, "copper", category, 1300, 15, 0xed9f07);
+        liquid_tin = FoundryFluidRegistry.registerLiquidMetal(registry, "tin", category, 550, 0, 0xc1cddc);
+        liquid_bronze = FoundryFluidRegistry.registerLiquidMetal(registry, "bronze", category, 1200, 15, 0xe3bd68);
+        liquid_electrum = FoundryFluidRegistry.registerLiquidMetal(registry, "electrum", category, 1350, 15, 0xe8db49);
+        liquid_invar = FoundryFluidRegistry.registerLiquidMetal(registry, "invar", category, 1780, 15, 0x7F907F);
+        liquid_nickel = FoundryFluidRegistry.registerLiquidMetal(registry, "nickel", category, 1750, 15, 0xc8d683);
+        liquid_zinc = FoundryFluidRegistry.registerLiquidMetal(registry, "zinc", category, 700, 0, 0xd3efe8);
+        liquid_brass = FoundryFluidRegistry.registerLiquidMetal(registry, "brass", category, 1200, 15, 0xede38b);
+        liquid_silver = FoundryFluidRegistry.registerLiquidMetal(registry, "silver", category, 1250, 15, 0xd1ecf6);
+        liquid_steel = FoundryFluidRegistry.registerLiquidMetal(registry, "steel", category, 1800, 15, 0xa7a7a7);
+        liquid_constantan = FoundryFluidRegistry.registerLiquidMetal(registry, "constantan", category, 1280, 15, 0xf7866c);
+        liquid_uranium = FoundryFluidRegistry.registerLiquidMetal(registry, "uranium", category, 1150, 15, 0x596552);
+        liquid_lead = FoundryFluidRegistry.registerLiquidMetal(registry, "lead", category, 650, 0, 0x4d4968);
+        liquid_platinum = FoundryFluidRegistry.registerLiquidMetal(registry, "platinum", category, 2100, 15, 0xB7E7FF);
+        liquid_aluminium = FoundryFluidRegistry.registerLiquidMetal(registry, "aluminium", category, 900, 0, 0xefe0d5);
+        liquid_cobalt = FoundryFluidRegistry.registerLiquidMetal(registry, "cobalt", category, 1500, 8, 0x2882d4);
+        liquid_iridium = FoundryFluidRegistry.registerLiquidMetal(registry, "iridium", category, 2450, 12, 0xBABADA);
+        liquid_signalum = FoundryFluidRegistry.registerLiquidMetal(registry, "signalum", category, 2800, 15, 0xD84100);
+        liquid_lumium = FoundryFluidRegistry.registerLiquidMetal(registry, "lumium", category, 2500, 15, 0xFFFF7F);
+        liquid_enderium = FoundryFluidRegistry.registerLiquidMetal(registry, "enderium", category, 3800, 12, 0x007068);
 
-        if (MetalConfig.metals.get("gold") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_gold = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "gold", 1350, 15, 0xf6d609);
-
-        if (MetalConfig.metals.get("copper") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_copper = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "copper", 1300, 15, 0xed9f07);
-
-        if (MetalConfig.metals.get("tin") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_tin = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "tin", 550, 0, 0xc1cddc);
-
-        if (MetalConfig.metals.get("bronze") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_bronze = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "bronze", 1200, 15, 0xe3bd68);
-
-        if (MetalConfig.metals.get("electrum") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_electrum = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "electrum", 1350, 15, 0xe8db49);
-
-        if (MetalConfig.metals.get("invar") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_invar = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "invar", 1780, 15, 0x7F907F);
-
-        if (MetalConfig.metals.get("nickel") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_nickel = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "nickel", 1750, 15, 0xc8d683);
-
-        if (MetalConfig.metals.get("zinc") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_zinc = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "zinc", 700, 0, 0xd3efe8);
-
-        if (MetalConfig.metals.get("brass") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_brass = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "brass", 1200, 15, 0xede38b);
-
-        if (MetalConfig.metals.get("silver") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_silver = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "silver", 1250, 15, 0xd1ecf6);
-
-        if (MetalConfig.metals.get("steel") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_steel = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "steel", 1800, 15, 0xa7a7a7);
-
-        if (MetalConfig.metals.get("constantan") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_constantan = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "constantan", 1280, 15,
-                0xf7866c);
-
-        if (MetalConfig.metals.get("uranium") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_uranium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "uranium", 1150, 15, 0x596552);
-
-        if (MetalConfig.metals.get("lead") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_lead = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "lead", 650, 0, 0x4d4968);
-
-        if (MetalConfig.metals.get("platinum") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_platinum = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "platinum", 2100, 15, 0xB7E7FF);
-
-        if (MetalConfig.metals.get("aluminium") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_aluminium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "aluminium", 900, 0, 0xefe0d5);
-
-        if (MetalConfig.metals.get("cobalt") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_cobalt = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "cobalt", 1500, 8, 0x2882d4);
-
-        if (MetalConfig.metals.get("iridium") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_iridium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "iridium", 2450, 12, 0xBABADA);
-
-        if (MetalConfig.metals.get("signalum") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_signalum = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "signalum", 2800, 15, 0xD84100);
-
-        if (MetalConfig.metals.get("lumium") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_lumium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "lumium", 2500, 15, 0xFFFF7F);
-
-        if (MetalConfig.metals.get("enderium") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_enderium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "enderium", 3800, 12, 0x007068);
-
-        if (!FoundryConfig.recipe_alumina_melts_to_aluminium && MetalConfig.metals.get("alumina") != MetalConfig.IntegrationStrategy.DISABLED)
+        if (!FoundryConfig.recipe_alumina_melts_to_aluminium)
         {
-            liquid_alumina = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "alumina", 2100, 12, 0xFFFFFF);
+            liquid_alumina = FoundryFluidRegistry.registerLiquidMetal(registry, "alumina", category, 2100, 12, 0xFFFFFF);
         }
 
         /*
-        LiquidMetalRegistry.instance.registerLiquidMetal(registry, "Manganese", 1550, 15);
-        LiquidMetalRegistry.instance.registerLiquidMetal(registry, "Rubber", 460, 0);
-        LiquidMetalRegistry.instance.registerLiquidMetal(registry, "StainlessSteel", 1900, 15);
-        LiquidMetalRegistry.instance.registerLiquidMetal(registry, "Kanthal", 1900, 15);
-        LiquidMetalRegistry.instance.registerLiquidMetal(registry, "Nichrome", 1950, 15);
+        LiquidMetalRegistry.registerLiquidMetal(registry, "Manganese", 1550, 15);
+        LiquidMetalRegistry.registerLiquidMetal(registry, "Rubber", 460, 0);
+        LiquidMetalRegistry.registerLiquidMetal(registry, "StainlessSteel", 1900, 15);
+        LiquidMetalRegistry.registerLiquidMetal(registry, "Kanthal", 1900, 15);
+        LiquidMetalRegistry.registerLiquidMetal(registry, "Nichrome", 1950, 15);
          */
 
         int temp = 1550;
-        liquid_glass = FoundryFluidRegistry.INSTANCE.registerLiquidGlass(registry, "glass", temp, 12, "glass",
-                0x40FFFFFF, Blocks.GLASS.getDefaultState());
+        liquid_glass = FoundryFluidRegistry.registerLiquidGlass(registry, "glass", category, temp, 12, "glass", 0x40FFFFFF,
+                Blocks.GLASS.getDefaultState());
 
         IBlockState stained_glass = Blocks.STAINED_GLASS.getDefaultState();
         for (EnumDyeColor dye : EnumDyeColor.values())
@@ -145,8 +101,8 @@ public class FoundryFluids
             int meta = dye.getMetadata();
 
             stained_glass = stained_glass.withProperty(BlockColored.COLOR, dye);
-            liquid_glass_colored[meta] = FoundryFluidRegistry.INSTANCE.registerLiquidGlass(registry, "glass_" + name,
-                    temp, 12, "glass", fluid_color, stained_glass);
+            liquid_glass_colored[meta] = FoundryFluidRegistry.registerLiquidGlass(registry, "glass_" + name, category, temp,
+                    12, "glass", fluid_color, stained_glass);
         }
     }
 }

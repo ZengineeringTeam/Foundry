@@ -1,6 +1,6 @@
 package exter.foundry.integration;
 
-import exter.foundry.config.MetalConfig;
+import exter.foundry.api.FoundryUtils;
 import exter.foundry.fluid.FluidLiquidMetal;
 import exter.foundry.fluid.FoundryFluidRegistry;
 import net.minecraft.block.Block;
@@ -9,15 +9,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ModIntegrationTechReborn implements IModIntegration
 {
@@ -27,8 +23,6 @@ public class ModIntegrationTechReborn implements IModIntegration
     private FluidLiquidMetal liquid_titanium;
     private FluidLiquidMetal liquid_tungsten;
     private FluidLiquidMetal liquid_refined_iron;
-
-    private Map<String, MetalConfig.IntegrationStrategy> metalConfigs = new HashMap<>();
 
     private ItemStack getItemStack(String name)
     {
@@ -87,19 +81,27 @@ public class ModIntegrationTechReborn implements IModIntegration
     @Override
     public void onPostInit()
     {
-        if (!Loader.isModLoaded(TECHREBORN))
+        if (FoundryFluidRegistry.getStrategy("chrome").registerRecipes())
         {
-            return;
+            FoundryUtils.registerBasicMeltingRecipes("chrome", liquid_chrome);
+        }
+        if (FoundryFluidRegistry.getStrategy("titanium").registerRecipes())
+        {
+            FoundryUtils.registerBasicMeltingRecipes("titanium", liquid_titanium);
+        }
+        if (FoundryFluidRegistry.getStrategy("tungsten").registerRecipes())
+        {
+            FoundryUtils.registerBasicMeltingRecipes("tungsten", liquid_tungsten);
+        }
+        if (FoundryFluidRegistry.getStrategy("refined_iron").registerRecipes())
+        {
+            FoundryUtils.registerBasicMeltingRecipes("refined_iron", liquid_refined_iron);
         }
     }
 
     @Override
     public void onPreInit(Configuration config)
     {
-        metalConfigs.put("chrome", MetalConfig.IntegrationStrategy.valueOf(config.getString("chrome", "Tech Reborn", MetalConfig.IntegrationStrategy.ENABLED.name(), "Valid values: ENABLED, DISABLED, NO_RECIPES")));
-        metalConfigs.put("titanium", MetalConfig.IntegrationStrategy.valueOf(config.getString("titanium", "Tech Reborn", MetalConfig.IntegrationStrategy.ENABLED.name(), "Valid values: ENABLED, DISABLED, NO_RECIPES")));
-        metalConfigs.put("tungsten", MetalConfig.IntegrationStrategy.valueOf(config.getString("tungsten", "Tech Reborn", MetalConfig.IntegrationStrategy.ENABLED.name(), "Valid values: ENABLED, DISABLED, NO_RECIPES")));
-        metalConfigs.put("refined_iron", MetalConfig.IntegrationStrategy.valueOf(config.getString("refined_iron", "Tech Reborn", MetalConfig.IntegrationStrategy.ENABLED.name(), "Valid values: ENABLED, DISABLED, NO_RECIPES")));
     }
 
     @SubscribeEvent
@@ -107,22 +109,12 @@ public class ModIntegrationTechReborn implements IModIntegration
     {
         IForgeRegistry<Block> registry = e.getRegistry();
 
-        if (MetalConfig.metals.get("chrome") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_chrome = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "chrome", 3400, 15, 0xF9AEAE);
-        if (MetalConfig.metals.get("titanium") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_titanium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "titanium", 3000, 15, 0x999BFF);
-        if (MetalConfig.metals.get("tungsten") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_tungsten = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "tungsten", 3950, 15,
+        liquid_chrome = FoundryFluidRegistry.registerLiquidMetal(registry, "chrome", "Tech Reborn", 3400, 15, 0xF9AEAE);
+        liquid_titanium = FoundryFluidRegistry.registerLiquidMetal(registry, "titanium", "Tech Reborn", 3000, 15,
+                0x999BFF);
+        liquid_tungsten = FoundryFluidRegistry.registerLiquidMetal(registry, "tungsten", "Tech Reborn", 3950, 15,
                 0x4A4E51);
-        if (MetalConfig.metals.get("refined_iron") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_refined_iron = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "refined_iron", 1940, 15,
-                0x76A6E9);
-
-        /*
-        FoundryUtils.registerBasicMeltingRecipes("chrome", liquid_chrome);
-        FoundryUtils.registerBasicMeltingRecipes("titanium", liquid_titanium);
-        FoundryUtils.registerBasicMeltingRecipes("tungsten", liquid_tungsten);
-        FoundryUtils.registerBasicMeltingRecipes("refined_iron", liquid_refined_iron);
-        */
+        liquid_refined_iron = FoundryFluidRegistry.registerLiquidMetal(registry, "refined_iron", "Tech Reborn", 1940,
+                15, 0x76A6E9);
     }
 }

@@ -6,6 +6,7 @@ import exter.foundry.fluid.FoundryFluidRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 
@@ -29,12 +30,14 @@ public class FoundryTab extends CreativeTabs
     public void displayAllRelevantItems(NonNullList<ItemStack> list)
     {
         super.displayAllRelevantItems(list);
-        // TODO: some buckets are missing. change the block register events maybe
-        FoundryFluidRegistry.INSTANCE.getFluids().forEach(fluid -> {
-            ItemStack bucket = FluidUtil.getFilledBucket(new FluidStack(fluid, 1));
-            if (!bucket.isEmpty())
+        FoundryFluidRegistry.getMap().forEach((name, strategy) -> {
+            if (strategy.enabled())
             {
-                list.add(bucket);
+                ItemStack bucket = FluidUtil.getFilledBucket(new FluidStack(FluidRegistry.getFluid(name), 1));
+                if (!bucket.isEmpty())
+                {
+                    list.add(bucket);
+                }
             }
         });
     }

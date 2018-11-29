@@ -1,7 +1,7 @@
 package exter.foundry.init;
 
 import exter.foundry.api.recipe.matcher.OreMatcher;
-import exter.foundry.config.MetalConfig;
+import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.fluid.FoundryFluids;
 import exter.foundry.item.ItemMold;
 import exter.foundry.recipes.manager.MoldRecipeManager;
@@ -50,8 +50,7 @@ public class InitToolRecipes
         MoldRecipeManager.INSTANCE.addRecipe(mold_shovel, 3, 6,
                 new int[] { 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(mold_hoe, 3, 5,
-                new int[] { 0, 2, 2, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1 });
+        MoldRecipeManager.INSTANCE.addRecipe(mold_hoe, 3, 5, new int[] { 0, 2, 2, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1 });
 
         MoldRecipeManager.INSTANCE.addRecipe(mold_sword, 3, 6,
                 new int[] { 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 2, 1, 0, 1, 0 });
@@ -65,12 +64,13 @@ public class InitToolRecipes
         MoldRecipeManager.INSTANCE.addRecipe(mold_shears, 5, 6,
                 new int[] { 2, 3, 0, 3, 2, 2, 3, 0, 3, 2, 2, 3, 0, 3, 2, 2, 0, 0, 0, 2, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(mold_excavator, 6, 6,
-                new int[] { 0, 0, 0, 3, 3, 3, 0, 0, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3, 0, 0, 1, 0, 3, 0, 0, 1, 0, 0, 0, 0, 0 });
+        MoldRecipeManager.INSTANCE.addRecipe(mold_excavator, 6, 6, new int[] { 0, 0, 0, 3, 3, 3, 0, 0, 3, 3, 3, 3, 0, 3,
+                3, 3, 3, 3, 0, 0, 3, 3, 3, 0, 0, 1, 0, 3, 0, 0, 1, 0, 0, 0, 0, 0 });
 
         // TODO: mold recipes
         // TODO: melting recipes
-        if (!MetalConfig.metals.containsKey("iron") || MetalConfig.metals.get("iron") == MetalConfig.IntegrationStrategy.ENABLED) {
+        if (FoundryFluidRegistry.getStrategy("iron").registerRecipes())
+        {
             MiscUtil.registerCasting(new ItemStack(Items.IRON_PICKAXE), FoundryFluids.liquid_iron, 3,
                     ItemMold.SubItem.PICKAXE, extra_sticks2);
             MiscUtil.registerCasting(new ItemStack(Items.IRON_AXE), FoundryFluids.liquid_iron, 3, ItemMold.SubItem.AXE,
@@ -79,16 +79,18 @@ public class InitToolRecipes
                     ItemMold.SubItem.SHOVEL, extra_sticks2);
             MiscUtil.registerCasting(new ItemStack(Items.IRON_HOE), FoundryFluids.liquid_iron, 2, ItemMold.SubItem.HOE,
                     extra_sticks2);
-            MiscUtil.registerCasting(new ItemStack(Items.IRON_SWORD), FoundryFluids.liquid_iron, 2, ItemMold.SubItem.SWORD,
-                    extra_sticks1);
+            MiscUtil.registerCasting(new ItemStack(Items.IRON_SWORD), FoundryFluids.liquid_iron, 2,
+                    ItemMold.SubItem.SWORD, extra_sticks1);
             MiscUtil.registerCasting(new ItemStack(Items.IRON_HELMET), FoundryFluids.liquid_iron, 5,
                     ItemMold.SubItem.HELMET);
             MiscUtil.registerCasting(new ItemStack(Items.IRON_CHESTPLATE), FoundryFluids.liquid_iron, 8,
                     ItemMold.SubItem.CHESTPLATE);
             MiscUtil.registerCasting(new ItemStack(Items.IRON_LEGGINGS), FoundryFluids.liquid_iron, 7,
                     ItemMold.SubItem.LEGGINGS);
-            MiscUtil.registerCasting(new ItemStack(Items.IRON_BOOTS), FoundryFluids.liquid_iron, 4, ItemMold.SubItem.BOOTS);
-            MiscUtil.registerCasting(new ItemStack(Items.SHEARS), FoundryFluids.liquid_iron, 2, ItemMold.SubItem.SHEARS);
+            MiscUtil.registerCasting(new ItemStack(Items.IRON_BOOTS), FoundryFluids.liquid_iron, 4,
+                    ItemMold.SubItem.BOOTS);
+            MiscUtil.registerCasting(new ItemStack(Items.SHEARS), FoundryFluids.liquid_iron, 2,
+                    ItemMold.SubItem.SHEARS);
 
             // iron shield?
             // MiscUtil.registerCasting(new ItemStack(Items.IRON_BOOTS), FoundryFluids.liquid_iron, 4, ItemMold.SubItem.BOOTS);
@@ -97,15 +99,16 @@ public class InitToolRecipes
             //                FoundryFluids.liquid_gold, 6, ItemMold.SubItem.BOOTS);
         }
 
-        if (!MetalConfig.metals.containsKey("gold") || MetalConfig.metals.get("gold") == MetalConfig.IntegrationStrategy.ENABLED) {
+        if (FoundryFluidRegistry.getStrategy("gold").registerRecipes())
+        {
             MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_PICKAXE), FoundryFluids.liquid_gold, 3,
                     ItemMold.SubItem.PICKAXE, extra_sticks2);
-            MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_AXE), FoundryFluids.liquid_gold, 3, ItemMold.SubItem.AXE,
-                    extra_sticks2);
+            MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_AXE), FoundryFluids.liquid_gold, 3,
+                    ItemMold.SubItem.AXE, extra_sticks2);
             MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_SHOVEL), FoundryFluids.liquid_gold, 1,
                     ItemMold.SubItem.SHOVEL, extra_sticks2);
-            MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_HOE), FoundryFluids.liquid_gold, 2, ItemMold.SubItem.HOE,
-                    extra_sticks2);
+            MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_HOE), FoundryFluids.liquid_gold, 2,
+                    ItemMold.SubItem.HOE, extra_sticks2);
             MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_SWORD), FoundryFluids.liquid_gold, 2,
                     ItemMold.SubItem.SWORD, extra_sticks1);
             MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_HELMET), FoundryFluids.liquid_gold, 5,

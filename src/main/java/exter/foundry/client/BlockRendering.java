@@ -14,6 +14,7 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -25,11 +26,14 @@ public class BlockRendering
     public static void onModelRegister(ModelRegistryEvent event)
     {
 
-        FoundryFluidRegistry.INSTANCE.getFluids().forEach(fluid -> {
-            Block block = fluid.getBlock();
-            if (block instanceof BlockFluidBase)
+        FoundryFluidRegistry.getMap().forEach((name, strategy) -> {
+            if (strategy.enabled())
             {
-                mapFluidModel((BlockFluidBase) block);
+                Block block = FluidRegistry.getFluid(name).getBlock();
+                if (block instanceof BlockFluidBase)
+                {
+                    mapFluidModel((BlockFluidBase) block);
+                }
             }
         });
     }

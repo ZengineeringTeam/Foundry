@@ -12,7 +12,6 @@ import cofh.thermalfoundation.init.TFProps;
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.api.recipe.matcher.OreMatcher;
-import exter.foundry.config.MetalConfig;
 import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.fluid.FoundryFluids;
 import exter.foundry.item.ItemMold.SubItem;
@@ -29,6 +28,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -77,18 +77,24 @@ public class ModIntegrationThermalFoundation implements IModIntegration
         MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Items.ENDER_PEARL),
                 new FluidStack(TFFluids.fluidEnder, 250), TFFluids.fluidEnder.getTemperature(), 75);
 
-        if (MetalConfig.metals.get("lumium") == MetalConfig.IntegrationStrategy.ENABLED && FoundryFluids.liquid_lumium != null && FoundryFluids.liquid_tin != null && FoundryFluids.liquid_silver != null)
+        if (FoundryFluidRegistry.getStrategy("lumium").registerRecipes() && FoundryFluids.liquid_lumium != null
+                && FoundryFluids.liquid_tin != null && FoundryFluids.liquid_silver != null)
             AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_lumium, FLUID_AMOUNT_INGOT),
                     new FluidStack(TFFluids.fluidGlowstone, 250),
                     new FluidStack(FoundryFluids.liquid_tin, FLUID_AMOUNT_INGOT / 4 * 3),
                     new FluidStack(FoundryFluids.liquid_silver, FLUID_AMOUNT_INGOT / 4));
-        if (MetalConfig.metals.get("signalum") == MetalConfig.IntegrationStrategy.ENABLED && FoundryFluids.liquid_signalum != null && FoundryFluids.liquid_copper != null && FoundryFluids.liquid_silver != null)
-            AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_signalum, FLUID_AMOUNT_INGOT),
+        if (FoundryFluidRegistry.getStrategy("signalum").registerRecipes() && FoundryFluids.liquid_signalum != null
+                && FoundryFluids.liquid_copper != null && FoundryFluids.liquid_silver != null)
+            AlloyMixerRecipeManager.INSTANCE.addRecipe(
+                    new FluidStack(FoundryFluids.liquid_signalum, FLUID_AMOUNT_INGOT),
                     new FluidStack(TFFluids.fluidRedstone, 250),
                     new FluidStack(FoundryFluids.liquid_copper, FLUID_AMOUNT_INGOT / 4 * 3),
                     new FluidStack(FoundryFluids.liquid_silver, FLUID_AMOUNT_INGOT / 4));
-        if (MetalConfig.metals.get("enderium") == MetalConfig.IntegrationStrategy.ENABLED && FoundryFluids.liquid_enderium != null && FoundryFluids.liquid_tin != null && FoundryFluids.liquid_silver != null && FoundryFluids.liquid_platinum != null)
-            AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_enderium, FLUID_AMOUNT_INGOT),
+        if (FoundryFluidRegistry.getStrategy("enderium").registerRecipes() && FoundryFluids.liquid_enderium != null
+                && FoundryFluids.liquid_tin != null && FoundryFluids.liquid_silver != null
+                && FoundryFluids.liquid_platinum != null)
+            AlloyMixerRecipeManager.INSTANCE.addRecipe(
+                    new FluidStack(FoundryFluids.liquid_enderium, FLUID_AMOUNT_INGOT),
                     new FluidStack(TFFluids.fluidEnder, 250),
                     new FluidStack(FoundryFluids.liquid_lead, FLUID_AMOUNT_INGOT / 4 * 3),
                     new FluidStack(FoundryFluids.liquid_platinum, FLUID_AMOUNT_INGOT / 4));
@@ -99,8 +105,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
         for (String name : ImmutableList.of("copper", "tin", "silver", "lead", "aluminum", "nickel", "platinum",
                 "steel", "electrum", "invar", "bronze", "constantan", "iron", "gold"))
         {
-            tryAddToolArmorRecipes(cfg, name,
-                    FoundryFluidRegistry.INSTANCE.getFluid(name.equals("aluminum") ? "aluminium" : name));
+            tryAddToolArmorRecipes(cfg, name, FluidRegistry.getFluid(name.equals("aluminum") ? "aluminium" : name));
         }
 
         BlockFluidInteractive pyrotheum = (BlockFluidInteractive) TFFluids.blockFluidPyrotheum;
@@ -135,7 +140,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
 
     public static void tryAddToolArmorRecipes(Configuration cfg, String name, Fluid fluid)
     {
-        if (fluid == null || MetalConfig.metals.get(name) != MetalConfig.IntegrationStrategy.ENABLED)
+        if (fluid == null || !FoundryFluidRegistry.getStrategy(name).registerRecipes())
         {
             return;
         }

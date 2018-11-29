@@ -11,8 +11,6 @@ import exter.foundry.api.recipe.ICastingTableRecipe;
 import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.api.recipe.matcher.OreMatcher;
 import exter.foundry.config.FoundryConfig;
-import exter.foundry.config.MetalConfig;
-import exter.foundry.fluid.FluidLiquidMetal;
 import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.fluid.FoundryFluids;
 import exter.foundry.item.ItemMold;
@@ -101,11 +99,16 @@ public class InitRecipes
 
         ItemStack ingot_mold = ItemMold.SubItem.INGOT.getItem();
         ItemStack block_mold = ItemMold.SubItem.BLOCK.getItem();
-        for (String name : FoundryFluidRegistry.INSTANCE.getFluidNames())
+        for (String name : FoundryFluidRegistry.getFluidNames())
         {
-            FluidLiquidMetal fluid = FoundryFluidRegistry.INSTANCE.getFluid(name);
+            Fluid fluid = FluidRegistry.getFluid(name);
+            if (fluid == null)
+            {
+                continue;
+            }
             name = MiscUtil.upperCaseFirstChar(name);
-            if (!fluid.glass && (!MetalConfig.metals.containsKey(name.toLowerCase()) || MetalConfig.metals.get(name.toLowerCase()) == MetalConfig.IntegrationStrategy.ENABLED))
+            if (!fluid.getName().startsWith("glass")
+                    && FoundryFluidRegistry.getStrategy(fluid.getName()).registerRecipes())
             {
                 FluidStack fluidstack = new FluidStack(fluid, FLUID_AMOUNT_INGOT);
                 List<ItemStack> ores = OreDictionary.doesOreNameExist("ingot" + name)
@@ -201,17 +204,19 @@ public class InitRecipes
     static public void registerMachineRecipes()
     {
 
-        for (String name : FoundryFluidRegistry.INSTANCE.getFluidNames())
+        for (String name : FoundryFluidRegistry.getFluidNames())
         {
-            FluidLiquidMetal fluid = FoundryFluidRegistry.INSTANCE.getFluid(name);
-            if (!fluid.glass && (!MetalConfig.metals.containsKey(name) || MetalConfig.metals.get(name) == MetalConfig.IntegrationStrategy.ENABLED))
+            Fluid fluid = FluidRegistry.getFluid(name);
+            if (!fluid.getName().startsWith("glass") && FoundryFluidRegistry.getStrategy(name).registerRecipes())
             {
                 FoundryUtils.registerBasicMeltingRecipes(name, fluid);
             }
         }
         // FoundryUtils.registerBasicMeltingRecipes("Chromium", LiquidMetalRegistry.instance.getFluid("chrome"));
-        if (MetalConfig.metals.get("aluminium") == MetalConfig.IntegrationStrategy.ENABLED)
-            FoundryUtils.registerBasicMeltingRecipes("Aluminum", FoundryFluidRegistry.INSTANCE.getFluid("aluminium"));
+        if (FoundryFluidRegistry.getStrategy("aluminium").registerRecipes())
+        {
+            FoundryUtils.registerBasicMeltingRecipes("Aluminum", FluidRegistry.getFluid("aluminium"));
+        }
         // FoundryUtils.registerBasicMeltingRecipes("Constantan", FoundryFluidRegistry.INSTANCE.getFluid("constantan"));
 
         MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.ICE),
@@ -264,21 +269,22 @@ public class InitRecipes
         }
 
         //Base casting recipes.
-        for (String name : FoundryFluidRegistry.INSTANCE.getFluidNames())
+        for (String name : FoundryFluidRegistry.getFluidNames())
         {
-            if (!MetalConfig.metals.containsKey(name) || MetalConfig.metals.get(name) == MetalConfig.IntegrationStrategy.ENABLED)
-                addDefaultCasting(FoundryFluidRegistry.INSTANCE.getFluid(name), name);
+            if (FoundryFluidRegistry.getStrategy(name).registerRecipes())
+                addDefaultCasting(FluidRegistry.getFluid(name), name);
         }
 
-        if (MetalConfig.metals.get("aluminium") == MetalConfig.IntegrationStrategy.ENABLED)
-            addDefaultCasting(FoundryFluidRegistry.INSTANCE.getFluid("aluminium"), "Aluminum");
-
-        if (MetalConfig.metals.get("constantan") == MetalConfig.IntegrationStrategy.ENABLED)
-            addDefaultCasting(FoundryFluidRegistry.INSTANCE.getFluid("constantan"), "Constantan");
+        // why?
+        if (FoundryFluidRegistry.getStrategy("aluminium").registerRecipes())
+            addDefaultCasting(FluidRegistry.getFluid("aluminium"), "Aluminum");
+        if (FoundryFluidRegistry.getStrategy("constantan").registerRecipes())
+            addDefaultCasting(FluidRegistry.getFluid("constantan"), "Constantan");
 
         if (FoundryConfig.recipe_alumina_melts_to_aluminium)
         {
-            if (FoundryFluids.liquid_aluminium != null) {
+            if (FoundryFluids.liquid_aluminium != null)
+            {
                 MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("ingotAlumina"),
                         new FluidStack(FoundryFluids.liquid_aluminium, FLUID_AMOUNT_INGOT), 2100);
                 MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("nuggetAlumina"),
@@ -291,12 +297,13 @@ public class InitRecipes
         }
         else
         {
-            if (FoundryFluids.liquid_aluminium != null && FoundryFluids.liquid_alumina != null) {
+            if (FoundryFluids.liquid_aluminium != null && FoundryFluids.liquid_alumina != null)
+            {
                 if (OreDictionary.doesOreNameExist("dustCoal"))
                     InfuserRecipeManager.INSTANCE.addRecipe(
                             new FluidStack(FoundryFluids.liquid_aluminium, FLUID_AMOUNT_INGOT * 2),
-                            new FluidStack(FoundryFluids.liquid_alumina, FLUID_AMOUNT_INGOT * 2), new OreMatcher("dustCoal"),
-                            2400);
+                            new FluidStack(FoundryFluids.liquid_alumina, FLUID_AMOUNT_INGOT * 2),
+                            new OreMatcher("dustCoal"), 2400);
                 if (OreDictionary.doesOreNameExist("dustCharcoal"))
                     InfuserRecipeManager.INSTANCE.addRecipe(
                             new FluidStack(FoundryFluids.liquid_aluminium, FLUID_AMOUNT_INGOT * 2),
@@ -351,11 +358,11 @@ public class InitRecipes
     static ItemStack mold_rod = ItemMold.SubItem.ROD.getItem();
     static ItemStack mold_nugget = ItemMold.SubItem.NUGGET.getItem();
 
-    public static void addDefaultCasting(FluidLiquidMetal fluid, String name)
+    public static void addDefaultCasting(Fluid fluid, String name)
     {
         name = MiscUtil.upperCaseFirstChar(name);
 
-        if (fluid.glass)
+        if (fluid.getName().startsWith("glass"))
         {
             return;
         }

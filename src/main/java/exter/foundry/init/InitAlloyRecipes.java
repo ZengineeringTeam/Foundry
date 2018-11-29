@@ -1,11 +1,12 @@
 package exter.foundry.init;
 
+import static exter.foundry.api.FoundryAPI.FLUID_AMOUNT_INGOT;
+
 import exter.foundry.api.recipe.matcher.IItemMatcher;
 import exter.foundry.api.recipe.matcher.OreMatcher;
 import exter.foundry.config.FoundryConfig;
-import exter.foundry.config.MetalConfig;
-import exter.foundry.fluid.FoundryFluids;
 import exter.foundry.fluid.FoundryFluidRegistry;
+import exter.foundry.fluid.FoundryFluids;
 import exter.foundry.recipes.manager.AlloyMixerRecipeManager;
 import exter.foundry.recipes.manager.AlloyingCrucibleRecipeManager;
 import exter.foundry.recipes.manager.InfuserRecipeManager;
@@ -16,20 +17,17 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.ArrayList;
-
-import static exter.foundry.api.FoundryAPI.FLUID_AMOUNT_INGOT;
-
 public class InitAlloyRecipes
 {
     // Create recipes for all alloy making machines.
     static private void addSimpleAlloy(String output, String input_a, int amount_a, String input_b, int amount_b)
     {
-        Fluid fluid_out = FoundryFluidRegistry.INSTANCE.getFluid(output);
-        Fluid fluid_in_a = FoundryFluidRegistry.INSTANCE.getFluid(input_a);
-        Fluid fluid_in_b = FoundryFluidRegistry.INSTANCE.getFluid(input_b);
+        Fluid fluid_out = FluidRegistry.getFluid(output);
+        Fluid fluid_in_a = FluidRegistry.getFluid(input_a);
+        Fluid fluid_in_b = FluidRegistry.getFluid(input_b);
 
-        if (fluid_out != null && fluid_in_a != null && fluid_in_b != null) {
+        if (fluid_out != null && fluid_in_a != null && fluid_in_b != null)
+        {
             ItemStack alloy_ingot = MiscUtil.getModItemFromOreDictionary("ingot" + output, amount_a + amount_b);
             if (!alloy_ingot.isEmpty())
             {
@@ -40,7 +38,7 @@ public class InitAlloyRecipes
                     new FluidStack(fluid_in_a, amount_a * 3), new FluidStack(fluid_in_b, amount_b * 3));
 
             AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(fluid_out, amount_a + amount_b),
-                    new FluidStack[]{new FluidStack(fluid_in_a, amount_a), new FluidStack(fluid_in_b, amount_b)});
+                    new FluidStack[] { new FluidStack(fluid_in_a, amount_a), new FluidStack(fluid_in_b, amount_b) });
         }
     }
 
@@ -60,23 +58,24 @@ public class InitAlloyRecipes
 
     static public void init()
     {
-        if (MetalConfig.metals.get("bronze") == MetalConfig.IntegrationStrategy.ENABLED)
+        if (FoundryFluidRegistry.getStrategy("bronze").registerRecipes())
             addSimpleAlloy("bronze", "copper", 3, "tin", 1);
 
-        if (MetalConfig.metals.get("brass") == MetalConfig.IntegrationStrategy.ENABLED)
+        if (FoundryFluidRegistry.getStrategy("brass").registerRecipes())
             addSimpleAlloy("brass", "copper", 3,
-                !OreDictionary.getOres("ingotZinc", false).isEmpty() ? "zinc" : "aluminium", 1);
+                    !OreDictionary.getOres("ingotZinc", false).isEmpty() ? "zinc" : "aluminium", 1);
 
-        if (MetalConfig.metals.get("invar") == MetalConfig.IntegrationStrategy.ENABLED)
+        if (FoundryFluidRegistry.getStrategy("invar").registerRecipes())
             addSimpleAlloy("invar", "iron", 2, "nickel", 1);
 
-        if (MetalConfig.metals.get("electrum") == MetalConfig.IntegrationStrategy.ENABLED)
+        if (FoundryFluidRegistry.getStrategy("electrum").registerRecipes())
             addSimpleAlloy("electrum", "gold", 1, "silver", 1);
 
-        if (MetalConfig.metals.get("constantan") == MetalConfig.IntegrationStrategy.ENABLED)
+        if (FoundryFluidRegistry.getStrategy("constantan").registerRecipes())
             addSimpleAlloy("constantan", "copper", 1, "nickel", 1);
 
-        if (MetalConfig.metals.get("steel") == MetalConfig.IntegrationStrategy.ENABLED && FoundryConfig.recipe_steel && FoundryFluids.liquid_steel != null && FoundryFluids.liquid_iron != null)
+        if (FoundryFluidRegistry.getStrategy("steel").registerRecipes() && FoundryConfig.recipe_steel
+                && FoundryFluids.liquid_steel != null && FoundryFluids.liquid_iron != null)
         {
             if (OreDictionary.doesOreNameExist("dustCoal"))
                 InfuserRecipeManager.INSTANCE.addRecipe(

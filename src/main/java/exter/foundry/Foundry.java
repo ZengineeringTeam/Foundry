@@ -1,15 +1,20 @@
 package exter.foundry;
 
-import exter.foundry.config.MetalConfig;
-import exter.foundry.integration.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.capability.CapabilityHeatProvider;
 import exter.foundry.config.FoundryConfig;
-import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.init.InitRecipes;
+import exter.foundry.integration.ModIntegrationBotania;
+import exter.foundry.integration.ModIntegrationCrafttweaker;
+import exter.foundry.integration.ModIntegrationEnderIO;
+import exter.foundry.integration.ModIntegrationManager;
+import exter.foundry.integration.ModIntegrationMekanism;
+import exter.foundry.integration.ModIntegrationTechReborn;
+import exter.foundry.integration.ModIntegrationTheOneProbe;
+import exter.foundry.integration.ModIntegrationThermalFoundation;
 import exter.foundry.material.MaterialRegistry;
 import exter.foundry.network.MessageTileEntitySync;
 import exter.foundry.proxy.CommonProxy;
@@ -145,10 +150,6 @@ public class Foundry
             ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationCrafttweaker());
         if (Loader.isModLoaded("theoneprobe"))
             ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationTheOneProbe());
-
-        MetalConfig.load(FoundryConfig.config);
-
-        FoundryAPI.FLUIDS = FoundryFluidRegistry.INSTANCE;
 
         FoundryAPI.MELTING_MANAGER = MeltingRecipeManager.INSTANCE;
         FoundryAPI.CASTING_MANAGER = CastingRecipeManager.INSTANCE;

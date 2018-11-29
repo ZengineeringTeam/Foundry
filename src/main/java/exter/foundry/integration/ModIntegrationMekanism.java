@@ -1,7 +1,6 @@
 package exter.foundry.integration;
 
 import exter.foundry.api.FoundryUtils;
-import exter.foundry.config.MetalConfig;
 import exter.foundry.fluid.FluidLiquidMetal;
 import exter.foundry.fluid.FoundryFluidRegistry;
 import net.minecraft.block.Block;
@@ -17,10 +16,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class ModIntegrationMekanism  implements IModIntegration
+public class ModIntegrationMekanism implements IModIntegration
 {
 
     public static final String MEKANISM = "mekanism";
@@ -28,8 +24,6 @@ public class ModIntegrationMekanism  implements IModIntegration
     private FluidLiquidMetal liquid_osmium;
     private FluidLiquidMetal liquid_refined_obsidian;
     private FluidLiquidMetal liquid_refined_glowstone;
-
-    private Map<String, MetalConfig.IntegrationStrategy> metalConfigs = new HashMap<>();
 
     private ItemStack getItemStack(String name)
     {
@@ -93,6 +87,7 @@ public class ModIntegrationMekanism  implements IModIntegration
             return;
         }
 
+        // FIXME
         /* Mekanism Tools are in another pack, so I can't make support by myself. I need your help!
         if (FoundryConfig.recipe_equipment)
         {
@@ -101,37 +96,37 @@ public class ModIntegrationMekanism  implements IModIntegration
             ItemStack osmium_shovel = getItemStack("osmiumshovel");
             ItemStack osmium_hoe = getItemStack("osmiumhoe");
             ItemStack osmium_sword = getItemStack("osmiumsword");
-
+        
             ItemStack osmium_helmet = getItemStack("osmiumhelmet");
             ItemStack osmium_chestplate = getItemStack("osmiumchestplate");
             ItemStack osmium_leggings = getItemStack("osmiumleggings");
             ItemStack osmium_boots = getItemStack("osmiumboots");
-
+        
             ItemStack refined_obsidian_pickaxe = getItemStack("obsidianpickaxe");
             ItemStack refined_obsidian_axe = getItemStack("obsidianaxe");
             ItemStack refined_obsidian_shovel = getItemStack("obsidianshovel");
             ItemStack refined_obsidian_hoe = getItemStack("obsidianhoe");
             ItemStack refined_obsidian_sword = getItemStack("obsidiansword");
-
+        
             ItemStack refined_obsidian_helmet = getItemStack("obsidianhelmet");
             ItemStack refined_obsidian_chestplate = getItemStack("obsidianchestplate");
             ItemStack refined_obsidian_leggings = getItemStack("obsidianleggings");
             ItemStack refined_obsidian_boots = getItemStack("obsidianboots");
-
+        
             ItemStack refined_glowstone_pickaxe = getItemStack("glowstonepickaxe");
             ItemStack refined_glowstone_axe = getItemStack("glowstoneaxe");
             ItemStack refined_glowstone_shovel = getItemStack("glowstoneshovel");
             ItemStack refined_glowstone_hoe = getItemStack("glowstonehoe");
             ItemStack refined_glowstone_sword = getItemStack("glowstonesword");
-
+        
             ItemStack refined_glowstone_helmet = getItemStack("glowstonehelmet");
             ItemStack refined_glowstone_chestplate = getItemStack("glowstonechestplate");
             ItemStack refined_glowstone_leggings = getItemStack("glowstoneleggings");
             ItemStack refined_glowstone_boots = getItemStack("glowstoneboots");
-
+        
             OreMatcher extra_sticks1 = new OreMatcher("stickWood", 1);
             OreMatcher extra_sticks2 = new OreMatcher("stickWood", 2);
-
+        
             MiscUtil.registerCasting(osmium_pickaxe, liquid_osmium, 3, ItemMold.SubItem.PICKAXE, extra_sticks2);
             MiscUtil.registerCasting(osmium_axe, liquid_osmium, 3, ItemMold.SubItem.AXE, extra_sticks2);
             MiscUtil.registerCasting(osmium_shovel, liquid_osmium, 1, ItemMold.SubItem.SHOVEL, extra_sticks2);
@@ -141,7 +136,7 @@ public class ModIntegrationMekanism  implements IModIntegration
             MiscUtil.registerCasting(osmium_leggings, liquid_osmium, 7, ItemMold.SubItem.LEGGINGS);
             MiscUtil.registerCasting(osmium_helmet, liquid_osmium, 5, ItemMold.SubItem.HELMET);
             MiscUtil.registerCasting(osmium_boots, liquid_osmium, 4, ItemMold.SubItem.BOOTS);
-
+        
             MiscUtil.registerCasting(refined_obsidian_pickaxe, liquid_refined_obsidian, 3, ItemMold.SubItem.PICKAXE, extra_sticks2);
             MiscUtil.registerCasting(refined_obsidian_axe, liquid_refined_obsidian, 3, ItemMold.SubItem.AXE, extra_sticks2);
             MiscUtil.registerCasting(refined_obsidian_shovel, liquid_refined_obsidian, 1, ItemMold.SubItem.SHOVEL, extra_sticks2);
@@ -151,7 +146,7 @@ public class ModIntegrationMekanism  implements IModIntegration
             MiscUtil.registerCasting(refined_obsidian_leggings, liquid_refined_obsidian, 7, ItemMold.SubItem.LEGGINGS);
             MiscUtil.registerCasting(refined_obsidian_helmet, liquid_refined_obsidian, 5, ItemMold.SubItem.HELMET);
             MiscUtil.registerCasting(refined_obsidian_boots, liquid_refined_obsidian, 4, ItemMold.SubItem.BOOTS);
-
+        
             MiscUtil.registerCasting(refined_glowstone_pickaxe, liquid_refined_glowstone, 3, ItemMold.SubItem.PICKAXE, extra_sticks2);
             MiscUtil.registerCasting(refined_glowstone_axe, liquid_refined_glowstone, 3, ItemMold.SubItem.AXE, extra_sticks2);
             MiscUtil.registerCasting(refined_glowstone_shovel, liquid_refined_glowstone, 1, ItemMold.SubItem.SHOVEL, extra_sticks2);
@@ -163,14 +158,18 @@ public class ModIntegrationMekanism  implements IModIntegration
             MiscUtil.registerCasting(refined_glowstone_boots, liquid_refined_glowstone, 4, ItemMold.SubItem.BOOTS);
         }
         */
+
+        if (FoundryFluidRegistry.getStrategy("osmium").registerRecipes())
+            FoundryUtils.registerBasicMeltingRecipes("osmium", liquid_osmium);
+        if (FoundryFluidRegistry.getStrategy("refined_obsidian").registerRecipes())
+            FoundryUtils.registerBasicMeltingRecipes("refined_obsidian", liquid_refined_obsidian);
+        if (FoundryFluidRegistry.getStrategy("refined_glowstone").registerRecipes())
+            FoundryUtils.registerBasicMeltingRecipes("refined_glowstone", liquid_refined_glowstone);
     }
 
     @Override
     public void onPreInit(Configuration config)
     {
-        metalConfigs.put("osmium", MetalConfig.IntegrationStrategy.valueOf(config.getString("osmium", "Mekanism", MetalConfig.IntegrationStrategy.ENABLED.name(), "Valid values: ENABLED, DISABLED, NO_RECIPES")));
-        metalConfigs.put("refined_obsidian", MetalConfig.IntegrationStrategy.valueOf(config.getString("refined_obsidian", "Mekanism", MetalConfig.IntegrationStrategy.ENABLED.name(), "Valid values: ENABLED, DISABLED, NO_RECIPES")));
-        metalConfigs.put("refined_glowstone", MetalConfig.IntegrationStrategy.valueOf(config.getString("refined_glowstone", "Mekanism", MetalConfig.IntegrationStrategy.ENABLED.name(), "Valid values: ENABLED, DISABLED, NO_RECIPES")));
     }
 
     @SubscribeEvent
@@ -178,19 +177,10 @@ public class ModIntegrationMekanism  implements IModIntegration
     {
         IForgeRegistry<Block> registry = e.getRegistry();
 
-        if (MetalConfig.metals.get("osmium") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_osmium = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "osmium", 3300, 15, 0xBFD0FF);
-        if (MetalConfig.metals.get("refined_obsidian") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_refined_obsidian = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "refined_obsidian", 3420, 15, 0x5D00FF);
-        if (MetalConfig.metals.get("refined_glowstone") != MetalConfig.IntegrationStrategy.DISABLED)
-            liquid_refined_glowstone = FoundryFluidRegistry.INSTANCE.registerLiquidMetal(registry, "refined_glowstone", 3922, 15,
-                0xFFFF00);
-
-        if (MetalConfig.metals.get("osmium") == MetalConfig.IntegrationStrategy.ENABLED)
-            FoundryUtils.registerBasicMeltingRecipes("osmium", liquid_osmium);
-        if (MetalConfig.metals.get("refined_obsidian") == MetalConfig.IntegrationStrategy.ENABLED)
-            FoundryUtils.registerBasicMeltingRecipes("refined_obsidian", liquid_refined_obsidian);
-        if (MetalConfig.metals.get("refined_glowstone") == MetalConfig.IntegrationStrategy.ENABLED)
-            FoundryUtils.registerBasicMeltingRecipes("refined_glowstone", liquid_refined_glowstone);
+        liquid_osmium = FoundryFluidRegistry.registerLiquidMetal(registry, "osmium", "Mekanism", 3300, 15, 0xBFD0FF);
+        liquid_refined_obsidian = FoundryFluidRegistry.registerLiquidMetal(registry, "refined_obsidian", "Mekanism",
+                3420, 15, 0x5D00FF);
+        liquid_refined_glowstone = FoundryFluidRegistry.registerLiquidMetal(registry, "refined_glowstone", "Mekanism",
+                3922, 15, 0xFFFF00);
     }
 }
