@@ -207,7 +207,7 @@ public class InitRecipes
         for (String name : FoundryFluidRegistry.getFluidNames())
         {
             Fluid fluid = FluidRegistry.getFluid(name);
-            if (!fluid.getName().startsWith("glass") && FoundryFluidRegistry.getStrategy(name).registerRecipes())
+            if (FoundryFluidRegistry.getStrategy(name).registerRecipes() && !fluid.getName().startsWith("glass"))
             {
                 FoundryUtils.registerBasicMeltingRecipes(name, fluid);
             }
