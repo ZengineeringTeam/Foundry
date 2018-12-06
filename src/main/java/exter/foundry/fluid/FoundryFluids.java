@@ -22,7 +22,6 @@ public class FoundryFluids
     public static Fluid liquid_tin;
     public static Fluid liquid_bronze;
     public static Fluid liquid_electrum;
-    public static Fluid liquid_invar;
     public static Fluid liquid_nickel;
     public static Fluid liquid_zinc;
     public static Fluid liquid_brass;
@@ -33,9 +32,6 @@ public class FoundryFluids
     public static Fluid liquid_platinum;
     public static Fluid liquid_aluminium;
     public static Fluid liquid_alumina;
-    public static Fluid liquid_signalum;
-    public static Fluid liquid_lumium;
-    public static Fluid liquid_enderium;
     public static Fluid liquid_uranium;
     public static Fluid liquid_cobalt;
     public static Fluid liquid_iridium;
@@ -53,7 +49,6 @@ public class FoundryFluids
         liquid_tin = FoundryFluidRegistry.registerLiquidMetal(registry, "tin", category, 550, 0, 0xc1cddc);
         liquid_bronze = FoundryFluidRegistry.registerLiquidMetal(registry, "bronze", category, 1200, 15, 0xe3bd68);
         liquid_electrum = FoundryFluidRegistry.registerLiquidMetal(registry, "electrum", category, 1350, 15, 0xe8db49);
-        liquid_invar = FoundryFluidRegistry.registerLiquidMetal(registry, "invar", category, 1780, 15, 0x7F907F);
         liquid_nickel = FoundryFluidRegistry.registerLiquidMetal(registry, "nickel", category, 1750, 15, 0xc8d683);
         liquid_zinc = FoundryFluidRegistry.registerLiquidMetal(registry, "zinc", category, 700, 0, 0xd3efe8);
         liquid_brass = FoundryFluidRegistry.registerLiquidMetal(registry, "brass", category, 1200, 15, 0xede38b);
@@ -66,9 +61,6 @@ public class FoundryFluids
         liquid_aluminium = FoundryFluidRegistry.registerLiquidMetal(registry, "aluminium", category, 900, 0, 0xefe0d5);
         liquid_cobalt = FoundryFluidRegistry.registerLiquidMetal(registry, "cobalt", category, 1500, 8, 0x2882d4);
         liquid_iridium = FoundryFluidRegistry.registerLiquidMetal(registry, "iridium", category, 2450, 12, 0xBABADA);
-        liquid_signalum = FoundryFluidRegistry.registerLiquidMetal(registry, "signalum", category, 2800, 15, 0xD84100);
-        liquid_lumium = FoundryFluidRegistry.registerLiquidMetal(registry, "lumium", category, 2500, 15, 0xFFFF7F);
-        liquid_enderium = FoundryFluidRegistry.registerLiquidMetal(registry, "enderium", category, 3800, 12, 0x007068);
 
         if (!FoundryConfig.recipe_alumina_melts_to_aluminium)
         {

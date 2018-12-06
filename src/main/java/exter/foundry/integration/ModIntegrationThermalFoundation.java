@@ -18,6 +18,7 @@ import exter.foundry.item.ItemMold.SubItem;
 import exter.foundry.recipes.manager.AlloyMixerRecipeManager;
 import exter.foundry.recipes.manager.FluidHeaterFuelManager;
 import exter.foundry.recipes.manager.MeltingRecipeManager;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.BlockSponge;
 import net.minecraft.block.state.IBlockState;
@@ -27,11 +28,14 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
 
 public class ModIntegrationThermalFoundation implements IModIntegration
 {
@@ -77,24 +81,27 @@ public class ModIntegrationThermalFoundation implements IModIntegration
         MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Items.ENDER_PEARL),
                 new FluidStack(TFFluids.fluidEnder, 250), TFFluids.fluidEnder.getTemperature(), 75);
 
-        if (FoundryFluidRegistry.getStrategy("lumium").registerRecipes() && FoundryFluids.liquid_lumium != null
+        Fluid liquid_lumium = FluidRegistry.getFluid("lumium");
+        if (FoundryFluidRegistry.getStrategy("lumium").registerRecipes() && liquid_lumium != null
                 && FoundryFluids.liquid_tin != null && FoundryFluids.liquid_silver != null)
-            AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(FoundryFluids.liquid_lumium, FLUID_AMOUNT_INGOT),
+            AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_lumium, FLUID_AMOUNT_INGOT),
                     new FluidStack(TFFluids.fluidGlowstone, 250),
                     new FluidStack(FoundryFluids.liquid_tin, FLUID_AMOUNT_INGOT / 4 * 3),
                     new FluidStack(FoundryFluids.liquid_silver, FLUID_AMOUNT_INGOT / 4));
-        if (FoundryFluidRegistry.getStrategy("signalum").registerRecipes() && FoundryFluids.liquid_signalum != null
+
+        Fluid liquid_signalum = FluidRegistry.getFluid("signalum");
+        if (FoundryFluidRegistry.getStrategy("signalum").registerRecipes() && liquid_signalum != null
                 && FoundryFluids.liquid_copper != null && FoundryFluids.liquid_silver != null)
-            AlloyMixerRecipeManager.INSTANCE.addRecipe(
-                    new FluidStack(FoundryFluids.liquid_signalum, FLUID_AMOUNT_INGOT),
+            AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_signalum, FLUID_AMOUNT_INGOT),
                     new FluidStack(TFFluids.fluidRedstone, 250),
                     new FluidStack(FoundryFluids.liquid_copper, FLUID_AMOUNT_INGOT / 4 * 3),
                     new FluidStack(FoundryFluids.liquid_silver, FLUID_AMOUNT_INGOT / 4));
-        if (FoundryFluidRegistry.getStrategy("enderium").registerRecipes() && FoundryFluids.liquid_enderium != null
+
+        Fluid liquid_enderium = FluidRegistry.getFluid("enderium");
+        if (FoundryFluidRegistry.getStrategy("enderium").registerRecipes() && liquid_enderium != null
                 && FoundryFluids.liquid_tin != null && FoundryFluids.liquid_silver != null
                 && FoundryFluids.liquid_platinum != null)
-            AlloyMixerRecipeManager.INSTANCE.addRecipe(
-                    new FluidStack(FoundryFluids.liquid_enderium, FLUID_AMOUNT_INGOT),
+            AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_enderium, FLUID_AMOUNT_INGOT),
                     new FluidStack(TFFluids.fluidEnder, 250),
                     new FluidStack(FoundryFluids.liquid_lead, FLUID_AMOUNT_INGOT / 4 * 3),
                     new FluidStack(FoundryFluids.liquid_platinum, FLUID_AMOUNT_INGOT / 4));
@@ -309,5 +316,16 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                 }
             }
         }
+    }
+
+    @SubscribeEvent
+    public void registerFluids(RegistryEvent.Register<Block> e)
+    {
+        IForgeRegistry<Block> registry = e.getRegistry();
+
+        FoundryFluidRegistry.registerLiquidMetal(registry, "invar", THERMALFOUNDATION, 1780, 15, 0x7F907F);
+        FoundryFluidRegistry.registerLiquidMetal(registry, "signalum", THERMALFOUNDATION, 2800, 15, 0xD84100);
+        FoundryFluidRegistry.registerLiquidMetal(registry, "lumium", THERMALFOUNDATION, 2500, 15, 0xFFFF7F);
+        FoundryFluidRegistry.registerLiquidMetal(registry, "enderium", THERMALFOUNDATION, 3800, 12, 0x007068);
     }
 }

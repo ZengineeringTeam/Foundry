@@ -1,11 +1,9 @@
 package exter.foundry.integration;
 
 import exter.foundry.api.FoundryAPI;
-import exter.foundry.api.FoundryUtils;
 import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.api.recipe.matcher.OreMatcher;
 import exter.foundry.config.FoundryConfig;
-import exter.foundry.fluid.FluidLiquidMetal;
 import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.item.ItemMold;
 import exter.foundry.util.MiscUtil;
@@ -30,10 +28,6 @@ public class ModIntegrationMekanism implements IModIntegration
 
     public static final String MEKANISM = "mekanism";
     public static final String MEKANISMTOOLS = "mekanismtools";
-
-    private FluidLiquidMetal liquid_osmium;
-    private FluidLiquidMetal liquid_refined_obsidian;
-    private FluidLiquidMetal liquid_refined_glowstone;
 
     private static ItemStack getItemStack(String name)
     {
@@ -208,10 +202,8 @@ public class ModIntegrationMekanism implements IModIntegration
     {
         IForgeRegistry<Block> registry = e.getRegistry();
 
-        liquid_osmium = FoundryFluidRegistry.registerLiquidMetal(registry, "osmium", "Mekanism", 3300, 15, 0xBFD0FF);
-        liquid_refined_obsidian = FoundryFluidRegistry.registerLiquidMetal(registry, "refined_obsidian", "Mekanism",
-                3420, 15, 0x5D00FF);
-        liquid_refined_glowstone = FoundryFluidRegistry.registerLiquidMetal(registry, "refined_glowstone", "Mekanism",
-                3922, 15, 0xFFFF00);
+        FoundryFluidRegistry.registerLiquidMetal(registry, "osmium", "Mekanism", 3300, 15, 0xBFD0FF);
+        FoundryFluidRegistry.registerLiquidMetal(registry, "refined_obsidian", "Mekanism", 3420, 15, 0x5D00FF);
+        FoundryFluidRegistry.registerLiquidMetal(registry, "refined_glowstone", "Mekanism", 3922, 15, 0xFFFF00);
     }
 }
