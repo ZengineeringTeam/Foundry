@@ -83,6 +83,7 @@ public class FoundryFluids
         LiquidMetalRegistry.registerLiquidMetal(registry, "Nichrome", 1950, 15);
          */
 
+        category = "glass";
         int temp = 1550;
         liquid_glass = FoundryFluidRegistry.registerLiquidGlass(registry, "glass", category, temp, 12, "glass", 0x40FFFFFF,
                 Blocks.GLASS.getDefaultState());
