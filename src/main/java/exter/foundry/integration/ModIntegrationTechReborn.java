@@ -81,22 +81,6 @@ public class ModIntegrationTechReborn implements IModIntegration
     @Override
     public void onPostInit()
     {
-        if (FoundryFluidRegistry.getStrategy("chrome").registerRecipes())
-        {
-            FoundryUtils.registerBasicMeltingRecipes("chrome", liquid_chrome);
-        }
-        if (FoundryFluidRegistry.getStrategy("titanium").registerRecipes())
-        {
-            FoundryUtils.registerBasicMeltingRecipes("titanium", liquid_titanium);
-        }
-        if (FoundryFluidRegistry.getStrategy("tungsten").registerRecipes())
-        {
-            FoundryUtils.registerBasicMeltingRecipes("tungsten", liquid_tungsten);
-        }
-        if (FoundryFluidRegistry.getStrategy("refined_iron").registerRecipes())
-        {
-            FoundryUtils.registerBasicMeltingRecipes("refined_iron", liquid_refined_iron);
-        }
     }
 
     @Override

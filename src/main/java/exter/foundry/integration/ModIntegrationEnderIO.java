@@ -133,7 +133,6 @@ public class ModIntegrationEnderIO implements IModIntegration
 
         if (FoundryFluidRegistry.getStrategy("redstone_alloy").registerRecipes())
         {
-            FoundryUtils.registerBasicMeltingRecipes("redstone_alloy", liquid_redstone_alloy);
             if (silicon != null)
             {
                 InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_redstone_alloy, FLUID_AMOUNT_INGOT),
@@ -143,7 +142,6 @@ public class ModIntegrationEnderIO implements IModIntegration
 
         if (FoundryFluidRegistry.getStrategy("electrical_steel").registerRecipes())
         {
-            FoundryUtils.registerBasicMeltingRecipes("electrical_steel", liquid_electrical_steel);
             if (silicon != null && FoundryFluids.liquid_steel != null)
             {
                 InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_electrical_steel, FLUID_AMOUNT_INGOT),
@@ -154,7 +152,6 @@ public class ModIntegrationEnderIO implements IModIntegration
 
         if (FoundryFluidRegistry.getStrategy("energetic_alloy").registerRecipes())
         {
-            FoundryUtils.registerBasicMeltingRecipes("energetic_alloy", liquid_energetic_alloy);
             if (FoundryFluids.liquid_gold != null)
             {
                 AlloyMixerRecipeManager.INSTANCE.addRecipe(
@@ -167,7 +164,6 @@ public class ModIntegrationEnderIO implements IModIntegration
         if (FoundryFluidRegistry.getStrategy("vibrant_alloy").registerRecipes())
         {
             FoundryUtils.registerBasicMeltingRecipes("phased_gold", liquid_vibrant_alloy); // what's this?
-            FoundryUtils.registerBasicMeltingRecipes("vibrant_alloy", liquid_vibrant_alloy);
             AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_vibrant_alloy, FLUID_AMOUNT_INGOT / 2),
                     new FluidStack[] { new FluidStack(liquid_energetic_alloy, FLUID_AMOUNT_INGOT / 2),
                             new FluidStack(liquid_enderpearl, 125) });
@@ -175,7 +171,6 @@ public class ModIntegrationEnderIO implements IModIntegration
 
         if (FoundryFluidRegistry.getStrategy("pulsating_iron").registerRecipes())
         {
-            FoundryUtils.registerBasicMeltingRecipes("pulsating_iron", liquid_phased_iron);
             if (FoundryFluids.liquid_iron != null)
             {
                 AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_phased_iron, FLUID_AMOUNT_INGOT / 2),
@@ -186,7 +181,6 @@ public class ModIntegrationEnderIO implements IModIntegration
 
         if (FoundryFluidRegistry.getStrategy("dark_steel").registerRecipes())
         {
-            FoundryUtils.registerBasicMeltingRecipes("dark_steel", liquid_dark_steel);
             if (FoundryFluids.liquid_steel != null)
             {
                 AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_dark_steel, FLUID_AMOUNT_INGOT / 4),
@@ -197,7 +191,6 @@ public class ModIntegrationEnderIO implements IModIntegration
 
         if (FoundryFluidRegistry.getStrategy("soularium").registerRecipes())
         {
-            FoundryUtils.registerBasicMeltingRecipes("soularium", liquid_soularium);
             if (FoundryFluids.liquid_gold != null)
             {
                 InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_soularium, FLUID_AMOUNT_INGOT),
