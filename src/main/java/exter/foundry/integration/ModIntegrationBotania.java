@@ -102,9 +102,6 @@ public class ModIntegrationBotania implements IModIntegration
 
         if (FoundryFluidRegistry.getStrategy("manasteel").registerRecipes())
         {
-            // FIXME: duplicated recipe
-            FoundryUtils.registerBasicMeltingRecipes("manasteel", liquid_manasteel);
-
             ItemStackMatcher manasteel_block = new ItemStackMatcher(getItemStack("storage", 0));
             FluidStack manasteel_liquid = new FluidStack(liquid_manasteel, FoundryAPI.getAmountBlock());
 
@@ -115,8 +112,6 @@ public class ModIntegrationBotania implements IModIntegration
 
         if (FoundryFluidRegistry.getStrategy("terrasteel").registerRecipes())
         {
-            FoundryUtils.registerBasicMeltingRecipes("terrasteel", liquid_terrasteel);
-
             ItemStackMatcher terrasteel_block = new ItemStackMatcher(getItemStack("storage", 1));
             FluidStack terrasteel_liquid = new FluidStack(liquid_terrasteel, FoundryAPI.getAmountBlock());
 
@@ -127,8 +122,6 @@ public class ModIntegrationBotania implements IModIntegration
 
         if (FoundryFluidRegistry.getStrategy("elven_elementium").registerRecipes())
         {
-            FoundryUtils.registerBasicMeltingRecipes("elven_elementium", liquid_elementium);
-
             ItemStackMatcher elementium_block = new ItemStackMatcher(getItemStack("storage", 2));
             FluidStack elementium_liquid = new FluidStack(liquid_elementium, FoundryAPI.getAmountBlock());
 

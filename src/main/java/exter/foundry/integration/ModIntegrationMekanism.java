@@ -150,13 +150,6 @@ public class ModIntegrationMekanism implements IModIntegration
                 registerTools("bronze", "bronze", extra_sticks1, extra_sticks2);
             }
         }
-
-        if (FoundryFluidRegistry.getStrategy("osmium").registerRecipes())
-            FoundryUtils.registerBasicMeltingRecipes("osmium", liquid_osmium);
-        if (FoundryFluidRegistry.getStrategy("refined_obsidian").registerRecipes())
-            FoundryUtils.registerBasicMeltingRecipes("refined_obsidian", liquid_refined_obsidian);
-        if (FoundryFluidRegistry.getStrategy("refined_glowstone").registerRecipes())
-            FoundryUtils.registerBasicMeltingRecipes("refined_glowstone", liquid_refined_glowstone);
     }
 
     private static void registerTools(String name, String itemPrefix, OreMatcher extra_sticks1, OreMatcher extra_sticks2)

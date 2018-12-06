@@ -39,11 +39,11 @@ public class InitRecipes
 
     public static void init()
     {
-        registerMachineRecipes();
     }
 
     static public void postInit()
     {
+        registerMachineRecipes();
         for (OreDictType type : OreDictType.TYPES)
         {
             for (OreDictMaterial material : OreDictMaterial.MATERIALS)

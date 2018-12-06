@@ -12,7 +12,7 @@ public class FoundryUtils
 
     private static boolean exists(String ore)
     {
-        return OreDictionary.doesOreNameExist(ore);
+        return !OreDictionary.getOres(ore, false).isEmpty();
     }
 
     /**

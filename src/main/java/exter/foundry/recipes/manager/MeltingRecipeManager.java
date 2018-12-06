@@ -31,7 +31,7 @@ public class MeltingRecipeManager implements IMeltingRecipeManager
     @Override
     public void addRecipe(IItemMatcher solid, FluidStack fluid_stack)
     {
-        if (!MiscUtil.isInvalid(solid)) addRecipe(solid, fluid_stack, fluid_stack.getFluid().getTemperature(), 100);
+        addRecipe(solid, fluid_stack, fluid_stack.getFluid().getTemperature());
     }
 
     @Override
@@ -43,7 +43,8 @@ public class MeltingRecipeManager implements IMeltingRecipeManager
     @Override
     public void addRecipe(IItemMatcher solid, FluidStack fluid_stack, int melting_point, int melting_speed)
     {
-        addRecipe(new MeltingRecipe(solid, fluid_stack, melting_point, melting_speed));
+        if (!MiscUtil.isInvalid(solid))
+            addRecipe(new MeltingRecipe(solid, fluid_stack, melting_point, melting_speed));
     }
 
     public void addRecipe(IMeltingRecipe recipe)
@@ -60,10 +61,12 @@ public class MeltingRecipeManager implements IMeltingRecipeManager
     @Override
     public IMeltingRecipe findRecipe(ItemStack item)
     {
-        if (item.isEmpty()) return null;
+        if (item.isEmpty())
+            return null;
         for (IMeltingRecipe r : recipes)
         {
-            if (r.matchesRecipe(item)) return r;
+            if (r.matchesRecipe(item))
+                return r;
         }
         return null;
     }

@@ -161,12 +161,21 @@ public class MiscUtil
     public static boolean isInvalid(IItemMatcher matcher)
     {
         if (matcher == null)
+        {
             Foundry.LOGGER.error("Null IItemMatcher! Instance: " + matcher);
+            return true;
+        }
         if (matcher.getItem().isEmpty())
+        {
             Foundry.LOGGER.error("Invalid IItemMatcher with an empty match stack! Instance: " + matcher);
+            return true;
+        }
         if (matcher.getItems().isEmpty())
+        {
             Foundry.LOGGER.error("Invalid IItemMatcher with an empty match list! Instance: " + matcher);
-        return matcher == null || matcher.getItem().isEmpty() || matcher.getItems().isEmpty();
+            return true;
+        }
+        return false;
     }
 
     @SideOnly(Side.CLIENT)
