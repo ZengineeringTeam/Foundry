@@ -1,6 +1,10 @@
 package exter.foundry.util;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.annotation.Nullable;
 
 import exter.foundry.Foundry;
 import exter.foundry.api.FoundryAPI;
@@ -170,9 +174,9 @@ public class MiscUtil
     {
         // Could eventually be replaced by reflection?
         String replaced = new TextComponentTranslation(key).getUnformattedText()
-                .replace("$CRUCIBLE_BASIC_MAX_TEMP", Integer.toString(FoundryAPI.CRUCIBLE_BASIC_MAX_TEMP/100))
-                .replace("$CRUCIBLE_STANDARD_MAX_TEMP", Integer.toString(FoundryAPI.CRUCIBLE_STANDARD_MAX_TEMP/100))
-                .replace("$CRUCIBLE_ADVANCED_MAX_TEMP", Integer.toString(FoundryAPI.CRUCIBLE_ADVANCED_MAX_TEMP/100));
+                .replace("$CRUCIBLE_BASIC_MAX_TEMP", Integer.toString(FoundryAPI.CRUCIBLE_BASIC_MAX_TEMP / 100))
+                .replace("$CRUCIBLE_STANDARD_MAX_TEMP", Integer.toString(FoundryAPI.CRUCIBLE_STANDARD_MAX_TEMP / 100))
+                .replace("$CRUCIBLE_ADVANCED_MAX_TEMP", Integer.toString(FoundryAPI.CRUCIBLE_ADVANCED_MAX_TEMP / 100));
 
         for (String str : replaced.split("//"))
         {
@@ -180,17 +184,17 @@ public class MiscUtil
         }
     }
 
-    public static void registerCasting(ItemStack item, Fluid liquid_metal, int ingots, ItemMold.SubItem mold_meta)
+    public static void registerCasting(ItemStack item, Fluid liquid_metal, int amount, ItemMold.SubItem mold_meta)
     {
-        registerCasting(item, new FluidStack(liquid_metal, FoundryAPI.FLUID_AMOUNT_INGOT * ingots), mold_meta, null);
+        registerCasting(item, new FluidStack(liquid_metal, amount), mold_meta, null);
     }
 
-    public static void registerCasting(ItemStack item, Fluid liquid_metal, int ingots, ItemMold.SubItem mold_meta, IItemMatcher extra)
+    public static void registerCasting(ItemStack item, Fluid liquid_metal, int amount, ItemMold.SubItem mold_meta, IItemMatcher extra)
     {
-        registerCasting(item, new FluidStack(liquid_metal, FoundryAPI.FLUID_AMOUNT_INGOT * ingots), mold_meta, extra);
+        registerCasting(item, new FluidStack(liquid_metal, amount), mold_meta, extra);
     }
 
-    public static void registerCasting(ItemStack item, FluidStack fluid, ItemMold.SubItem mold_meta, IItemMatcher extra)
+    public static void registerCasting(ItemStack item, FluidStack fluid, ItemMold.SubItem mold_meta, @Nullable IItemMatcher extra)
     {
         registerCasting(item, fluid, mold_meta, false, extra);
     }
