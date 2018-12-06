@@ -2,11 +2,11 @@ package exter.foundry.integration;
 
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.FoundryUtils;
+import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.api.recipe.matcher.OreMatcher;
 import exter.foundry.config.FoundryConfig;
 import exter.foundry.fluid.FluidLiquidMetal;
 import exter.foundry.fluid.FoundryFluidRegistry;
-import exter.foundry.fluid.FoundryFluids;
 import exter.foundry.item.ItemMold;
 import exter.foundry.util.MiscUtil;
 import net.minecraft.block.Block;
@@ -16,6 +16,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -33,12 +35,12 @@ public class ModIntegrationMekanism implements IModIntegration
     private FluidLiquidMetal liquid_refined_obsidian;
     private FluidLiquidMetal liquid_refined_glowstone;
 
-    private ItemStack getItemStack(String name)
+    private static ItemStack getItemStack(String name)
     {
         return getItemStack(name, 0);
     }
 
-    private ItemStack getItemStack(String name, int meta)
+    private static ItemStack getItemStack(String name, int meta)
     {
         Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(MEKANISMTOOLS, name));
         if (item == null)
@@ -140,97 +142,12 @@ public class ModIntegrationMekanism implements IModIntegration
             OreMatcher extra_sticks1 = new OreMatcher("stickWood", 1);
             OreMatcher extra_sticks2 = new OreMatcher("stickWood", 2);
 
-            // TODO: melting recipes
-
-            if (FoundryFluidRegistry.getStrategy("osmium").registerRecipes())
+            registerTools("osmium", "osmium", extra_sticks1, extra_sticks2);
+            registerTools("refined_obsidian", "obsidian", extra_sticks1, extra_sticks2);
+            registerTools("refined_glowstone", "glowstone", extra_sticks1, extra_sticks2);
+            if (!Loader.isModLoaded("thermalfoundation"))
             {
-                MiscUtil.registerCasting(osmium_pickaxe, liquid_osmium, FoundryAPI.getAmountPickaxe(),
-                        ItemMold.SubItem.PICKAXE, extra_sticks2);
-                MiscUtil.registerCasting(osmium_axe, liquid_osmium, FoundryAPI.getAmountAxe(), ItemMold.SubItem.AXE,
-                        extra_sticks2);
-                MiscUtil.registerCasting(osmium_shovel, liquid_osmium, FoundryAPI.getAmountShovel(),
-                        ItemMold.SubItem.SHOVEL, extra_sticks2);
-                MiscUtil.registerCasting(osmium_hoe, liquid_osmium, FoundryAPI.getAmountHoe(), ItemMold.SubItem.HOE,
-                        extra_sticks1);
-                MiscUtil.registerCasting(osmium_sword, liquid_osmium, FoundryAPI.getAmountSword(),
-                        ItemMold.SubItem.SWORD, extra_sticks1);
-                MiscUtil.registerCasting(osmium_chestplate, liquid_osmium, FoundryAPI.getAmountChest(),
-                        ItemMold.SubItem.CHESTPLATE);
-                MiscUtil.registerCasting(osmium_leggings, liquid_osmium, FoundryAPI.getAmountLegs(),
-                        ItemMold.SubItem.LEGGINGS);
-                MiscUtil.registerCasting(osmium_helmet, liquid_osmium, FoundryAPI.getAmountHelm(),
-                        ItemMold.SubItem.HELMET);
-                MiscUtil.registerCasting(osmium_boots, liquid_osmium, FoundryAPI.getAmountBoots(),
-                        ItemMold.SubItem.BOOTS);
-            }
-
-            if (FoundryFluidRegistry.getStrategy("refined_obsidian").registerRecipes())
-            {
-                MiscUtil.registerCasting(refined_obsidian_pickaxe, liquid_refined_obsidian,
-                        FoundryAPI.getAmountPickaxe(), ItemMold.SubItem.PICKAXE, extra_sticks2);
-                MiscUtil.registerCasting(refined_obsidian_axe, liquid_refined_obsidian, FoundryAPI.getAmountAxe(),
-                        ItemMold.SubItem.AXE, extra_sticks2);
-                MiscUtil.registerCasting(refined_obsidian_shovel, liquid_refined_obsidian, FoundryAPI.getAmountShovel(),
-                        ItemMold.SubItem.SHOVEL, extra_sticks2);
-                MiscUtil.registerCasting(refined_obsidian_hoe, liquid_refined_obsidian, FoundryAPI.getAmountHoe(),
-                        ItemMold.SubItem.HOE, extra_sticks1);
-                MiscUtil.registerCasting(refined_obsidian_sword, liquid_refined_obsidian, FoundryAPI.getAmountSword(),
-                        ItemMold.SubItem.SWORD, extra_sticks1);
-                MiscUtil.registerCasting(refined_obsidian_chestplate, liquid_refined_obsidian,
-                        FoundryAPI.getAmountChest(), ItemMold.SubItem.CHESTPLATE);
-                MiscUtil.registerCasting(refined_obsidian_leggings, liquid_refined_obsidian, FoundryAPI.getAmountLegs(),
-                        ItemMold.SubItem.LEGGINGS);
-                MiscUtil.registerCasting(refined_obsidian_helmet, liquid_refined_obsidian, FoundryAPI.getAmountHelm(),
-                        ItemMold.SubItem.HELMET);
-                MiscUtil.registerCasting(refined_obsidian_boots, liquid_refined_obsidian, FoundryAPI.getAmountBoots(),
-                        ItemMold.SubItem.BOOTS);
-            }
-
-            if (FoundryFluidRegistry.getStrategy("refined_glowstone").registerRecipes())
-            {
-                MiscUtil.registerCasting(refined_glowstone_pickaxe, liquid_refined_glowstone,
-                        FoundryAPI.getAmountPickaxe(), ItemMold.SubItem.PICKAXE, extra_sticks2);
-                MiscUtil.registerCasting(refined_glowstone_axe, liquid_refined_glowstone, FoundryAPI.getAmountAxe(),
-                        ItemMold.SubItem.AXE, extra_sticks2);
-                MiscUtil.registerCasting(refined_glowstone_shovel, liquid_refined_glowstone,
-                        FoundryAPI.getAmountShovel(), ItemMold.SubItem.SHOVEL, extra_sticks2);
-                MiscUtil.registerCasting(refined_glowstone_hoe, liquid_refined_glowstone, FoundryAPI.getAmountHoe(),
-                        ItemMold.SubItem.HOE, extra_sticks1);
-                MiscUtil.registerCasting(refined_glowstone_sword, liquid_refined_glowstone, FoundryAPI.getAmountSword(),
-                        ItemMold.SubItem.SWORD, extra_sticks1);
-                MiscUtil.registerCasting(refined_glowstone_chestplate, liquid_refined_glowstone,
-                        FoundryAPI.getAmountChest(), ItemMold.SubItem.CHESTPLATE);
-                MiscUtil.registerCasting(refined_glowstone_leggings, liquid_refined_glowstone,
-                        FoundryAPI.getAmountLegs(), ItemMold.SubItem.LEGGINGS);
-                MiscUtil.registerCasting(refined_glowstone_helmet, liquid_refined_glowstone, FoundryAPI.getAmountHelm(),
-                        ItemMold.SubItem.HELMET);
-                MiscUtil.registerCasting(refined_glowstone_boots, liquid_refined_glowstone, FoundryAPI.getAmountBoots(),
-                        ItemMold.SubItem.BOOTS);
-            }
-
-            if (FoundryFluidRegistry.getStrategy("bronze").registerRecipes()
-                    && !Loader.isModLoaded("thermalfoundation"))
-            {
-                Fluid liquid_bronze = FoundryFluids.liquid_bronze;
-
-                MiscUtil.registerCasting(bronze_pickaxe, liquid_bronze, FoundryAPI.getAmountPickaxe(),
-                        ItemMold.SubItem.PICKAXE, extra_sticks2);
-                MiscUtil.registerCasting(bronze_axe, liquid_bronze, FoundryAPI.getAmountAxe(), ItemMold.SubItem.AXE,
-                        extra_sticks2);
-                MiscUtil.registerCasting(bronze_shovel, liquid_bronze, FoundryAPI.getAmountShovel(),
-                        ItemMold.SubItem.SHOVEL, extra_sticks2);
-                MiscUtil.registerCasting(bronze_hoe, liquid_bronze, FoundryAPI.getAmountHoe(), ItemMold.SubItem.HOE,
-                        extra_sticks1);
-                MiscUtil.registerCasting(bronze_sword, liquid_bronze, FoundryAPI.getAmountSword(),
-                        ItemMold.SubItem.SWORD, extra_sticks1);
-                MiscUtil.registerCasting(bronze_chestplate, liquid_bronze, FoundryAPI.getAmountChest(),
-                        ItemMold.SubItem.CHESTPLATE);
-                MiscUtil.registerCasting(bronze_leggings, liquid_bronze, FoundryAPI.getAmountLegs(),
-                        ItemMold.SubItem.LEGGINGS);
-                MiscUtil.registerCasting(bronze_helmet, liquid_bronze, FoundryAPI.getAmountHelm(),
-                        ItemMold.SubItem.HELMET);
-                MiscUtil.registerCasting(bronze_boots, liquid_bronze, FoundryAPI.getAmountBoots(),
-                        ItemMold.SubItem.BOOTS);
+                registerTools("bronze", "bronze", extra_sticks1, extra_sticks2);
             }
         }
 
@@ -240,6 +157,52 @@ public class ModIntegrationMekanism implements IModIntegration
             FoundryUtils.registerBasicMeltingRecipes("refined_obsidian", liquid_refined_obsidian);
         if (FoundryFluidRegistry.getStrategy("refined_glowstone").registerRecipes())
             FoundryUtils.registerBasicMeltingRecipes("refined_glowstone", liquid_refined_glowstone);
+    }
+
+    private static void registerTools(String name, String itemPrefix, OreMatcher extra_sticks1, OreMatcher extra_sticks2)
+    {
+        if (FoundryFluidRegistry.getStrategy(name).registerRecipes())
+        {
+            ItemStack pickaxe = getItemStack(itemPrefix + "pickaxe");
+            ItemStack axe = getItemStack(itemPrefix + "axe");
+            ItemStack shovel = getItemStack(itemPrefix + "shovel");
+            ItemStack hoe = getItemStack(itemPrefix + "hoe");
+            ItemStack sword = getItemStack(itemPrefix + "sword");
+            ItemStack helmet = getItemStack(itemPrefix + "helmet");
+            ItemStack chestplate = getItemStack(itemPrefix + "chestplate");
+            ItemStack leggings = getItemStack(itemPrefix + "leggings");
+            ItemStack boots = getItemStack(itemPrefix + "boots");
+
+            Fluid fluid = FluidRegistry.getFluid(name);
+            FluidStack fluidStack;
+            fluidStack = new FluidStack(fluid, FoundryAPI.getAmountPickaxe());
+            MiscUtil.registerCasting(pickaxe, fluidStack, ItemMold.SubItem.PICKAXE, extra_sticks2);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(pickaxe), fluidStack);
+            fluidStack = new FluidStack(fluid, FoundryAPI.getAmountAxe());
+            MiscUtil.registerCasting(axe, fluidStack, ItemMold.SubItem.AXE, extra_sticks2);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(axe), fluidStack);
+            fluidStack = new FluidStack(fluid, FoundryAPI.getAmountShovel());
+            MiscUtil.registerCasting(shovel, fluidStack, ItemMold.SubItem.SHOVEL, extra_sticks2);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(shovel), fluidStack);
+            fluidStack = new FluidStack(fluid, FoundryAPI.getAmountHoe());
+            MiscUtil.registerCasting(hoe, fluidStack, ItemMold.SubItem.HOE, extra_sticks1);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(hoe), fluidStack);
+            fluidStack = new FluidStack(fluid, FoundryAPI.getAmountSword());
+            MiscUtil.registerCasting(sword, fluidStack, ItemMold.SubItem.SWORD, extra_sticks1);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(sword), fluidStack);
+            fluidStack = new FluidStack(fluid, FoundryAPI.getAmountChest());
+            MiscUtil.registerCasting(chestplate, fluidStack, ItemMold.SubItem.CHESTPLATE, null);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(chestplate), fluidStack);
+            fluidStack = new FluidStack(fluid, FoundryAPI.getAmountLegs());
+            MiscUtil.registerCasting(leggings, fluidStack, ItemMold.SubItem.LEGGINGS, null);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(leggings), fluidStack);
+            fluidStack = new FluidStack(fluid, FoundryAPI.getAmountHelm());
+            MiscUtil.registerCasting(helmet, fluidStack, ItemMold.SubItem.HELMET, null);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(helmet), fluidStack);
+            fluidStack = new FluidStack(fluid, FoundryAPI.getAmountBoots());
+            MiscUtil.registerCasting(boots, fluidStack, ItemMold.SubItem.BOOTS, null);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(boots), fluidStack);
+        }
     }
 
     @Override

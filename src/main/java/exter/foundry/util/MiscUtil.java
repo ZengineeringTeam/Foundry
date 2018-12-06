@@ -199,7 +199,7 @@ public class MiscUtil
         registerCasting(item, fluid, mold_meta, false, extra);
     }
 
-    public static void registerCasting(ItemStack item, FluidStack fluid, ItemMold.SubItem mold_meta, boolean consume_mold, IItemMatcher extra)
+    public static void registerCasting(ItemStack item, FluidStack fluid, ItemMold.SubItem mold_meta, boolean consume_mold, @Nullable IItemMatcher extra)
     {
         if (!item.isEmpty())
         {
