@@ -1,13 +1,16 @@
 package exter.foundry.client.gui;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import exter.foundry.api.FoundryAPI;
 import exter.foundry.tileentity.TileEntityFoundry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.RenderHelper;
@@ -15,10 +18,12 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
@@ -40,9 +45,15 @@ public abstract class GuiFoundry extends GuiContainer
         FluidStack stack = tank.getFluid();
         if (stack != null && stack.amount > 0)
         {
-
             tooltip.add(stack.getLocalizedName());
-            tooltip.add(String.valueOf(stack.amount) + " / " + String.valueOf(tank.getCapacity()) + " mB");
+            if (GuiScreen.isShiftKeyDown())
+            {
+                tooltip.add(String.valueOf(stack.amount) + " / " + String.valueOf(tank.getCapacity()) + " mB");
+            }
+            else
+            {
+                tooltip.add(mBtoIngnots(stack.amount));
+            }
         }
         else
         {
@@ -199,19 +210,7 @@ public abstract class GuiFoundry extends GuiContainer
 
     protected String getRedstoenModeText(TileEntityFoundry.RedstoneMode mode)
     {
-        switch (mode) // TODO
-        {
-        case RSMODE_IGNORE:
-            return "Mode: Ignore Restone";
-        case RSMODE_OFF:
-            return "Mode: Redstone signal OFF";
-        case RSMODE_ON:
-            return "Mode: Redstone signal ON";
-        case RSMODE_PULSE:
-            return "Mode: Redstone pulse";
-        default:
-            return null;
-        }
+        return I18n.format("foundry.rsmode." + mode.id);
     }
 
     protected String getInventoryName()
@@ -225,5 +224,42 @@ public abstract class GuiFoundry extends GuiContainer
         float green = (color >> 8 & 255) / 255.0F;
         float blue = (color & 255) / 255.0F;
         GL11.glColor4f(red, green, blue, 1.0f);
+    }
+
+    public static String mBtoIngnots(int mb)
+    {
+        if (mb <= 0)
+        {
+            return mb + " mB";
+        }
+        String text = "";
+        if (mb >= FoundryAPI.getAmountBlock())
+        {
+            int n = mb / FoundryAPI.getAmountBlock();
+            text += translateWithFormat("gui.foundry.unit.block", n);
+            mb -= n * FoundryAPI.getAmountBlock();
+        }
+        if (mb >= FoundryAPI.FLUID_AMOUNT_INGOT)
+        {
+            int n = mb / FoundryAPI.FLUID_AMOUNT_INGOT;
+            text += translateWithFormat("gui.foundry.unit.ingot", n);
+            mb -= n * FoundryAPI.FLUID_AMOUNT_INGOT;
+        }
+        if (mb >= FoundryAPI.getAmountNugget())
+        {
+            int n = mb / FoundryAPI.getAmountNugget();
+            text += translateWithFormat("gui.foundry.unit.nugget", n);
+            mb -= n * FoundryAPI.getAmountNugget();
+        }
+        if (mb > 0)
+        {
+            text += mb + " mB";
+        }
+        return text;
+    }
+
+    private static String translateWithFormat(String key, Object... args)
+    {
+        return new MessageFormat(I18n.format(key), MinecraftForgeClient.getLocale()).format(args);
     }
 }

@@ -271,3 +271,11 @@ gui.foundry.crucible=Melting Crucible
 gui.foundry.crucible.temperature=Temperature: %d K
 gui.foundry.crucible.melt=Melt: %d K
 gui.foundry.caster.energy=Energy: %d FE / %d FE
+gui.foundry.unit.block={0,choice,0#0 blocks|1#1 block|1<{0} blocks} 
+gui.foundry.unit.ingot={0,choice,0#0 ingots|1#1 ingot|1<{0} ingots} 
+gui.foundry.unit.nugget={0,choice,0#0 nuggets|1#1 nugget|1<{0} nuggets} 
+
+foundry.rsmode.0=Mode: Ignore Restone
+foundry.rsmode.1=Mode: Redstone signal OFF
+foundry.rsmode.2=Mode: Redstone signal ON
+foundry.rsmode.3=Mode: Redstone pulse

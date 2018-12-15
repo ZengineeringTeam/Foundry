@@ -271,3 +271,11 @@ gui.foundry.crucible=熔炼坩埚
 gui.foundry.crucible.temperature=温度：%d K
 gui.foundry.crucible.melt=熔点：%d K
 gui.foundry.caster.energy=能量：%d FE / %d FE
+gui.foundry.unit.block={0}块 
+gui.foundry.unit.ingot={0}锭 
+gui.foundry.unit.nugget={0}粒 
+
+foundry.rsmode.0=模式：忽略红石
+foundry.rsmode.1=模式：红石信号关
+foundry.rsmode.2=模式：红石信号开
+foundry.rsmode.3=模式：红石脉冲
