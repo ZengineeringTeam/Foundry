@@ -2,6 +2,7 @@ package exter.foundry.integration;
 
 import static exter.foundry.api.FoundryAPI.FLUID_AMOUNT_INGOT;
 
+import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.FoundryUtils;
 import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.api.recipe.matcher.OreMatcher;
@@ -114,14 +115,21 @@ public class ModIntegrationEnderIO implements IModIntegration
             ItemStack dark_steel_leggings = getItemStack("item_dark_steel_leggings");
             ItemStack dark_steel_boots = getItemStack("item_dark_steel_boots");
 
-            MiscUtil.registerCasting(dark_steel_chestplate, liquid_dark_steel, 8, ItemMold.SubItem.CHESTPLATE, null);
-            MiscUtil.registerCasting(dark_steel_helmet, liquid_dark_steel, 5, ItemMold.SubItem.HELMET, null);
-            MiscUtil.registerCasting(dark_steel_leggings, liquid_dark_steel, 7, ItemMold.SubItem.LEGGINGS, null);
-            MiscUtil.registerCasting(dark_steel_boots, liquid_dark_steel, 4, ItemMold.SubItem.BOOTS, null);
+            MiscUtil.registerCasting(dark_steel_chestplate, liquid_dark_steel, FoundryAPI.getAmountChest(),
+                    ItemMold.SubItem.CHESTPLATE, null);
+            MiscUtil.registerCasting(dark_steel_helmet, liquid_dark_steel, FoundryAPI.getAmountHelm(),
+                    ItemMold.SubItem.HELMET, null);
+            MiscUtil.registerCasting(dark_steel_leggings, liquid_dark_steel, FoundryAPI.getAmountLegs(),
+                    ItemMold.SubItem.LEGGINGS, null);
+            MiscUtil.registerCasting(dark_steel_boots, liquid_dark_steel, FoundryAPI.getAmountBoots(),
+                    ItemMold.SubItem.BOOTS, null);
 
-            MiscUtil.registerCasting(dark_steel_pickaxe, liquid_dark_steel, 3, ItemMold.SubItem.PICKAXE, extra_sticks2);
-            MiscUtil.registerCasting(dark_steel_axe, liquid_dark_steel, 3, ItemMold.SubItem.AXE, extra_sticks2);
-            MiscUtil.registerCasting(dark_steel_sword, liquid_dark_steel, 2, ItemMold.SubItem.SWORD, extra_sticks1);
+            MiscUtil.registerCasting(dark_steel_pickaxe, liquid_dark_steel, FoundryAPI.getAmountPickaxe(),
+                    ItemMold.SubItem.PICKAXE, extra_sticks2);
+            MiscUtil.registerCasting(dark_steel_axe, liquid_dark_steel, FoundryAPI.getAmountAxe(), ItemMold.SubItem.AXE,
+                    extra_sticks2);
+            MiscUtil.registerCasting(dark_steel_sword, liquid_dark_steel, FoundryAPI.getAmountSword(),
+                    ItemMold.SubItem.SWORD, extra_sticks1);
 
         }
         ItemStack silicon = getItemStack("item_material", 5);
