@@ -24,9 +24,7 @@ public final class MaterialRegistry implements IMaterialRegistry
 
     private final Set<String> type_names;
 
-    @SideOnly(Side.CLIENT)
     private Map<String, ItemStack> material_icons;
-    @SideOnly(Side.CLIENT)
     private Map<String, ItemStack> type_icons;
 
     private MaterialRegistry()
