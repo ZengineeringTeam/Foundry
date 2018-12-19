@@ -59,6 +59,14 @@ public class FoundryUtils
                 FoundryAPI.MELTING_MANAGER.addRecipe(new OreMatcher("ore" + partial_name),
                         new FluidStack(fluid, FoundryAPI.getAmountOre()));
 
+            if (exists("crushed" + partial_name))
+                FoundryAPI.MELTING_MANAGER.addRecipe(new OreMatcher("crushed" + partial_name),
+                        new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_INGOT));
+
+            if (exists("crushedPurified" + partial_name))
+                FoundryAPI.MELTING_MANAGER.addRecipe(new OreMatcher("crushedPurified" + partial_name),
+                        new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_INGOT));
+
             if (exists("orePoor" + partial_name))
                 FoundryAPI.MELTING_MANAGER.addRecipe(new OreMatcher("orePoor" + partial_name),
                         new FluidStack(fluid, FoundryAPI.getAmountNugget() * 2));
@@ -69,7 +77,7 @@ public class FoundryUtils
 
             if (exists("dustTiny" + partial_name))
                 FoundryAPI.MELTING_MANAGER.addRecipe(new OreMatcher("dustTiny" + partial_name),
-                        new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_INGOT / 4));
+                        new FluidStack(fluid, FoundryAPI.FLUID_AMOUNT_INGOT / 9));
 
             if (exists("plate" + partial_name))
                 FoundryAPI.MELTING_MANAGER.addRecipe(new OreMatcher("plate" + partial_name),

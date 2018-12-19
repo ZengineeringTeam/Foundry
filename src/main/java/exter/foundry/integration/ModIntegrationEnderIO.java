@@ -220,7 +220,7 @@ public class ModIntegrationEnderIO implements IModIntegration
         liquid_energetic_alloy = FoundryFluidRegistry.registerLiquidMetal(registry, "energetic_alloy", "EnderIO", 2500,
                 15, 0xF05A0A);
         liquid_vibrant_alloy = FoundryFluidRegistry.registerLiquidMetal(registry, "vibrant_alloy", "EnderIO", 2500, 15,
-                0x82A532);
+                0xBEFA00);
         liquid_dark_steel = FoundryFluidRegistry.registerLiquidMetal(registry, "dark_steel", "EnderIO", 1850, 12,
                 0x333333);
         liquid_electrical_steel = FoundryFluidRegistry.registerLiquidMetal(registry, "electrical_steel", "EnderIO",
