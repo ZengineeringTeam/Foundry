@@ -114,14 +114,14 @@ public class ModIntegrationEnderIO implements IModIntegration
             ItemStack dark_steel_leggings = getItemStack("item_dark_steel_leggings");
             ItemStack dark_steel_boots = getItemStack("item_dark_steel_boots");
 
-            MiscUtil.registerCasting(dark_steel_chestplate, liquid_dark_steel, 8, ItemMold.SubItem.CHESTPLATE, null);
-            MiscUtil.registerCasting(dark_steel_helmet, liquid_dark_steel, 5, ItemMold.SubItem.HELMET, null);
-            MiscUtil.registerCasting(dark_steel_leggings, liquid_dark_steel, 7, ItemMold.SubItem.LEGGINGS, null);
-            MiscUtil.registerCasting(dark_steel_boots, liquid_dark_steel, 4, ItemMold.SubItem.BOOTS, null);
+            MiscUtil.registerCasting(dark_steel_chestplate, liquid_dark_steel, FLUID_AMOUNT_INGOT * 8, ItemMold.SubItem.CHESTPLATE, null);
+            MiscUtil.registerCasting(dark_steel_helmet, liquid_dark_steel, FLUID_AMOUNT_INGOT * 5, ItemMold.SubItem.HELMET, null);
+            MiscUtil.registerCasting(dark_steel_leggings, liquid_dark_steel, FLUID_AMOUNT_INGOT * 7, ItemMold.SubItem.LEGGINGS, null);
+            MiscUtil.registerCasting(dark_steel_boots, liquid_dark_steel, FLUID_AMOUNT_INGOT * 4, ItemMold.SubItem.BOOTS, null);
 
-            MiscUtil.registerCasting(dark_steel_pickaxe, liquid_dark_steel, 3, ItemMold.SubItem.PICKAXE, extra_sticks2);
-            MiscUtil.registerCasting(dark_steel_axe, liquid_dark_steel, 3, ItemMold.SubItem.AXE, extra_sticks2);
-            MiscUtil.registerCasting(dark_steel_sword, liquid_dark_steel, 2, ItemMold.SubItem.SWORD, extra_sticks1);
+            MiscUtil.registerCasting(dark_steel_pickaxe, liquid_dark_steel, FLUID_AMOUNT_INGOT * 3, ItemMold.SubItem.PICKAXE, extra_sticks2);
+            MiscUtil.registerCasting(dark_steel_axe, liquid_dark_steel, FLUID_AMOUNT_INGOT * 3, ItemMold.SubItem.AXE, extra_sticks2);
+            MiscUtil.registerCasting(dark_steel_sword, liquid_dark_steel, FLUID_AMOUNT_INGOT * 2, ItemMold.SubItem.SWORD, extra_sticks1);
 
         }
         ItemStack silicon = getItemStack("item_material", 5);
@@ -212,7 +212,7 @@ public class ModIntegrationEnderIO implements IModIntegration
         liquid_energetic_alloy = FoundryFluidRegistry.registerLiquidMetal(registry, "energetic_alloy", "EnderIO", 2500,
                 15, 0xF05A0A);
         liquid_vibrant_alloy = FoundryFluidRegistry.registerLiquidMetal(registry, "vibrant_alloy", "EnderIO", 2500, 15,
-                0x82A532);
+                0xBEFA00);
         liquid_dark_steel = FoundryFluidRegistry.registerLiquidMetal(registry, "dark_steel", "EnderIO", 1850, 12,
                 0x333333);
         liquid_electrical_steel = FoundryFluidRegistry.registerLiquidMetal(registry, "electrical_steel", "EnderIO",
