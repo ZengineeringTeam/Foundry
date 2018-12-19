@@ -709,7 +709,7 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
 
     public void updateRedstone()
     {
-        redstone_signal = world.isBlockIndirectlyGettingPowered(getPos()) > 0;
+        redstone_signal = world.isBlockPowered(getPos());
     }
 
     protected abstract void updateServer();

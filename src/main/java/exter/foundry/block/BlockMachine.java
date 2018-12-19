@@ -16,6 +16,7 @@ import exter.foundry.tileentity.TileEntityMeltingCrucibleBasic;
 import exter.foundry.tileentity.TileEntityMeltingCrucibleStandard;
 import exter.foundry.tileentity.TileEntityMetalCaster;
 import exter.foundry.tileentity.TileEntityMetalInfuser;
+import exter.foundry.tileentity.TileEntityPowered;
 import exter.foundry.util.MiscUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -239,11 +240,11 @@ public class BlockMachine extends Block implements ITileEntityProvider, IBlockVa
     @Override
     public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block, BlockPos fromPos)
     {
-        TileEntityFoundry te = (TileEntityFoundry) world.getTileEntity(pos);
+        TileEntity te = world.getTileEntity(pos);
 
-        if (te != null)
+        if (te instanceof TileEntityFoundry)
         {
-            te.updateRedstone();
+            ((TileEntityFoundry) te).updateRedstone();
         }
     }
 
