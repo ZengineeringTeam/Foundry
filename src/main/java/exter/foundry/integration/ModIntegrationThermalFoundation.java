@@ -70,16 +70,33 @@ public class ModIntegrationThermalFoundation implements IModIntegration
     @Override
     public void onInit()
     {
+        //Redstone
         MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("dustRedstone"),
                 new FluidStack(TFFluids.fluidRedstone, 100));
         MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("blockRedstone"),
                 new FluidStack(TFFluids.fluidRedstone, 900));
+        MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("clathrateRedstone"),
+                new FluidStack(TFFluids.fluidRedstone, 250));
+        MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("oreClathrateRedstone"),
+                new FluidStack(TFFluids.fluidRedstone, 1000));
+        MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("dustSmallRedstone"),
+                new FluidStack(TFFluids.fluidRedstone, 25));
+        //Glowstone
         MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("dustGlowstone"),
                 new FluidStack(TFFluids.fluidGlowstone, 250), TFFluids.fluidGlowstone.getTemperature(), 90);
         MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("glowstone"),
                 new FluidStack(TFFluids.fluidGlowstone, 1000), TFFluids.fluidGlowstone.getTemperature(), 90);
+        MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("clathrateGlowstone"),
+                new FluidStack(TFFluids.fluidGlowstone, 250), TFFluids.fluidGlowstone.getTemperature(), 90);
+        MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("oreClathrateGlowstone"),
+                new FluidStack(TFFluids.fluidGlowstone, 1000), TFFluids.fluidGlowstone.getTemperature(), 90);
+        //Ender Pearl
         MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Items.ENDER_PEARL),
                 new FluidStack(TFFluids.fluidEnder, 250), TFFluids.fluidEnder.getTemperature(), 75);
+        MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("clathrateEnder"),
+                new FluidStack(TFFluids.fluidEnder, 250), TFFluids.fluidEnder.getTemperature(), 75);
+        MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("oreClathrateEnder"),
+                new FluidStack(TFFluids.fluidEnder, 1000), TFFluids.fluidEnder.getTemperature(), 75);
 
         Fluid liquid_lumium = FluidRegistry.getFluid("lumium");
         if (FoundryFluidRegistry.getStrategy("lumium").registerRecipes() && liquid_lumium != null
