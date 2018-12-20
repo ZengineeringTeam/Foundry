@@ -11,12 +11,6 @@ public interface ICastingRecipeManager
 {
 
     /**
-     * Register an item as a mold. Only registered items are accepted in the Metal Caster's mold slot.
-     * @param mold Item to be registered.
-     */
-    public void addMold(ItemStack mold);
-
-    /**
      * Register a Metal Caster recipe.
      * Note: the mold must be registered with {@link RegisterMold}.
      * @param result Item produced.
@@ -46,12 +40,6 @@ public interface ICastingRecipeManager
      * @return The casting recipe, or null if no matching recipe.
      */
     public ICastingRecipe findRecipe(FluidStack fluid, ItemStack mold, ItemStack extra);
-
-    /**
-     * Get a list of all registered molds.
-     * @return List of all registered molds.
-     */
-    public List<ItemStack> getMolds();
 
     /**
      * Get a list of all the recipes.

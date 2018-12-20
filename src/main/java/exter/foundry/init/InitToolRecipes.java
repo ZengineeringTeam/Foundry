@@ -30,7 +30,7 @@ public class InitToolRecipes
         ItemStack mold_sickle = ItemMold.SubItem.SICKLE.getItem();
         ItemStack mold_shears = ItemMold.SubItem.SHEARS.getItem();
         ItemStack mold_excavator = ItemMold.SubItem.EXCAVATOR.getItem();
-        ItemStack mold_shield = ItemMold.SubItem.SHIELD.getItem();
+        ItemStack mold_shield = new ItemStack(Items.SHIELD);
 
         MoldRecipeManager.INSTANCE.addRecipe(mold_helmet, 4, 3, new int[] { 3, 3, 3, 3, 3, 1, 1, 3, 3, 1, 1, 3 });
 

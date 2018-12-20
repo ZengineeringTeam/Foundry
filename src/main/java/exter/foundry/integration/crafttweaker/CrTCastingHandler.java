@@ -74,55 +74,6 @@ public class CrTCastingHandler
         }
     }
 
-    public static class MoldAction extends AddRemoveAction
-    {
-
-        ItemStack mold;
-
-        public MoldAction(ItemStack mold)
-        {
-            this.mold = mold;
-        }
-
-        @Override
-        protected void add()
-        {
-            CastingRecipeManager.INSTANCE.addMold(mold);
-        }
-
-        @Override
-        public String getDescription()
-        {
-            return String.format("%s", CrTHelper.getItemDescription(mold));
-        }
-
-        @Override
-        public String getRecipeType()
-        {
-            return "casting mold";
-        }
-
-        @Override
-        protected void remove()
-        {
-            CastingRecipeManager.INSTANCE.removeMold(mold);
-        }
-    }
-
-    @ZenMethod
-    static public void addMold(IItemStack mold)
-    {
-        ModIntegrationCrafttweaker.queueAdd(() -> {
-            ItemStack molditem = CraftTweakerMC.getItemStack(mold);
-            if (molditem.isEmpty())
-            {
-                CrTHelper.printCrt("Invalid mold item: " + mold);
-                return;
-            }
-            CraftTweakerAPI.apply(new MoldAction(molditem).action_add);
-        });
-    }
-
     @ZenMethod
     static public void addRecipe(IItemStack output, ILiquidStack input, IItemStack mold, @Optional IIngredient extra, @Optional int speed, @Optional boolean consumes_mold)
     {
@@ -140,29 +91,6 @@ public class CrTCastingHandler
                 return;
             }
             CraftTweakerAPI.apply(new CastingAction(recipe).action_add);
-        });
-    }
-
-    @ZenMethod
-    static public void removeMold(IItemStack mold)
-    {
-        ModIntegrationCrafttweaker.queueRemove(() -> {
-
-            ItemStack molditem = CraftTweakerMC.getItemStack(mold);
-            if (molditem.isEmpty())
-            {
-                CraftTweakerAPI.logWarning("Invalid mold item: " + mold);
-                return;
-            }
-            for (ItemStack m : CastingRecipeManager.INSTANCE.getMolds())
-            {
-                if (m.isItemEqual(molditem) && ItemStack.areItemStacksEqual(m, molditem))
-                {
-                    CraftTweakerAPI.apply(new MoldAction(m).action_remove);
-                    return;
-                }
-            }
-            CraftTweakerAPI.logWarning("Mold not found: " + mold);
         });
     }
 
@@ -206,12 +134,6 @@ public class CrTCastingHandler
     public static void clearRecipes()
     {
         ModIntegrationCrafttweaker.queueClear(CastingRecipeManager.INSTANCE.getRecipes());
-    }
-
-    @ZenMethod
-    public static void clearMolds()
-    {
-        ModIntegrationCrafttweaker.queueClear(CastingRecipeManager.INSTANCE.getMolds());
     }
 
 }

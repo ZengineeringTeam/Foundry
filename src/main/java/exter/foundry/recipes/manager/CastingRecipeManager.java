@@ -14,18 +14,10 @@ public class CastingRecipeManager implements ICastingRecipeManager
 {
     public static final CastingRecipeManager INSTANCE = new CastingRecipeManager();
     private final NonNullList<ICastingRecipe> recipes;
-    private final NonNullList<ItemStack> molds;
 
     private CastingRecipeManager()
     {
         recipes = NonNullList.create();
-        molds = NonNullList.create();
-    }
-
-    @Override
-    public void addMold(ItemStack mold)
-    {
-        molds.add(mold.copy());
     }
 
     public void addRecipe(ICastingRecipe recipe)
@@ -66,12 +58,6 @@ public class CastingRecipeManager implements ICastingRecipeManager
     }
 
     @Override
-    public List<ItemStack> getMolds()
-    {
-        return molds;
-    }
-
-    @Override
     public List<ICastingRecipe> getRecipes()
     {
         return recipes;
@@ -82,17 +68,12 @@ public class CastingRecipeManager implements ICastingRecipeManager
     {
         if (stack.isEmpty())
             return false;
-        for (ItemStack m : molds)
+        for (ICastingRecipe recipe : recipes)
         {
-            if (m.isItemEqual(stack))
+            if (recipe.getMold().isItemEqual(stack))
                 return true;
         }
         return false;
-    }
-
-    public void removeMold(ItemStack mold)
-    {
-        molds.remove(mold);
     }
 
     @Override

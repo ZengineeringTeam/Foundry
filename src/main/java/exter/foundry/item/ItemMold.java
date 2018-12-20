@@ -35,8 +35,7 @@ public class ItemMold extends Item
         HAMMER(17, "hammer"),
         SICKLE(18, "sickle"),
         SHEARS(19, "shears"),
-        EXCAVATOR(20, "excavator"),
-        SHIELD(-1, "shield");
+        EXCAVATOR(20, "excavator");
 
         static private final Map<Integer, SubItem> value_map = new HashMap<>();
         static
@@ -53,8 +52,8 @@ public class ItemMold extends Item
         }
 
         public final int id;
-
         public final String name;
+        public boolean registered = true;
 
         SubItem(int id, String name)
         {
@@ -75,10 +74,6 @@ public class ItemMold extends Item
 
         public ItemStack getItem(int amount)
         {
-            if (id == -1)
-            {
-                return new ItemStack(Items.SHIELD, amount);
-            }
             return new ItemStack(FoundryItems.item_mold, amount, id);
         }
     }
@@ -99,7 +94,7 @@ public class ItemMold extends Item
         if (isInCreativeTab(tabs))
             for (SubItem m : SubItem.values())
             {
-                if (m.id >= 0)
+                if (m.registered)
                 {
                     ItemStack itemstack = new ItemStack(this, 1, m.id);
                     list.add(itemstack);

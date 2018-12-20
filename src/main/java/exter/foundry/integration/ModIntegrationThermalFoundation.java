@@ -26,6 +26,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.RegistryEvent;
@@ -248,7 +249,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                         FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(shield),
                                 new FluidStack(fluid, FoundryAPI.getAmountShield()));
                         FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(shield),
-                                new FluidStack(fluid, FoundryAPI.getAmountShield()), SubItem.SHIELD.getItem(), true,
+                                new FluidStack(fluid, FoundryAPI.getAmountShield()), new ItemStack(Items.SHIELD), true,
                                 null);
                     }
                 }

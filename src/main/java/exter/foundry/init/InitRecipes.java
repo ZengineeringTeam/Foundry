@@ -253,11 +253,6 @@ public class InitRecipes
 
         InitAlloyRecipes.init();
 
-        for (ItemMold.SubItem sub : ItemMold.SubItem.values())
-        {
-            CastingRecipeManager.INSTANCE.addMold(sub.getItem());
-        }
-
         if (FoundryConfig.recipe_equipment)
         {
             InitToolRecipes.init();
