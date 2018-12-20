@@ -7,17 +7,17 @@ public interface IAlloyingCrucibleRecipe
     /**
      * Get the recipe's input A.
      */
-    public FluidStack getInputA();
+    FluidStack getInputA();
 
     /**
      * Get the recipe's input B.
      */
-    public FluidStack getInputB();
+    FluidStack getInputB();
 
     /**
      * Get the recipe's output.
      */
-    public FluidStack getOutput();
+    FluidStack getOutput();
 
     /**
      * Check if the fluids matches this recipe.
@@ -25,5 +25,5 @@ public interface IAlloyingCrucibleRecipe
      * @param input_b fluid to compare.
      * @return true if the fluids matches, false otherwise.
      */
-    public boolean matchesRecipe(FluidStack input_a, FluidStack input_b);
+    boolean matchesRecipe(FluidStack input_a, FluidStack input_b);
 }

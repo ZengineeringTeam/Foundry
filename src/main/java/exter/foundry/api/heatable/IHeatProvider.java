@@ -17,5 +17,5 @@ public interface IHeatProvider
      * @param heat
      * @return Heat provided in 1/100 of degK.
      */
-    public int provideHeat(int max_heat, int heat);
+    int provideHeat(int max_heat, int heat);
 }

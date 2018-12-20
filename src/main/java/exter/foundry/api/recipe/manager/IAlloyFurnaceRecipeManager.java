@@ -14,14 +14,14 @@ public interface IAlloyFurnaceRecipeManager
      * @param in_a Input A.
      * @param in_b Input B.
      */
-    public void addRecipe(ItemStack out, IItemMatcher in_a, IItemMatcher in_b);
+    void addRecipe(ItemStack out, IItemMatcher in_a, IItemMatcher in_b);
 
     /**
      * Register an Alloy Mixer recipe using combination of items.
      * @param in_a Inputs A.
      * @param in_b Inputs B.
      */
-    public void addRecipe(ItemStack out, IItemMatcher[] in_a, IItemMatcher[] in_b);
+    void addRecipe(ItemStack out, IItemMatcher[] in_a, IItemMatcher[] in_b);
 
     /**
      * Find a valid recipe that contains the given inputs.
@@ -31,17 +31,17 @@ public interface IAlloyFurnaceRecipeManager
      * @param order [Output] Order in which the input fluids are matched.
      * @return
      */
-    public IAlloyFurnaceRecipe findRecipe(ItemStack in_a, ItemStack in_b);
+    IAlloyFurnaceRecipe findRecipe(ItemStack in_a, ItemStack in_b);
 
     /**
      * Get a list of all the recipes
      * @return List of all the recipes
      */
-    public List<IAlloyFurnaceRecipe> getRecipes();
+    List<IAlloyFurnaceRecipe> getRecipes();
 
     /**
      * Removes a recipe.
      * @param The recipe to remove.
      */
-    public void removeRecipe(IAlloyFurnaceRecipe recipe);
+    void removeRecipe(IAlloyFurnaceRecipe recipe);
 }

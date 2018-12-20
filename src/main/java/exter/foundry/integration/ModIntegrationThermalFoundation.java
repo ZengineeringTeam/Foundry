@@ -189,7 +189,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(helm),
                             new FluidStack(fluid, FoundryAPI.getAmountHelm()));
                     FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(helm),
-                            new FluidStack(fluid, FoundryAPI.getAmountHelm()), SubItem.HELMET.getItem(), false, null);
+                            new FluidStack(fluid, FoundryAPI.getAmountHelm()), SubItem.HELMET, false, null);
                 }
 
                 Item chest = ForgeRegistries.ITEMS
@@ -199,8 +199,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(chest),
                             new FluidStack(fluid, FoundryAPI.getAmountChest()));
                     FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(chest),
-                            new FluidStack(fluid, FoundryAPI.getAmountChest()), SubItem.CHESTPLATE.getItem(), false,
-                            null);
+                            new FluidStack(fluid, FoundryAPI.getAmountChest()), SubItem.CHESTPLATE, false, null);
                 }
 
                 Item legs = ForgeRegistries.ITEMS
@@ -210,7 +209,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(legs),
                             new FluidStack(fluid, FoundryAPI.getAmountLegs()));
                     FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(legs),
-                            new FluidStack(fluid, FoundryAPI.getAmountLegs()), SubItem.LEGGINGS.getItem(), false, null);
+                            new FluidStack(fluid, FoundryAPI.getAmountLegs()), SubItem.LEGGINGS, false, null);
                 }
 
                 Item boots = ForgeRegistries.ITEMS
@@ -220,7 +219,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(boots),
                             new FluidStack(fluid, FoundryAPI.getAmountBoots()));
                     FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(boots),
-                            new FluidStack(fluid, FoundryAPI.getAmountBoots()), SubItem.BOOTS.getItem(), false, null);
+                            new FluidStack(fluid, FoundryAPI.getAmountBoots()), SubItem.BOOTS, false, null);
                 }
             }
 
@@ -235,8 +234,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                         FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(shears),
                                 new FluidStack(fluid, FoundryAPI.getAmountShears()));
                         FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(shears),
-                                new FluidStack(fluid, FoundryAPI.getAmountShears()), SubItem.SHEARS.getItem(), false,
-                                null);
+                                new FluidStack(fluid, FoundryAPI.getAmountShears()), SubItem.SHEARS, false, null);
                     }
                 }
 
@@ -249,8 +247,8 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                         FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(shield),
                                 new FluidStack(fluid, FoundryAPI.getAmountShield()));
                         FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(shield),
-                                new FluidStack(fluid, FoundryAPI.getAmountShield()), new ItemStack(Items.SHIELD), true,
-                                null);
+                                new FluidStack(fluid, FoundryAPI.getAmountShield()),
+                                new ItemStackMatcher(new ItemStack(Items.SHIELD)), true, null);
                     }
                 }
 
@@ -261,8 +259,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(pickaxe),
                             new FluidStack(fluid, FoundryAPI.getAmountPickaxe()));
                     FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(pickaxe),
-                            new FluidStack(fluid, FoundryAPI.getAmountPickaxe()), SubItem.PICKAXE.getItem(), false,
-                            stick);
+                            new FluidStack(fluid, FoundryAPI.getAmountPickaxe()), SubItem.PICKAXE, false, stick);
                 }
 
                 Item axe = ForgeRegistries.ITEMS
@@ -272,7 +269,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(axe),
                             new FluidStack(fluid, FoundryAPI.getAmountAxe()));
                     FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(axe),
-                            new FluidStack(fluid, FoundryAPI.getAmountAxe()), SubItem.AXE.getItem(), false, stick);
+                            new FluidStack(fluid, FoundryAPI.getAmountAxe()), SubItem.AXE, false, stick);
                 }
                 Item shovel = ForgeRegistries.ITEMS
                         .getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "tool.shovel_" + name));
@@ -281,8 +278,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(shovel),
                             new FluidStack(fluid, FoundryAPI.getAmountShovel()));
                     FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(shovel),
-                            new FluidStack(fluid, FoundryAPI.getAmountShovel()), SubItem.SHOVEL.getItem(), false,
-                            stick);
+                            new FluidStack(fluid, FoundryAPI.getAmountShovel()), SubItem.SHOVEL, false, stick);
                 }
 
                 Item hoe = ForgeRegistries.ITEMS
@@ -292,7 +288,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(hoe),
                             new FluidStack(fluid, FoundryAPI.getAmountHoe()));
                     FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(hoe),
-                            new FluidStack(fluid, FoundryAPI.getAmountHoe()), SubItem.HOE.getItem(), false, stick);
+                            new FluidStack(fluid, FoundryAPI.getAmountHoe()), SubItem.HOE, false, stick);
                 }
                 Item sword = ForgeRegistries.ITEMS
                         .getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "tool.sword_" + name));
@@ -301,7 +297,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(sword),
                             new FluidStack(fluid, FoundryAPI.getAmountSword()));
                     FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(sword),
-                            new FluidStack(fluid, FoundryAPI.getAmountSword()), SubItem.SWORD.getItem(), false,
+                            new FluidStack(fluid, FoundryAPI.getAmountSword()), SubItem.SWORD, false,
                             new OreMatcher("stickWood"));
                 }
 
@@ -312,7 +308,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(sickle),
                             new FluidStack(fluid, FoundryAPI.getAmountSickle()));
                     FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(sickle),
-                            new FluidStack(fluid, FoundryAPI.getAmountSickle()), SubItem.SICKLE.getItem(), false,
+                            new FluidStack(fluid, FoundryAPI.getAmountSickle()), SubItem.SICKLE, false,
                             new OreMatcher("stickWood"));
                 }
 
@@ -323,8 +319,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(hammer),
                             new FluidStack(fluid, FoundryAPI.getAmountHammer()));
                     FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(hammer),
-                            new FluidStack(fluid, FoundryAPI.getAmountHammer()), SubItem.HAMMER.getItem(), false,
-                            stick);
+                            new FluidStack(fluid, FoundryAPI.getAmountHammer()), SubItem.HAMMER, false, stick);
                 }
 
                 Item excavator = ForgeRegistries.ITEMS
@@ -334,8 +329,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(excavator),
                             new FluidStack(fluid, FoundryAPI.getAmountExcavator()));
                     FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(excavator),
-                            new FluidStack(fluid, FoundryAPI.getAmountExcavator()), SubItem.EXCAVATOR.getItem(), false,
-                            stick);
+                            new FluidStack(fluid, FoundryAPI.getAmountExcavator()), SubItem.EXCAVATOR, false, stick);
                 }
             }
         }

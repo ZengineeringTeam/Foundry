@@ -6,6 +6,7 @@ import com.google.common.base.Preconditions;
 
 import exter.foundry.api.recipe.ICastingRecipe;
 import exter.foundry.api.recipe.matcher.IItemMatcher;
+import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -15,7 +16,7 @@ import net.minecraftforge.fluids.FluidStack;
 public class CastingRecipe implements ICastingRecipe
 {
     private final FluidStack fluid;
-    private final ItemStack mold;
+    private final IItemMatcher mold;
     private final IItemMatcher extra;
 
     private final IItemMatcher output;
@@ -23,15 +24,15 @@ public class CastingRecipe implements ICastingRecipe
     private final int speed;
     private final boolean consume_mold;
 
-    public CastingRecipe(IItemMatcher result, FluidStack in_fluid, ItemStack in_mold, boolean in_comsume_mold, @Nullable IItemMatcher in_extra, int cast_speed)
+    public CastingRecipe(IItemMatcher result, FluidStack in_fluid, IItemMatcher in_mold, boolean in_comsume_mold, @Nullable IItemMatcher in_extra, int cast_speed)
     {
         Preconditions.checkArgument(in_fluid != null);
-        Preconditions.checkArgument(!in_mold.isEmpty());
+        Preconditions.checkArgument(in_mold != null);
         Preconditions.checkArgument(cast_speed > 0);
         Preconditions.checkArgument(result != null);
         output = result;
         fluid = in_fluid.copy();
-        mold = in_mold.copy();
+        mold = in_mold;
         extra = in_extra;
         speed = cast_speed;
         consume_mold = in_comsume_mold;
@@ -64,7 +65,7 @@ public class CastingRecipe implements ICastingRecipe
     @Override
     public ItemStack getMold()
     {
-        return mold.copy();
+        return mold.getItem();
     }
 
     @Override
@@ -82,7 +83,7 @@ public class CastingRecipe implements ICastingRecipe
     @Override
     public boolean matchesRecipe(ItemStack mold_stack, FluidStack fluid_stack, ItemStack in_extra)
     {
-        return fluid_stack != null && fluid_stack.containsFluid(fluid) && ItemStack.areItemStacksEqual(mold, mold_stack)
+        return fluid_stack != null && fluid_stack.containsFluid(fluid) && mold.test(mold_stack)
                 && (!requiresExtra() || extra.apply(in_extra));
     }
 

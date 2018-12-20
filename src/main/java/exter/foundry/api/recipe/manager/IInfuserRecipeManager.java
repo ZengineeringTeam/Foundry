@@ -16,19 +16,19 @@ public interface IInfuserRecipeManager
      * @param item Item required.
      * @param energy Energy required (100 Energy = 1 MJ, 10 Energy = 1 RF, 40 Energy = 1 EU).
      */
-    public void addRecipe(FluidStack result, FluidStack fluid, IItemMatcher item, int energy);
+    void addRecipe(FluidStack result, FluidStack fluid, IItemMatcher item, int energy);
 
-    public IInfuserRecipe findRecipe(FluidStack fluid, ItemStack item);
+    IInfuserRecipe findRecipe(FluidStack fluid, ItemStack item);
 
     /**
      * Get a list of all the recipes
      * @return List of all the recipes
      */
-    public List<IInfuserRecipe> getRecipes();
+    List<IInfuserRecipe> getRecipes();
 
     /**
      * Removes a recipe.
      * @param The recipe to remove.
      */
-    public void removeRecipe(IInfuserRecipe recipe);
+    void removeRecipe(IInfuserRecipe recipe);
 }

@@ -15,7 +15,7 @@ public interface ICastingTableRecipeManager
      * @param in_fluid Fluid required (fluid type and amount).
      * @param in_type Type of Casting Table required.
      */
-    public void addRecipe(IItemMatcher result, FluidStack in_fluid, ICastingTableRecipe.TableType in_type);
+    void addRecipe(IItemMatcher result, FluidStack in_fluid, ICastingTableRecipe.TableType in_type);
 
     /**
      * Find a casting recipe given a FluidStack and a mold.
@@ -23,13 +23,13 @@ public interface ICastingTableRecipeManager
      * @param in_type Type of Casting Table used by the recipe.
      * @return The casting recipe, or null if no matching recipe.
      */
-    public ICastingTableRecipe findRecipe(FluidStack fluid, ICastingTableRecipe.TableType in_type);
+    ICastingTableRecipe findRecipe(FluidStack fluid, ICastingTableRecipe.TableType in_type);
 
-    public List<ICastingTableRecipe> getRecipes();
+    List<ICastingTableRecipe> getRecipes();
 
     /**
      * Removes a recipe.
      * @param The recipe to remove.
      */
-    public void removeRecipe(ICastingTableRecipe recipe);
+    void removeRecipe(ICastingTableRecipe recipe);
 }

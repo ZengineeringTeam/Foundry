@@ -5,6 +5,7 @@ import java.util.List;
 import exter.foundry.api.recipe.ICastingRecipe;
 import exter.foundry.api.recipe.manager.ICastingRecipeManager;
 import exter.foundry.api.recipe.matcher.IItemMatcher;
+import exter.foundry.item.ItemMold;
 import exter.foundry.recipes.CastingRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -26,9 +27,24 @@ public class CastingRecipeManager implements ICastingRecipeManager
     }
 
     @Override
-    public void addRecipe(IItemMatcher result, FluidStack in_fluid, ItemStack in_mold, boolean comsume_mold, IItemMatcher in_extra, int cast_speed)
+    public void addRecipe(IItemMatcher result, FluidStack in_fluid, IItemMatcher in_mold, boolean comsume_mold, IItemMatcher in_extra, int cast_speed)
     {
         ICastingRecipe recipe = new CastingRecipe(result, in_fluid, in_mold, comsume_mold, in_extra, cast_speed);
+        if (recipe.requiresExtra())
+        {
+            recipes.add(0, recipe);
+        }
+        else
+        {
+            recipes.add(recipe);
+        }
+    }
+
+    @Override
+    public void addRecipe(IItemMatcher result, FluidStack in_fluid, ItemMold.SubItem in_mold, boolean comsume_mold, IItemMatcher in_extra, int cast_speed)
+    {
+        ICastingRecipe recipe = new CastingRecipe(result, in_fluid, in_mold.getMatcher(), comsume_mold, in_extra,
+                cast_speed);
         if (recipe.requiresExtra())
         {
             recipes.add(0, recipe);

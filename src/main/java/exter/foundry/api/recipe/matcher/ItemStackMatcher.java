@@ -25,7 +25,7 @@ public class ItemStackMatcher implements IItemMatcher
 
     public ItemStackMatcher(ItemStack match)
     {
-        if (match.isEmpty())
+        if (match == null || match.isEmpty())
             throw new IllegalArgumentException("Invalid ItemStackMatcher: Cannot use an empty stack!");
         this.match = match.copy();
     }

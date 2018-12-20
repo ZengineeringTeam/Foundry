@@ -212,12 +212,12 @@ public class MiscUtil
     {
         if (!item.isEmpty())
         {
-            ItemStack mold = mold_meta.getItem();
             ItemStack extra_item = extra != null ? extra.getItem() : ItemStack.EMPTY;
             if (CastingRecipeManager.INSTANCE.findRecipe(
-                    new FluidStack(fluid.getFluid(), FoundryAPI.CASTER_TANK_CAPACITY), mold, extra_item) == null)
+                    new FluidStack(fluid.getFluid(), FoundryAPI.CASTER_TANK_CAPACITY), mold_meta, extra_item) == null)
             {
-                CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(item), fluid, mold, consume_mold, extra);
+                CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(item), fluid, mold_meta, consume_mold,
+                        extra);
             }
         }
         else

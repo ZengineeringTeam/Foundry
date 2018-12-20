@@ -1,6 +1,7 @@
 package exter.foundry.init;
 
 import exter.foundry.api.FoundryAPI;
+import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.api.recipe.matcher.OreMatcher;
 import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.fluid.FoundryFluids;
@@ -17,56 +18,58 @@ public class InitToolRecipes
         OreMatcher extra_sticks1 = new OreMatcher("stickWood", 1);
         OreMatcher extra_sticks2 = new OreMatcher("stickWood", 2);
 
-        ItemStack mold_chestplate = ItemMold.SubItem.CHESTPLATE.getItem();
-        ItemStack mold_pickaxe = ItemMold.SubItem.PICKAXE.getItem();
-        ItemStack mold_axe = ItemMold.SubItem.AXE.getItem();
-        ItemStack mold_shovel = ItemMold.SubItem.SHOVEL.getItem();
-        ItemStack mold_hoe = ItemMold.SubItem.HOE.getItem();
-        ItemStack mold_sword = ItemMold.SubItem.SWORD.getItem();
-        ItemStack mold_leggings = ItemMold.SubItem.LEGGINGS.getItem();
-        ItemStack mold_helmet = ItemMold.SubItem.HELMET.getItem();
-        ItemStack mold_boots = ItemMold.SubItem.BOOTS.getItem();
-        ItemStack mold_hammer = ItemMold.SubItem.HAMMER.getItem();
-        ItemStack mold_sickle = ItemMold.SubItem.SICKLE.getItem();
-        ItemStack mold_shears = ItemMold.SubItem.SHEARS.getItem();
-        ItemStack mold_excavator = ItemMold.SubItem.EXCAVATOR.getItem();
-        ItemStack mold_shield = new ItemStack(Items.SHIELD);
+        ItemStackMatcher mold_chestplate = ItemMold.SubItem.CHESTPLATE.getMatcher();
+        ItemStackMatcher mold_pickaxe = ItemMold.SubItem.PICKAXE.getMatcher();
+        ItemStackMatcher mold_axe = ItemMold.SubItem.AXE.getMatcher();
+        ItemStackMatcher mold_shovel = ItemMold.SubItem.SHOVEL.getMatcher();
+        ItemStackMatcher mold_hoe = ItemMold.SubItem.HOE.getMatcher();
+        ItemStackMatcher mold_sword = ItemMold.SubItem.SWORD.getMatcher();
+        ItemStackMatcher mold_leggings = ItemMold.SubItem.LEGGINGS.getMatcher();
+        ItemStackMatcher mold_helmet = ItemMold.SubItem.HELMET.getMatcher();
+        ItemStackMatcher mold_boots = ItemMold.SubItem.BOOTS.getMatcher();
+        ItemStackMatcher mold_hammer = ItemMold.SubItem.HAMMER.getMatcher();
+        ItemStackMatcher mold_sickle = ItemMold.SubItem.SICKLE.getMatcher();
+        ItemStackMatcher mold_shears = ItemMold.SubItem.SHEARS.getMatcher();
+        ItemStackMatcher mold_excavator = ItemMold.SubItem.EXCAVATOR.getMatcher();
 
-        MoldRecipeManager.INSTANCE.addRecipe(mold_helmet, 4, 3, new int[] { 3, 3, 3, 3, 3, 1, 1, 3, 3, 1, 1, 3 });
+        MoldRecipeManager.INSTANCE.addRecipe(mold_helmet.getItem(), 4, 3,
+                new int[] { 3, 3, 3, 3, 3, 1, 1, 3, 3, 1, 1, 3 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(mold_chestplate, 6, 6, new int[] { 3, 1, 0, 0, 1, 3, 3, 1, 0, 0, 1, 3, 3,
-                1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 3 });
+        MoldRecipeManager.INSTANCE.addRecipe(mold_chestplate.getItem(), 6, 6, new int[] { 3, 1, 0, 0, 1, 3, 3, 1, 0, 0,
+                1, 3, 3, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 3 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(mold_leggings, 6, 6, new int[] { 3, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 3, 3, 1,
-                0, 0, 1, 3, 3, 1, 0, 0, 1, 3, 3, 1, 0, 0, 1, 3, 3, 1, 0, 0, 1, 3 });
+        MoldRecipeManager.INSTANCE.addRecipe(mold_leggings.getItem(), 6, 6, new int[] { 3, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1,
+                3, 3, 1, 0, 0, 1, 3, 3, 1, 0, 0, 1, 3, 3, 1, 0, 0, 1, 3, 3, 1, 0, 0, 1, 3 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(mold_boots, 6, 6, new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                0, 0, 0, 2, 3, 0, 0, 3, 2, 3, 3, 0, 0, 3, 3, 3, 3, 0, 0, 3, 3 });
+        MoldRecipeManager.INSTANCE.addRecipe(mold_boots.getItem(), 6, 6, new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 2, 3, 0, 0, 3, 2, 3, 3, 0, 0, 3, 3, 3, 3, 0, 0, 3, 3 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(mold_pickaxe, 5, 5,
+        MoldRecipeManager.INSTANCE.addRecipe(mold_pickaxe.getItem(), 5, 5,
                 new int[] { 0, 2, 2, 2, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(mold_axe, 3, 5, new int[] { 1, 2, 2, 1, 2, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1 });
+        MoldRecipeManager.INSTANCE.addRecipe(mold_axe.getItem(), 3, 5,
+                new int[] { 1, 2, 2, 1, 2, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(mold_shovel, 3, 6,
+        MoldRecipeManager.INSTANCE.addRecipe(mold_shovel.getItem(), 3, 6,
                 new int[] { 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(mold_hoe, 3, 5, new int[] { 0, 2, 2, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1 });
+        MoldRecipeManager.INSTANCE.addRecipe(mold_hoe.getItem(), 3, 5,
+                new int[] { 0, 2, 2, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(mold_sword, 3, 6,
+        MoldRecipeManager.INSTANCE.addRecipe(mold_sword.getItem(), 3, 6,
                 new int[] { 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 2, 1, 0, 1, 0 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(mold_hammer, 5, 6,
+        MoldRecipeManager.INSTANCE.addRecipe(mold_hammer.getItem(), 5, 6,
                 new int[] { 3, 2, 2, 2, 3, 3, 4, 4, 4, 3, 3, 2, 3, 2, 3, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(mold_sickle, 5, 6,
+        MoldRecipeManager.INSTANCE.addRecipe(mold_sickle.getItem(), 5, 6,
                 new int[] { 3, 3, 3, 3, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 2, 3, 3, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(mold_shears, 5, 6,
+        MoldRecipeManager.INSTANCE.addRecipe(mold_shears.getItem(), 5, 6,
                 new int[] { 2, 3, 0, 3, 2, 2, 3, 0, 3, 2, 2, 3, 0, 3, 2, 2, 0, 0, 0, 2, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(mold_excavator, 6, 6, new int[] { 0, 0, 0, 3, 3, 3, 0, 0, 3, 3, 3, 3, 0, 3,
-                3, 3, 3, 3, 0, 0, 3, 3, 3, 0, 0, 1, 0, 3, 0, 0, 1, 0, 0, 0, 0, 0 });
+        MoldRecipeManager.INSTANCE.addRecipe(mold_excavator.getItem(), 6, 6, new int[] { 0, 0, 0, 3, 3, 3, 0, 0, 3, 3,
+                3, 3, 0, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3, 0, 0, 1, 0, 3, 0, 0, 1, 0, 0, 0, 0, 0 });
 
         // TODO: mold recipes
         // TODO: melting recipes

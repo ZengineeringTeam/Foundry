@@ -4,13 +4,13 @@ import net.minecraft.item.ItemStack;
 
 public interface IMoldRecipe
 {
-    public int getHeight();
+    int getHeight();
 
-    public ItemStack getOutput();
+    ItemStack getOutput();
 
-    public int[] getRecipeGrid();
+    int[] getRecipeGrid();
 
-    public int getWidth();
+    int getWidth();
 
-    public boolean matchesRecipe(int[] grid);
+    boolean matchesRecipe(int[] grid);
 }

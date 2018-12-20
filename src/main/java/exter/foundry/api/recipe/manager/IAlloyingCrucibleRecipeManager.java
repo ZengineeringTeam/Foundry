@@ -13,7 +13,7 @@ public interface IAlloyingCrucibleRecipeManager
      * @param in_a Input A.
      * @param in_b Input B.
      */
-    public void addRecipe(FluidStack out, FluidStack in_a, FluidStack in_b);
+    void addRecipe(FluidStack out, FluidStack in_a, FluidStack in_b);
 
     /**
      * Find a valid recipe that contains the given inputs.
@@ -23,17 +23,17 @@ public interface IAlloyingCrucibleRecipeManager
      * @param order [Output] Order in which the input fluids are matched.
      * @return
      */
-    public IAlloyingCrucibleRecipe findRecipe(FluidStack in_a, FluidStack in_b);
+    IAlloyingCrucibleRecipe findRecipe(FluidStack in_a, FluidStack in_b);
 
     /**
      * Get a list of all the recipes
      * @return List of all the recipes
      */
-    public List<IAlloyingCrucibleRecipe> getRecipes();
+    List<IAlloyingCrucibleRecipe> getRecipes();
 
     /**
      * Removes a recipe.
      * @param The recipe to remove.
      */
-    public void removeRecipe(IAlloyingCrucibleRecipe recipe);
+    void removeRecipe(IAlloyingCrucibleRecipe recipe);
 }

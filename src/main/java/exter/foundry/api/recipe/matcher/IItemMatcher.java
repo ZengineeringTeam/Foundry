@@ -8,9 +8,9 @@ import net.minecraft.item.ItemStack;
 
 public interface IItemMatcher extends Predicate<ItemStack>
 {
-    public int getAmount();
+    int getAmount();
 
-    public ItemStack getItem();
+    ItemStack getItem();
 
-    public List<ItemStack> getItems();
+    List<ItemStack> getItems();
 }

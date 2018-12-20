@@ -7,13 +7,13 @@ import net.minecraftforge.fluids.Fluid;
 
 public interface IFluidHeaterFuelManager
 {
-    public void addFuel(IFluidHeaterFuel fuel);
+    void addFuel(IFluidHeaterFuel fuel);
 
-    public void addFuel(Fluid fluid);
+    void addFuel(Fluid fluid);
 
-    public IFluidHeaterFuel getFuel(Fluid fluid);
+    IFluidHeaterFuel getFuel(Fluid fluid);
 
-    public List<IFluidHeaterFuel> getFuels();
+    List<IFluidHeaterFuel> getFuels();
 
-    public void removeFuel(IFluidHeaterFuel fuel);
+    void removeFuel(IFluidHeaterFuel fuel);
 }

@@ -4,9 +4,9 @@ import net.minecraftforge.fluids.Fluid;
 
 public interface IFluidHeaterFuel
 {
-    public Fluid getFluid();
+    Fluid getFluid();
 
-    default public int getHeat()
+    default int getHeat()
     {
         return getFluid().getTemperature() * 100;
     }

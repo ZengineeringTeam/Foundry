@@ -97,8 +97,6 @@ public class InitRecipes
         }
         */
 
-        ItemStack ingot_mold = ItemMold.SubItem.INGOT.getItem();
-        ItemStack block_mold = ItemMold.SubItem.BLOCK.getItem();
         for (String name : FoundryFluidRegistry.getFluidNames())
         {
             Fluid fluid = FluidRegistry.getFluid(name);
@@ -116,10 +114,10 @@ public class InitRecipes
                         : new ArrayList<>();
                 if (ores != null && ores.size() > 0)
                 {
-                    if (CastingRecipeManager.INSTANCE.findRecipe(fluidstack, ingot_mold, null) == null)
+                    if (CastingRecipeManager.INSTANCE.findRecipe(fluidstack, ItemMold.SubItem.INGOT, null) == null)
                     {
-                        CastingRecipeManager.INSTANCE.addRecipe(new OreMatcher("ingot" + name), fluidstack, ingot_mold,
-                                false, null);
+                        CastingRecipeManager.INSTANCE.addRecipe(new OreMatcher("ingot" + name), fluidstack,
+                                ItemMold.SubItem.INGOT, false, null);
                     }
                     if (CastingTableRecipeManager.INSTANCE.findRecipe(fluidstack,
                             ICastingTableRecipe.TableType.INGOT) == null)
@@ -134,10 +132,10 @@ public class InitRecipes
                 fluidstack.amount = FoundryAPI.getAmountBlock();
                 if (ores != null && ores.size() > 0)
                 {
-                    if (CastingRecipeManager.INSTANCE.findRecipe(fluidstack, block_mold, null) == null)
+                    if (CastingRecipeManager.INSTANCE.findRecipe(fluidstack, ItemMold.SubItem.BLOCK, null) == null)
                     {
-                        CastingRecipeManager.INSTANCE.addRecipe(new OreMatcher("block" + name), fluidstack, block_mold,
-                                false, null);
+                        CastingRecipeManager.INSTANCE.addRecipe(new OreMatcher("block" + name), fluidstack,
+                                ItemMold.SubItem.BLOCK, false, null);
                     }
                     if (CastingTableRecipeManager.INSTANCE.findRecipe(fluidstack,
                             ICastingTableRecipe.TableType.BLOCK) == null)
@@ -167,9 +165,9 @@ public class InitRecipes
         MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("paneGlassColorless"), new FluidStack(liquid_glass, 375),
                 temp, melt);
         CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS), new FluidStack(liquid_glass, 1000),
-                ItemMold.SubItem.BLOCK.getItem(), false, null, 400);
+                ItemMold.SubItem.BLOCK, false, null, 400);
         CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS_PANE),
-                new FluidStack(liquid_glass, 375), ItemMold.SubItem.PLATE.getItem(), false, null, 100);
+                new FluidStack(liquid_glass, 375), ItemMold.SubItem.PLATE, false, null, 100);
         CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS),
                 new FluidStack(liquid_glass, 1000), ICastingTableRecipe.TableType.BLOCK);
         CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS_PANE),
@@ -188,9 +186,9 @@ public class InitRecipes
             MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("paneGlass" + oredict_names[dye.getDyeDamage()]),
                     new FluidStack(liquid_glass_colored, 375), temp, melt);
             CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stained_glass),
-                    new FluidStack(liquid_glass_colored, 1000), ItemMold.SubItem.BLOCK.getItem(), false, null, 400);
+                    new FluidStack(liquid_glass_colored, 1000), ItemMold.SubItem.BLOCK, false, null, 400);
             CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stained_glass_pane),
-                    new FluidStack(liquid_glass_colored, 375), ItemMold.SubItem.PLATE.getItem(), false, null, 100);
+                    new FluidStack(liquid_glass_colored, 375), ItemMold.SubItem.PLATE, false, null, 100);
             CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stained_glass),
                     new FluidStack(liquid_glass_colored, 1000), ICastingTableRecipe.TableType.BLOCK);
             CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stained_glass_pane),
@@ -344,15 +342,6 @@ public class InitRecipes
         FluidHeaterFuelManager.INSTANCE.addFuel(FluidRegistry.LAVA);
     }
 
-    static ItemStack mold_ingot = ItemMold.SubItem.INGOT.getItem();
-    static ItemStack mold_slab = ItemMold.SubItem.SLAB.getItem();
-    static ItemStack mold_stairs = ItemMold.SubItem.STAIRS.getItem();
-    static ItemStack mold_plate = ItemMold.SubItem.PLATE.getItem();
-    static ItemStack mold_block = ItemMold.SubItem.BLOCK.getItem();
-    static ItemStack mold_gear = ItemMold.SubItem.GEAR.getItem();
-    static ItemStack mold_rod = ItemMold.SubItem.ROD.getItem();
-    static ItemStack mold_nugget = ItemMold.SubItem.NUGGET.getItem();
-
     public static void addDefaultCasting(Fluid fluid, String name)
     {
         name = MiscUtil.upperCaseFirstChar(name);
@@ -367,7 +356,8 @@ public class InitRecipes
         if (!ingot.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FLUID_AMOUNT_INGOT);
-            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(ingot), fluid_stack, mold_ingot, false, null);
+            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(ingot), fluid_stack, ItemMold.SubItem.INGOT,
+                    false, null);
             CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(ingot), fluid_stack,
                     ICastingTableRecipe.TableType.INGOT);
         }
@@ -377,7 +367,8 @@ public class InitRecipes
         if (!block.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountBlock());
-            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(block), fluid_stack, mold_block, false, null);
+            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(block), fluid_stack, ItemMold.SubItem.BLOCK,
+                    false, null);
             CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(block), fluid_stack,
                     ICastingTableRecipe.TableType.BLOCK);
         }
@@ -388,7 +379,8 @@ public class InitRecipes
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountBlock() / 2);
 
-            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(slab), fluid_stack, mold_slab, false, null);
+            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(slab), fluid_stack, ItemMold.SubItem.SLAB,
+                    false, null);
             MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(slab), fluid_stack);
         }
 
@@ -397,8 +389,8 @@ public class InitRecipes
         if (!stairs.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountBlock() * 3 / 4);
-            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stairs), fluid_stack, mold_stairs, false,
-                    null);
+            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stairs), fluid_stack, ItemMold.SubItem.STAIRS,
+                    false, null);
             MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stairs), fluid_stack);
         }
 
@@ -407,7 +399,8 @@ public class InitRecipes
         if (!gear.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountGear());
-            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(gear), fluid_stack, mold_gear, false, null);
+            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(gear), fluid_stack, ItemMold.SubItem.GEAR,
+                    false, null);
         }
 
         // Nugget
@@ -415,8 +408,8 @@ public class InitRecipes
         if (!nugget.isEmpty())
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountNugget());
-            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(nugget), fluid_stack, mold_nugget, false,
-                    null);
+            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(nugget), fluid_stack, ItemMold.SubItem.NUGGET,
+                    false, null);
         }
 
         // Plate
@@ -425,7 +418,8 @@ public class InitRecipes
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountPlate());
 
-            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(plate), fluid_stack, mold_plate, false, null);
+            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(plate), fluid_stack, ItemMold.SubItem.PLATE,
+                    false, null);
             CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(plate), fluid_stack,
                     ICastingTableRecipe.TableType.PLATE);
         }
@@ -436,7 +430,8 @@ public class InitRecipes
         {
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountRod());
 
-            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(rod), fluid_stack, mold_rod, false, null);
+            CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(rod), fluid_stack, ItemMold.SubItem.ROD, false,
+                    null);
             CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(rod), fluid_stack,
                     ICastingTableRecipe.TableType.ROD);
         }

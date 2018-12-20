@@ -15,21 +15,21 @@ public interface ICastingTableRecipe
      * Get the fluid required for casting.
      * @return FluidStack containing the required fluid.
      */
-    public FluidStack getInput();
+    FluidStack getInput();
 
     /**
      * Get the actual item produced by casting.
      * @return ItemStack containing the item produced. Can be null if using an Ore Dictionary name with nothing registered with it.
      */
-    public ItemStack getOutput();
+    ItemStack getOutput();
 
     /**
      * Get the output's matcher.
      */
-    public IItemMatcher getOutputMatcher();
+    IItemMatcher getOutputMatcher();
 
     /**
      * Get the Casting Table type.
      */
-    public TableType getTableType();
+    TableType getTableType();
 }

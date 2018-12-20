@@ -3,9 +3,9 @@ package exter.foundry.item;
 import java.util.HashMap;
 import java.util.Map;
 
+import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.creativetab.FoundryTab;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
@@ -54,11 +54,13 @@ public class ItemMold extends Item
         public final int id;
         public final String name;
         public boolean registered = true;
+        private final ItemStackMatcher matcher;
 
         SubItem(int id, String name)
         {
             this.id = id;
             this.name = name;
+            this.matcher = new ItemStackMatcher(new ItemStack(FoundryItems.item_mold, 1, id));
         }
 
         @Override
@@ -67,14 +69,14 @@ public class ItemMold extends Item
             return name;
         }
 
-        public ItemStack getItem()
+        public ItemStackMatcher getMatcher()
         {
-            return getItem(1);
+            return matcher;
         }
 
-        public ItemStack getItem(int amount)
+        public ItemStack getItem()
         {
-            return new ItemStack(FoundryItems.item_mold, amount, id);
+            return matcher.getItem();
         }
     }
 

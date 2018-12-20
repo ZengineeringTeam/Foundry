@@ -4,6 +4,7 @@ import java.util.List;
 
 import exter.foundry.api.recipe.ICastingRecipe;
 import exter.foundry.api.recipe.matcher.IItemMatcher;
+import exter.foundry.item.ItemMold;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -18,7 +19,7 @@ public interface ICastingRecipeManager
      * @param in_mold Mold required.
      * @param in_extra Extra item required (null, if no extra item is required).
      */
-    default public void addRecipe(IItemMatcher result, FluidStack in_fluid, ItemStack in_mold, boolean comsume_mold, IItemMatcher in_extra)
+    default void addRecipe(IItemMatcher result, FluidStack in_fluid, IItemMatcher in_mold, boolean comsume_mold, IItemMatcher in_extra)
     {
         addRecipe(result, in_fluid, in_mold, comsume_mold, in_extra, 100);
     }
@@ -31,7 +32,14 @@ public interface ICastingRecipeManager
      * @param in_mold Mold required.
      * @param in_extra Extra item required (null, if no extra item is required).
      */
-    public void addRecipe(IItemMatcher result, FluidStack in_fluid, ItemStack in_mold, boolean comsume_mold, IItemMatcher in_extra, int speed);
+    void addRecipe(IItemMatcher result, FluidStack in_fluid, IItemMatcher in_mold, boolean comsume_mold, IItemMatcher in_extra, int speed);
+
+    default void addRecipe(IItemMatcher result, FluidStack in_fluid, ItemMold.SubItem in_mold, boolean comsume_mold, IItemMatcher in_extra)
+    {
+        addRecipe(result, in_fluid, in_mold, comsume_mold, in_extra, 100);
+    }
+
+    void addRecipe(IItemMatcher result, FluidStack in_fluid, ItemMold.SubItem in_mold, boolean comsume_mold, IItemMatcher in_extra, int speed);
 
     /**
      * Find a casting recipe given a FluidStack and a mold.
@@ -39,24 +47,29 @@ public interface ICastingRecipeManager
      * @param mold Mold used by the recipe.
      * @return The casting recipe, or null if no matching recipe.
      */
-    public ICastingRecipe findRecipe(FluidStack fluid, ItemStack mold, ItemStack extra);
+    ICastingRecipe findRecipe(FluidStack fluid, ItemStack mold, ItemStack extra);
+
+    default ICastingRecipe findRecipe(FluidStack fluid, ItemMold.SubItem mold, ItemStack extra)
+    {
+        return findRecipe(fluid, mold.getMatcher().getItem(), extra);
+    }
 
     /**
      * Get a list of all the recipes.
      * @return List of all the recipes.
      */
-    public List<ICastingRecipe> getRecipes();
+    List<ICastingRecipe> getRecipes();
 
     /**
      * Check if an item is registered as a mold.
      * @param stack Item to check.
      * @return true if an item is registered, false if not.
      */
-    public boolean isItemMold(ItemStack stack);
+    boolean isItemMold(ItemStack stack);
 
     /**
      * Removes a recipe.
      * @param The recipe to remove.
      */
-    public void removeRecipe(ICastingRecipe recipe);
+    void removeRecipe(ICastingRecipe recipe);
 }

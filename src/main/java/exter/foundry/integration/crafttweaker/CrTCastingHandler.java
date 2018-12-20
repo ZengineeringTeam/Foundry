@@ -82,8 +82,8 @@ public class CrTCastingHandler
             try
             {
                 recipe = new CastingRecipe(new ItemStackMatcher(CraftTweakerMC.getItemStack(output)),
-                        CraftTweakerMC.getLiquidStack(input), CraftTweakerMC.getItemStack(mold), consumes_mold,
-                        extra == null ? null : CrTHelper.getIngredient(extra), speed == 0 ? 100 : speed);
+                        CraftTweakerMC.getLiquidStack(input), new ItemStackMatcher(CraftTweakerMC.getItemStack(mold)),
+                        consumes_mold, extra == null ? null : CrTHelper.getIngredient(extra), speed == 0 ? 100 : speed);
             }
             catch (IllegalArgumentException e)
             {

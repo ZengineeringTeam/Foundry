@@ -6,25 +6,25 @@ import net.minecraftforge.fluids.FluidStack;
 
 public interface IInfuserRecipe
 {
-    public int getEnergyNeeded();
+    int getEnergyNeeded();
 
     /**
      * Get the substance required.
      * @return The substance required.
      */
-    public IItemMatcher getInput();
+    IItemMatcher getInput();
 
     /**
      * Get the fluid required.
      * @return FluidStack containing the required fluid.
      */
-    public FluidStack getInputFluid();
+    FluidStack getInputFluid();
 
     /**
      * Get the produced fluid.
      * @return The fluid that the recipe produces.
      */
-    public FluidStack getOutput();
+    FluidStack getOutput();
 
     /**
      * Check if a fluid stack and substance stack matches this recipe
@@ -33,5 +33,5 @@ public interface IInfuserRecipe
      * @param substance_amount Substance amount to check.
      * @return true if the fluid and substance matches, false otherwise.
      */
-    public boolean matchesRecipe(FluidStack in_fluid, ItemStack in_item);
+    boolean matchesRecipe(FluidStack in_fluid, ItemStack in_item);
 }

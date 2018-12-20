@@ -1,7 +1,6 @@
 package exter.foundry.integration;
 
 import exter.foundry.api.FoundryAPI;
-import exter.foundry.api.FoundryUtils;
 import exter.foundry.api.recipe.ICastingTableRecipe.TableType;
 import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.config.FoundryConfig;
@@ -98,15 +97,14 @@ public class ModIntegrationBotania implements IModIntegration
             return;
         }
 
-        ItemStack mold_block = ItemMold.SubItem.BLOCK.getItem();
-
         if (FoundryFluidRegistry.getStrategy("manasteel").registerRecipes())
         {
             ItemStackMatcher manasteel_block = new ItemStackMatcher(getItemStack("storage", 0));
             FluidStack manasteel_liquid = new FluidStack(liquid_manasteel, FoundryAPI.getAmountBlock());
 
             MeltingRecipeManager.INSTANCE.addRecipe(manasteel_block, manasteel_liquid);
-            CastingRecipeManager.INSTANCE.addRecipe(manasteel_block, manasteel_liquid, mold_block, false, null);
+            CastingRecipeManager.INSTANCE.addRecipe(manasteel_block, manasteel_liquid, ItemMold.SubItem.BLOCK, false,
+                    null);
             CastingTableRecipeManager.INSTANCE.addRecipe(manasteel_block, manasteel_liquid, TableType.BLOCK);
         }
 
@@ -116,7 +114,8 @@ public class ModIntegrationBotania implements IModIntegration
             FluidStack terrasteel_liquid = new FluidStack(liquid_terrasteel, FoundryAPI.getAmountBlock());
 
             MeltingRecipeManager.INSTANCE.addRecipe(terrasteel_block, terrasteel_liquid);
-            CastingRecipeManager.INSTANCE.addRecipe(terrasteel_block, terrasteel_liquid, mold_block, false, null);
+            CastingRecipeManager.INSTANCE.addRecipe(terrasteel_block, terrasteel_liquid, ItemMold.SubItem.BLOCK, false,
+                    null);
             CastingTableRecipeManager.INSTANCE.addRecipe(terrasteel_block, terrasteel_liquid, TableType.BLOCK);
         }
 
@@ -126,7 +125,8 @@ public class ModIntegrationBotania implements IModIntegration
             FluidStack elementium_liquid = new FluidStack(liquid_elementium, FoundryAPI.getAmountBlock());
 
             MeltingRecipeManager.INSTANCE.addRecipe(elementium_block, elementium_liquid);
-            CastingRecipeManager.INSTANCE.addRecipe(elementium_block, elementium_liquid, mold_block, false, null);
+            CastingRecipeManager.INSTANCE.addRecipe(elementium_block, elementium_liquid, ItemMold.SubItem.BLOCK, false,
+                    null);
             CastingTableRecipeManager.INSTANCE.addRecipe(elementium_block, elementium_liquid, TableType.BLOCK);
         }
 
