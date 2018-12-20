@@ -1,4 +1,4 @@
-Zen: Foundry[![CurseForge](http://cf.way2muchnoise.eu/zen-foundry.svg)](https://minecraft.curseforge.com/projects/zen-foundry)[![Version](http://cf.way2muchnoise.eu/versions/zen-foundry.svg)](https://minecraft.curseforge.com/projects/zen-foundry)
+Zen: Foundry [![CurseForge](http://cf.way2muchnoise.eu/zen-foundry.svg)](https://minecraft.curseforge.com/projects/zen-foundry) [![Version](http://cf.way2muchnoise.eu/versions/zen-foundry.svg)](https://minecraft.curseforge.com/projects/zen-foundry)
 =======
 
 ![banner](https://i.imgur.com/m8lBpep.png)
