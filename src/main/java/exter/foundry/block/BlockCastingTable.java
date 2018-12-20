@@ -192,6 +192,9 @@ public class BlockCastingTable extends Block implements ITileEntityProvider, IBl
             case ROD:
                 stack = ItemMold.SubItem.ROD.getItem();
                 break;
+            case BLOCK:
+                stack = ItemMold.SubItem.BLOCK.getItem();
+                break;
             default:
             }
             drops.add(stack);
