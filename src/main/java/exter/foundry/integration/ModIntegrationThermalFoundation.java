@@ -35,6 +35,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class ModIntegrationThermalFoundation implements IModIntegration
@@ -79,8 +80,12 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                 new FluidStack(TFFluids.fluidRedstone, 250));
         MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("oreClathrateRedstone"),
                 new FluidStack(TFFluids.fluidRedstone, 1000));
-        MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("dustSmallRedstone"),
-                new FluidStack(TFFluids.fluidRedstone, 25));
+        if (OreDictionary.doesOreNameExist("dustSmallRedstone"))
+        {
+            MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("dustSmallRedstone"),
+                    new FluidStack(TFFluids.fluidRedstone, 25));
+        }
+
         //Glowstone
         MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("dustGlowstone"),
                 new FluidStack(TFFluids.fluidGlowstone, 250), TFFluids.fluidGlowstone.getTemperature(), 90);
@@ -241,9 +246,9 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                     if (shield != null && cfg.get(tools, "Shield", true).getBoolean(true))
                     {
                         FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(shield),
-                                new FluidStack(fluid, FoundryAPI.getAmountSword()));
+                                new FluidStack(fluid, FoundryAPI.getAmountShield()));
                         FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(shield),
-                                new FluidStack(fluid, FoundryAPI.getAmountSword()), SubItem.SHIELD.getItem(), true,
+                                new FluidStack(fluid, FoundryAPI.getAmountShield()), SubItem.SHIELD.getItem(), true,
                                 null);
                     }
                 }
