@@ -9,6 +9,7 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemDye;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -37,6 +38,9 @@ public class FoundryFluids
     public static Fluid liquid_iridium;
     public static Fluid liquid_glass;
     public static Fluid[] liquid_glass_colored = new Fluid[16];
+    public static Fluid liquid_redstone;
+    public static Fluid liquid_glowstone;
+    public static Fluid liquid_enderpearl;
 
     @SubscribeEvent
     public static void registerFluids(Register<Block> event)
@@ -65,6 +69,14 @@ public class FoundryFluids
         if (!FoundryConfig.recipe_alumina_melts_to_aluminium)
         {
             liquid_alumina = FoundryFluidRegistry.registerLiquidMetal(registry, "alumina", category, 2100, 12, 0xFFFFFF);
+        }
+
+        category = "Base Materials";
+        if (!Loader.isModLoaded("thermalfoundation"))
+        {
+            liquid_redstone = FoundryFluidRegistry.registerLiquidMetal(registry, "redstone", category, 301, 10, 0xa50505);
+            liquid_glowstone = FoundryFluidRegistry.registerLiquidMetal(registry, "glowstone", category, 301, 10, 0xf0de08);
+            liquid_enderpearl = FoundryFluidRegistry.registerLiquidMetal(registry, "ender", category, 301, 10, 0x0f3c37);
         }
 
         /*

@@ -205,7 +205,8 @@ public class InitRecipes
         for (String name : FoundryFluidRegistry.getFluidNames())
         {
             Fluid fluid = FluidRegistry.getFluid(name);
-            if (FoundryFluidRegistry.getStrategy(name).registerRecipes() && !fluid.getName().startsWith("glass"))
+            if (FoundryFluidRegistry.getStrategy(name).registerRecipes() && !fluid.getName().startsWith("glass") && !fluid.getName().equals("redstone")
+                    && !fluid.getName().equals("glowstone") && !fluid.getName().equals("ender") && !fluid.getName().equals("endstone"))
             {
                 FoundryUtils.registerBasicMeltingRecipes(name, fluid);
             }
@@ -217,6 +218,33 @@ public class InitRecipes
         }
         // FoundryUtils.registerBasicMeltingRecipes("Constantan", FoundryFluidRegistry.INSTANCE.getFluid("constantan"));
 
+        if (FoundryFluidRegistry.getStrategy("redstone").registerRecipes())
+        {
+            MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Items.REDSTONE),
+                new FluidStack(FoundryFluids.liquid_redstone, 100));
+            MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.REDSTONE_BLOCK),
+                    new FluidStack(FoundryFluids.liquid_redstone, 900));
+            if (OreDictionary.doesOreNameExist("dustSmallRedstone"))
+            {
+                MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("dustSmallRedstone"),
+                        new FluidStack(FoundryFluids.liquid_redstone, 25));
+            }
+        }
+
+        if (FoundryFluidRegistry.getStrategy("glowstone").registerRecipes())
+        {
+            MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Items.GLOWSTONE_DUST),
+                    new FluidStack(FoundryFluids.liquid_glowstone, 250));
+            MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLOWSTONE),
+                    new FluidStack(FoundryFluids.liquid_glowstone, 1000));
+        }
+
+        if (FoundryFluidRegistry.getStrategy("ender").registerRecipes())
+        {
+            MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Items.ENDER_PEARL),
+                    new FluidStack(FoundryFluids.liquid_enderpearl, 250));
+        }
+
         MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.ICE),
                 new FluidStack(FluidRegistry.WATER, 1000), 350, 200);
         MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.PACKED_ICE),
@@ -225,6 +253,9 @@ public class InitRecipes
                 new FluidStack(FluidRegistry.WATER, 500), 325, 200);
         MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Items.SNOWBALL),
                 new FluidStack(FluidRegistry.WATER, 125), 325, 200);
+
+        MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.MAGMA),
+                new FluidStack(FluidRegistry.LAVA, 1000), 1250, 200);
 
         MoldRecipeManager.INSTANCE.addRecipe(ItemMold.SubItem.INGOT.getItem(), 2, 4,
                 new int[] { 2, 2, 2, 2, 2, 2, 2, 2 });
