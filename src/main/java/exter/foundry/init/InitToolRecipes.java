@@ -7,14 +7,17 @@ import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.fluid.FoundryFluids;
 import exter.foundry.item.ItemMold;
 import exter.foundry.recipes.manager.MoldRecipeManager;
-import exter.foundry.util.MiscUtil;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 
 public class InitToolRecipes
 {
     static public void init()
     {
+        Fluid liquid_iron = FoundryFluids.liquid_iron;
+        Fluid liquid_gold = FoundryFluids.liquid_gold;
+
         OreMatcher extra_sticks1 = new OreMatcher("stickWood", 1);
         OreMatcher extra_sticks2 = new OreMatcher("stickWood", 2);
 
@@ -27,10 +30,7 @@ public class InitToolRecipes
         ItemStackMatcher mold_leggings = ItemMold.SubItem.LEGGINGS.getMatcher();
         ItemStackMatcher mold_helmet = ItemMold.SubItem.HELMET.getMatcher();
         ItemStackMatcher mold_boots = ItemMold.SubItem.BOOTS.getMatcher();
-        ItemStackMatcher mold_hammer = ItemMold.SubItem.HAMMER.getMatcher();
-        ItemStackMatcher mold_sickle = ItemMold.SubItem.SICKLE.getMatcher();
         ItemStackMatcher mold_shears = ItemMold.SubItem.SHEARS.getMatcher();
-        ItemStackMatcher mold_excavator = ItemMold.SubItem.EXCAVATOR.getMatcher();
 
         MoldRecipeManager.INSTANCE.addRecipe(mold_helmet.getItem(), 4, 3,
                 new int[] { 3, 3, 3, 3, 3, 1, 1, 3, 3, 1, 1, 3 });
@@ -59,70 +59,92 @@ public class InitToolRecipes
         MoldRecipeManager.INSTANCE.addRecipe(mold_sword.getItem(), 3, 6,
                 new int[] { 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 2, 1, 0, 1, 0 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(mold_hammer.getItem(), 5, 6,
-                new int[] { 3, 2, 2, 2, 3, 3, 4, 4, 4, 3, 3, 2, 3, 2, 3, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0 });
-
-        MoldRecipeManager.INSTANCE.addRecipe(mold_sickle.getItem(), 5, 6,
-                new int[] { 3, 3, 3, 3, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 2, 3, 3, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0 });
-
         MoldRecipeManager.INSTANCE.addRecipe(mold_shears.getItem(), 5, 6,
                 new int[] { 2, 3, 0, 3, 2, 2, 3, 0, 3, 2, 2, 3, 0, 3, 2, 2, 0, 0, 0, 2, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0 });
 
-        MoldRecipeManager.INSTANCE.addRecipe(mold_excavator.getItem(), 6, 6, new int[] { 0, 0, 0, 3, 3, 3, 0, 0, 3, 3,
-                3, 3, 0, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3, 0, 0, 1, 0, 3, 0, 0, 1, 0, 0, 0, 0, 0 });
-
         // TODO: mold recipes
-        // TODO: melting recipes
         if (FoundryFluidRegistry.getStrategy("iron").registerRecipes())
         {
-            MiscUtil.registerCasting(new ItemStack(Items.IRON_PICKAXE), FoundryFluids.liquid_iron,
-                    FoundryAPI.getAmountPickaxe(), ItemMold.SubItem.PICKAXE, extra_sticks2);
-            MiscUtil.registerCasting(new ItemStack(Items.IRON_AXE), FoundryFluids.liquid_iron,
-                    FoundryAPI.getAmountAxe(), ItemMold.SubItem.AXE, extra_sticks2);
-            MiscUtil.registerCasting(new ItemStack(Items.IRON_SHOVEL), FoundryFluids.liquid_iron,
-                    FoundryAPI.getAmountShovel(), ItemMold.SubItem.SHOVEL, extra_sticks2);
-            MiscUtil.registerCasting(new ItemStack(Items.IRON_HOE), FoundryFluids.liquid_iron,
-                    FoundryAPI.getAmountHoe(), ItemMold.SubItem.HOE, extra_sticks2);
-            MiscUtil.registerCasting(new ItemStack(Items.IRON_SWORD), FoundryFluids.liquid_iron,
-                    FoundryAPI.getAmountSword(), ItemMold.SubItem.SWORD, extra_sticks1);
-            MiscUtil.registerCasting(new ItemStack(Items.IRON_HELMET), FoundryFluids.liquid_iron,
-                    FoundryAPI.getAmountHelm(), ItemMold.SubItem.HELMET);
-            MiscUtil.registerCasting(new ItemStack(Items.IRON_CHESTPLATE), FoundryFluids.liquid_iron,
-                    FoundryAPI.getAmountChest(), ItemMold.SubItem.CHESTPLATE);
-            MiscUtil.registerCasting(new ItemStack(Items.IRON_LEGGINGS), FoundryFluids.liquid_iron,
-                    FoundryAPI.getAmountLegs(), ItemMold.SubItem.LEGGINGS);
-            MiscUtil.registerCasting(new ItemStack(Items.IRON_BOOTS), FoundryFluids.liquid_iron,
-                    FoundryAPI.getAmountBoots(), ItemMold.SubItem.BOOTS);
-            MiscUtil.registerCasting(new ItemStack(Items.SHEARS), FoundryFluids.liquid_iron,
-                    FoundryAPI.getAmountShears(), ItemMold.SubItem.SHEARS);
-
-            // iron shield?
-            // MiscUtil.registerCasting(new ItemStack(Items.IRON_BOOTS), FoundryFluids.liquid_iron, 4, ItemMold.SubItem.BOOTS);
-            //        MiscUtil.registerCasting(
-            //                new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "???"))),
-            //                FoundryFluids.liquid_gold, 6, ItemMold.SubItem.BOOTS);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(Items.IRON_PICKAXE),
+                    new FluidStack(liquid_iron, FoundryAPI.getAmountPickaxe()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(Items.IRON_PICKAXE),
+                    new FluidStack(liquid_iron, FoundryAPI.getAmountPickaxe()), ItemMold.SubItem.PICKAXE, false, extra_sticks2);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(Items.IRON_AXE),
+                    new FluidStack(liquid_iron, FoundryAPI.getAmountAxe()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(Items.IRON_AXE),
+                    new FluidStack(liquid_iron, FoundryAPI.getAmountAxe()), ItemMold.SubItem.AXE, false, extra_sticks2);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(Items.IRON_SHOVEL),
+                    new FluidStack(liquid_iron, FoundryAPI.getAmountShovel()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(Items.IRON_SHOVEL),
+                    new FluidStack(liquid_iron, FoundryAPI.getAmountShovel()), ItemMold.SubItem.SHOVEL, false, extra_sticks2);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(Items.IRON_HOE),
+                    new FluidStack(liquid_iron, FoundryAPI.getAmountHoe()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(Items.IRON_HOE),
+                    new FluidStack(liquid_iron, FoundryAPI.getAmountHoe()), ItemMold.SubItem.HOE, false, extra_sticks2);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(Items.IRON_SWORD),
+                    new FluidStack(liquid_iron, FoundryAPI.getAmountSword()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(Items.IRON_SWORD),
+                    new FluidStack(liquid_iron, FoundryAPI.getAmountSword()), ItemMold.SubItem.SWORD, false, extra_sticks1);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(Items.SHEARS),
+                    new FluidStack(liquid_iron, FoundryAPI.getAmountShears()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(Items.SHEARS),
+                    new FluidStack(liquid_iron, FoundryAPI.getAmountShears()), ItemMold.SubItem.SHEARS, false, null);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(Items.IRON_HELMET),
+                    new FluidStack(liquid_iron, FoundryAPI.getAmountHelm()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(Items.IRON_HELMET),
+                    new FluidStack(liquid_iron, FoundryAPI.getAmountHelm()), ItemMold.SubItem.HELMET, false, null);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(Items.IRON_CHESTPLATE),
+                    new FluidStack(liquid_iron, FoundryAPI.getAmountChest()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(Items.IRON_CHESTPLATE),
+                    new FluidStack(liquid_iron, FoundryAPI.getAmountChest()), ItemMold.SubItem.CHESTPLATE, false, null);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(Items.IRON_LEGGINGS),
+                    new FluidStack(liquid_iron, FoundryAPI.getAmountLegs()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(Items.IRON_LEGGINGS),
+                    new FluidStack(liquid_iron, FoundryAPI.getAmountLegs()), ItemMold.SubItem.LEGGINGS, false, null);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(Items.IRON_BOOTS),
+                    new FluidStack(liquid_iron, FoundryAPI.getAmountBoots()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(Items.IRON_BOOTS),
+                    new FluidStack(liquid_iron, FoundryAPI.getAmountBoots()), ItemMold.SubItem.BOOTS, false, null);
         }
 
         if (FoundryFluidRegistry.getStrategy("gold").registerRecipes())
         {
-            MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_PICKAXE), FoundryFluids.liquid_gold,
-                    FoundryAPI.getAmountPickaxe(), ItemMold.SubItem.PICKAXE, extra_sticks2);
-            MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_AXE), FoundryFluids.liquid_gold,
-                    FoundryAPI.getAmountAxe(), ItemMold.SubItem.AXE, extra_sticks2);
-            MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_SHOVEL), FoundryFluids.liquid_gold,
-                    FoundryAPI.getAmountShovel(), ItemMold.SubItem.SHOVEL, extra_sticks2);
-            MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_HOE), FoundryFluids.liquid_gold,
-                    FoundryAPI.getAmountHoe(), ItemMold.SubItem.HOE, extra_sticks2);
-            MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_SWORD), FoundryFluids.liquid_gold,
-                    FoundryAPI.getAmountSword(), ItemMold.SubItem.SWORD, extra_sticks1);
-            MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_HELMET), FoundryFluids.liquid_gold,
-                    FoundryAPI.getAmountHelm(), ItemMold.SubItem.HELMET);
-            MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_CHESTPLATE), FoundryFluids.liquid_gold,
-                    FoundryAPI.getAmountChest(), ItemMold.SubItem.CHESTPLATE);
-            MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_LEGGINGS), FoundryFluids.liquid_gold,
-                    FoundryAPI.getAmountLegs(), ItemMold.SubItem.LEGGINGS);
-            MiscUtil.registerCasting(new ItemStack(Items.GOLDEN_BOOTS), FoundryFluids.liquid_gold,
-                    FoundryAPI.getAmountBoots(), ItemMold.SubItem.BOOTS);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(Items.GOLDEN_PICKAXE),
+                    new FluidStack(liquid_gold, FoundryAPI.getAmountPickaxe()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(Items.GOLDEN_PICKAXE),
+                    new FluidStack(liquid_gold, FoundryAPI.getAmountPickaxe()), ItemMold.SubItem.PICKAXE, false, extra_sticks2);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(Items.GOLDEN_AXE),
+                    new FluidStack(liquid_gold, FoundryAPI.getAmountAxe()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(Items.GOLDEN_AXE),
+                    new FluidStack(liquid_gold, FoundryAPI.getAmountAxe()), ItemMold.SubItem.AXE, false, extra_sticks2);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(Items.GOLDEN_SHOVEL),
+                    new FluidStack(liquid_gold, FoundryAPI.getAmountShovel()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(Items.GOLDEN_SHOVEL),
+                    new FluidStack(liquid_gold, FoundryAPI.getAmountShovel()), ItemMold.SubItem.SHOVEL, false, extra_sticks2);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(Items.GOLDEN_HOE),
+                    new FluidStack(liquid_gold, FoundryAPI.getAmountHoe()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(Items.GOLDEN_HOE),
+                    new FluidStack(liquid_gold, FoundryAPI.getAmountHoe()), ItemMold.SubItem.HOE, false, extra_sticks2);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(Items.GOLDEN_SWORD),
+                    new FluidStack(liquid_gold, FoundryAPI.getAmountSword()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(Items.GOLDEN_SWORD),
+                    new FluidStack(liquid_gold, FoundryAPI.getAmountSword()), ItemMold.SubItem.SWORD, false, extra_sticks1);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(Items.GOLDEN_HELMET),
+                    new FluidStack(liquid_gold, FoundryAPI.getAmountHelm()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(Items.GOLDEN_HELMET),
+                    new FluidStack(liquid_gold, FoundryAPI.getAmountHelm()), ItemMold.SubItem.HELMET, false, null);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(Items.GOLDEN_CHESTPLATE),
+                    new FluidStack(liquid_gold, FoundryAPI.getAmountChest()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(Items.GOLDEN_CHESTPLATE),
+                    new FluidStack(liquid_gold, FoundryAPI.getAmountChest()), ItemMold.SubItem.CHESTPLATE, false, null);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(Items.GOLDEN_LEGGINGS),
+                    new FluidStack(liquid_gold, FoundryAPI.getAmountLegs()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(Items.GOLDEN_LEGGINGS),
+                    new FluidStack(liquid_gold, FoundryAPI.getAmountLegs()), ItemMold.SubItem.LEGGINGS, false, null);
+            FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(Items.GOLDEN_BOOTS),
+                    new FluidStack(liquid_gold, FoundryAPI.getAmountBoots()));
+            FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(Items.GOLDEN_BOOTS),
+                    new FluidStack(liquid_gold, FoundryAPI.getAmountBoots()), ItemMold.SubItem.BOOTS, false, null);
         }
     }
 }
