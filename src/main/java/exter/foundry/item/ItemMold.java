@@ -22,20 +22,25 @@ public class ItemMold extends Item
         BLOCK(4, "block"),
         SLAB(5, "slab"),
         STAIRS(6, "stairs"),
-        PICKAXE(7, "pickaxe"),
-        AXE(8, "axe"),
-        SWORD(9, "sword"),
-        SHOVEL(10, "shovel"),
-        HOE(11, "hoe"),
-        HELMET(12, "helmet"),
-        CHESTPLATE(13, "chestplate"),
-        LEGGINGS(14, "leggings"),
-        BOOTS(15, "boots"),
-        NUGGET(16, "nugget"),
-        HAMMER(17, "hammer"),
+        NUGGET(7, "nugget"),
+        PICKAXE(8, "pickaxe"),
+        AXE(9, "axe"),
+        SWORD(10, "sword"),
+        SHOVEL(11, "shovel"),
+        HOE(12, "hoe"),
+        SHEARS(13, "shears"),
+        HELMET(14, "helmet"),
+        CHESTPLATE(15, "chestplate"),
+        LEGGINGS(16, "leggings"),
+        BOOTS(17, "boots"),
+        //Thermal Foundation
         SICKLE(18, "sickle"),
-        SHEARS(19, "shears"),
-        EXCAVATOR(20, "excavator");
+        HAMMER(19, "hammer"),
+        EXCAVATOR(20, "excavator"),
+        //Ender IO
+        GRINDINGBALL(21, "grindingball");
+        //Tech Reborn & Industrial Craft
+        //CABLE(22, "cable");
 
         static private final Map<Integer, SubItem> value_map = new HashMap<>();
         static
