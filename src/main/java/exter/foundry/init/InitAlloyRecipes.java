@@ -38,7 +38,7 @@ public class InitAlloyRecipes
                     new FluidStack(fluid_in_a, amount_a * 3), new FluidStack(fluid_in_b, amount_b * 3));
 
             AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(fluid_out, amount_a + amount_b),
-                    new FluidStack[] { new FluidStack(fluid_in_a, amount_a), new FluidStack(fluid_in_b, amount_b) });
+                    new FluidStack(fluid_in_a, amount_a), new FluidStack(fluid_in_b, amount_b));
         }
     }
 
