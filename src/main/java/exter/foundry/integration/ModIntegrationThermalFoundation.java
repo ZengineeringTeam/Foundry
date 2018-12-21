@@ -14,10 +14,12 @@ import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.api.recipe.matcher.OreMatcher;
 import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.fluid.FoundryFluids;
+import exter.foundry.item.ItemMold;
 import exter.foundry.item.ItemMold.SubItem;
 import exter.foundry.recipes.manager.AlloyMixerRecipeManager;
 import exter.foundry.recipes.manager.FluidHeaterFuelManager;
 import exter.foundry.recipes.manager.MeltingRecipeManager;
+import exter.foundry.recipes.manager.MoldRecipeManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockColored;
 import net.minecraft.block.BlockSponge;
@@ -86,7 +88,6 @@ public class ModIntegrationThermalFoundation implements IModIntegration
             MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("dustSmallRedstone"),
                     new FluidStack(TFFluids.fluidRedstone, 25));
         }
-
         //Glowstone
         MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("dustGlowstone"),
                 new FluidStack(TFFluids.fluidGlowstone, 250), TFFluids.fluidGlowstone.getTemperature(), 90);
@@ -130,6 +131,13 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                     new FluidStack(FoundryFluids.liquid_platinum, FLUID_AMOUNT_INGOT / 4));
 
         FluidHeaterFuelManager.INSTANCE.addFuel(TFFluids.fluidPyrotheum);
+
+        MoldRecipeManager.INSTANCE.addRecipe(ItemMold.SubItem.SICKLE.getMatcher().getItem(), 5, 6,
+                new int[] { 3, 3, 3, 3, 3, 0, 0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 2, 3, 3, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0 });
+        MoldRecipeManager.INSTANCE.addRecipe(ItemMold.SubItem.HAMMER.getMatcher().getItem(), 5, 6,
+                new int[] { 3, 2, 2, 2, 3, 3, 4, 4, 4, 3, 3, 2, 3, 2, 3, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0 });
+        MoldRecipeManager.INSTANCE.addRecipe(ItemMold.SubItem.EXCAVATOR.getMatcher().getItem(), 6, 6, new int[] { 0, 0, 0, 3, 3, 3, 0, 0, 3, 3,
+                3, 3, 0, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3, 0, 0, 1, 0, 3, 0, 0, 1, 0, 0, 0, 0, 0 });
 
         Configuration cfg = ThermalFoundation.CONFIG.getConfiguration();
         for (String name : ImmutableList.of("copper", "tin", "silver", "lead", "aluminum", "nickel", "platinum",
@@ -271,6 +279,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                     FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(axe),
                             new FluidStack(fluid, FoundryAPI.getAmountAxe()), SubItem.AXE, false, stick);
                 }
+
                 Item shovel = ForgeRegistries.ITEMS
                         .getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "tool.shovel_" + name));
                 if (shovel != null && cfg.get(tools, "Shovel", true).getBoolean(true))
@@ -290,6 +299,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                     FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(hoe),
                             new FluidStack(fluid, FoundryAPI.getAmountHoe()), SubItem.HOE, false, stick);
                 }
+
                 Item sword = ForgeRegistries.ITEMS
                         .getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "tool.sword_" + name));
                 if (sword != null && cfg.get(tools, "Sword", true).getBoolean(true))
