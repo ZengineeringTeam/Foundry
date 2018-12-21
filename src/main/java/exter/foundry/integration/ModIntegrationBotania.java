@@ -136,6 +136,7 @@ public class ModIntegrationBotania implements IModIntegration
             ItemStack manasteel_axe = getItemStack("manasteelaxe");
             ItemStack manasteel_shovel = getItemStack("manasteelshovel");
             ItemStack manasteel_sword = getItemStack("manasteelsword");
+            ItemStack manasteel_shears = getItemStack("manasteelshears");
 
             ItemStack manasteel_helmet = getItemStack("manasteelhelm");
             ItemStack manasteel_chestplate = getItemStack("manasteelchest");
@@ -148,6 +149,7 @@ public class ModIntegrationBotania implements IModIntegration
             ItemStack elementium_axe = getItemStack("elementiumaxe");
             ItemStack elementium_shovel = getItemStack("elementiumshovel");
             ItemStack elementium_sword = getItemStack("elementiumsword");
+            ItemStack elementium_shears = getItemStack("elementiumshears");
 
             ItemStack elementium_helmet = getItemStack("elementiumhelm");
             ItemStack elementium_chestplate = getItemStack("elementiumchest");
@@ -174,6 +176,8 @@ public class ModIntegrationBotania implements IModIntegration
                         ItemMold.SubItem.SHOVEL, extra_sticks2);
                 MiscUtil.registerCasting(manasteel_sword, liquid_manasteel, FoundryAPI.getAmountSword(),
                         ItemMold.SubItem.SWORD, extra_sticks1);
+                MiscUtil.registerCasting(manasteel_shears, liquid_manasteel, FoundryAPI.getAmountShears(),
+                        ItemMold.SubItem.SHEARS);
                 MiscUtil.registerCasting(manasteel_chestplate, liquid_manasteel, FoundryAPI.getAmountChest(),
                         ItemMold.SubItem.CHESTPLATE);
                 MiscUtil.registerCasting(manasteel_leggings, liquid_manasteel, FoundryAPI.getAmountLegs(),
@@ -199,6 +203,8 @@ public class ModIntegrationBotania implements IModIntegration
                         ItemMold.SubItem.SHOVEL, extra_dreamsticks2);
                 MiscUtil.registerCasting(elementium_sword, liquid_elementium, FoundryAPI.getAmountSword(),
                         ItemMold.SubItem.SWORD, extra_dreamsticks1);
+                MiscUtil.registerCasting(elementium_shears, liquid_elementium, FoundryAPI.getAmountShears(),
+                        ItemMold.SubItem.SHEARS);
                 MiscUtil.registerCasting(elementium_chestplate, liquid_elementium, FoundryAPI.getAmountChest(),
                         ItemMold.SubItem.CHESTPLATE);
                 MiscUtil.registerCasting(elementium_leggings, liquid_elementium, FoundryAPI.getAmountLegs(),
