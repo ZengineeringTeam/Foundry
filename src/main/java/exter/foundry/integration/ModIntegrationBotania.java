@@ -4,19 +4,18 @@ import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.recipe.ICastingTableRecipe.TableType;
 import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.config.FoundryConfig;
-import exter.foundry.fluid.FluidLiquidMetal;
 import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.item.ItemMold;
 import exter.foundry.recipes.manager.CastingRecipeManager;
 import exter.foundry.recipes.manager.CastingTableRecipeManager;
 import exter.foundry.recipes.manager.MeltingRecipeManager;
-import exter.foundry.util.MiscUtil;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.RegistryEvent.Register;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -31,9 +30,9 @@ public class ModIntegrationBotania implements IModIntegration
 
     public static final String BOTANIA = "botania";
 
-    private FluidLiquidMetal liquid_manasteel;
-    private FluidLiquidMetal liquid_terrasteel;
-    private FluidLiquidMetal liquid_elementium;
+    public static Fluid liquid_manasteel;
+    public static Fluid liquid_terrasteel;
+    public static Fluid liquid_elementium;
 
     private ItemStack getItemStack(String name)
     {
@@ -168,51 +167,90 @@ public class ModIntegrationBotania implements IModIntegration
 
             if (FoundryFluidRegistry.getStrategy("manasteel").registerRecipes())
             {
-                MiscUtil.registerCasting(manasteel_pickaxe, liquid_manasteel, FoundryAPI.getAmountPickaxe(),
-                        ItemMold.SubItem.PICKAXE, extra_sticks2);
-                MiscUtil.registerCasting(manasteel_axe, liquid_manasteel, FoundryAPI.getAmountAxe(),
-                        ItemMold.SubItem.AXE, extra_sticks2);
-                MiscUtil.registerCasting(manasteel_shovel, liquid_manasteel, FoundryAPI.getAmountShovel(),
-                        ItemMold.SubItem.SHOVEL, extra_sticks2);
-                MiscUtil.registerCasting(manasteel_sword, liquid_manasteel, FoundryAPI.getAmountSword(),
-                        ItemMold.SubItem.SWORD, extra_sticks1);
-                MiscUtil.registerCasting(manasteel_shears, liquid_manasteel, FoundryAPI.getAmountShears(),
-                        ItemMold.SubItem.SHEARS);
-                MiscUtil.registerCasting(manasteel_chestplate, liquid_manasteel, FoundryAPI.getAmountChest(),
-                        ItemMold.SubItem.CHESTPLATE);
-                MiscUtil.registerCasting(manasteel_leggings, liquid_manasteel, FoundryAPI.getAmountLegs(),
-                        ItemMold.SubItem.LEGGINGS);
-                MiscUtil.registerCasting(manasteel_helmet, liquid_manasteel, FoundryAPI.getAmountHelm(),
-                        ItemMold.SubItem.HELMET);
-                MiscUtil.registerCasting(manasteel_boots, liquid_manasteel, FoundryAPI.getAmountBoots(),
-                        ItemMold.SubItem.BOOTS);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(manasteel_pickaxe),
+                        new FluidStack(liquid_manasteel, FoundryAPI.getAmountPickaxe()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(manasteel_pickaxe),
+                        new FluidStack(liquid_manasteel, FoundryAPI.getAmountPickaxe()), ItemMold.SubItem.PICKAXE, false, extra_sticks2);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(manasteel_axe),
+                        new FluidStack(liquid_manasteel, FoundryAPI.getAmountAxe()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(manasteel_axe),
+                        new FluidStack(liquid_manasteel, FoundryAPI.getAmountAxe()), ItemMold.SubItem.AXE, false, extra_sticks2);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(manasteel_shovel),
+                        new FluidStack(liquid_manasteel, FoundryAPI.getAmountShovel()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(manasteel_shovel),
+                        new FluidStack(liquid_manasteel, FoundryAPI.getAmountShovel()), ItemMold.SubItem.SHOVEL, false, extra_sticks2);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(manasteel_sword),
+                        new FluidStack(liquid_manasteel, FoundryAPI.getAmountSword()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(manasteel_sword),
+                        new FluidStack(liquid_manasteel, FoundryAPI.getAmountSword()), ItemMold.SubItem.SWORD, false, extra_sticks1);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(manasteel_shears),
+                        new FluidStack(liquid_manasteel, FoundryAPI.getAmountShears()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(manasteel_shears),
+                        new FluidStack(liquid_manasteel, FoundryAPI.getAmountShears()), ItemMold.SubItem.SHEARS, false, null);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(manasteel_helmet),
+                        new FluidStack(liquid_manasteel, FoundryAPI.getAmountHelm()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(manasteel_helmet),
+                        new FluidStack(liquid_manasteel, FoundryAPI.getAmountHelm()), ItemMold.SubItem.HELMET, false, null);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(manasteel_chestplate),
+                        new FluidStack(liquid_manasteel, FoundryAPI.getAmountChest()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(manasteel_chestplate),
+                        new FluidStack(liquid_manasteel, FoundryAPI.getAmountChest()), ItemMold.SubItem.CHESTPLATE, false, null);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(manasteel_leggings),
+                        new FluidStack(liquid_manasteel, FoundryAPI.getAmountLegs()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(manasteel_leggings),
+                        new FluidStack(liquid_manasteel, FoundryAPI.getAmountLegs()), ItemMold.SubItem.LEGGINGS, false, null);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(manasteel_boots),
+                        new FluidStack(liquid_manasteel, FoundryAPI.getAmountBoots()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(manasteel_boots),
+                        new FluidStack(liquid_manasteel, FoundryAPI.getAmountBoots()), ItemMold.SubItem.BOOTS, false, null);
             }
 
             if (FoundryFluidRegistry.getStrategy("terrasteel").registerRecipes())
-                MiscUtil.registerCasting(terrasteel_sword,
-                        new FluidStack(liquid_terrasteel, FoundryAPI.getAmountSword()), ItemMold.SubItem.SWORD,
-                        extra_sticks1);
+            {
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(terrasteel_sword),
+                        new FluidStack(liquid_terrasteel, FoundryAPI.getAmountSword()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(terrasteel_sword),
+                        new FluidStack(liquid_terrasteel, FoundryAPI.getAmountSword()), ItemMold.SubItem.SWORD, false, extra_sticks1);
+            }
 
             if (FoundryFluidRegistry.getStrategy("elven_elementium").registerRecipes())
             {
-                MiscUtil.registerCasting(elementium_pickaxe, liquid_elementium, FoundryAPI.getAmountPickaxe(),
-                        ItemMold.SubItem.PICKAXE, extra_dreamsticks2);
-                MiscUtil.registerCasting(elementium_axe, liquid_elementium, FoundryAPI.getAmountAxe(),
-                        ItemMold.SubItem.AXE, extra_dreamsticks2);
-                MiscUtil.registerCasting(elementium_shovel, liquid_elementium, FoundryAPI.getAmountShovel(),
-                        ItemMold.SubItem.SHOVEL, extra_dreamsticks2);
-                MiscUtil.registerCasting(elementium_sword, liquid_elementium, FoundryAPI.getAmountSword(),
-                        ItemMold.SubItem.SWORD, extra_dreamsticks1);
-                MiscUtil.registerCasting(elementium_shears, liquid_elementium, FoundryAPI.getAmountShears(),
-                        ItemMold.SubItem.SHEARS);
-                MiscUtil.registerCasting(elementium_chestplate, liquid_elementium, FoundryAPI.getAmountChest(),
-                        ItemMold.SubItem.CHESTPLATE);
-                MiscUtil.registerCasting(elementium_leggings, liquid_elementium, FoundryAPI.getAmountLegs(),
-                        ItemMold.SubItem.LEGGINGS);
-                MiscUtil.registerCasting(elementium_helmet, liquid_elementium, FoundryAPI.getAmountHelm(),
-                        ItemMold.SubItem.HELMET);
-                MiscUtil.registerCasting(elementium_boots, liquid_elementium, FoundryAPI.getAmountBoots(),
-                        ItemMold.SubItem.BOOTS);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(elementium_pickaxe),
+                        new FluidStack(liquid_elementium, FoundryAPI.getAmountPickaxe()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(elementium_pickaxe),
+                        new FluidStack(liquid_elementium, FoundryAPI.getAmountPickaxe()), ItemMold.SubItem.PICKAXE, false, extra_dreamsticks2);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(elementium_axe),
+                        new FluidStack(liquid_elementium, FoundryAPI.getAmountAxe()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(elementium_axe),
+                        new FluidStack(liquid_elementium, FoundryAPI.getAmountAxe()), ItemMold.SubItem.AXE, false, extra_dreamsticks2);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(elementium_shovel),
+                        new FluidStack(liquid_elementium, FoundryAPI.getAmountShovel()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(elementium_shovel),
+                        new FluidStack(liquid_elementium, FoundryAPI.getAmountShovel()), ItemMold.SubItem.SHOVEL, false, extra_dreamsticks2);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(elementium_sword),
+                        new FluidStack(liquid_elementium, FoundryAPI.getAmountSword()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(elementium_sword),
+                        new FluidStack(liquid_elementium, FoundryAPI.getAmountSword()), ItemMold.SubItem.SWORD, false, extra_dreamsticks1);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(elementium_shears),
+                        new FluidStack(liquid_elementium, FoundryAPI.getAmountShears()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(elementium_shears),
+                        new FluidStack(liquid_elementium, FoundryAPI.getAmountShears()), ItemMold.SubItem.SHEARS, false, null);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(elementium_helmet),
+                        new FluidStack(liquid_elementium, FoundryAPI.getAmountHelm()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(elementium_helmet),
+                        new FluidStack(liquid_elementium, FoundryAPI.getAmountHelm()), ItemMold.SubItem.HELMET, false, null);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(elementium_chestplate),
+                        new FluidStack(liquid_elementium, FoundryAPI.getAmountChest()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(elementium_chestplate),
+                        new FluidStack(liquid_elementium, FoundryAPI.getAmountChest()), ItemMold.SubItem.CHESTPLATE, false, null);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(elementium_leggings),
+                        new FluidStack(liquid_elementium, FoundryAPI.getAmountLegs()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(elementium_leggings),
+                        new FluidStack(liquid_elementium, FoundryAPI.getAmountLegs()), ItemMold.SubItem.LEGGINGS, false, null);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(elementium_boots),
+                        new FluidStack(liquid_elementium, FoundryAPI.getAmountBoots()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(elementium_boots),
+                        new FluidStack(liquid_elementium, FoundryAPI.getAmountBoots()), ItemMold.SubItem.BOOTS, false, null);
             }
         }
     }
