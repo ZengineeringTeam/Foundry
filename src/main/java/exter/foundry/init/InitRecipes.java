@@ -105,7 +105,7 @@ public class InitRecipes
                 continue;
             }
             name = MiscUtil.upperCaseFirstChar(name);
-            if (!fluid.getName().startsWith("glass")
+            if (!fluid.getName().startsWith("glass") && !fluid.getName().equals("redstone") && !fluid.getName().equals("glowstone")
                     && FoundryFluidRegistry.getStrategy(fluid.getName()).registerRecipes())
             {
                 FluidStack fluidstack = new FluidStack(fluid, FLUID_AMOUNT_INGOT);
@@ -377,7 +377,7 @@ public class InitRecipes
     {
         name = MiscUtil.upperCaseFirstChar(name);
 
-        if (fluid.getName().startsWith("glass"))
+        if (fluid.getName().startsWith("glass") || fluid.getName().equals("redstone") || fluid.getName().equals("glowstone"))
         {
             return;
         }
