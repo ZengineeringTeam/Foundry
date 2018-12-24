@@ -188,6 +188,7 @@ foundry.router.type.NativeCluster=Native Cluster
 foundry.router.type.PoorOre=Poor Ore
 
 foundry.compat.top.progress=Progress:
+foundry.compat.top.temperature=Temperature:
 
 itemGroup.foundry=Foundry
 
