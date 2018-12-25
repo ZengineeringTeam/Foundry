@@ -1,8 +1,8 @@
 package exter.foundry.integration;
 
 import exter.foundry.integration.top.CastingTableProvider;
+import exter.foundry.integration.top.MeltingCrucibleProvider;
 import exter.foundry.integration.top.MoldStationProvider;
-import exter.foundry.integration.top.TemperatureProvider;
 import mcjty.theoneprobe.api.ITheOneProbe;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
@@ -71,7 +71,7 @@ public class ModIntegrationTheOneProbe implements IModIntegration
         {
             probe.registerProvider(new CastingTableProvider());
             probe.registerProvider(new MoldStationProvider());
-            probe.registerProvider(new TemperatureProvider());
+            probe.registerProvider(new MeltingCrucibleProvider());
             return null;
         }
     }

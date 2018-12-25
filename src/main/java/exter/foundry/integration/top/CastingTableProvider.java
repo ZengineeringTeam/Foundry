@@ -10,6 +10,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 
 public class CastingTableProvider implements IProbeInfoProvider
 {
@@ -32,6 +34,19 @@ public class CastingTableProvider implements IProbeInfoProvider
                 {
                     probeInfo.text(TextFormatting.GREEN + I18n.translateToLocalFormatted(Foundry.MODID + ".compat.top.progress"))
                             .progress(100 - tileCastingTable.getProgress() / 2, 100, probeInfo.defaultProgressStyle().suffix("%"));
+                }
+
+                FluidTank fluidTank = tileCastingTable.getTank(0);
+                FluidStack fluidStack = fluidTank.getFluid();
+                if (fluidStack != null)
+                {
+                    int color;
+                    if (fluidStack.getFluid().getColor(fluidStack) != 0xffffffff)
+                        color = fluidStack.getFluid().getColor(fluidStack);
+                    else
+                        color = 0xff777777;
+                    probeInfo.text(TextFormatting.WHITE + I18n.translateToLocalFormatted(Foundry.MODID + ".compat.top.liquid"))
+                            .element(new ElementFluid(fluidStack.getLocalizedName(), fluidTank.getFluidAmount(), fluidTank.getCapacity(), color, player.isSneaking()));
                 }
             }
         }
