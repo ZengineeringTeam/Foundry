@@ -45,7 +45,7 @@ public class CastingTableProvider implements IProbeInfoProvider
                         color = fluidStack.getFluid().getColor(fluidStack);
                     else
                         color = 0xff777777;
-                    probeInfo.text(TextFormatting.WHITE + I18n.translateToLocalFormatted(Foundry.MODID + ".compat.top.liquid"))
+                    probeInfo.text(TextFormatting.WHITE + I18n.translateToLocalFormatted(Foundry.MODID + ".compat.top.fluid"))
                             .element(new ElementFluid(fluidStack.getLocalizedName(), fluidTank.getFluidAmount(), fluidTank.getCapacity(), color, player.isSneaking()));
                 }
             }

@@ -189,6 +189,7 @@ foundry.router.type.PoorOre=Poor Ore
 
 foundry.compat.top.progress=Progress:
 foundry.compat.top.temperature=Temperature:
+foundry.compat.top.fluid=Fluid:
 
 itemGroup.foundry=Foundry
 

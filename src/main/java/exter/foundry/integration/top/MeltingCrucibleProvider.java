@@ -34,7 +34,7 @@ public class MeltingCrucibleProvider implements IProbeInfoProvider
                 TileEntityMeltingCrucibleBasic tileMeltingCrucible = (TileEntityMeltingCrucibleBasic) tile;
                 //Draw Temperature
                 probeInfo.text(TextFormatting.GOLD + I18n.translateToLocalFormatted(Foundry.MODID + ".compat.top.temperature"))
-                        .element(new ElementTemperature(tileMeltingCrucible.getTemperature() / 100, tileMeltingCrucible.getMaxTemperature() / 100, new Color(255, 170, 0).hashCode()));
+                        .element(new ElementTemperature(tileMeltingCrucible.getTemperature(), tileMeltingCrucible.getMaxTemperature()));
                 //Draw Progress
                 int progress = tileMeltingCrucible.getProgress() * 100 / TileEntityMeltingCrucibleBasic.SMELT_TIME;
                 if (progress != 0)
@@ -58,7 +58,7 @@ public class MeltingCrucibleProvider implements IProbeInfoProvider
                         color = new Color(230, 145, 60).hashCode();
                     else
                         color = 0xff777777;
-                    probeInfo.text(TextFormatting.WHITE + I18n.translateToLocalFormatted(Foundry.MODID + ".compat.top.liquid"))
+                    probeInfo.text(TextFormatting.WHITE + I18n.translateToLocalFormatted(Foundry.MODID + ".compat.top.fluid"))
                             .element(new ElementFluid(fluidStack.getLocalizedName(), fluidTank.getFluidAmount(), fluidTank.getCapacity(), color, player.isSneaking()));
                 }
             }
