@@ -12,6 +12,7 @@ import cofh.thermalfoundation.init.TFProps;
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.api.recipe.matcher.OreMatcher;
+import exter.foundry.config.FoundryConfig;
 import exter.foundry.fluid.FoundryFluidRegistry;
 import exter.foundry.fluid.FoundryFluids;
 import exter.foundry.item.ItemMold;
@@ -188,11 +189,11 @@ public class ModIntegrationThermalFoundation implements IModIntegration
 
         if (Loader.isModLoaded("thermalfoundation"))
         {
-            if (!TFProps.disableAllArmor)
+            if (FoundryConfig.register_tf_tool_recipes_anyway || !TFProps.disableAllArmor)
             {
                 Item helm = ForgeRegistries.ITEMS
                         .getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "armor.helmet_" + name));
-                if (helm != null && cfg.get(armor, "Helmet", true).getBoolean(true))
+                if (helm != null && (FoundryConfig.register_tf_tool_recipes_anyway || cfg.get(armor, "Helmet", true).getBoolean(true)))
                 {
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(helm),
                             new FluidStack(fluid, FoundryAPI.getAmountHelm()));
@@ -202,7 +203,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
 
                 Item chest = ForgeRegistries.ITEMS
                         .getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "armor.plate_" + name));
-                if (chest != null && cfg.get(armor, "Chestplate", true).getBoolean(true))
+                if (chest != null && (FoundryConfig.register_tf_tool_recipes_anyway || cfg.get(armor, "Chestplate", true).getBoolean(true)))
                 {
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(chest),
                             new FluidStack(fluid, FoundryAPI.getAmountChest()));
@@ -212,7 +213,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
 
                 Item legs = ForgeRegistries.ITEMS
                         .getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "armor.legs_" + name));
-                if (legs != null && cfg.get(armor, "Leggings", true).getBoolean(true))
+                if (legs != null && (FoundryConfig.register_tf_tool_recipes_anyway || cfg.get(armor, "Leggings", true).getBoolean(true)))
                 {
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(legs),
                             new FluidStack(fluid, FoundryAPI.getAmountLegs()));
@@ -222,7 +223,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
 
                 Item boots = ForgeRegistries.ITEMS
                         .getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "armor.boots_" + name));
-                if (boots != null && cfg.get(armor, "Boots", true).getBoolean(true))
+                if (boots != null && (FoundryConfig.register_tf_tool_recipes_anyway || cfg.get(armor, "Boots", true).getBoolean(true)))
                 {
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(boots),
                             new FluidStack(fluid, FoundryAPI.getAmountBoots()));
@@ -231,13 +232,13 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                 }
             }
 
-            if (!TFProps.disableAllTools)
+            if (FoundryConfig.register_tf_tool_recipes_anyway || !TFProps.disableAllTools)
             {
-                if (!TFProps.disableAllShears)
+                if (FoundryConfig.register_tf_tool_recipes_anyway || !TFProps.disableAllShears)
                 {
                     Item shears = ForgeRegistries.ITEMS
                             .getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "tool.shears_" + name));
-                    if (shears != null && cfg.get(tools, "Shears", true).getBoolean(true))
+                    if (shears != null && (FoundryConfig.register_tf_tool_recipes_anyway || cfg.get(tools, "Shears", true).getBoolean(true)))
                     {
                         FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(shears),
                                 new FluidStack(fluid, FoundryAPI.getAmountShears()));
@@ -246,11 +247,11 @@ public class ModIntegrationThermalFoundation implements IModIntegration
                     }
                 }
 
-                if (!TFProps.disableAllShields)
+                if (FoundryConfig.register_tf_tool_recipes_anyway || !TFProps.disableAllShields)
                 {
                     Item shield = ForgeRegistries.ITEMS
                             .getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "tool.shield_" + name));
-                    if (shield != null && cfg.get(tools, "Shield", true).getBoolean(true))
+                    if (shield != null && (FoundryConfig.register_tf_tool_recipes_anyway || cfg.get(tools, "Shield", true).getBoolean(true)))
                     {
                         FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(shield),
                                 new FluidStack(fluid, FoundryAPI.getAmountShield()));
@@ -262,7 +263,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
 
                 Item pickaxe = ForgeRegistries.ITEMS
                         .getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "tool.pickaxe_" + name));
-                if (pickaxe != null && cfg.get(tools, "Pickaxe", true).getBoolean(true))
+                if (pickaxe != null && (FoundryConfig.register_tf_tool_recipes_anyway || cfg.get(tools, "Pickaxe", true).getBoolean(true)))
                 {
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(pickaxe),
                             new FluidStack(fluid, FoundryAPI.getAmountPickaxe()));
@@ -272,7 +273,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
 
                 Item axe = ForgeRegistries.ITEMS
                         .getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "tool.axe_" + name));
-                if (axe != null && cfg.get(tools, "Axe", true).getBoolean(true))
+                if (axe != null && (FoundryConfig.register_tf_tool_recipes_anyway || cfg.get(tools, "Axe", true).getBoolean(true)))
                 {
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(axe),
                             new FluidStack(fluid, FoundryAPI.getAmountAxe()));
@@ -282,7 +283,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
 
                 Item shovel = ForgeRegistries.ITEMS
                         .getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "tool.shovel_" + name));
-                if (shovel != null && cfg.get(tools, "Shovel", true).getBoolean(true))
+                if (shovel != null && (FoundryConfig.register_tf_tool_recipes_anyway || cfg.get(tools, "Shovel", true).getBoolean(true)))
                 {
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(shovel),
                             new FluidStack(fluid, FoundryAPI.getAmountShovel()));
@@ -292,7 +293,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
 
                 Item hoe = ForgeRegistries.ITEMS
                         .getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "tool.hoe_" + name));
-                if (hoe != null && cfg.get(tools, "Hoe", true).getBoolean(true))
+                if (hoe != null && (FoundryConfig.register_tf_tool_recipes_anyway || cfg.get(tools, "Hoe", true).getBoolean(true)))
                 {
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(hoe),
                             new FluidStack(fluid, FoundryAPI.getAmountHoe()));
@@ -302,7 +303,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
 
                 Item sword = ForgeRegistries.ITEMS
                         .getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "tool.sword_" + name));
-                if (sword != null && cfg.get(tools, "Sword", true).getBoolean(true))
+                if (sword != null && (FoundryConfig.register_tf_tool_recipes_anyway || cfg.get(tools, "Sword", true).getBoolean(true)))
                 {
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(sword),
                             new FluidStack(fluid, FoundryAPI.getAmountSword()));
@@ -313,7 +314,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
 
                 Item sickle = ForgeRegistries.ITEMS
                         .getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "tool.sickle_" + name));
-                if (sickle != null && cfg.get(tools, "Sickle", true).getBoolean(true))
+                if (sickle != null && (FoundryConfig.register_tf_tool_recipes_anyway || cfg.get(tools, "Sickle", true).getBoolean(true)))
                 {
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(sickle),
                             new FluidStack(fluid, FoundryAPI.getAmountSickle()));
@@ -324,7 +325,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
 
                 Item hammer = ForgeRegistries.ITEMS
                         .getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "tool.hammer_" + name));
-                if (hammer != null && cfg.get(tools, "Hammer", true).getBoolean(true))
+                if (hammer != null && (FoundryConfig.register_tf_tool_recipes_anyway || cfg.get(tools, "Hammer", true).getBoolean(true)))
                 {
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(hammer),
                             new FluidStack(fluid, FoundryAPI.getAmountHammer()));
@@ -334,7 +335,7 @@ public class ModIntegrationThermalFoundation implements IModIntegration
 
                 Item excavator = ForgeRegistries.ITEMS
                         .getValue(new ResourceLocation(ThermalFoundation.MOD_ID, "tool.excavator_" + name));
-                if (excavator != null && cfg.get(tools, "Excavator", true).getBoolean(true))
+                if (excavator != null && (FoundryConfig.register_tf_tool_recipes_anyway || cfg.get(tools, "Excavator", true).getBoolean(true)))
                 {
                     FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(excavator),
                             new FluidStack(fluid, FoundryAPI.getAmountExcavator()));

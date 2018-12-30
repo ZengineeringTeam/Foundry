@@ -24,6 +24,7 @@ public class FoundryConfig
     public static boolean recipe_equipment = true;
     public static boolean recipe_glass = true;
     public static boolean recipe_alumina_melts_to_aluminium = true;
+    public static boolean register_tf_tool_recipes_anyway = false;
 
     public static boolean hardcore_furnace_remove_ingots = false;
     public static Set<String> hardcore_furnace_keep_ingots;
@@ -54,6 +55,8 @@ public class FoundryConfig
         recipe_steel = config.getBoolean("steel", "recipes", recipe_steel, "Enable/disable steel infuser recipes");
         recipe_alumina_melts_to_aluminium = config.getBoolean("alumina_melts_to_aluminium", "recipes", false,
                 "Enable/disable alumina melting directly into aluminium.");
+        register_tf_tool_recipes_anyway = config.getBoolean("register_tf_tool_recipes_anyway", "recipes", false,
+                "Register recipes of tools from Thermal Foundation anyway or not.");
 
         config.addCustomCategoryComment("hardcore",
                 "These settings increase the game harder by altering vanilla recipes.");
