@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL11;
 
 import exter.foundry.Foundry;
 import exter.foundry.client.gui.button.GuiButtonFoundry;
+import exter.foundry.config.FoundryConfig;
 import exter.foundry.container.ContainerMetalCaster;
 import exter.foundry.tileentity.TileEntityFoundry.RedstoneMode;
 import exter.foundry.tileentity.TileEntityMetalCaster;
@@ -138,7 +139,7 @@ public class GuiMetalCaster extends GuiFoundry
             drawHoveringText(currenttip, mousex, mousey, fontRenderer);
         }
 
-        if (isPointInRegion(POWER_X, POWER_Y, POWER_WIDTH, POWER_HEIGHT, mousex, mousey))
+        if (FoundryConfig.metalCasterPower && isPointInRegion(POWER_X, POWER_Y, POWER_WIDTH, POWER_HEIGHT, mousex, mousey))
         {
             List<String> currenttip = new ArrayList<>();
             long power = te_caster.getStoredFoundryEnergy();
