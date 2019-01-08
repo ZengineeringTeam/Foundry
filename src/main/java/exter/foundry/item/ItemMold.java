@@ -91,7 +91,7 @@ public class ItemMold extends Item
         maxStackSize = 1;
         setCreativeTab(FoundryTab.INSTANCE);
         setHasSubtypes(true);
-        setUnlocalizedName("mold");
+        setTranslationKey("mold");
         setRegistryName("mold");
     }
 
@@ -110,7 +110,7 @@ public class ItemMold extends Item
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack itemstack)
+    public String getTranslationKey(ItemStack itemstack)
     {
         return "item.foundry.mold." + SubItem.fromId(itemstack.getItemDamage()).name;
     }

@@ -20,7 +20,7 @@ public class BlockCauldronBronze extends BlockCauldron
     public BlockCauldronBronze()
     {
         setRegistryName(Foundry.MODID, "bronze_cauldron");
-        setUnlocalizedName(Foundry.MODID + ".bronze_cauldron");
+        setTranslationKey(Foundry.MODID + ".bronze_cauldron");
         setHardness(1.8F);
         setCreativeTab(CreativeTabs.BREWING);
     }

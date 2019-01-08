@@ -21,7 +21,7 @@ public class FoundryTab extends CreativeTabs
     }
 
     @Override
-    public ItemStack getTabIconItem()
+    public ItemStack createIcon()
     {
         return FoundryBlocks.block_machine.asItemStack(EnumMachine.CASTER);
     }

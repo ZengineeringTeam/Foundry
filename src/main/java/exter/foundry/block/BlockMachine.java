@@ -110,7 +110,7 @@ public class BlockMachine extends Block implements ITileEntityProvider, IBlockVa
         setHardness(1.0F);
         setResistance(8.0F);
         setSoundType(SoundType.STONE);
-        setUnlocalizedName("foundry.machine");
+        setTranslationKey("foundry.machine");
         setCreativeTab(FoundryTab.INSTANCE);
         setRegistryName("machine");
     }
@@ -219,7 +219,7 @@ public class BlockMachine extends Block implements ITileEntityProvider, IBlockVa
     }
 
     @Override
-    public String getUnlocalizedName(int meta)
+    public String getTranslationKey(int meta)
     {
         return "tile." + Foundry.MODID + "." + getStateFromMeta(meta).getValue(MACHINE).name;
     }
@@ -228,7 +228,7 @@ public class BlockMachine extends Block implements ITileEntityProvider, IBlockVa
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced)
     {
-        MiscUtil.localizeTooltip(getUnlocalizedName(stack.getMetadata()) + ".tooltip", tooltip);
+        MiscUtil.localizeTooltip(getTranslationKey(stack.getMetadata()) + ".tooltip", tooltip);
     }
 
     @Override

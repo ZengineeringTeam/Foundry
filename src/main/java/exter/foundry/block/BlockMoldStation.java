@@ -27,7 +27,7 @@ public class BlockMoldStation extends BlockFoundrySidedMachine
     public BlockMoldStation()
     {
         super(Material.ROCK);
-        setUnlocalizedName(Foundry.MODID + ".mold_station");
+        setTranslationKey(Foundry.MODID + ".mold_station");
         setHardness(1.0F);
         setResistance(8.0F);
         setSoundType(SoundType.STONE);
@@ -38,7 +38,7 @@ public class BlockMoldStation extends BlockFoundrySidedMachine
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced)
     {
-        MiscUtil.localizeTooltip(getUnlocalizedName() + ".tooltip", tooltip);
+        MiscUtil.localizeTooltip(getTranslationKey() + ".tooltip", tooltip);
     }
 
     @Override
