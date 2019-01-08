@@ -7,11 +7,13 @@ import exter.foundry.api.FoundryAPI;
 import exter.foundry.capability.CapabilityHeatProvider;
 import exter.foundry.config.FoundryConfig;
 import exter.foundry.init.InitRecipes;
+import exter.foundry.integration.ModIntegrationBaseMetals;
 import exter.foundry.integration.ModIntegrationBotania;
 import exter.foundry.integration.ModIntegrationCrafttweaker;
 import exter.foundry.integration.ModIntegrationEnderIO;
 import exter.foundry.integration.ModIntegrationManager;
 import exter.foundry.integration.ModIntegrationMekanism;
+import exter.foundry.integration.ModIntegrationModernMetals;
 import exter.foundry.integration.ModIntegrationTechReborn;
 import exter.foundry.integration.ModIntegrationTheOneProbe;
 import exter.foundry.integration.ModIntegrationThermalFoundation;
@@ -146,6 +148,10 @@ public class Foundry
             ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationTechReborn());
         if (Loader.isModLoaded("thermalfoundation"))
             ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationThermalFoundation());
+        if (Loader.isModLoaded("basemetals"))
+            ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationBaseMetals());
+        if (Loader.isModLoaded("modernmetals"))
+            ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationModernMetals());
         if (Loader.isModLoaded("crafttweaker"))
             ModIntegrationManager.registerIntegration(FoundryConfig.config, new ModIntegrationCrafttweaker());
         if (Loader.isModLoaded("theoneprobe"))

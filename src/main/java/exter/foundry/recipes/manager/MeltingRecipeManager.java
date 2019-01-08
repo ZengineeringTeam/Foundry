@@ -1,5 +1,9 @@
 package exter.foundry.recipes.manager;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import exter.foundry.Foundry;
 import exter.foundry.api.recipe.IMeltingRecipe;
 import exter.foundry.api.recipe.manager.IMeltingRecipeManager;
@@ -9,10 +13,6 @@ import exter.foundry.util.MiscUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.fluids.FluidStack;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class MeltingRecipeManager implements IMeltingRecipeManager
 {

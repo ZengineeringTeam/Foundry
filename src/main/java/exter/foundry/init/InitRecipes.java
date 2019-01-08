@@ -412,7 +412,6 @@ public class InitRecipes
 
             CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(slab), fluid_stack, ItemMold.SubItem.SLAB,
                     false, null);
-            MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(slab), fluid_stack);
         }
 
         // Stairs
@@ -422,7 +421,6 @@ public class InitRecipes
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountBlock() * 3 / 4);
             CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stairs), fluid_stack, ItemMold.SubItem.STAIRS,
                     false, null);
-            MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stairs), fluid_stack);
         }
 
         // Gear

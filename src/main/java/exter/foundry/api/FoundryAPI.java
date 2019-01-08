@@ -62,6 +62,11 @@ public class FoundryAPI
         return FLUID_AMOUNT_INGOT * 4;
     }
 
+    public static int getAmountTrapdoor()
+    {
+        return FLUID_AMOUNT_INGOT * 4;
+    }
+
     public static int getAmountHelm()
     {
         return FLUID_AMOUNT_INGOT * 5;
@@ -128,6 +133,66 @@ public class FoundryAPI
     }
 
     public static int getAmountShears()
+    {
+        return FLUID_AMOUNT_INGOT * 2;
+    }
+
+    public static int getAmountButton()
+    {
+        return getAmountNugget() * 2;
+    }
+
+    public static int getAmountWall()
+    {
+        return getAmountBlock();
+    }
+
+    public static int getAmountLever()
+    {
+        return getAmountRod() + FLUID_AMOUNT_INGOT;
+    }
+
+    public static int getAmountCasing()
+    {
+        return FLUID_AMOUNT_INGOT / 2;
+    }
+
+    public static int getAmountClump()
+    {
+        return FLUID_AMOUNT_INGOT;
+    }
+
+    public static int getAmountCrystal()
+    {
+        return FLUID_AMOUNT_INGOT;
+    }
+
+    public static int getAmountShard()
+    {
+        return FLUID_AMOUNT_INGOT;
+    }
+
+    public static int getAmountDensePlate()
+    {
+        return getAmountPlate() * 9;
+    }
+
+    public static int getAmountBars()
+    {
+        return 54;
+    }
+
+    public static int getAmountSlab()
+    {
+        return getAmountBlock() / 2;
+    }
+
+    public static int getAmountStairs()
+    {
+        return getAmountBlock() * 3 / 2;
+    }
+
+    public static int getAmountPressurePlate()
     {
         return FLUID_AMOUNT_INGOT * 2;
     }
