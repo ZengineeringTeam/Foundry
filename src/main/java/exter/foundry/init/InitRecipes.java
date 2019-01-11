@@ -165,9 +165,9 @@ public class InitRecipes
         MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("paneGlassColorless"), new FluidStack(liquid_glass, 375),
                 temp, melt);
         CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS), new FluidStack(liquid_glass, 1000),
-                ItemMold.SubItem.BLOCK, false, null, 400);
+                ItemMold.SubItem.BLOCK, false, null);
         CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS_PANE),
-                new FluidStack(liquid_glass, 375), ItemMold.SubItem.PLATE, false, null, 100);
+                new FluidStack(liquid_glass, 375), ItemMold.SubItem.PLATE, false, null);
         CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS),
                 new FluidStack(liquid_glass, 1000), ICastingTableRecipe.TableType.BLOCK);
         CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS_PANE),
@@ -186,9 +186,9 @@ public class InitRecipes
             MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("paneGlass" + oredict_names[dye.getDyeDamage()]),
                     new FluidStack(liquid_glass_colored, 375), temp, melt);
             CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stained_glass),
-                    new FluidStack(liquid_glass_colored, 1000), ItemMold.SubItem.BLOCK, false, null, 400);
+                    new FluidStack(liquid_glass_colored, 1000), ItemMold.SubItem.BLOCK, false, null);
             CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stained_glass_pane),
-                    new FluidStack(liquid_glass_colored, 375), ItemMold.SubItem.PLATE, false, null, 100);
+                    new FluidStack(liquid_glass_colored, 375), ItemMold.SubItem.PLATE, false, null);
             CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stained_glass),
                     new FluidStack(liquid_glass_colored, 1000), ICastingTableRecipe.TableType.BLOCK);
             CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stained_glass_pane),

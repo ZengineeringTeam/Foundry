@@ -33,7 +33,7 @@ public class CastingTableProvider implements IProbeInfoProvider
                 if (tileCastingTable.getProgress() != 0)
                 {
                     probeInfo.text(TextFormatting.GREEN + I18n.translateToLocalFormatted(Foundry.MODID + ".compat.top.progress"))
-                            .progress(100 - tileCastingTable.getProgress() / 2, 100, probeInfo.defaultProgressStyle().suffix("%"));
+                            .progress(100 - tileCastingTable.getProgress() * 100 / tileCastingTable.getTotalTick(), 100, probeInfo.defaultProgressStyle().suffix("%"));
                 }
 
                 FluidTank fluidTank = tileCastingTable.getTank(0);

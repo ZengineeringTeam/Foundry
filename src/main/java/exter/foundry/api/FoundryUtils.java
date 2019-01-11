@@ -1,6 +1,7 @@
 package exter.foundry.api;
 
 import exter.foundry.api.recipe.matcher.OreMatcher;
+import exter.foundry.config.FoundryConfig;
 import exter.foundry.util.MiscUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
@@ -127,6 +128,15 @@ public class FoundryUtils
                 FoundryAPI.MELTING_MANAGER.addRecipe(new OreMatcher("stairs" + partial_name),
                         new FluidStack(fluid, FoundryAPI.getAmountStairs()));
         }
+    }
+
+    public static int getCastTime(FluidStack fluidStack)
+    {
+        if (fluidStack == null)
+        {
+            return 0;
+        }
+        return Math.max(1, FoundryConfig.castingTick * fluidStack.amount / FoundryAPI.FLUID_AMOUNT_INGOT);
     }
 
 }

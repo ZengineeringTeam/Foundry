@@ -7,6 +7,7 @@ import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.liquid.ILiquidStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
+import exter.foundry.api.FoundryUtils;
 import exter.foundry.api.recipe.ICastingRecipe;
 import exter.foundry.api.recipe.matcher.IItemMatcher;
 import exter.foundry.api.recipe.matcher.ItemStackMatcher;
@@ -75,15 +76,16 @@ public class CrTCastingHandler
     }
 
     @ZenMethod
-    static public void addRecipe(IItemStack output, ILiquidStack input, IItemStack mold, @Optional IIngredient extra, @Optional int speed, @Optional boolean consumes_mold)
+    static public void addRecipe(IItemStack output, ILiquidStack input, IItemStack mold, @Optional IIngredient extra, @Optional int tick, @Optional boolean consumes_mold)
     {
         ModIntegrationCrafttweaker.queueAdd(() -> {
             ICastingRecipe recipe = null;
             try
             {
+                FluidStack inputFluid = CraftTweakerMC.getLiquidStack(input);
                 recipe = new CastingRecipe(new ItemStackMatcher(CraftTweakerMC.getItemStack(output)),
-                        CraftTweakerMC.getLiquidStack(input), new ItemStackMatcher(CraftTweakerMC.getItemStack(mold)),
-                        consumes_mold, extra == null ? null : CrTHelper.getIngredient(extra), speed == 0 ? 100 : speed);
+                        inputFluid, new ItemStackMatcher(CraftTweakerMC.getItemStack(mold)),
+                        consumes_mold, extra == null ? null : CrTHelper.getIngredient(extra), FoundryUtils.getCastTime(inputFluid));
             }
             catch (IllegalArgumentException e)
             {

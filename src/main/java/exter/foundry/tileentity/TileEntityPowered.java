@@ -256,8 +256,7 @@ public abstract class TileEntityPowered extends TileEntityFoundry implements IEn
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
-        super.writeToNBT(compound);
         compound.setInteger("energy", energyStorage.getEnergyStored());
-        return compound;
+        return super.writeToNBT(compound);
     }
 }

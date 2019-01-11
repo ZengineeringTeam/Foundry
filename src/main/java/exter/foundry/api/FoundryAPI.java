@@ -30,7 +30,7 @@ public class FoundryAPI
     /**
      * The fluid value for an ore, or 0, if the config is not overriding it.
      */
-    public static int FLUID_AMOUNT_ORE = 0;
+    public static int FLUID_AMOUNT_ORE = FLUID_AMOUNT_INGOT * 2;
 
     public static int getAmountBlock()
     {

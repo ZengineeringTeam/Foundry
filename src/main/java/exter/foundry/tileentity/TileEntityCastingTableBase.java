@@ -4,6 +4,7 @@ import java.util.Set;
 
 import com.google.common.collect.ImmutableSet;
 
+import exter.foundry.api.FoundryUtils;
 import exter.foundry.api.recipe.ICastingTableRecipe;
 import exter.foundry.recipes.manager.CastingTableRecipeManager;
 import net.minecraft.item.ItemStack;
@@ -104,8 +105,6 @@ public abstract class TileEntityCastingTableBase extends TileEntityFoundry
         }
     }
 
-    static public final int CAST_TIME = 200;
-
     static private final Set<Integer> IH_SLOTS_INPUT = ImmutableSet.of();
     static private final Set<Integer> IH_SLOTS_OUTPUT = ImmutableSet.of(0);
 
@@ -115,6 +114,7 @@ public abstract class TileEntityCastingTableBase extends TileEntityFoundry
 
     private ICastingTableRecipe recipe;
 
+    private int totalTick;
     private int progress;
     private final ItemHandlerTable item_handler;
 
@@ -126,7 +126,7 @@ public abstract class TileEntityCastingTableBase extends TileEntityFoundry
         fluid_handler = new FluidHandler();
 
         progress = 0;
-        recipe = null;
+        totalTick = 0;
         item_handler = new ItemHandlerTable(getSizeInventory(), IH_SLOTS_INPUT, IH_SLOTS_OUTPUT);
     }
 
@@ -147,6 +147,11 @@ public abstract class TileEntityCastingTableBase extends TileEntityFoundry
     public final int getProgress()
     {
         return progress;
+    }
+    
+    public int getTotalTick()
+    {
+        return totalTick;
     }
 
     @Override
@@ -193,6 +198,10 @@ public abstract class TileEntityCastingTableBase extends TileEntityFoundry
         {
             progress = compound.getInteger("progress");
         }
+        if (compound.hasKey("total"))
+        {
+            totalTick = compound.getInteger("total");
+        }
         if (world != null && world.isRemote && compound.hasKey("tank_capacity"))
         {
             tank.setCapacity(compound.getInteger("tank_capacity"));
@@ -216,6 +225,7 @@ public abstract class TileEntityCastingTableBase extends TileEntityFoundry
         {
             recipe = null;
             tank.setCapacity(getDefaultCapacity());
+            totalTick = progress = 0;
             return;
         }
 
@@ -254,9 +264,9 @@ public abstract class TileEntityCastingTableBase extends TileEntityFoundry
                 setRecipe(null);
             }
         }
-        else if (inventory.get(0).isEmpty() && recipe != null && tank.getFluid().amount == recipe.getInput().amount)
+        else if (tank.getFluid() != null && inventory.get(0).isEmpty() && recipe != null && tank.getFluid().amount == recipe.getInput().amount)
         {
-            progress = CAST_TIME;
+            totalTick = progress = FoundryUtils.getCastTime(tank.getFluid());
         }
 
         if (last_progress != progress && last_progress % 10 == 0)
@@ -270,6 +280,7 @@ public abstract class TileEntityCastingTableBase extends TileEntityFoundry
     {
         super.writeToNBT(compound);
         compound.setInteger("progress", progress);
+        compound.setInteger("total", totalTick);
         return compound;
     }
 

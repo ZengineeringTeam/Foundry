@@ -18,7 +18,7 @@ public interface ICastingRecipe
      * Get the casting speed.
      * @return The casting speed.
      */
-    int getCastingSpeed();
+    int getCastingTime();
 
     /**
      * Get the fluid required for casting.
