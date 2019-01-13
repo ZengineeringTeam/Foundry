@@ -128,8 +128,7 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
             {
                 burnTime = nbt.hasKey("time") ? nbt.getInteger("time") : burnTime;
                 totalBurnTime = nbt.hasKey("total") ? nbt.getInteger("total") : totalBurnTime;
-                totalBurnTime = nbt.hasKey("heat") ? nbt.getInteger("heat")
-                        : FoundryConfig.default_burner_fuel_heat * 100;
+                heat = nbt.hasKey("heat") ? nbt.getInteger("heat") : FoundryConfig.default_burner_fuel_heat;
             }
         }
     }
@@ -341,7 +340,7 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
                     return false;
                 }
                 fuel.totalBurnTime = fuel.burnTime = time;
-                fuel.heat = FoundryConfig.default_burner_fuel_heat * 100;
+                fuel.heat = FoundryConfig.default_burner_fuel_heat;
             }
             ItemStack stackCopy = stack.copy();
             stack.shrink(1);

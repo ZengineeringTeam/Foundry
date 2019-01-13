@@ -75,8 +75,8 @@ public class FoundryConfig
         metalCasterPower = config.getBoolean("Metal Caster Power", "general", true, "If the Metal Caster requires power to operate.");
         if (!metalCasterPower)
             BlockMachine.EnumMachine.CASTER.setTooltip("caster2");
-        default_burner_fuel_heat = config.getInt("default_burner_fuel_heat", "general", 1000, TileEntityHeatable.TEMP_MIN, Integer.MAX_VALUE, "default_burner_fuel_heat");
-        default_burner_exoflame_heat = config.getInt("default_burner_exoflame_heat", "general", default_burner_fuel_heat * 3, TileEntityHeatable.TEMP_MIN, Integer.MAX_VALUE, "default_burner_exoflame_heat");
+        default_burner_fuel_heat = config.getInt("default_burner_fuel_heat", "general", 100000, TileEntityHeatable.TEMP_MIN, Integer.MAX_VALUE, "default_burner_fuel_heat (in 1/100 deg Ks)");
+        default_burner_exoflame_heat = config.getInt("default_burner_exoflame_heat", "general", default_burner_fuel_heat * 3, TileEntityHeatable.TEMP_MIN, Integer.MAX_VALUE, "default_burner_exoflame_heat (in 1/100 deg Ks)");
 
         crtError = config.getBoolean("CrT Errors", "general", true, "If foundry's CraftTweaker integration logs errors instead of info");
 
