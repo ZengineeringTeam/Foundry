@@ -1,6 +1,8 @@
 package exter.foundry.integration;
 
 import exter.foundry.integration.top.CastingTableProvider;
+import exter.foundry.integration.top.ElementFluid;
+import exter.foundry.integration.top.ElementTemperature;
 import exter.foundry.integration.top.MeltingCrucibleProvider;
 import exter.foundry.integration.top.MoldStationProvider;
 import mcjty.theoneprobe.api.ITheOneProbe;
@@ -72,6 +74,8 @@ public class ModIntegrationTheOneProbe implements IModIntegration
             probe.registerProvider(new CastingTableProvider());
             probe.registerProvider(new MoldStationProvider());
             probe.registerProvider(new MeltingCrucibleProvider());
+            ElementFluid.ELEMENT_FLUID = probe.registerElementFactory(ElementFluid::new);
+            ElementTemperature.ELEMENT_TEMPERATURE = probe.registerElementFactory(ElementTemperature::new);
             return null;
         }
     }

@@ -1,7 +1,6 @@
 package exter.foundry.integration.top;
 
 import io.netty.buffer.ByteBuf;
-import mcjty.theoneprobe.TheOneProbe;
 import mcjty.theoneprobe.api.IElement;
 import mcjty.theoneprobe.apiimpl.client.ElementProgressRender;
 import mcjty.theoneprobe.apiimpl.client.ElementTextRender;
@@ -13,7 +12,7 @@ import java.awt.*;
 
 public class ElementFluid implements IElement
 {
-    private static int ELEMENT_FLUID = TheOneProbe.theOneProbeImp.registerElementFactory(ElementFluid::new);
+    public static int ELEMENT_FLUID;
     private final String fluidName;
     private final int amount, capacity, color1, color2;
     private final boolean sneaking;

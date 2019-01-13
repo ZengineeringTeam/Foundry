@@ -1,7 +1,6 @@
 package exter.foundry.integration.top;
 
 import io.netty.buffer.ByteBuf;
-import mcjty.theoneprobe.TheOneProbe;
 import mcjty.theoneprobe.api.IElement;
 import mcjty.theoneprobe.apiimpl.client.ElementProgressRender;
 import mcjty.theoneprobe.apiimpl.client.ElementTextRender;
@@ -11,7 +10,7 @@ import java.awt.*;
 
 public class ElementTemperature implements IElement
 {
-    private static int ELEMENT_TEMPERATURE = TheOneProbe.theOneProbeImp.registerElementFactory(ElementTemperature::new);
+    public static int ELEMENT_TEMPERATURE;
     private final int current, max;
 
     public ElementTemperature(int current, int max)
