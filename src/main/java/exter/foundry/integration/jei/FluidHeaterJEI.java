@@ -14,9 +14,9 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import mezz.jei.config.Constants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
 
 public class FluidHeaterJEI
@@ -24,15 +24,11 @@ public class FluidHeaterJEI
     public static class Category implements IRecipeCategory<Wrapper>
     {
         private final IDrawableStatic background;
-        private final IDrawableStatic flameTransparentBackground;
         private final String localizedName;
 
         public Category(IGuiHelper guiHelper)
         {
-            background = guiHelper.drawableBuilder(Constants.RECIPE_GUI_VANILLA, 0, 134, 18, 34).addPadding(0, 0, 0, 88)
-                    .build();
-
-            flameTransparentBackground = guiHelper.createDrawable(Constants.RECIPE_BACKGROUND, 215, 0, 14, 14);
+            background = guiHelper.drawableBuilder(new ResourceLocation("jei", "textures/gui/gui_vanilla.png"), 0, 134, 18, 34).addPadding(0, 0, 0, 88).build();
             localizedName = I18n.format("gui.jei." + getUid());
         }
 
@@ -74,13 +70,10 @@ public class FluidHeaterJEI
     public static class Wrapper implements IRecipeWrapper
     {
         private final IFluidHeaterFuel fuel;
-        private final IDrawableAnimated flame;
 
         public Wrapper(IGuiHelper guiHelper, IFluidHeaterFuel fuel)
         {
             this.fuel = fuel;
-            flame = guiHelper.drawableBuilder(Constants.RECIPE_GUI_VANILLA, 82, 114, 14, 14).buildAnimated(100,
-                    IDrawableAnimated.StartDirection.TOP, true);
         }
 
         @Override
@@ -92,7 +85,10 @@ public class FluidHeaterJEI
         @Override
         public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY)
         {
-            flame.draw(minecraft, 2, 0);
+            if (JEIFoundryPlugin.flame != null)
+            {
+                JEIFoundryPlugin.flame.draw(minecraft, 2, 0);
+            }
             minecraft.fontRenderer.drawString(fuel.getHeat() / 100 + "K 1Tick", 44, 13, Color.gray.getRGB());
         }
 
