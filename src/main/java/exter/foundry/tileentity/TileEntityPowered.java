@@ -32,7 +32,7 @@ public abstract class TileEntityPowered extends TileEntityFoundry implements IEn
 
         public void setEnergy(int energy)
         {
-            energy = Math.min(energy, getMaxEnergyStored());
+            this.energy = Math.min(energy, getMaxEnergyStored());
             onEnergyChanged();
         }
 
