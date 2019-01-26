@@ -100,6 +100,7 @@ public abstract class GuiFoundry extends GuiContainer
         {
             mc.renderEngine.bindTexture(BLOCK_TEXTURE);
             int color = fluid.getColor(liquid);
+            boolean lighter = fluid.isLighterThanAir();
             //setGLColor(color);
             while (true)
             {
@@ -118,8 +119,14 @@ public abstract class GuiFoundry extends GuiContainer
 
                 if (i > 0)
                 {
-                    drawTexturedModelRectFromIconPartial(window_x + x, window_y + y + tank_height - i - start,
-                            liquid_icon, 16, i, 0, 16 - i, color);
+                    if (lighter)
+                    {
+                        drawTexturedModelRectFromIconPartial(window_x + x, window_y + y + start, liquid_icon, 16, i, 0, 16 - i, color);
+                    }
+                    else
+                    {
+                        drawTexturedModelRectFromIconPartial(window_x + x, window_y + y + tank_height - i - start, liquid_icon, 16, i, 0, 16 - i, color);
+                    }
                 }
                 start += 16;
 
