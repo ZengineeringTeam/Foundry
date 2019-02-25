@@ -4,10 +4,11 @@
     "item": "foundry:machine",
     "data": 4
   },
+  "conditions": [ { "type": "forge:false" } ],
   "pattern": [
     "GRG",
     "SCS",
-	"GOG"
+    "GOG"
   ],
   "key": {
     "G": {
