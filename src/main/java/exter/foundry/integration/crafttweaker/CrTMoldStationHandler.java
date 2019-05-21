@@ -1,6 +1,7 @@
 package exter.foundry.integration.crafttweaker;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.api.item.IItemStack;
@@ -103,16 +104,11 @@ public class CrTMoldStationHandler
     @ZenMethod
     static public void removeRecipe(IItemStack output)
     {
-        if (output.isEmpty()) return;
+        if (output.isEmpty())
+            return;
         ModIntegrationCrafttweaker.queueRemove(() -> {
             List<IMoldRecipe> recipes = MoldRecipeManager.INSTANCE.getRecipes();
-            for (IMoldRecipe recipe : recipes)
-            {
-                if (output.matches(CraftTweakerMC.getIItemStack(recipe.getOutput())))
-                {
-                    CraftTweakerAPI.apply(new MoldStationAction(recipe).action_remove);
-                }
-            }
+            recipes.stream().filter(r -> output.matches(CraftTweakerMC.getIItemStack(r.getOutput()))).forEach(r -> CraftTweakerAPI.apply(new MoldStationAction(r).action_remove));
         });
     }
 
