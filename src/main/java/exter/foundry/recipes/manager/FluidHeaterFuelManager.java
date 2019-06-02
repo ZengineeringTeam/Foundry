@@ -41,6 +41,7 @@ public class FluidHeaterFuelManager implements IFluidHeaterFuelManager
     @Nullable
     public IFluidHeaterFuel getFuel(Fluid fluid)
     {
+        if (fluid == null) return null;
         for (IFluidHeaterFuel f : fuels)
             if (f.getFluid().getName().equals(fluid.getName()))
                 return f;

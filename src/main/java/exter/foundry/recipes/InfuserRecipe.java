@@ -75,6 +75,7 @@ public class InfuserRecipe implements IInfuserRecipe
     @Override
     public boolean matchesRecipe(FluidStack in_fluid, ItemStack item_stack)
     {
+        if (in_fluid == null || item_stack.isEmpty()) return false;
         return item.apply(item_stack) && in_fluid.containsFluid(fluid);
     }
 
