@@ -75,8 +75,7 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
             FluidTank tank = getTank(tank_slot);
             if (stackInput.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null))
             {
-                IFluidHandlerItem handler = stackInput
-                        .getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
+                IFluidHandlerItem handler = stackInput.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
                 //                ItemStack stackOutput = getStackInSlot(output_slot);
                 //                if (!stackOutput.isEmpty() && (stackOutput.getCount() >= stackInput.getMaxStackSize()
                 //                        || !stackInput.isItemEqual(stackOutput)
@@ -407,10 +406,6 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
             {
                 return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(getFluidHandler(facing));
             }
-            else
-            {
-                return super.getCapability(cap, facing);
-            }
         }
         else if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
         {
@@ -419,15 +414,8 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
             {
                 return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(getItemHandler(facing));
             }
-            else
-            {
-                return super.getCapability(cap, facing);
-            }
         }
-        else
-        {
-            return super.getCapability(cap, facing);
-        }
+        return super.getCapability(cap, facing);
     }
 
     @Override
@@ -496,11 +484,11 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
     {
         if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
         {
-            return getFluidHandler(facing) != null;
+            return getFluidHandler(facing) != null || super.hasCapability(cap, facing);
         }
         else if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
         {
-            return getItemHandler(facing) != null;
+            return getItemHandler(facing) != null || super.hasCapability(cap, facing);
         }
         else
         {
@@ -613,8 +601,7 @@ public abstract class TileEntityFoundry extends TileEntity implements ITickable,
     protected void sendPacketToNearbyPlayers(NBTTagCompound data)
     {
         data.setInteger("dim", world.provider.getDimension());
-        Foundry.NETWORK.sendToAllAround(new MessageTileEntitySync(data),
-                new TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 192));
+        Foundry.NETWORK.sendToAllAround(new MessageTileEntitySync(data), new TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 192));
     }
 
     protected void sendPacketToPlayer(NBTTagCompound data, EntityPlayerMP player)
