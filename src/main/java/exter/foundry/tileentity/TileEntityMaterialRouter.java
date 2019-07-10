@@ -49,26 +49,26 @@ public class TileEntityMaterialRouter extends TileEntityFoundry
 
         public boolean matchesItem(ItemStack stack)
         {
-            Foundry.LOGGER.info("Item: " + stack.getTranslationKey());
-            Foundry.LOGGER.info("Material: " + MaterialRegistry.INSTANCE.getMaterial(stack));
-            Foundry.LOGGER.info("Type: " + MaterialRegistry.INSTANCE.getType(stack));
-            if (!material.equals("_Any"))
-            {
-                String stack_material = MaterialRegistry.INSTANCE.getMaterial(stack);
-                if (!material.equals(stack_material))
-                {
-                    return false;
-                }
-            }
-
-            if (!type.equals("_Any"))
-            {
-                String stack_type = MaterialRegistry.INSTANCE.getType(stack);
-                if (!type.equals(stack_type))
-                {
-                    return false;
-                }
-            }
+//            Foundry.LOGGER.info("Item: " + stack.getTranslationKey());
+//            Foundry.LOGGER.info("Material: " + MaterialRegistry.INSTANCE.getMaterial(stack));
+//            Foundry.LOGGER.info("Type: " + MaterialRegistry.INSTANCE.getType(stack));
+//            if (!material.equals("_Any"))
+//            {
+//                String stack_material = MaterialRegistry.INSTANCE.getMaterial(stack);
+//                if (!material.equals(stack_material))
+//                {
+//                    return false;
+//                }
+//            }
+//
+//            if (!type.equals("_Any"))
+//            {
+//                String stack_type = MaterialRegistry.INSTANCE.getType(stack);
+//                if (!type.equals(stack_type))
+//                {
+//                    return false;
+//                }
+//            }
 
             return true;
         }
@@ -195,39 +195,39 @@ public class TileEntityMaterialRouter extends TileEntityFoundry
     {
         super.readFromNBT(compound);
 
-        NBTTagCompound routes_tag = (NBTTagCompound) compound.getTag("Routes");
-        if (routes_tag != null)
-        {
-            routes.clear();
-            int size = routes_tag.getInteger("size");
-            int i;
-            for (i = 0; i < size; i++)
-            {
-                NBTTagCompound route_entry_tag = routes_tag.getCompoundTag("Route_" + String.valueOf(i));
-                routes.add(new Route(route_entry_tag));
-            }
-        }
-
-        if (compound.hasKey("gui_material_scroll"))
-        {
-            gui_material_scroll = compound.getInteger("gui_material_scroll");
-        }
-        if (compound.hasKey("gui_type_scroll"))
-        {
-            gui_type_scroll = compound.getInteger("gui_type_scroll");
-        }
-        if (compound.hasKey("gui_route_scroll"))
-        {
-            gui_route_scroll = compound.getInteger("gui_route_scroll");
-        }
-        if (compound.hasKey("gui_material_selected"))
-        {
-            gui_material_selected = compound.getInteger("gui_material_selected");
-        }
-        if (compound.hasKey("gui_type_selected"))
-        {
-            gui_type_selected = compound.getInteger("gui_type_selected");
-        }
+//        NBTTagCompound routes_tag = (NBTTagCompound) compound.getTag("Routes");
+//        if (routes_tag != null)
+//        {
+//            routes.clear();
+//            int size = routes_tag.getInteger("size");
+//            int i;
+//            for (i = 0; i < size; i++)
+//            {
+//                NBTTagCompound route_entry_tag = routes_tag.getCompoundTag("Route_" + String.valueOf(i));
+//                routes.add(new Route(route_entry_tag));
+//            }
+//        }
+//
+//        if (compound.hasKey("gui_material_scroll"))
+//        {
+//            gui_material_scroll = compound.getInteger("gui_material_scroll");
+//        }
+//        if (compound.hasKey("gui_type_scroll"))
+//        {
+//            gui_type_scroll = compound.getInteger("gui_type_scroll");
+//        }
+//        if (compound.hasKey("gui_route_scroll"))
+//        {
+//            gui_route_scroll = compound.getInteger("gui_route_scroll");
+//        }
+//        if (compound.hasKey("gui_material_selected"))
+//        {
+//            gui_material_selected = compound.getInteger("gui_material_selected");
+//        }
+//        if (compound.hasKey("gui_type_selected"))
+//        {
+//            gui_type_selected = compound.getInteger("gui_type_selected");
+//        }
 
     }
 
@@ -322,13 +322,13 @@ public class TileEntityMaterialRouter extends TileEntityFoundry
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
         super.writeToNBT(compound);
-        writeRoutesToNBT(compound);
-
-        compound.setInteger("gui_material_scroll", gui_material_scroll);
-        compound.setInteger("gui_type_scroll", gui_type_scroll);
-        compound.setInteger("gui_route_scroll", gui_route_scroll);
-        compound.setInteger("gui_material_selected", gui_material_selected);
-        compound.setInteger("gui_type_selected", gui_type_selected);
+//        writeRoutesToNBT(compound);
+//
+//        compound.setInteger("gui_material_scroll", gui_material_scroll);
+//        compound.setInteger("gui_type_scroll", gui_type_scroll);
+//        compound.setInteger("gui_route_scroll", gui_route_scroll);
+//        compound.setInteger("gui_material_selected", gui_material_selected);
+//        compound.setInteger("gui_type_selected", gui_type_selected);
         return compound;
     }
 }

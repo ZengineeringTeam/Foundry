@@ -44,31 +44,31 @@ public class InitRecipes
     static public void postInit()
     {
         registerMachineRecipes();
-        for (OreDictType type : OreDictType.TYPES)
-        {
-            for (OreDictMaterial material : OreDictMaterial.MATERIALS)
-            {
-                String od_name = type.prefix + material.suffix;
-                if (OreDictionary.doesOreNameExist(od_name))
-                {
-                    for (ItemStack item : OreDictionary.getOres(od_name, false))
-                    {
-                        MaterialRegistry.INSTANCE.registerItem(item, material.suffix, type.name);
-                    }
-                }
-                if (material.suffix_alias != null)
-                {
-                    od_name = type.prefix + material.suffix_alias;
-                    if (OreDictionary.doesOreNameExist(od_name))
-                    {
-                        for (ItemStack item : OreDictionary.getOres(od_name, false))
-                        {
-                            MaterialRegistry.INSTANCE.registerItem(item, material.suffix, type.name);
-                        }
-                    }
-                }
-            }
-        }
+//        for (OreDictType type : OreDictType.TYPES)
+//        {
+//            for (OreDictMaterial material : OreDictMaterial.MATERIALS)
+//            {
+//                String od_name = type.prefix + material.suffix;
+//                if (OreDictionary.doesOreNameExist(od_name))
+//                {
+//                    for (ItemStack item : OreDictionary.getOres(od_name, false))
+//                    {
+//                        MaterialRegistry.INSTANCE.registerItem(item, material.suffix, type.name);
+//                    }
+//                }
+//                if (material.suffix_alias != null)
+//                {
+//                    od_name = type.prefix + material.suffix_alias;
+//                    if (OreDictionary.doesOreNameExist(od_name))
+//                    {
+//                        for (ItemStack item : OreDictionary.getOres(od_name, false))
+//                        {
+//                            MaterialRegistry.INSTANCE.registerItem(item, material.suffix, type.name);
+//                        }
+//                    }
+//                }
+//            }
+//        }
 
         /*  I Don't really know what this does.  It doesn't make much sense.
         for (Map.Entry<ItemStack, ItemStack> entry : FurnaceRecipes.instance().getSmeltingList().entrySet()) {
