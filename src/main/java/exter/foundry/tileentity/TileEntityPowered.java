@@ -32,7 +32,7 @@ public abstract class TileEntityPowered extends TileEntityFoundry implements IEn
 
         public void setEnergy(int energy)
         {
-            energy = Math.min(energy, getMaxEnergyStored());
+            this.energy = Math.min(energy, getMaxEnergyStored());
             onEnergyChanged();
         }
 
@@ -240,7 +240,7 @@ public abstract class TileEntityPowered extends TileEntityFoundry implements IEn
     @Override
     public void updateRedstone()
     {
-        redstone_signal = world.isBlockIndirectlyGettingPowered(getPos()) > 0;
+        redstone_signal = world.getRedstonePowerFromNeighbors(getPos()) > 0;
     }
 
     @Override
@@ -256,8 +256,7 @@ public abstract class TileEntityPowered extends TileEntityFoundry implements IEn
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
-        super.writeToNBT(compound);
         compound.setInteger("energy", energyStorage.getEnergyStored());
-        return compound;
+        return super.writeToNBT(compound);
     }
 }

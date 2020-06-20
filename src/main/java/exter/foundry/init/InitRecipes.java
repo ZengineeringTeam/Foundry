@@ -44,31 +44,31 @@ public class InitRecipes
     static public void postInit()
     {
         registerMachineRecipes();
-        for (OreDictType type : OreDictType.TYPES)
-        {
-            for (OreDictMaterial material : OreDictMaterial.MATERIALS)
-            {
-                String od_name = type.prefix + material.suffix;
-                if (OreDictionary.doesOreNameExist(od_name))
-                {
-                    for (ItemStack item : OreDictionary.getOres(od_name, false))
-                    {
-                        MaterialRegistry.INSTANCE.registerItem(item, material.suffix, type.name);
-                    }
-                }
-                if (material.suffix_alias != null)
-                {
-                    od_name = type.prefix + material.suffix_alias;
-                    if (OreDictionary.doesOreNameExist(od_name))
-                    {
-                        for (ItemStack item : OreDictionary.getOres(od_name, false))
-                        {
-                            MaterialRegistry.INSTANCE.registerItem(item, material.suffix, type.name);
-                        }
-                    }
-                }
-            }
-        }
+//        for (OreDictType type : OreDictType.TYPES)
+//        {
+//            for (OreDictMaterial material : OreDictMaterial.MATERIALS)
+//            {
+//                String od_name = type.prefix + material.suffix;
+//                if (OreDictionary.doesOreNameExist(od_name))
+//                {
+//                    for (ItemStack item : OreDictionary.getOres(od_name, false))
+//                    {
+//                        MaterialRegistry.INSTANCE.registerItem(item, material.suffix, type.name);
+//                    }
+//                }
+//                if (material.suffix_alias != null)
+//                {
+//                    od_name = type.prefix + material.suffix_alias;
+//                    if (OreDictionary.doesOreNameExist(od_name))
+//                    {
+//                        for (ItemStack item : OreDictionary.getOres(od_name, false))
+//                        {
+//                            MaterialRegistry.INSTANCE.registerItem(item, material.suffix, type.name);
+//                        }
+//                    }
+//                }
+//            }
+//        }
 
         /*  I Don't really know what this does.  It doesn't make much sense.
         for (Map.Entry<ItemStack, ItemStack> entry : FurnaceRecipes.instance().getSmeltingList().entrySet()) {
@@ -165,9 +165,9 @@ public class InitRecipes
         MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("paneGlassColorless"), new FluidStack(liquid_glass, 375),
                 temp, melt);
         CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS), new FluidStack(liquid_glass, 1000),
-                ItemMold.SubItem.BLOCK, false, null, 400);
+                ItemMold.SubItem.BLOCK, false, null);
         CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS_PANE),
-                new FluidStack(liquid_glass, 375), ItemMold.SubItem.PLATE, false, null, 100);
+                new FluidStack(liquid_glass, 375), ItemMold.SubItem.PLATE, false, null);
         CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS),
                 new FluidStack(liquid_glass, 1000), ICastingTableRecipe.TableType.BLOCK);
         CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.GLASS_PANE),
@@ -186,9 +186,9 @@ public class InitRecipes
             MeltingRecipeManager.INSTANCE.addRecipe(new OreMatcher("paneGlass" + oredict_names[dye.getDyeDamage()]),
                     new FluidStack(liquid_glass_colored, 375), temp, melt);
             CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stained_glass),
-                    new FluidStack(liquid_glass_colored, 1000), ItemMold.SubItem.BLOCK, false, null, 400);
+                    new FluidStack(liquid_glass_colored, 1000), ItemMold.SubItem.BLOCK, false, null);
             CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stained_glass_pane),
-                    new FluidStack(liquid_glass_colored, 375), ItemMold.SubItem.PLATE, false, null, 100);
+                    new FluidStack(liquid_glass_colored, 375), ItemMold.SubItem.PLATE, false, null);
             CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stained_glass),
                     new FluidStack(liquid_glass_colored, 1000), ICastingTableRecipe.TableType.BLOCK);
             CastingTableRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stained_glass_pane),
@@ -412,7 +412,6 @@ public class InitRecipes
 
             CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(slab), fluid_stack, ItemMold.SubItem.SLAB,
                     false, null);
-            MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(slab), fluid_stack);
         }
 
         // Stairs
@@ -422,7 +421,6 @@ public class InitRecipes
             FluidStack fluid_stack = new FluidStack(fluid, FoundryAPI.getAmountBlock() * 3 / 4);
             CastingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stairs), fluid_stack, ItemMold.SubItem.STAIRS,
                     false, null);
-            MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(stairs), fluid_stack);
         }
 
         // Gear

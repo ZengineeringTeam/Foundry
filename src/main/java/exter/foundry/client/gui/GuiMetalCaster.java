@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL11;
 
 import exter.foundry.Foundry;
 import exter.foundry.client.gui.button.GuiButtonFoundry;
+import exter.foundry.config.FoundryConfig;
 import exter.foundry.container.ContainerMetalCaster;
 import exter.foundry.tileentity.TileEntityFoundry.RedstoneMode;
 import exter.foundry.tileentity.TileEntityMetalCaster;
@@ -98,22 +99,20 @@ public class GuiMetalCaster extends GuiFoundry
         drawTexturedModalRect(window_x, window_y, 0, 0, xSize, ySize);
 
         //Draw progress bar.
-        int progress = te_caster.getProgress() * PROGRESS_WIDTH / TileEntityMetalCaster.CAST_TIME;
-        if (progress > 0)
+        int progress = te_caster.getProgress();
+        int total = te_caster.getTotalTick();
+        if (total > 0 && progress > 0)
         {
-            drawTexturedModalRect(window_x + PROGRESS_X, window_y + PROGRESS_Y, PROGRESS_OVERLAY_X, PROGRESS_OVERLAY_Y,
-                    progress, PROGRESS_HEIGHT);
+            drawTexturedModalRect(window_x + PROGRESS_X, window_y + PROGRESS_Y, PROGRESS_OVERLAY_X, PROGRESS_OVERLAY_Y, (total - progress) * PROGRESS_WIDTH / total, PROGRESS_HEIGHT);
         }
 
         //Draw stored power bar.
         int power = te_caster.getStoredFoundryEnergy() * POWER_HEIGHT / te_caster.getFoundryEnergyCapacity();
         if (power > 0)
         {
-            drawTexturedModalRect(window_x + POWER_X, window_y + POWER_Y + POWER_HEIGHT - power, POWER_OVERLAY_X,
-                    POWER_OVERLAY_Y + POWER_HEIGHT - power, POWER_WIDTH, power);
+            drawTexturedModalRect(window_x + POWER_X, window_y + POWER_Y + POWER_HEIGHT - power, POWER_OVERLAY_X, POWER_OVERLAY_Y + POWER_HEIGHT - power, POWER_WIDTH, power);
         }
-        displayTank(window_x, window_y, TANK_X, TANK_Y, TANK_HEIGHT, TANK_OVERLAY_X, TANK_OVERLAY_Y,
-                te_caster.getTank(0));
+        displayTank(window_x, window_y, TANK_X, TANK_Y, TANK_HEIGHT, TANK_OVERLAY_X, TANK_OVERLAY_Y, te_caster.getTank(0));
     }
 
     @Override
@@ -121,8 +120,7 @@ public class GuiMetalCaster extends GuiFoundry
     {
         super.drawGuiContainerForegroundLayer(mouse_x, mouse_y);
 
-        fontRenderer.drawString(STRING_MACHINE, xSize / 2 - fontRenderer.getStringWidth(STRING_MACHINE) / 2, 6,
-                0x404040);
+        fontRenderer.drawString(STRING_MACHINE, xSize / 2 - fontRenderer.getStringWidth(STRING_MACHINE) / 2, 6, 0x404040);
         fontRenderer.drawString(getInventoryName(), 8, ySize - 96 + 2, 0x404040);
     }
 
@@ -138,7 +136,7 @@ public class GuiMetalCaster extends GuiFoundry
             drawHoveringText(currenttip, mousex, mousey, fontRenderer);
         }
 
-        if (isPointInRegion(POWER_X, POWER_Y, POWER_WIDTH, POWER_HEIGHT, mousex, mousey))
+        if (FoundryConfig.metalCasterPower && isPointInRegion(POWER_X, POWER_Y, POWER_WIDTH, POWER_HEIGHT, mousex, mousey))
         {
             List<String> currenttip = new ArrayList<>();
             long power = te_caster.getStoredFoundryEnergy();
@@ -167,8 +165,7 @@ public class GuiMetalCaster extends GuiFoundry
         super.initGui();
         int window_x = (width - xSize) / 2;
         int window_y = (height - ySize) / 2;
-        button_mode = new GuiButtonFoundry(1, RSMODE_X + window_x, RSMODE_Y + window_y, 16, 15, GUI_TEXTURE,
-                RSMODE_TEXTURE_X, RSMODE_TEXTURE_Y, RSMODE_TEXTURE_X + 16, RSMODE_TEXTURE_Y);
+        button_mode = new GuiButtonFoundry(1, RSMODE_X + window_x, RSMODE_Y + window_y, 16, 15, GUI_TEXTURE, RSMODE_TEXTURE_X, RSMODE_TEXTURE_Y, RSMODE_TEXTURE_X + 16, RSMODE_TEXTURE_Y);
         buttonList.add(button_mode);
     }
 }

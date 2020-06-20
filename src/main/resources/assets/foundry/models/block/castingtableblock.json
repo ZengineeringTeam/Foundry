@@ -6,6 +6,7 @@
 		"particle": "ceramics:blocks/porcelain",
 		"inside": "blocks/hardened_clay"
 	},
+	"ambientocclusion": false,
 	"elements": [
 		{
 			"from": [2, 0, 2],

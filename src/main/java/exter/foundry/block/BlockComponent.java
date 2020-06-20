@@ -51,7 +51,7 @@ public class BlockComponent extends Block implements IBlockVariants
         setHardness(1.0F);
         setResistance(8.0F);
         setSoundType(SoundType.STONE);
-        setUnlocalizedName("foundry.componentBlock");
+        setTranslationKey("foundry.componentBlock");
         setCreativeTab(FoundryTab.INSTANCE);
         setRegistryName("componentBlock");
     }
@@ -101,7 +101,7 @@ public class BlockComponent extends Block implements IBlockVariants
     }
 
     @Override
-    public String getUnlocalizedName(int meta)
+    public String getTranslationKey(int meta)
     {
         return "tile." + Foundry.MODID + "." + getStateFromMeta(meta).getValue(VARIANT).name;
     }

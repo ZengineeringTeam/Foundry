@@ -27,7 +27,7 @@ public class BlockBurnerHeater extends BlockFoundrySidedMachine
     public BlockBurnerHeater()
     {
         super(Material.ROCK);
-        setUnlocalizedName(Foundry.MODID + ".burner_heater");
+        setTranslationKey(Foundry.MODID + ".burner_heater");
         setHardness(1.0F);
         setResistance(8.0F);
         setSoundType(SoundType.STONE);
@@ -38,7 +38,7 @@ public class BlockBurnerHeater extends BlockFoundrySidedMachine
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced)
     {
-        MiscUtil.localizeTooltip(getUnlocalizedName() + ".tooltip", tooltip);
+        MiscUtil.localizeTooltip(getTranslationKey() + ".tooltip", tooltip);
     }
 
     @Override

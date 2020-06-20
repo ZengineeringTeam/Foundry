@@ -166,7 +166,7 @@ public class CastingTableRenderer extends TileEntitySpecialRenderer<TileEntityCa
             }
             else
             {
-                progress = (double) te.getProgress() / TileEntityCastingTableBase.CAST_TIME;
+                progress = (double) te.getProgress() / te.getTotalTick();
                 progress = Math.sqrt(progress);
             }
             float alpha = (color >> 24 & 255) / 255.0F * (float) progress;

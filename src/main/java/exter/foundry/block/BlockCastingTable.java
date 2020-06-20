@@ -95,7 +95,7 @@ public class BlockCastingTable extends Block implements ITileEntityProvider, IBl
         setHardness(1.0F);
         setResistance(8.0F);
         setSoundType(SoundType.STONE);
-        setUnlocalizedName(Foundry.MODID + ".casting_table");
+        setTranslationKey(Foundry.MODID + ".casting_table");
         setCreativeTab(FoundryTab.INSTANCE);
         setRegistryName(Foundry.MODID, "casting_table");
     }
@@ -104,7 +104,7 @@ public class BlockCastingTable extends Block implements ITileEntityProvider, IBl
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced)
     {
-        MiscUtil.localizeTooltip(getUnlocalizedName(stack.getMetadata()) + ".tooltip", tooltip);
+        MiscUtil.localizeTooltip(getTranslationKey(stack.getMetadata()) + ".tooltip", tooltip);
     }
 
     public ItemStack asItemStack(EnumTable machine)
@@ -255,9 +255,9 @@ public class BlockCastingTable extends Block implements ITileEntityProvider, IBl
     }
 
     @Override
-    public String getUnlocalizedName(int meta)
+    public String getTranslationKey(int meta)
     {
-        return getUnlocalizedName() + "." + getStateFromMeta(meta).getValue(TABLE).name;
+        return getTranslationKey() + "." + getStateFromMeta(meta).getValue(TABLE).name;
     }
 
     @Override

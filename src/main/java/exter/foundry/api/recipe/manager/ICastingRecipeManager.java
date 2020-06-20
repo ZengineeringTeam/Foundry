@@ -2,6 +2,7 @@ package exter.foundry.api.recipe.manager;
 
 import java.util.List;
 
+import exter.foundry.api.FoundryUtils;
 import exter.foundry.api.recipe.ICastingRecipe;
 import exter.foundry.api.recipe.matcher.IItemMatcher;
 import exter.foundry.item.ItemMold;
@@ -21,7 +22,7 @@ public interface ICastingRecipeManager
      */
     default void addRecipe(IItemMatcher result, FluidStack in_fluid, IItemMatcher in_mold, boolean comsume_mold, IItemMatcher in_extra)
     {
-        addRecipe(result, in_fluid, in_mold, comsume_mold, in_extra, 100);
+        addRecipe(result, in_fluid, in_mold, comsume_mold, in_extra, FoundryUtils.getCastTime(in_fluid));
     }
 
     /**
@@ -32,14 +33,14 @@ public interface ICastingRecipeManager
      * @param in_mold Mold required.
      * @param in_extra Extra item required (null, if no extra item is required).
      */
-    void addRecipe(IItemMatcher result, FluidStack in_fluid, IItemMatcher in_mold, boolean comsume_mold, IItemMatcher in_extra, int speed);
+    void addRecipe(IItemMatcher result, FluidStack in_fluid, IItemMatcher in_mold, boolean comsume_mold, IItemMatcher in_extra, int tick);
 
     default void addRecipe(IItemMatcher result, FluidStack in_fluid, ItemMold.SubItem in_mold, boolean comsume_mold, IItemMatcher in_extra)
     {
-        addRecipe(result, in_fluid, in_mold, comsume_mold, in_extra, 100);
+        addRecipe(result, in_fluid, in_mold, comsume_mold, in_extra, FoundryUtils.getCastTime(in_fluid));
     }
 
-    void addRecipe(IItemMatcher result, FluidStack in_fluid, ItemMold.SubItem in_mold, boolean comsume_mold, IItemMatcher in_extra, int speed);
+    void addRecipe(IItemMatcher result, FluidStack in_fluid, ItemMold.SubItem in_mold, boolean comsume_mold, IItemMatcher in_extra, int tick);
 
     /**
      * Find a casting recipe given a FluidStack and a mold.

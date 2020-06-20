@@ -140,72 +140,42 @@ public class ModIntegrationEnderIO implements IModIntegration
 
             if (FoundryFluidRegistry.getStrategy("dark_steel").registerRecipes())
             {
-                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_helmet),
-                        new FluidStack(liquid_dark_steel, FoundryAPI.getAmountHelm()));
-                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_helmet),
-                        new FluidStack(liquid_dark_steel, FoundryAPI.getAmountHelm()), ItemMold.SubItem.HELMET, false, null);
-                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_chestplate),
-                        new FluidStack(liquid_dark_steel, FoundryAPI.getAmountChest()));
-                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_chestplate),
-                        new FluidStack(liquid_dark_steel, FoundryAPI.getAmountChest()), ItemMold.SubItem.CHESTPLATE, false, null);
-                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_leggings),
-                        new FluidStack(liquid_dark_steel, FoundryAPI.getAmountLegs()));
-                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_leggings),
-                        new FluidStack(liquid_dark_steel, FoundryAPI.getAmountLegs()), ItemMold.SubItem.LEGGINGS, false, null);
-                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_boots),
-                        new FluidStack(liquid_dark_steel, FoundryAPI.getAmountBoots()));
-                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_boots),
-                        new FluidStack(liquid_dark_steel, FoundryAPI.getAmountBoots()), ItemMold.SubItem.BOOTS, false, null);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_helmet), new FluidStack(liquid_dark_steel, FoundryAPI.getAmountHelm()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_helmet), new FluidStack(liquid_dark_steel, FoundryAPI.getAmountHelm()), ItemMold.SubItem.HELMET, false, null);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_chestplate), new FluidStack(liquid_dark_steel, FoundryAPI.getAmountChest()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_chestplate), new FluidStack(liquid_dark_steel, FoundryAPI.getAmountChest()), ItemMold.SubItem.CHESTPLATE, false, null);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_leggings), new FluidStack(liquid_dark_steel, FoundryAPI.getAmountLegs()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_leggings), new FluidStack(liquid_dark_steel, FoundryAPI.getAmountLegs()), ItemMold.SubItem.LEGGINGS, false, null);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_boots), new FluidStack(liquid_dark_steel, FoundryAPI.getAmountBoots()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_boots), new FluidStack(liquid_dark_steel, FoundryAPI.getAmountBoots()), ItemMold.SubItem.BOOTS, false, null);
 
-                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_pickaxe),
-                        new FluidStack(liquid_dark_steel, FoundryAPI.getAmountPickaxe()));
-                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_pickaxe),
-                        new FluidStack(liquid_dark_steel, FoundryAPI.getAmountPickaxe()), ItemMold.SubItem.PICKAXE, false, extra_sticks2);
-                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_axe),
-                        new FluidStack(liquid_dark_steel, FoundryAPI.getAmountAxe()));
-                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_axe),
-                        new FluidStack(liquid_dark_steel, FoundryAPI.getAmountAxe()), ItemMold.SubItem.AXE, false, extra_sticks2);
-                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_sword),
-                        new FluidStack(liquid_dark_steel, FoundryAPI.getAmountSword()));
-                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_sword),
-                        new FluidStack(liquid_dark_steel, FoundryAPI.getAmountSword()), ItemMold.SubItem.SWORD, false, extra_sticks1);
-                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_shears),
-                        new FluidStack(liquid_dark_steel, FoundryAPI.getAmountShears()));
-                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_shears),
-                        new FluidStack(liquid_dark_steel, FoundryAPI.getAmountShears()), ItemMold.SubItem.SHEARS, false, null);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_pickaxe), new FluidStack(liquid_dark_steel, FoundryAPI.getAmountPickaxe()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_pickaxe), new FluidStack(liquid_dark_steel, FoundryAPI.getAmountPickaxe()), ItemMold.SubItem.PICKAXE, false, extra_sticks2);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_axe), new FluidStack(liquid_dark_steel, FoundryAPI.getAmountAxe()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_axe), new FluidStack(liquid_dark_steel, FoundryAPI.getAmountAxe()), ItemMold.SubItem.AXE, false, extra_sticks2);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_sword), new FluidStack(liquid_dark_steel, FoundryAPI.getAmountSword()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_sword), new FluidStack(liquid_dark_steel, FoundryAPI.getAmountSword()), ItemMold.SubItem.SWORD, false, extra_sticks1);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_shears), new FluidStack(liquid_dark_steel, FoundryAPI.getAmountShears()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(dark_steel_shears), new FluidStack(liquid_dark_steel, FoundryAPI.getAmountShears()), ItemMold.SubItem.SHEARS, false, null);
             }
 
             if (FoundryFluidRegistry.getStrategy("end_steel").registerRecipes())
             {
-                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_helmet),
-                        new FluidStack(liquid_end_steel, FoundryAPI.getAmountHelm()));
-                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_helmet),
-                        new FluidStack(liquid_end_steel, FoundryAPI.getAmountHelm()), ItemMold.SubItem.HELMET, false, guardian_diode);
-                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_chestplate),
-                        new FluidStack(liquid_end_steel, FoundryAPI.getAmountChest()));
-                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_chestplate),
-                        new FluidStack(liquid_end_steel, FoundryAPI.getAmountChest()), ItemMold.SubItem.CHESTPLATE, false, guardian_diode);
-                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_leggings),
-                        new FluidStack(liquid_end_steel, FoundryAPI.getAmountLegs()));
-                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_leggings),
-                        new FluidStack(liquid_end_steel, FoundryAPI.getAmountLegs()), ItemMold.SubItem.LEGGINGS, false, guardian_diode);
-                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_boots),
-                        new FluidStack(liquid_end_steel, FoundryAPI.getAmountBoots()));
-                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_boots),
-                        new FluidStack(liquid_end_steel, FoundryAPI.getAmountBoots()), ItemMold.SubItem.BOOTS, false, guardian_diode);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_helmet), new FluidStack(liquid_end_steel, FoundryAPI.getAmountHelm()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_helmet), new FluidStack(liquid_end_steel, FoundryAPI.getAmountHelm()), ItemMold.SubItem.HELMET, false, guardian_diode);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_chestplate), new FluidStack(liquid_end_steel, FoundryAPI.getAmountChest()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_chestplate), new FluidStack(liquid_end_steel, FoundryAPI.getAmountChest()), ItemMold.SubItem.CHESTPLATE, false, guardian_diode);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_leggings), new FluidStack(liquid_end_steel, FoundryAPI.getAmountLegs()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_leggings), new FluidStack(liquid_end_steel, FoundryAPI.getAmountLegs()), ItemMold.SubItem.LEGGINGS, false, guardian_diode);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_boots), new FluidStack(liquid_end_steel, FoundryAPI.getAmountBoots()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_boots), new FluidStack(liquid_end_steel, FoundryAPI.getAmountBoots()), ItemMold.SubItem.BOOTS, false, guardian_diode);
 
-                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_pickaxe),
-                        new FluidStack(liquid_end_steel, FoundryAPI.getAmountPickaxe()));
-                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_pickaxe),
-                        new FluidStack(liquid_end_steel, FoundryAPI.getAmountPickaxe()), ItemMold.SubItem.PICKAXE, false, infinity_rod2);
-                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_axe),
-                        new FluidStack(liquid_end_steel, FoundryAPI.getAmountAxe()));
-                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_axe),
-                        new FluidStack(liquid_end_steel, FoundryAPI.getAmountAxe()), ItemMold.SubItem.AXE, false, infinity_rod2);
-                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_sword),
-                        new FluidStack(liquid_end_steel, FoundryAPI.getAmountSword()));
-                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_sword),
-                        new FluidStack(liquid_end_steel, FoundryAPI.getAmountSword()), ItemMold.SubItem.SWORD, false, infinity_rod1);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_pickaxe), new FluidStack(liquid_end_steel, FoundryAPI.getAmountPickaxe()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_pickaxe), new FluidStack(liquid_end_steel, FoundryAPI.getAmountPickaxe()), ItemMold.SubItem.PICKAXE, false, infinity_rod2);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_axe), new FluidStack(liquid_end_steel, FoundryAPI.getAmountAxe()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_axe), new FluidStack(liquid_end_steel, FoundryAPI.getAmountAxe()), ItemMold.SubItem.AXE, false, infinity_rod2);
+                FoundryAPI.MELTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_sword), new FluidStack(liquid_end_steel, FoundryAPI.getAmountSword()));
+                FoundryAPI.CASTING_MANAGER.addRecipe(new ItemStackMatcher(end_steel_sword), new FluidStack(liquid_end_steel, FoundryAPI.getAmountSword()), ItemMold.SubItem.SWORD, false, infinity_rod1);
             }
         }
 
@@ -221,9 +191,7 @@ public class ModIntegrationEnderIO implements IModIntegration
         {
             if (!silicon.isEmpty() && FoundryFluids.liquid_steel != null)
             {
-                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_electrical_steel, FLUID_AMOUNT_INGOT),
-                        new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT), new ItemStackMatcher(silicon),
-                        12000);
+                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_electrical_steel, FLUID_AMOUNT_INGOT), new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT), new ItemStackMatcher(silicon), 12000);
             }
         }
 
@@ -231,10 +199,7 @@ public class ModIntegrationEnderIO implements IModIntegration
         {
             if (FoundryFluids.liquid_gold != null && liquid_redstone != null && liquid_glowstone != null)
             {
-                AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_energetic_alloy, FLUID_AMOUNT_INGOT / 2),
-                        new FluidStack(FoundryFluids.liquid_gold, FLUID_AMOUNT_INGOT / 2),
-                        new FluidStack(liquid_redstone, 50),
-                        new FluidStack(liquid_glowstone, 125));
+                AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_energetic_alloy, FLUID_AMOUNT_INGOT / 2), new FluidStack(FoundryFluids.liquid_gold, FLUID_AMOUNT_INGOT / 2), new FluidStack(liquid_redstone, 50), new FluidStack(liquid_glowstone, 125));
             }
         }
 
@@ -243,12 +208,8 @@ public class ModIntegrationEnderIO implements IModIntegration
             FoundryUtils.registerBasicMeltingRecipes("phased_gold", liquid_vibrant_alloy); // what's this?
             if (liquid_enderpearl != null)
             {
-                AlloyingCrucibleRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_vibrant_alloy, FLUID_AMOUNT_INGOT),
-                        new FluidStack(liquid_energetic_alloy, FLUID_AMOUNT_INGOT),
-                        new FluidStack(liquid_enderpearl, 250));
-                AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_vibrant_alloy, FLUID_AMOUNT_INGOT / 2),
-                        new FluidStack(liquid_energetic_alloy, FLUID_AMOUNT_INGOT / 2),
-                        new FluidStack(liquid_enderpearl, 125));
+                AlloyingCrucibleRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_vibrant_alloy, FLUID_AMOUNT_INGOT), new FluidStack(liquid_energetic_alloy, FLUID_AMOUNT_INGOT), new FluidStack(liquid_enderpearl, 250));
+                AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_vibrant_alloy, FLUID_AMOUNT_INGOT / 2), new FluidStack(liquid_energetic_alloy, FLUID_AMOUNT_INGOT / 2), new FluidStack(liquid_enderpearl, 125));
             }
         }
 
@@ -256,8 +217,7 @@ public class ModIntegrationEnderIO implements IModIntegration
         {
             if (!silicon.isEmpty() && liquid_redstone != null)
             {
-                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_redstone_alloy, FLUID_AMOUNT_INGOT),
-                        new FluidStack(liquid_redstone, 100), new ItemStackMatcher(silicon), 12000);
+                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_redstone_alloy, FLUID_AMOUNT_INGOT), new FluidStack(liquid_redstone, 100), new ItemStackMatcher(silicon), 12000);
             }
         }
 
@@ -265,9 +225,7 @@ public class ModIntegrationEnderIO implements IModIntegration
         {
             if (!redstone_dust.isEmpty() && FoundryFluids.liquid_iron != null)
             {
-                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_conductive_iron, FLUID_AMOUNT_INGOT),
-                        new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT), new ItemStackMatcher(redstone_dust),
-                        12000);
+                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_conductive_iron, FLUID_AMOUNT_INGOT), new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT), new ItemStackMatcher(redstone_dust), 12000);
             }
         }
 
@@ -275,12 +233,8 @@ public class ModIntegrationEnderIO implements IModIntegration
         {
             if (FoundryFluids.liquid_iron != null && liquid_enderpearl != null)
             {
-                AlloyingCrucibleRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_pulsating_iron, FLUID_AMOUNT_INGOT),
-                        new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT),
-                        new FluidStack(liquid_enderpearl, 250));
-                AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_pulsating_iron, FLUID_AMOUNT_INGOT / 2),
-                        new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT / 2),
-                        new FluidStack(liquid_enderpearl, 125));
+                AlloyingCrucibleRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_pulsating_iron, FLUID_AMOUNT_INGOT), new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT), new FluidStack(liquid_enderpearl, 250));
+                AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_pulsating_iron, FLUID_AMOUNT_INGOT / 2), new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT / 2), new FluidStack(liquid_enderpearl, 125));
             }
         }
 
@@ -288,19 +242,12 @@ public class ModIntegrationEnderIO implements IModIntegration
         {
             if (FoundryFluids.liquid_steel != null)
             {
-                AlloyingCrucibleRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_dark_steel, FLUID_AMOUNT_INGOT / 2),
-                        new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT / 2),
-                        new FluidStack(FluidRegistry.LAVA, 500));
-                AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_dark_steel, FLUID_AMOUNT_INGOT / 4),
-                        new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT / 4),
-                        new FluidStack(FluidRegistry.LAVA, 250));
+                AlloyingCrucibleRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_dark_steel, FLUID_AMOUNT_INGOT / 2), new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT / 2), new FluidStack(FluidRegistry.LAVA, 500));
+                AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_dark_steel, FLUID_AMOUNT_INGOT / 4), new FluidStack(FoundryFluids.liquid_steel, FLUID_AMOUNT_INGOT / 4), new FluidStack(FluidRegistry.LAVA, 250));
             }
             if (FoundryFluids.liquid_iron != null && liquid_coal != null)
             {
-                AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_dark_steel, FLUID_AMOUNT_INGOT / 4),
-                        new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT / 4),
-                        new FluidStack(liquid_coal, 25),
-                        new FluidStack(FluidRegistry.LAVA, 250));
+                AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_dark_steel, FLUID_AMOUNT_INGOT / 4), new FluidStack(FoundryFluids.liquid_iron, FLUID_AMOUNT_INGOT / 4), new FluidStack(liquid_coal, 25), new FluidStack(FluidRegistry.LAVA, 250));
             }
         }
 
@@ -308,91 +255,71 @@ public class ModIntegrationEnderIO implements IModIntegration
         {
             if (FoundryFluids.liquid_gold != null)
             {
-                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_soularium, FLUID_AMOUNT_INGOT),
-                        new FluidStack(FoundryFluids.liquid_gold, FLUID_AMOUNT_INGOT),
-                        new ItemStackMatcher(new ItemStack(Blocks.SOUL_SAND)), 12000);
+                InfuserRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_soularium, FLUID_AMOUNT_INGOT), new FluidStack(FoundryFluids.liquid_gold, FLUID_AMOUNT_INGOT), new ItemStackMatcher(new ItemStack(Blocks.SOUL_SAND)), 12000);
             }
         }
 
         if (FoundryFluidRegistry.getStrategy("endstone").registerRecipes())
         {
-            MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.END_STONE),
-                    new FluidStack(liquid_endstone, 1000), 2000, 200);
+            MeltingRecipeManager.INSTANCE.addRecipe(new ItemStackMatcher(Blocks.END_STONE), new FluidStack(liquid_endstone, 1000), 2000, 200);
         }
 
         if (FoundryFluidRegistry.getStrategy("end_steel").registerRecipes())
         {
             if (liquid_endstone != null && liquid_dark_steel != null)
             {
-                AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_end_steel, FLUID_AMOUNT_INGOT / 4),
-                        new FluidStack(liquid_endstone, 250),
-                        new FluidStack(liquid_dark_steel, FLUID_AMOUNT_INGOT / 4),
-                        new FluidStack(FluidRegistry.LAVA, 250));
+                AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_end_steel, FLUID_AMOUNT_INGOT / 4), new FluidStack(liquid_endstone, 250), new FluidStack(liquid_dark_steel, FLUID_AMOUNT_INGOT / 4), new FluidStack(FluidRegistry.LAVA, 250));
             }
         }
 
         if (FoundryFluidRegistry.getStrategy("construction_alloy").registerRecipes())
         {
-            List<Fluid> metal = new ArrayList<>();
-            for (Fluid TEMP : ImmutableList.of(FoundryFluids.liquid_lead, FoundryFluids.liquid_copper, FoundryFluids.liquid_silver,
-                    FoundryFluids.liquid_aluminium, FoundryFluids.liquid_tin, FoundryFluids.liquid_nickel, FoundryFluids.liquid_zinc,
-                    FoundryFluids.liquid_platinum, ModIntegrationMekanism.liquid_osmium, FoundryFluids.liquid_cobalt,
-                    ModIntegrationTechReborn.liquid_titanium, ModIntegrationTechReborn.liquid_tungsten))
+            List<Fluid> metals = new ArrayList<>();
+            for (String name : new String[] { "lead", "copper", "silver", "aluminium", "tin", "nickel", "zinc", "platinum", "osmium", "cobalt", "titanium", "liquid_tungsten" })
             {
-                if (TEMP != null)
+                Fluid fluid = FluidRegistry.getFluid(name);
+                if (fluid != null)
                 {
-                    metal.add(TEMP);
+                    metals.add(fluid);
                 }
             }
-            for (Fluid x : metal)
+            for (Fluid x : metals)
             {
-                for (Fluid y : metal)
+                for (Fluid y : metals)
                 {
                     if (x == y && x != FoundryFluids.liquid_nickel)
                     {
-                        AlloyingCrucibleRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_iron_alloy, 3),
-                                new FluidStack(x, 6),
-                                new FluidStack(FoundryFluids.liquid_iron, 3));
-                        AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_iron_alloy, 1),
-                                new FluidStack(x, 2),
-                                new FluidStack(FoundryFluids.liquid_iron, 1));
+                        AlloyingCrucibleRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_iron_alloy, 3), new FluidStack(x, 6), new FluidStack(FoundryFluids.liquid_iron, 3));
+                        AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_iron_alloy, 1), new FluidStack(x, 2), new FluidStack(FoundryFluids.liquid_iron, 1));
                     }
                     else
                     {
-                        AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_iron_alloy, 1),
-                                new FluidStack(x, 1),
-                                new FluidStack(FoundryFluids.liquid_iron, 1),
-                                new FluidStack(y, 1));
+                        AlloyMixerRecipeManager.INSTANCE.addRecipe(new FluidStack(liquid_iron_alloy, 1), new FluidStack(x, 1), new FluidStack(FoundryFluids.liquid_iron, 1), new FluidStack(y, 1));
                     }
                 }
             }
         }
 
-        MoldRecipeManager.INSTANCE.addRecipe(ItemMold.SubItem.GRINDINGBALL.getMatcher().getItem(), 6, 6,
-                new int[] { 0, 0, 1, 1, 0, 0, 0, 2, 3, 3, 2, 0, 1, 3, 4, 4, 3, 1, 1, 3, 4, 4, 3, 1, 0, 2, 3, 3, 2, 0, 0, 0, 1, 1, 0, 0 });
+        MoldRecipeManager.INSTANCE.addRecipe(ItemMold.SubItem.GRINDINGBALL.getMatcher().getItem(), 6, 6, new int[] { 0, 0, 1, 1, 0, 0, 0, 2, 3, 3, 2, 0, 1, 3, 4, 4, 3, 1, 1, 3, 4, 4, 3, 1, 0, 2, 3, 3, 2, 0, 0, 0, 1, 1, 0, 0 });
         for (String name : FoundryFluidRegistry.getFluidNames())
         {
-                Fluid fluid = FluidRegistry.getFluid(name);
-                if (FoundryFluidRegistry.getStrategy(name).registerRecipes())
+            Fluid fluid = FluidRegistry.getFluid(name);
+            if (FoundryFluidRegistry.getStrategy(name).registerRecipes())
+            {
+                name = MiscUtil.upperCaseFirstChar(name);
+                if (!OreDictionary.getOres("ball" + name, false).isEmpty())
                 {
-                    name = MiscUtil.upperCaseFirstChar(name);
-                    if (!OreDictionary.getOres("ball" + name, false).isEmpty())
-                    {
-                        FoundryAPI.MELTING_MANAGER.addRecipe(new OreMatcher("ball" + name),
-                                new FluidStack(fluid, FLUID_AMOUNT_INGOT * 5 / 24));
-                        FoundryAPI.CASTING_MANAGER.addRecipe(new OreMatcher("ball" + name, 24),
-                                new FluidStack(fluid, FLUID_AMOUNT_INGOT * 5), ItemMold.SubItem.GRINDINGBALL, false, null);
-                        FoundryUtils.registerBasicMeltingRecipes(name, fluid);
-                    }
-                    if (!OreDictionary.getOres("itemGrindingBall" + name, false).isEmpty())
-                    {
-                        FoundryAPI.MELTING_MANAGER.addRecipe(new OreMatcher("itemGrindingBall" + name),
-                                new FluidStack(fluid, FLUID_AMOUNT_INGOT * 5 / 24));
-                        FoundryAPI.CASTING_MANAGER.addRecipe(new OreMatcher("itemGrindingBall" + name, 24),
-                                new FluidStack(fluid, FLUID_AMOUNT_INGOT * 5), ItemMold.SubItem.GRINDINGBALL, false, null);
-                        FoundryUtils.registerBasicMeltingRecipes(name, fluid);
-                    }
+                    FoundryAPI.MELTING_MANAGER.addRecipe(new OreMatcher("ball" + name), new FluidStack(fluid, FLUID_AMOUNT_INGOT * 5 / 24));
+                    FoundryAPI.CASTING_MANAGER.addRecipe(new OreMatcher("ball" + name, 24), new FluidStack(fluid, FLUID_AMOUNT_INGOT * 5), ItemMold.SubItem.GRINDINGBALL, false, null);
+                    FoundryUtils.registerBasicMeltingRecipes(name, fluid);
                 }
+                if (!OreDictionary.getOres("itemGrindingBall" + name, false).isEmpty())
+                {
+                    FoundryAPI.MELTING_MANAGER.addRecipe(new OreMatcher("itemGrindingBall" + name), new FluidStack(fluid, FLUID_AMOUNT_INGOT * 5 / 24));
+                    FoundryAPI.CASTING_MANAGER.addRecipe(new OreMatcher("itemGrindingBall" + name, 24), new FluidStack(fluid, FLUID_AMOUNT_INGOT * 5), ItemMold.SubItem.GRINDINGBALL, false, null);
+                    FoundryUtils.registerBasicMeltingRecipes(name, fluid);
+                }
+            }
         }
     }
 
@@ -401,28 +328,17 @@ public class ModIntegrationEnderIO implements IModIntegration
     {
         IForgeRegistry<Block> registry = e.getRegistry();
 
-        liquid_electrical_steel = FoundryFluidRegistry.registerLiquidMetal(registry, "electrical_steel", "EnderIO",
-                1850, 15, 0x747474);
-        liquid_energetic_alloy = FoundryFluidRegistry.registerLiquidMetal(registry, "energetic_alloy", "EnderIO", 2200,
-                15, 0xF05A0A);
-        liquid_vibrant_alloy = FoundryFluidRegistry.registerLiquidMetal(registry, "vibrant_alloy", "EnderIO", 2500, 15,
-                0xBEFA00);
-        liquid_redstone_alloy = FoundryFluidRegistry.registerLiquidMetal(registry, "redstone_alloy", "EnderIO", 1000,
-                14, 0x732828);
-        liquid_conductive_iron = FoundryFluidRegistry.registerLiquidMetal(registry, "conductive_iron", "EnderIO", 1200,
-                15, 0xFFB9B9);
-        liquid_pulsating_iron = FoundryFluidRegistry.registerLiquidMetal(registry, "pulsating_iron", "EnderIO", 1850, 15,
-                0x69EB87);
-        liquid_dark_steel = FoundryFluidRegistry.registerLiquidMetal(registry, "dark_steel", "EnderIO", 1850, 12,
-                0x333333);
-        liquid_soularium = FoundryFluidRegistry.registerLiquidMetal(registry, "soularium", "EnderIO", 1350, 12,
-                0x5A3228);
-        liquid_endstone = FoundryFluidRegistry.registerLiquidMetal(registry, "endstone", "EnderIO", 2000, 15,
-                0xFFFFDC);
-        liquid_end_steel = FoundryFluidRegistry.registerLiquidMetal(registry, "end_steel", "EnderIO", 2500, 15,
-                0xDCD7A0);
-        liquid_iron_alloy = FoundryFluidRegistry.registerLiquidMetal(registry, "construction_alloy", "EnderIO", 650, 12,
-                0x3C3C3C);
+        liquid_electrical_steel = FoundryFluidRegistry.registerLiquidMetal(registry, "electrical_steel", "EnderIO", 1850, 15, 0x747474);
+        liquid_energetic_alloy = FoundryFluidRegistry.registerLiquidMetal(registry, "energetic_alloy", "EnderIO", 2200, 15, 0xF05A0A);
+        liquid_vibrant_alloy = FoundryFluidRegistry.registerLiquidMetal(registry, "vibrant_alloy", "EnderIO", 2500, 15, 0xBEFA00);
+        liquid_redstone_alloy = FoundryFluidRegistry.registerLiquidMetal(registry, "redstone_alloy", "EnderIO", 1000, 14, 0x732828);
+        liquid_conductive_iron = FoundryFluidRegistry.registerLiquidMetal(registry, "conductive_iron", "EnderIO", 1200, 15, 0xFFB9B9);
+        liquid_pulsating_iron = FoundryFluidRegistry.registerLiquidMetal(registry, "pulsating_iron", "EnderIO", 1850, 15, 0x69EB87);
+        liquid_dark_steel = FoundryFluidRegistry.registerLiquidMetal(registry, "dark_steel", "EnderIO", 1850, 12, 0x333333);
+        liquid_soularium = FoundryFluidRegistry.registerLiquidMetal(registry, "soularium", "EnderIO", 1350, 12, 0x5A3228);
+        liquid_endstone = FoundryFluidRegistry.registerLiquidMetal(registry, "endstone", "EnderIO", 2000, 15, 0xFFFFDC);
+        liquid_end_steel = FoundryFluidRegistry.registerLiquidMetal(registry, "end_steel", "EnderIO", 2500, 15, 0xDCD7A0);
+        liquid_iron_alloy = FoundryFluidRegistry.registerLiquidMetal(registry, "construction_alloy", "EnderIO", 650, 12, 0x3C3C3C);
     }
 
     @Override

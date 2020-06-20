@@ -45,7 +45,7 @@ public class CastingRecipe implements ICastingRecipe
     }
 
     @Override
-    public int getCastingSpeed()
+    public int getCastingTime()
     {
         return speed;
     }

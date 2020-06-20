@@ -27,9 +27,9 @@ public class CastingRecipeManager implements ICastingRecipeManager
     }
 
     @Override
-    public void addRecipe(IItemMatcher result, FluidStack in_fluid, IItemMatcher in_mold, boolean comsume_mold, IItemMatcher in_extra, int cast_speed)
+    public void addRecipe(IItemMatcher result, FluidStack in_fluid, IItemMatcher in_mold, boolean comsume_mold, IItemMatcher in_extra, int tick)
     {
-        ICastingRecipe recipe = new CastingRecipe(result, in_fluid, in_mold, comsume_mold, in_extra, cast_speed);
+        ICastingRecipe recipe = new CastingRecipe(result, in_fluid, in_mold, comsume_mold, in_extra, tick);
         if (recipe.requiresExtra())
         {
             recipes.add(0, recipe);

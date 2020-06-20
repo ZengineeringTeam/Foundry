@@ -30,7 +30,7 @@ public class FoundryAPI
     /**
      * The fluid value for an ore, or 0, if the config is not overriding it.
      */
-    public static int FLUID_AMOUNT_ORE = 0;
+    public static int FLUID_AMOUNT_ORE = FLUID_AMOUNT_INGOT * 2;
 
     public static int getAmountBlock()
     {
@@ -58,6 +58,11 @@ public class FoundryAPI
     }
 
     public static int getAmountGear()
+    {
+        return FLUID_AMOUNT_INGOT * 4;
+    }
+
+    public static int getAmountTrapdoor()
     {
         return FLUID_AMOUNT_INGOT * 4;
     }
@@ -128,6 +133,66 @@ public class FoundryAPI
     }
 
     public static int getAmountShears()
+    {
+        return FLUID_AMOUNT_INGOT * 2;
+    }
+
+    public static int getAmountButton()
+    {
+        return getAmountNugget() * 2;
+    }
+
+    public static int getAmountWall()
+    {
+        return getAmountBlock();
+    }
+
+    public static int getAmountLever()
+    {
+        return getAmountRod() + FLUID_AMOUNT_INGOT;
+    }
+
+    public static int getAmountCasing()
+    {
+        return FLUID_AMOUNT_INGOT / 2;
+    }
+
+    public static int getAmountClump()
+    {
+        return FLUID_AMOUNT_INGOT;
+    }
+
+    public static int getAmountCrystal()
+    {
+        return FLUID_AMOUNT_INGOT;
+    }
+
+    public static int getAmountShard()
+    {
+        return FLUID_AMOUNT_INGOT;
+    }
+
+    public static int getAmountDensePlate()
+    {
+        return getAmountPlate() * 9;
+    }
+
+    public static int getAmountBars()
+    {
+        return 54;
+    }
+
+    public static int getAmountSlab()
+    {
+        return getAmountBlock() / 2;
+    }
+
+    public static int getAmountStairs()
+    {
+        return getAmountBlock() * 3 / 2;
+    }
+
+    public static int getAmountPressurePlate()
     {
         return FLUID_AMOUNT_INGOT * 2;
     }

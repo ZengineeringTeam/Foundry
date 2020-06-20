@@ -17,7 +17,7 @@ public class FoundryItems
     public static void registerItems(Register<Item> event)
     {
         event.getRegistry().register(item_small_clay = new Item().setRegistryName(Foundry.MODID, "small_clay")
-                .setUnlocalizedName(Foundry.MODID + ".small_clay").setCreativeTab(FoundryTab.INSTANCE));
+                .setTranslationKey(Foundry.MODID + ".small_clay").setCreativeTab(FoundryTab.INSTANCE));
         event.getRegistry().register(item_mold = new ItemMold());
     }
 }

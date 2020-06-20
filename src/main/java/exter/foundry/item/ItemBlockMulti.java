@@ -26,8 +26,8 @@ public class ItemBlockMulti extends ItemBlock
     }
 
     @Override
-    public final String getUnlocalizedName(ItemStack stack)
+    public final String getTranslationKey(ItemStack stack)
     {
-        return ((IBlockVariants) block).getUnlocalizedName(getSubIndex(stack));
+        return ((IBlockVariants) block).getTranslationKey(getSubIndex(stack));
     }
 }

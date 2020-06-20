@@ -8,20 +8,18 @@ import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.recipe.ICastingRecipe;
 import exter.foundry.config.FoundryConfig;
 import exter.foundry.recipes.manager.CastingRecipeManager;
+import exter.foundry.util.MiscUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.IItemHandler;
 
 public class TileEntityMetalCaster extends TileEntityPowered
 {
-    static public final int CAST_TIME = 400000;
-
     static public final int ENERGY_REQUIRED = FoundryConfig.metalCasterPower ? 10000 : 0;
 
     static public final int INVENTORY_OUTPUT = 0;
@@ -39,9 +37,10 @@ public class TileEntityMetalCaster extends TileEntityPowered
     private final IFluidHandler fluid_handler;
     private final ItemHandler item_handler;
 
-    private ICastingRecipe current_recipe;
+    private ICastingRecipe currentRecipe;
 
     private int progress;
+    private int totalTick;
 
     public TileEntityMetalCaster()
     {
@@ -51,37 +50,35 @@ public class TileEntityMetalCaster extends TileEntityPowered
         fluid_handler = new FluidHandler(0, 0);
         item_handler = new ItemHandler(getSizeInventory(), IH_SLOTS_INPUT, IH_SLOTS_OUTPUT);
 
-        current_recipe = null;
+        currentRecipe = null;
 
         addContainerSlot(new ContainerSlot(0, INVENTORY_CONTAINER_INPUT, INVENTORY_CONTAINER_OUTPUT, false));
     }
 
     private void beginCasting()
     {
-        if (current_recipe != null && canCastCurrentRecipe()
-                && ((!FoundryConfig.metalCasterPower) || getStoredFoundryEnergy() >= ENERGY_REQUIRED))
+        if (currentRecipe != null && canCastCurrentRecipe() && ((!FoundryConfig.metalCasterPower) || getStoredFoundryEnergy() >= ENERGY_REQUIRED))
         {
             if (FoundryConfig.metalCasterPower)
                 useFoundryEnergy(ENERGY_REQUIRED, true);
-            progress = 0;
+            totalTick = progress = currentRecipe.getCastingTime();
         }
     }
 
     private boolean canCastCurrentRecipe()
     {
-        if (current_recipe.requiresExtra())
+        if (currentRecipe.requiresExtra())
         {
-            if (!current_recipe.containsExtra(inventory.get(INVENTORY_EXTRA)))
+            if (!currentRecipe.containsExtra(inventory.get(INVENTORY_EXTRA)))
             {
                 return false;
             }
         }
 
-        ItemStack recipe_output = current_recipe.getOutput();
+        ItemStack recipe_output = currentRecipe.getOutput();
 
         ItemStack inv_output = inventory.get(INVENTORY_OUTPUT);
-        if (!inv_output.isEmpty() && (!inv_output.isItemEqual(recipe_output)
-                || inv_output.getCount() + recipe_output.getCount() > inv_output.getMaxStackSize()))
+        if (!inv_output.isEmpty() && (!inv_output.isItemEqual(recipe_output) || inv_output.getCount() + recipe_output.getCount() > inv_output.getMaxStackSize()))
         {
             return false;
         }
@@ -90,17 +87,16 @@ public class TileEntityMetalCaster extends TileEntityPowered
 
     private void checkCurrentRecipe()
     {
-        if (current_recipe == null)
+        if (currentRecipe == null)
         {
-            progress = -1;
+            totalTick = progress = -1;
             return;
         }
 
-        if (!current_recipe.matchesRecipe(inventory.get(INVENTORY_MOLD), tank.getFluid(),
-                inventory.get(INVENTORY_EXTRA)))
+        if (!currentRecipe.matchesRecipe(inventory.get(INVENTORY_MOLD), tank.getFluid(), inventory.get(INVENTORY_EXTRA)))
         {
-            progress = -1;
-            current_recipe = null;
+            totalTick = progress = -1;
+            currentRecipe = null;
             return;
         }
     }
@@ -159,12 +155,15 @@ public class TileEntityMetalCaster extends TileEntityPowered
         {
             progress = compund.getInteger("progress");
         }
+        if (compund.hasKey("total"))
+        {
+            totalTick = compund.getInteger("total");
+        }
     }
 
     @Override
     protected void updateClient()
     {
-
     }
 
     @Override
@@ -175,11 +174,10 @@ public class TileEntityMetalCaster extends TileEntityPowered
 
         checkCurrentRecipe();
 
-        if (current_recipe == null)
+        if (currentRecipe == null)
         {
-            current_recipe = CastingRecipeManager.INSTANCE.findRecipe(tank.getFluid(), inventory.get(INVENTORY_MOLD),
-                    inventory.get(INVENTORY_EXTRA));
-            progress = -1;
+            currentRecipe = CastingRecipeManager.INSTANCE.findRecipe(tank.getFluid(), inventory.get(INVENTORY_MOLD), inventory.get(INVENTORY_EXTRA));
+            totalTick = progress = -1;
         }
 
         if (progress < 0)
@@ -213,36 +211,25 @@ public class TileEntityMetalCaster extends TileEntityPowered
         {
             if (canCastCurrentRecipe())
             {
-                FluidStack input_fluid = current_recipe.getInput();
-                int increment = 18000 * current_recipe.getCastingSpeed() / input_fluid.amount;
-                if (increment > CAST_TIME / 4)
+                --progress;
+                if (progress == 0)
                 {
-                    increment = CAST_TIME / 4;
-                }
-                if (increment < 1)
-                {
-                    increment = 1;
-                }
-                progress += increment;
-
-                if (progress >= CAST_TIME)
-                {
-                    progress = -1;
-                    tank.drain(input_fluid.amount, true);
-                    if (current_recipe.requiresExtra())
+                    totalTick = progress = -1;
+                    tank.drain(currentRecipe.getInput().amount, true);
+                    if (currentRecipe.requiresExtra())
                     {
-                        decrStackSize(INVENTORY_EXTRA, current_recipe.getInputExtra().getAmount());
+                        decrStackSize(INVENTORY_EXTRA, currentRecipe.getInputExtra().getAmount());
                         updateInventoryItem(INVENTORY_EXTRA);
                     }
                     if (inventory.get(INVENTORY_OUTPUT).isEmpty())
                     {
-                        inventory.set(INVENTORY_OUTPUT, current_recipe.getOutput());
+                        inventory.set(INVENTORY_OUTPUT, currentRecipe.getOutput());
                     }
                     else
                     {
-                        inventory.get(INVENTORY_OUTPUT).grow(current_recipe.getOutput().getCount());
+                        inventory.get(INVENTORY_OUTPUT).grow(currentRecipe.getOutput().getCount());
                     }
-                    if (current_recipe.consumesMold())
+                    if (currentRecipe.consumesMold())
                     {
                         inventory.get(INVENTORY_MOLD).shrink(1);
                     }
@@ -253,7 +240,7 @@ public class TileEntityMetalCaster extends TileEntityPowered
             }
             else
             {
-                progress = -1;
+                totalTick = progress = -1;
             }
         }
     }
@@ -261,15 +248,20 @@ public class TileEntityMetalCaster extends TileEntityPowered
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound)
     {
-        super.writeToNBT(compound);
         compound.setInteger("progress", progress);
-        return compound;
+        compound.setInteger("total", totalTick);
+        return super.writeToNBT(compound);
     }
 
     @Override
     public int getFoundryEnergyCapacity()
     {
         return 40000;
+    }
+
+    public int getTotalTick()
+    {
+        return totalTick;
     }
 
     @Override

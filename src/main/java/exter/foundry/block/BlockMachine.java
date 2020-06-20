@@ -3,6 +3,7 @@ package exter.foundry.block;
 import java.util.List;
 
 import exter.foundry.Foundry;
+import exter.foundry.config.FoundryConfig;
 import exter.foundry.creativetab.FoundryTab;
 import exter.foundry.proxy.CommonProxy;
 import exter.foundry.tileentity.TileEntityAlloyMixer;
@@ -110,7 +111,7 @@ public class BlockMachine extends Block implements ITileEntityProvider, IBlockVa
         setHardness(1.0F);
         setResistance(8.0F);
         setSoundType(SoundType.STONE);
-        setUnlocalizedName("foundry.machine");
+        setTranslationKey("foundry.machine");
         setCreativeTab(FoundryTab.INSTANCE);
         setRegistryName("machine");
     }
@@ -219,7 +220,7 @@ public class BlockMachine extends Block implements ITileEntityProvider, IBlockVa
     }
 
     @Override
-    public String getUnlocalizedName(int meta)
+    public String getTranslationKey(int meta)
     {
         return "tile." + Foundry.MODID + "." + getStateFromMeta(meta).getValue(MACHINE).name;
     }
@@ -228,7 +229,12 @@ public class BlockMachine extends Block implements ITileEntityProvider, IBlockVa
     @Override
     public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced)
     {
-        MiscUtil.localizeTooltip(getUnlocalizedName(stack.getMetadata()) + ".tooltip", tooltip);
+        String key = getTranslationKey(stack.getMetadata());
+        if (!FoundryConfig.metalCasterPower && stack.getMetadata() == 1)
+        {
+            key += "2";
+        }
+        MiscUtil.localizeTooltip(key + ".tooltip", tooltip);
     }
 
     @Override
