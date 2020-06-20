@@ -3,6 +3,8 @@ package exter.foundry.integration;
 import static exter.foundry.api.FoundryAPI.FLUID_AMOUNT_INGOT;
 
 import com.google.common.collect.ImmutableList;
+
+import cofh.shade.com.typesafe.config.ConfigException.Null;
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.FoundryUtils;
 import exter.foundry.api.recipe.matcher.ItemStackMatcher;
@@ -272,7 +274,7 @@ public class ModIntegrationEnderIO implements IModIntegration
             }
         }
 
-        if (FoundryFluidRegistry.getStrategy("construction_alloy").registerRecipes())
+        if (FoundryFluids.liquid_iron != null && liquid_iron_alloy != null && FoundryFluidRegistry.getStrategy("construction_alloy").registerRecipes())
         {
             List<Fluid> metals = new ArrayList<>();
             for (String name : new String[] { "lead", "copper", "silver", "aluminium", "tin", "nickel", "zinc", "platinum", "osmium", "cobalt", "titanium", "liquid_tungsten" })

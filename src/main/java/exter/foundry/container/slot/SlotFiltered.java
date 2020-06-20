@@ -1,5 +1,7 @@
 package exter.foundry.container.slot;
 
+import exter.foundry.config.FoundryConfig;
+import exter.foundry.util.MiscUtil;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -17,6 +19,7 @@ public class SlotFiltered extends Slot
     @Override
     public boolean isItemValid(ItemStack stack)
     {
+        MiscUtil.parseItem(FoundryConfig.CLAYBLOCK);
         return filter.isItemEqual(stack);
     }
 }

@@ -17,8 +17,10 @@ import exter.foundry.recipes.manager.CastingRecipeManager;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -27,6 +29,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -253,6 +256,47 @@ public class MiscUtil
             }
         }
         return sb.toString();
+    }
+
+    public static ItemStack parseItem(String id)
+    {
+        String[] parts = id.split(":");
+        int length = parts.length;
+        if (length == 0)
+        {
+            return ItemStack.EMPTY;
+        }
+        int meta = 0;
+        if (length > 1)
+        {
+            String lastPart = parts[length - 1];
+            if (lastPart.matches("\\d+"))
+            {
+                length--;
+                meta = Integer.parseInt(lastPart);
+            }
+        }
+        String realId = "";
+        for (int i = 0; i < length; i++)
+        {
+            if (i > 0)
+            {
+                realId += ":";
+            }
+            realId += parts[i];
+        }
+        try
+        {
+            Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(realId));
+            if (item != null)
+            {
+                return new ItemStack(item, 1, meta);
+            }
+        }
+        catch (Exception e)
+        {
+        }
+        return ItemStack.EMPTY;
     }
 
 }

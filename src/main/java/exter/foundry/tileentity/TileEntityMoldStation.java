@@ -269,7 +269,7 @@ public class TileEntityMoldStation extends TileEntityFoundry implements IExoflam
         switch (slot)
         {
         case SLOT_BLOCK:
-            return stack.getItem() == FoundryRegistry.CLAYBLOCK.getItem();
+            return stack.isItemEqual(FoundryRegistry.CLAYBLOCK);
         case SLOT_FUEL:
             return TileEntityFurnace.isItemFuel(stack);
         }

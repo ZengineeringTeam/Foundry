@@ -2,6 +2,9 @@ package exter.foundry.tileentity;
 
 import exter.foundry.api.FoundryAPI;
 import exter.foundry.api.heatable.IHeatProvider;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -17,7 +20,8 @@ public abstract class TileEntityHeatable extends TileEntityFoundry
         return Math.floorDiv(temperature * loss_rate - TEMP_MIN, loss_rate - 1);
     }
 
-    private final int MAX_HEAT_RECEIVE = getStableTemperatureNeed(getMaxTemperature(), getTemperatureLossRate()) - getMaxTemperature();
+    private final int MAX_HEAT_RECEIVE = getStableTemperatureNeed(getMaxTemperature(), getTemperatureLossRate())
+            - getMaxTemperature();
     private int heat;
 
     public TileEntityHeatable()
@@ -38,6 +42,8 @@ public abstract class TileEntityHeatable extends TileEntityFoundry
         return null;
     }
 
+    public static final Object2IntMap<IBlockState> STATE_SOURCES = new Object2IntOpenHashMap<>();
+
     @Override
     protected void updateServer()
     {
@@ -47,13 +53,19 @@ public abstract class TileEntityHeatable extends TileEntityFoundry
         if (canReceiveHeat())
         {
             IHeatProvider heater = getHeatProvider();
-
+            int temp_heater = 0;
             if (heater != null)
             {
-                int temp_heater = Math.max(0, heater.provideHeat(temp_max, temp_last));
+                temp_heater = Math.max(0, heater.provideHeat(temp_max, temp_last));
+            }
+            else if (!STATE_SOURCES.isEmpty())
+            {
+                temp_heater = STATE_SOURCES.getInt(world.getBlockState(getPos().down()));
+            }
+            if (temp_heater > 0)
+            {
                 int receive = getHeatReceive(temp_heater);
                 heat += receive;
-                //                System.out.println("receive: "+receive);
             }
         }
 

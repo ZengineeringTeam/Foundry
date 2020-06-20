@@ -1,26 +1,18 @@
 package exter.foundry;
 
+import exter.foundry.config.FoundryConfig;
+import exter.foundry.util.MiscUtil;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.registry.GameRegistry.ItemStackHolder;
-import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-@EventBusSubscriber
 public class FoundryRegistry
 {
-    @ItemStackHolder(value = "ceramics:unfired_clay", meta = 4)
-    public static final ItemStack CLAY = ItemStack.EMPTY;
+    public static final ItemStack CLAYBLOCK = MiscUtil.parseItem(FoundryConfig.CLAYBLOCK);
 
-    @ItemStackHolder(value = "ceramics:unfired_clay", meta = 5)
-    public static final ItemStack BRICK = ItemStack.EMPTY;
+    public static final ItemStack BARREL = MiscUtil.parseItem(FoundryConfig.BARREL);
 
-    @ItemStackHolder("ceramics:clay_soft")
-    public static final ItemStack CLAYBLOCK = ItemStack.EMPTY;
-
-    @ItemStackHolder("ceramics:porcelain_barrel")
-    public static final ItemStack BARREL = ItemStack.EMPTY;
-
-    @ObjectHolder("thermalfoundation:fluid_cryotheum")
-    public static final Block CRYOTHEUM = null;
+    public static final Block CRYOTHEUM = ForgeRegistries.BLOCKS
+            .getValue(new ResourceLocation("thermalfoundation:fluid_cryotheum"));
 }
