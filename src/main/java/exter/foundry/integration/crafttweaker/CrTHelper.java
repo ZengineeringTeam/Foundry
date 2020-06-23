@@ -15,6 +15,7 @@ import exter.foundry.config.FoundryConfig;
 import exter.foundry.integration.crafttweaker.orestack.CrTOreStack;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class CrTHelper
 {
@@ -42,6 +43,11 @@ public class CrTHelper
         if (ingr instanceof CrTOreStack)
         {
             return (OreMatcher) ingr.getInternal();
+        }
+        // For oredicts with more than one amount (they are transformed from IOreDictEntry)
+        if (OreDictionary.doesOreNameExist((String) ingr.getInternal()))
+        {
+            return new OreMatcher((String) ingr.getInternal(), ingr.getAmount());
         }
         throw new IllegalArgumentException("Invalid IIngredient passed to a foundry method, " + ingr);
     }
