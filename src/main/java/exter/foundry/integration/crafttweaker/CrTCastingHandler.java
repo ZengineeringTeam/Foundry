@@ -97,11 +97,11 @@ public class CrTCastingHandler
     }
 
     @ZenMethod
-    static public void removeRecipe(ILiquidStack input, IItemStack mold, @Optional IItemStack extra)
+    static public void removeRecipe(ILiquidStack input, IItemStack mold, @Optional IIngredient extra)
     {
         ModIntegrationCrafttweaker.queueRemove(() -> {
             ICastingRecipe recipe = findCastingForRemoval(CraftTweakerMC.getLiquidStack(input),
-                    CraftTweakerMC.getItemStack(mold), CraftTweakerMC.getItemStack(extra));
+                    CraftTweakerMC.getItemStack(mold), CraftTweakerMC.getIngredient(extra));
             if (recipe == null)
             {
                 CraftTweakerAPI.logWarning("Casting recipe not found: " + getDebugDescription(input, mold, extra));
@@ -111,24 +111,34 @@ public class CrTCastingHandler
         });
     }
 
-    public static String getDebugDescription(ILiquidStack input, IItemStack mold, @Nullable IItemStack extra)
+    public static String getDebugDescription(ILiquidStack input, IItemStack mold, @Nullable IIngredient extra)
     {
         if (extra == null)
             return String.format("( %s, %s )", CrTHelper.getFluidDescription(input),
                     CrTHelper.getItemDescription(mold));
         return String.format("( %s, %s, %s )", CrTHelper.getFluidDescription(input), CrTHelper.getItemDescription(mold),
-                CrTHelper.getItemDescription(extra));
+                CrTHelper.getItemDescription(CrTHelper.getIngredient(extra)));
     }
 
-    public static ICastingRecipe findCastingForRemoval(FluidStack fluid, ItemStack mold, ItemStack extra)
+    public static ICastingRecipe findCastingForRemoval(FluidStack fluid, ItemStack mold, Ingredient extra)
     {
         if (mold.isEmpty() || fluid == null)
             return null;
         for (ICastingRecipe cr : CastingRecipeManager.INSTANCE.getRecipes())
+        {
             if (cr.getInput().getFluid().getName().equals(fluid.getFluid().getName())
-                    && ItemStack.areItemStacksEqual(mold, cr.getMold())
-                    && (cr.getInputExtra() == null || cr.getInputExtra().apply(extra)))
-                return cr;
+                    && ItemStack.areItemStacksEqual(mold, cr.getMold()))
+            {
+                if (cr.getInputExtra() == null)
+                    return cr;
+                boolean matchesExtra = false;
+                for (ItemStack item : extra.getMatchingStacks())
+                {
+                    if (cr.getInputExtra().apply(item))
+                        return cr;
+                }
+            }
+        }
         return null;
     }
 
