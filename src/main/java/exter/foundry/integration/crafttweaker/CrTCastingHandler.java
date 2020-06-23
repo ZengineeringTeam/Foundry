@@ -85,7 +85,7 @@ public class CrTCastingHandler
                 FluidStack inputFluid = CraftTweakerMC.getLiquidStack(input);
                 recipe = new CastingRecipe(new ItemStackMatcher(CraftTweakerMC.getItemStack(output)),
                         inputFluid, new ItemStackMatcher(CraftTweakerMC.getItemStack(mold)),
-                        consumes_mold, extra == null ? null : CrTHelper.getIngredient(extra), FoundryUtils.getCastTime(inputFluid));
+                        consumes_mold, extra == null ? null : CrTHelper.getIngredient(extra), tick == 0 ? FoundryUtils.getCastTime(inputFluid) : tick);
             }
             catch (IllegalArgumentException e)
             {
