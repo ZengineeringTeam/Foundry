@@ -30,7 +30,7 @@ public class CrTHeatingHandler
         {
             Preconditions.checkNotNull(state);
             Block block = (Block) state.getBlock().getDefinition().getInternal();
-            TileEntityHeatable.STATE_SOURCES.put(block.getStateFromMeta(state.getMeta()), heat);
+            TileEntityHeatable.STATE_SOURCES.put(block.getStateFromMeta(state.getMeta()), heat * 100);
         }
 
         @Override

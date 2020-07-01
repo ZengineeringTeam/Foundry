@@ -7,11 +7,13 @@ import crafttweaker.api.item.IIngredient;
 import crafttweaker.mc1120.item.MCItemStack;
 import exter.foundry.api.recipe.matcher.IItemMatcher;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.ItemHandlerHelper;
 
 public class CrTItemMatcher implements IItemMatcher
 {
 
     private final IIngredient ingredient;
+    private List<ItemStack> items;
 
     public CrTItemMatcher(IIngredient ingredient)
     {
@@ -44,8 +46,13 @@ public class CrTItemMatcher implements IItemMatcher
     @Override
     public List<ItemStack> getItems()
     {
-        return ingredient.getItems().stream().filter($ -> $ instanceof MCItemStack)
-                .map($ -> (ItemStack) $.getInternal()).collect(Collectors.toList());
+        if (items == null)
+        {
+            items = ingredient.getItems().stream().filter($ -> $ instanceof MCItemStack)
+                    .map($ -> (ItemStack) $.getInternal()).map($ -> ItemHandlerHelper.copyStackWithSize($, getAmount()))
+                    .collect(Collectors.toList());
+        }
+        return items;
     }
 
 }

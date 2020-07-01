@@ -60,7 +60,8 @@ public abstract class TileEntityHeatable extends TileEntityFoundry
             }
             else if (!STATE_SOURCES.isEmpty())
             {
-                temp_heater = STATE_SOURCES.getInt(world.getBlockState(getPos().down()));
+                IBlockState state = world.getBlockState(getPos().down());
+                temp_heater = STATE_SOURCES.getInt(state);
             }
             if (temp_heater > 0)
             {

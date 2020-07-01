@@ -7,12 +7,10 @@ import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.liquid.ILiquidStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
-import crafttweaker.api.oredict.IOreDictEntry;
 import exter.foundry.api.recipe.matcher.IItemMatcher;
 import exter.foundry.api.recipe.matcher.ItemStackMatcher;
 import exter.foundry.api.recipe.matcher.OreMatcher;
 import exter.foundry.config.FoundryConfig;
-import exter.foundry.integration.crafttweaker.orestack.CrTOreStack;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -49,7 +47,7 @@ public class CrTHelper
         }
         else
         {
-            ItemStack stack = ((ItemStackMatcher) obj).getItem();
+            ItemStack stack = obj.getItem();
             String desc = String.format("<%s:%d>", stack.getItem().getRegistryName(), stack.getItemDamage());
             if (stack.getCount() > 1)
                 desc += " * " + stack.getCount();
