@@ -44,7 +44,7 @@ repositories {
 }
 
 dependencies {
-    deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.9.+"
+    deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.19.+"
     deobfCompile "mezz.jei:jei_1.12.2:4.14.+"
 	//deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.23-16"
   	//deobfCompile "mcp.mobius.waila:Hwyla:1.8.+"

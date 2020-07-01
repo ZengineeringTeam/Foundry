@@ -35,15 +35,8 @@ public class CrTHelper
         {
             return new ItemStackMatcher(CraftTweakerMC.getItemStack((IItemStack) ingr));
         }
-        if (ingr instanceof IOreDictEntry)
-        {
-            return new OreMatcher((String) ingr.getInternal());
-        }
-        if (ingr instanceof CrTOreStack)
-        {
-            return (OreMatcher) ingr.getInternal();
-        }
-        throw new IllegalArgumentException("Invalid IIngredient passed to a foundry method, " + ingr);
+        return new CrTItemMatcher(ingr);
+        //throw new IllegalArgumentException("Invalid IIngredient passed to a foundry method, " + ingr);
     }
 
     public static String getItemDescription(IItemMatcher obj)

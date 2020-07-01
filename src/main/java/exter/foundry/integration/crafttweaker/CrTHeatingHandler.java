@@ -1,5 +1,7 @@
 package exter.foundry.integration.crafttweaker;
 
+import com.google.common.base.Preconditions;
+
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.api.block.IBlockState;
@@ -26,6 +28,7 @@ public class CrTHeatingHandler
         @Override
         public void apply()
         {
+            Preconditions.checkNotNull(state);
             Block block = (Block) state.getBlock().getDefinition().getInternal();
             TileEntityHeatable.STATE_SOURCES.put(block.getStateFromMeta(state.getMeta()), heat);
         }

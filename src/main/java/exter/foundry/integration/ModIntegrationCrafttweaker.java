@@ -12,6 +12,7 @@ import exter.foundry.integration.crafttweaker.CrTBurnerFuelHandler;
 import exter.foundry.integration.crafttweaker.CrTCastingHandler;
 import exter.foundry.integration.crafttweaker.CrTCastingTableHandler;
 import exter.foundry.integration.crafttweaker.CrTFluidFuelHandler;
+import exter.foundry.integration.crafttweaker.CrTHeatingHandler;
 import exter.foundry.integration.crafttweaker.CrTInfuserHandler;
 import exter.foundry.integration.crafttweaker.CrTMeltingHandler;
 import exter.foundry.integration.crafttweaker.CrTMoldStationHandler;
@@ -90,6 +91,7 @@ public class ModIntegrationCrafttweaker implements IModIntegration
         CraftTweakerAPI.registerClass(CrTMoldStationHandler.class);
         CraftTweakerAPI.registerClass(CrTBurnerFuelHandler.class);
         CraftTweakerAPI.registerClass(CrTFluidFuelHandler.class);
+        CraftTweakerAPI.registerClass(CrTHeatingHandler.class);
     }
 
     public static void queueAdd(Runnable action)
