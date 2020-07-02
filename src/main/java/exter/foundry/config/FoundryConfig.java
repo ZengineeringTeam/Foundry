@@ -37,9 +37,6 @@ public class FoundryConfig
     public static boolean metalCasterPower = true;
     public static boolean crtError = true;
 
-    public static String CLAYBLOCK = "ceramics:clay_soft";
-    public static String BARREL = "ceramics:porcelain_barrel";
-
     // Mirrored default settings for Unidict for maximum compatibility
     public static String[] modPriority;
 
@@ -120,8 +117,12 @@ public class FoundryConfig
                 FoundryAPI.CRUCIBLE_ADVANCED_MAX_TEMP, 0, Integer.MAX_VALUE,
                 "Max temperatures for advanced crucibles (in 1/100 deg Ks).");
 
-        CLAYBLOCK = config.getString("Clay Block Item", "general", CLAYBLOCK, "");
-        BARREL = config.getString("Barrel Item", "general", BARREL, "");
+        FoundryAPI.CRUCIBLE_BASIC_TEMP_LOSS_RATE = config.getInt("Crucible (Basic) Temperature Loss Rate", "general",
+                FoundryAPI.CRUCIBLE_BASIC_TEMP_LOSS_RATE, 0, Integer.MAX_VALUE, "");
+        FoundryAPI.CRUCIBLE_STANDARD_TEMP_LOSS_RATE = config.getInt("Crucible (Standard) Temperature Loss Rate",
+                "general", FoundryAPI.CRUCIBLE_STANDARD_TEMP_LOSS_RATE, 0, Integer.MAX_VALUE, "");
+        FoundryAPI.CRUCIBLE_ADVANCED_TEMP_LOSS_RATE = config.getInt("Crucible (Advanced) Temperature Loss Rate",
+                "general", FoundryAPI.CRUCIBLE_ADVANCED_TEMP_LOSS_RATE, 0, Integer.MAX_VALUE, "");
     }
 
     @SubscribeEvent

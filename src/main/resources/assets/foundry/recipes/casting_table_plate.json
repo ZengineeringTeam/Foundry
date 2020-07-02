@@ -14,8 +14,8 @@
       "data": 1
     },
     "B": {
-      "item": "ceramics:porcelain_barrel",
-      "data": 0
+      "type": "forge:ore_dict",
+      "ore": "foundryBarrel"
     }
   }
 }

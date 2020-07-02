@@ -1,6 +1,5 @@
 package exter.foundry.container;
 
-import exter.foundry.FoundryRegistry;
 import exter.foundry.container.slot.SlotFiltered;
 import exter.foundry.container.slot.SlotOutput;
 import exter.foundry.tileentity.TileEntityMoldStation;
@@ -35,8 +34,8 @@ public class ContainerMoldStation extends ContainerFoundry
         te_station.openInventory(player);
         int i, j;
 
-        addSlotToContainer(
-                new SlotFiltered(te_station, TileEntityMoldStation.SLOT_BLOCK, 8, 16, FoundryRegistry.CLAYBLOCK));
+        addSlotToContainer(new SlotFiltered(te_station, TileEntityMoldStation.SLOT_BLOCK, 8, 16,
+                TileEntityMoldStation.CLAYBLOCK_MATCHER));
         addSlotToContainer(new SlotOutput(te_station, TileEntityMoldStation.SLOT_CLAY, 8, 76));
         addSlotToContainer(new SlotOutput(te_station, TileEntityMoldStation.SLOT_OUTPUT, 147, 38));
         addSlotToContainer(new SlotFurnaceFuel(te_station, TileEntityMoldStation.SLOT_FUEL, 119, 76));

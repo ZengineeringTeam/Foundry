@@ -2,6 +2,7 @@ package exter.foundry.tileentity;
 
 import exter.foundry.FoundryRegistry;
 import exter.foundry.api.recipe.IMoldRecipe;
+import exter.foundry.api.recipe.matcher.OreMatcher;
 import exter.foundry.block.BlockMoldStation;
 import exter.foundry.item.FoundryItems;
 import exter.foundry.recipes.manager.MoldRecipeManager;
@@ -29,6 +30,8 @@ public class TileEntityMoldStation extends TileEntityFoundry implements IExoflam
     public static final int SLOT_FUEL = 3;
     public static final int MIN_DEPTH = 0;
     public static final int MAX_DEPTH = 4;
+
+    public static final OreMatcher CLAYBLOCK_MATCHER = new OreMatcher(FoundryRegistry.CLAYBLOCK);
 
     private int burn_time;
 
@@ -269,7 +272,7 @@ public class TileEntityMoldStation extends TileEntityFoundry implements IExoflam
         switch (slot)
         {
         case SLOT_BLOCK:
-            return stack.isItemEqual(FoundryRegistry.CLAYBLOCK);
+            return CLAYBLOCK_MATCHER.test(stack);
         case SLOT_FUEL:
             return TileEntityFurnace.isItemFuel(stack);
         }

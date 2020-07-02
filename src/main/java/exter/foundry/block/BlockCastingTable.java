@@ -179,7 +179,7 @@ public class BlockCastingTable extends Block implements ITileEntityProvider, IBl
     {
         if (FoundryConfig.castingTableUncrafting)
         {
-            drops.add(FoundryRegistry.BARREL);
+            drops.add(MiscUtil.getStackFromDictWithPreference(FoundryRegistry.BARREL, 1));
             ItemStack stack = ItemStack.EMPTY;
             switch (state.getValue(TABLE))
             {

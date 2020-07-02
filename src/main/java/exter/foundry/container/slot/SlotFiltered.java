@@ -1,16 +1,16 @@
 package exter.foundry.container.slot;
 
-import exter.foundry.config.FoundryConfig;
-import exter.foundry.util.MiscUtil;
+import com.google.common.base.Predicate;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class SlotFiltered extends Slot
 {
-    private final ItemStack filter;
+    private final Predicate<ItemStack> filter;
 
-    public SlotFiltered(IInventory inventory, int par2, int par3, int par4, ItemStack filter)
+    public SlotFiltered(IInventory inventory, int par2, int par3, int par4, Predicate<ItemStack> filter)
     {
         super(inventory, par2, par3, par4);
         this.filter = filter;
@@ -19,7 +19,6 @@ public class SlotFiltered extends Slot
     @Override
     public boolean isItemValid(ItemStack stack)
     {
-        MiscUtil.parseItem(FoundryConfig.CLAYBLOCK);
-        return filter.isItemEqual(stack);
+        return filter.test(stack);
     }
 }

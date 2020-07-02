@@ -209,9 +209,9 @@ public class FoundryAPI
     public static final int ATOMIZER_WATER_TANK_CAPACITY = 6000;
 
     //Heat loss rates for crucibles.
-    public static final int CRUCIBLE_BASIC_TEMP_LOSS_RATE = 75;
-    public static final int CRUCIBLE_STANDARD_TEMP_LOSS_RATE = 80;
-    public static final int CRUCIBLE_ADVANCED_TEMP_LOSS_RATE = 90;
+    public static int CRUCIBLE_BASIC_TEMP_LOSS_RATE = 75;
+    public static int CRUCIBLE_STANDARD_TEMP_LOSS_RATE = 80;
+    public static int CRUCIBLE_ADVANCED_TEMP_LOSS_RATE = 90;
 
     //Max temperatures for crucibles (in 1/100 deg Ks).
     public static int CRUCIBLE_BASIC_MAX_TEMP = 200000;
