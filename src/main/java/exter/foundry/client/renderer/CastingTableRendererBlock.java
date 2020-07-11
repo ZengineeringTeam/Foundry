@@ -39,7 +39,7 @@ public class CastingTableRendererBlock extends CastingTableRenderer
         {
             return quads.get(0).getSprite();
         }
-        return null;
+        return Minecraft.getMinecraft().getTextureMapBlocks().getMissingSprite();
     }
 
     @Override
