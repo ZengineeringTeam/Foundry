@@ -245,11 +245,16 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack stack)
     {
+        return isValidFuel(stack);
+    }
+    
+    public static boolean isValidFuel(ItemStack stack)
+    {
         if (stack.getItem() == Items.LAVA_BUCKET)
         {
             return false;
         }
-        return BurnerHeaterFuelManager.INSTANCE.getFuel(stack) != null || TileEntityFurnace.isItemFuel(stack);
+        return BurnerHeaterFuelManager.INSTANCE.getFuel(stack) != null || (FoundryConfig.enable_default_burner_fuel && TileEntityFurnace.isItemFuel(stack));
     }
 
     @Override
@@ -332,7 +337,7 @@ public class TileEntityBurnerHeater extends TileEntityFoundry implements IExofla
                 fuel.totalBurnTime = fuel.burnTime = ifuel.getBurnTime();
                 fuel.heat = ifuel.getHeat();
             }
-            else
+            else if (FoundryConfig.enable_default_burner_fuel)
             {
                 int time = TileEntityFurnace.getItemBurnTime(stack);
                 if (time <= 0)

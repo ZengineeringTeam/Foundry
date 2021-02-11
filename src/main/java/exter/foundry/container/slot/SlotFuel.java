@@ -1,6 +1,7 @@
 package exter.foundry.container.slot;
 
 import exter.foundry.recipes.manager.BurnerHeaterFuelManager;
+import exter.foundry.tileentity.TileEntityBurnerHeater;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -18,11 +19,7 @@ public class SlotFuel extends Slot
     @Override
     public boolean isItemValid(ItemStack stack)
     {
-        if (stack.getItem() == Items.LAVA_BUCKET)
-        {
-            return false;
-        }
-        return BurnerHeaterFuelManager.INSTANCE.getFuel(stack) != null || TileEntityFurnace.isItemFuel(stack);
+        return TileEntityBurnerHeater.isValidFuel(stack);
     }
 
 }

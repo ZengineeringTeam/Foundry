@@ -31,6 +31,7 @@ public class FoundryConfig
     public static boolean hardcore_remove_ingot_nugget = false;
     public static boolean hardcore_remove_block_ingot = false;
 
+    public static boolean enable_default_burner_fuel = true;
     public static int default_burner_fuel_heat;
     public static int default_burner_exoflame_heat;
 
@@ -89,6 +90,8 @@ public class FoundryConfig
                 "If the Metal Caster requires power to operate.");
         if (!metalCasterPower)
             BlockMachine.EnumMachine.CASTER.setTooltip("caster2");
+        enable_default_burner_fuel = config.getBoolean("Enable Default Burner Fuel", "general", true,
+                "Burner Heater can accepet all furnace fuels.");
         default_burner_fuel_heat = config.getInt("default_burner_fuel_heat", "general", 100000,
                 TileEntityHeatable.TEMP_MIN, Integer.MAX_VALUE, "default_burner_fuel_heat (in 1/100 deg Ks)");
         default_burner_exoflame_heat = config.getInt("default_burner_exoflame_heat", "general",
