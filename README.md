@@ -4,3 +4,5 @@ Zen: Foundry [![CurseForge](http://cf.way2muchnoise.eu/zen-foundry.svg)](https:/
 ![banner](https://i.imgur.com/m8lBpep.png)
 
 **Zen: Foundry** is an adaptation of [Foundry](https://minecraft.curseforge.com/projects/foundry) and [Ignition: Foundry](https://minecraft.curseforge.com/projects/ignition-foundry) made for my friend's and my modpack, which focuses on compatibility to [Ceramics](https://minecraft.curseforge.com/projects/ceramics). **Zen: Foundry** is also a Minecraft mod centered around melting and casting with metal.
+
+[CraftTweaker Docs](https://docs.blamejared.com/1.12/en/Mods/Zen_Foundry/ZenFoundry/) (thanks to democat)
